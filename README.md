@@ -66,7 +66,21 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 <p align="center"> <img src = "imagens/Backlog priorizado.png"></p>
  
  ## 📆 Sprints
-<p align="center"> <img src = ""></p>  
+Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
+
+| Sprint | Atividade |
+|:-----:|:---------:|
+| 01 | Página de cálculo do comprimento de pista. |
+| 01 | Interface de cálculo visando acesso via tablet. |
+| 01 | Aplicar sistemas de unidade de medida. |
+| 02 | Página de cadastro de aeronaves. |
+| 02 | Página de edição de aeronaves. |
+| 02 | Adequar interface às configurações da aeronave. |
+| 03 | Página de visualização do histórico de cálculos. |
+| 03 | Salvar histórico de cálculos no banco. |
+| 04 | Página de cadastro de usuário. |
+| 04 | Página de login (administrador/usuário) |
+| 04 | Documentação de Software. |
  
 <br>
 <span id="equipe">
