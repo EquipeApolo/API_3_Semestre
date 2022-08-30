@@ -63,7 +63,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = ""></p>
+<p align="center"> <img src = "./imagens/Backlog Priorizado.png"></p>
  
  ## 📆 Sprints
 <p align="center"> <img src = ""></p>  
