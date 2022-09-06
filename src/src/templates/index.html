@@ -1,14 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux</title>
-</head>
-<body>
-    <h1>Bem Vindo!</h1>
-    <h2>Linux melhor sistema operacional do mundo!!!!</h2>
-    <p>Quem discordar é corinthiano!</p>
-</body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="Icons/aviao.png" />
+
+    <title>Cálculo de Performance</title>
+  </head>
+  <body>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contato</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+              <input type="text" placeholder="Nome" class="form-control mt-2">
+
+              <input type="email" placeholder="E-mail" class="form-control mt-2">
+
+              <input type="text" placeholder="Assunto" class="form-control mt-2">
+
+              <textarea placeholder="Digite sua mensagem" class="form-control mt-2"></textarea>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- cabeçalho -->
+    <header class="container">
+        <div class="row mt-5 mb-5">
+                <img src="Icons/aviao.png" class="img col-sm-5 col-md-3 col-lg-2">
+                <h1 class="text-center mt-5 col-sm-7 col-md-9">Cálculo de Performance</h1>     
+        </div>
+    </header>
+
+    <!-- cards -->
+    <div class="container mb-5">
+        <div class="row mb-5">
+            <div class="col-4">
+                <div class="card border-0">
+                    <i style="font-size:3rem"></i>
+                    <h5 class="card-title">Unit of measurement</h5>
+                    <select class="custom-select" id="btnMeasurement">
+                      <option selected>Unit of measurement</option>
+                      <option value="1">Internacional</option>
+                      <option value="2">Imperial</option>
+                    </select>                   
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-0">
+                    <i style="font-size:3rem"></i>
+                    <h5 class="card-title">Aircraft model</h5>
+                    <div class="input-group input-group-sm mb-3">
+                      <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="model">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card border-0">
+                    <i style="font-size:3rem"></i>
+                    <h5 class="card-title">Engine</h5>
+                    <div class="input-group input-group-sm mb-3">
+                      <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="engine">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Certification</h5>
+                  <select class="custom-select" id="btnCertification">
+                    <option selected>Certification</option>
+                    <option value="1">ANAC</option>
+                    <option value="2">EASA</option>
+                    <option value="3">FAA</option>
+                  </select>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Aircraft weight</h5>
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="weight">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Wind</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Temperature</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="temperature">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Braking application level</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="braking">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Speed additive</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Runway condition</h5>
+                  <select class="custom-select" id="btnCondition">
+                    <option selected>Runway condition</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>                 
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Slope of the runway</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Airport altitude</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="altitude">
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <h5 class="card-title justify-content-start" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" for="reverserSwitch">Use of reverser?</h5>
+              <div class="form-check form-switch">
+                    <input class="form-check-input" 
+                  type="checkbox" 
+                  role="switch" 
+                  id="reverserSwitch" 
+                  style="transform: scale(1.75);">
+                </input>
+                </div>
+              </div>
+
+              <div class="col-4">
+                <h5 class="form-check-label justify-content-start" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" for="flapSwitch">Has landing flap?</h5>
+              <div class="form-check form-switch">
+                  <div class="input-group input-group-sm">
+                    <input class="form-check-input" 
+                  type="checkbox" 
+                  role="switch" 
+                  id="flapSwitch" 
+                  style="transform: scale(1.75);">
+                </input>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-grid gap-4 col-12 d-md-flex justify-content-md-end"">
+              <button type="button" class="btn btn-primary col-3" id="btnResult">Result</button>
+              <form class="col-4"><input type="text" class="form-control" id="Result" placeholder="Result" disabled></form>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- <footer class="mt-5 bg-secondary text-center text-light p-4">
+        Todos os direitos reservados para a empresa criadora de Websites.
+    </footer> -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  </body>
 </html>
