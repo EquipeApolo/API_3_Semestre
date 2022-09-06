@@ -16,8 +16,8 @@
     <title>Cálculo de Performance</title>
   </head>
   <body>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- Modal (Ignorar, não faz parte da página)--> 
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
     <!-- cabeçalho -->
     <header class="container">
@@ -59,7 +59,7 @@
                     <i style="font-size:3rem"></i>
                     <h5 class="card-title">Unit of measurement</h5>
                     <select class="custom-select" id="btnMeasurement">
-                      <option selected>Unit of measurement</option>
+                      <option selected disabled>Unit of measurement</option>
                       <option value="1">Internacional</option>
                       <option value="2">Imperial</option>
                     </select>                   
@@ -91,7 +91,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Certification</h5>
                   <select class="custom-select" id="btnCertification">
-                    <option selected>Certification</option>
+                    <option selected disabled>Certification</option>
                     <option value="1">ANAC</option>
                     <option value="2">EASA</option>
                     <option value="3">FAA</option>
@@ -105,6 +105,7 @@
                   <h5 class="card-title">Aircraft weight</h5>
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="weight">
+                    <span class="input-group-text">Kg</span>
                   </div>
               </div>
             </div>
@@ -115,6 +116,7 @@
                   <h5 class="card-title">Wind</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
+                    <span class="input-group-text">Km</span>
                   </div>
               </div>
             </div>
@@ -125,6 +127,7 @@
                   <h5 class="card-title">Temperature</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="temperature">
+                    <span class="input-group-text">°C</span>
                   </div>
               </div>
             </div>
@@ -154,7 +157,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Runway condition</h5>
                   <select class="custom-select" id="btnCondition">
-                    <option selected>Runway condition</option>
+                    <option selected disabled>Runway condition</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -212,7 +215,7 @@
               </div>
             </div>
 
-            <div class="d-grid gap-4 col-12 d-md-flex justify-content-md-end"">
+            <div class="d-grid gap-4 col-12 d-md-flex justify-content-md-end">
               <button type="button" class="btn btn-primary col-3" id="btnResult">Result</button>
               <form class="col-4"><input type="text" class="form-control" id="Result" placeholder="Result" disabled></form>
             </div>
