@@ -13,6 +13,10 @@
     <!--Favicon-->
     <link rel="shortcut icon" href="Icons/aviao.png" />
 
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <script src="dist/script.js"></script>
+
     <title>Cálculo de Performance</title>
   </head>
   <body>
@@ -105,7 +109,7 @@
                   <h5 class="card-title">Aircraft weight</h5>
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="weight">
-                    <span class="input-group-text">Kg</span>
+                    <span class="input-group-text" id="AircraftWeight"></span>
                   </div>
               </div>
             </div>
@@ -116,7 +120,7 @@
                   <h5 class="card-title">Wind</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
-                    <span class="input-group-text">Km</span>
+                    <span class="input-group-text" id="Wind"></span>
                   </div>
               </div>
             </div>
@@ -127,7 +131,7 @@
                   <h5 class="card-title">Temperature</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="temperature">
-                    <span class="input-group-text">°C</span>
+                    <span class="input-group-text" id="Temperature"></span>
                   </div>
               </div>
             </div>
@@ -148,6 +152,7 @@
                   <h5 class="card-title">Speed additive</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
+                    <span class="input-group-text" id="SpeedAdditive"></span>
                   </div>
               </div>
             </div>
@@ -181,9 +186,10 @@
             <div class="col-4">
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Airport altitude</h5> 
+                  <h5 class="card-title">AirportAltitude</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="altitude">
+                    <span class="input-group-text" id="AirportAltitude"></span>
                   </div>
               </div>
             </div>
@@ -216,7 +222,7 @@
             </div>
 
             <div class="d-grid gap-4 col-12 d-md-flex justify-content-md-end">
-              <button type="button" class="btn btn-primary col-3" id="btnResult">Result</button>
+              <input type="submit" class="btn btn-primary col-3" id="btnResult" value="Result" onclick="dadosInput()"></input>
               <form class="col-4"><input type="text" class="form-control" id="Result" placeholder="Result" disabled></form>
             </div>
             
@@ -229,5 +235,39 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
+
+    <script>
+
+      $('#btnMeasurement').change(function (){
+        var sistemaMedidas = $(this).val();
+        let saidaWeight = document.getElementById('AircraftWeight')
+        let saidaTemp = document.getElementById('Temperature')
+        let saidaWind = document.getElementById('Wind')
+        let saidaSpeedA = document.getElementById('SpeedAdditive')
+        let saidaAirportA = document.getElementById('AirportAltitude')
+
+        if(sistemaMedidas == "1"){ 
+              saidaWeight.innerHTML = 'kg'
+              saidaTemp.innerHTML = '°C'
+              saidaWind.innerHTML = 'Km'
+              saidaSpeedA.innerHTML = 'Km'
+              saidaAirportA.innerHTML = 'M'
+
+            }
+          else{
+              saidaWeight.innerHTML = 'Lbs'
+              saidaTemp.innerHTML = '°F'
+              saidaWind.innerHTML = 'Mi'
+              saidaSpeedA.innerHTML = 'Mi'
+              saidaAirportA.innerHTML = 'Pol'
+
+          }  
+      });    
+
+    </script>
+
+
   </body>
+
 </html>

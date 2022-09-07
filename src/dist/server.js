@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const app = (0, express_1.default)();
 app.get('/', (request, response) => {
-    return response.json({ message: 'Olá Dev!' });
+    return response.sendFile(__dirname + '/templates/index.html');
 });
-app.listen(3333, () => {
-    console.log('Server strarted on port 3333!');
+//app.use(routes)
+app.listen(3000, () => {
+    console.log('Server strarted on port 3000!');
 });
