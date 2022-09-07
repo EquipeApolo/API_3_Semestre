@@ -17,6 +17,8 @@
 
     <script src="dist/script.js"></script>
 
+    <script src="dist/sistemaMedida.js"></script>
+
     <title>Cálculo de Performance</title>
   </head>
   <body>
@@ -179,6 +181,7 @@
                   <h5 class="card-title">Slope of the runway</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
+                    <span class="input-group-text" id="SlopeRunway"></span>
                   </div>
               </div>
             </div>
@@ -235,35 +238,35 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-
-
     <script>
+    $('#btnMeasurement').change(function (){
+    var sistemaMedidas = $(this).val();
+    let saidaWeight = document.getElementById('AircraftWeight')
+    let saidaTemp = document.getElementById('Temperature')
+    let saidaWind = document.getElementById('Wind')
+    let saidaSpeedA = document.getElementById('SpeedAdditive')
+    let saidaAirportA = document.getElementById('AirportAltitude')
+    let saidaSlopeRunway = document.getElementById('SlopeRunway')
 
-      $('#btnMeasurement').change(function (){
-        var sistemaMedidas = $(this).val();
-        let saidaWeight = document.getElementById('AircraftWeight')
-        let saidaTemp = document.getElementById('Temperature')
-        let saidaWind = document.getElementById('Wind')
-        let saidaSpeedA = document.getElementById('SpeedAdditive')
-        let saidaAirportA = document.getElementById('AirportAltitude')
+    if(sistemaMedidas == "1"){ 
+          saidaWeight.innerHTML = 'kg'
+          saidaTemp.innerHTML = '°C'
+          saidaWind.innerHTML = 'Km'
+          saidaSpeedA.innerHTML = 'Km'
+          saidaAirportA.innerHTML = 'M'
+          saidaSlopeRunway.innerHTML = 'M'
 
-        if(sistemaMedidas == "1"){ 
-              saidaWeight.innerHTML = 'kg'
-              saidaTemp.innerHTML = '°C'
-              saidaWind.innerHTML = 'Km'
-              saidaSpeedA.innerHTML = 'Km'
-              saidaAirportA.innerHTML = 'M'
+        }
+      else{
+          saidaWeight.innerHTML = 'Lbs'
+          saidaTemp.innerHTML = '°F'
+          saidaWind.innerHTML = 'Mi'
+          saidaSpeedA.innerHTML = 'Mi'
+          saidaAirportA.innerHTML = 'Pés'
+          saidaSlopeRunway.innerHTML = 'Pés'
 
-            }
-          else{
-              saidaWeight.innerHTML = 'Lbs'
-              saidaTemp.innerHTML = '°F'
-              saidaWind.innerHTML = 'Mi'
-              saidaSpeedA.innerHTML = 'Mi'
-              saidaAirportA.innerHTML = 'Pol'
-
-          }  
-      });    
+      }  
+  }); 
 
     </script>
 
