@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --inspect --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --inspect --ignore-watch node_modules public/server.ts"
   },
   "keywords": [],
   "author": "",
