@@ -4,11 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+//import routes from './routes';
 const app = (0, express_1.default)();
-app.get('/', (request, response) => {
-    return response.sendFile(__dirname + '/templates/index.html');
+var path = require('path');
+var publico = path.join(__dirname);
+app.get('/', function (req, res) {
+    res.sendFile(path.join(publico, 'index.html'));
 });
-//app.use(routes)
+app.use('/Icons', express_1.default.static(path.join(__dirname, '..', 'public', 'Icons')));
+app.use('/dist', express_1.default.static(path.join(__dirname, '..', 'dist')));
 app.listen(3000, () => {
     console.log('Server strarted on port 3000!');
 });
