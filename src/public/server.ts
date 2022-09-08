@@ -15,7 +15,7 @@ app.use('/Icons', express.static(path.join(__dirname, '..', 'public', 'Icons')))
 
 app.use('/dist', express.static(path.join(__dirname, '..', 'dist')))
 
-  
+ 
 app.listen(3000, () => {
     console.log('Server strarted on port 3000!')
 })
