@@ -57,6 +57,9 @@ function dadosInput(){
     //Input Resultado   
     document.getElementById('Result').value = weight + wind;       
 
+    console.log(reverserSwitchCheck);
+    console.log(flapSwitchCheck);
+    
 
 
     console.log(valuex); 

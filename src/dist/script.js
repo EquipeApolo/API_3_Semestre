@@ -48,6 +48,8 @@ function dadosInput() {
     }
     //Input Resultado   
     document.getElementById('Result').value = weight + wind;
+    console.log(reverserSwitchCheck);
+    console.log(flapSwitchCheck);
     console.log(valuex);
     console.log(model, engine, temperature, weight, wind, braking, speedAdditive, slope, altitude);
 }
