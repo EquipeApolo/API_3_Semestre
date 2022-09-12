@@ -80,6 +80,7 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 03 | Salvar histórico de cálculos no banco. |
 | 04 | Página de cadastro de usuário. |
 | 04 | Página de login (administrador/usuário) |
+| 04 | Upar servidor na nuvem. |
 | 04 | Documentação de Software. |
  
 <br>
