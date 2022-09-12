@@ -20,13 +20,13 @@
 
 - [ ] Cadastros de modelos de aeronaves;
 - [ ] Perfis diferentes (administrador, usuário);
-- [ ] Interface amigável para cálculo de perfomace via celular ou tablet;
-- [ ] Gerar cálculo do comprimento mínimo da pista de pouso pelos fatores considerados;
+- [x] Interface amigável para cálculo de perfomace via celular ou tablet;
+- [x] Gerar cálculo do comprimento mínimo da pista de pouso pelos fatores considerados;
 - [ ] Gerar histórico dos cálculos realizados;
 
 <h3> Requisitos Não Funcionais </h3>
 
-- [ ] Linguagem Typescript;
+- [x] Linguagem Typescript;
 - [ ] Documentações;
  
 
