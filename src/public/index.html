@@ -15,10 +15,23 @@
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
-    <script src="dist/script.js"></script>
+    <script src="js/index.js"></script>
 
 
     <title>Performance Calculation</title>
+
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
   <body>
 
@@ -83,7 +96,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Aircraft weight</h5>
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="weight">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="weight">
                     <span class="input-group-text" id="AircraftWeight"></span>
                   </div>
               </div>
@@ -94,7 +107,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Speed additive</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
                     <span class="input-group-text" id="SpeedAdditive"></span>
                   </div>
               </div>
@@ -118,7 +131,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Temperature</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="temperature">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="temperature">
                     <span class="input-group-text" id="Temperature"></span>
                   </div>
               </div>
@@ -130,7 +143,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Wind</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
                     <span class="input-group-text" id="Wind"></span>
                   </div>
               </div>
@@ -159,7 +172,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Slope of the runway</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
                     <span class="input-group-text" id="SlopeRunway"></span>
                   </div>
               </div>
@@ -170,7 +183,7 @@
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Airport Altitude</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="altitude">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="altitude">
                     <span class="input-group-text" id="AirportAltitude"></span>
                   </div>
               </div>
@@ -216,38 +229,6 @@
     </footer> -->
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <script>
-    $('#btnMeasurement').change(function (){
-    var sistemaMedidas = $(this).val();
-    let saidaWeight = document.getElementById('AircraftWeight')
-    let saidaTemp = document.getElementById('Temperature')
-    let saidaWind = document.getElementById('Wind')
-    let saidaSpeedA = document.getElementById('SpeedAdditive')
-    let saidaAirportA = document.getElementById('AirportAltitude')
-    let saidaSlopeRunway = document.getElementById('SlopeRunway')
-
-    if(sistemaMedidas == "1"){ 
-          saidaWeight.innerHTML = 'Kg'
-          saidaTemp.innerHTML = '°C'
-          saidaWind.innerHTML = 'Km'
-          saidaSpeedA.innerHTML = 'Km'
-          saidaAirportA.innerHTML = 'M'
-          saidaSlopeRunway.innerHTML = '%'
-
-        }
-      else{
-          saidaWeight.innerHTML = 'Lbs'
-          saidaTemp.innerHTML = '°F'
-          saidaWind.innerHTML = 'Kt'
-          saidaSpeedA.innerHTML = 'Mi'
-          saidaAirportA.innerHTML = 'Ft'
-          saidaSlopeRunway.innerHTML = '%'
-
-      }  
-  }); 
-
-    </script>
 
 
   </body>
