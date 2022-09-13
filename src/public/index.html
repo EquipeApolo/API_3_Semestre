@@ -18,7 +18,7 @@
     <script src="dist/script.js"></script>
 
 
-    <title>Cálculo de Performance</title>
+    <title>Performance Calculation</title>
   </head>
   <body>
 
@@ -26,7 +26,7 @@
     <header class="container">
         <div class="row mt-5 mb-5">
                 <img src="Icons/aviao.png" class="img col-sm-5 col-md-3 col-lg-2">
-                <h1 class="text-center mt-5 col-sm-7 col-md-9">Cálculo de Performance</h1>     
+                <h1 class="text-center mt-5 col-sm-7 col-md-9">Performance Calculation</h1>     
         </div>
     </header>
 
@@ -37,7 +37,7 @@
                 <div class="card border-0">
                     <i style="font-size:3rem"></i>
                     <h5 class="card-title">Unit of measurement</h5>
-                    <select class="custom-select" id="btnMeasurement">
+                    <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="btnMeasurement">
                       <option selected disabled>Unit of measurement</option>
                       <option value="1">Internacional</option>
                       <option value="2">Imperial</option>
@@ -69,7 +69,7 @@
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Certification</h5>
-                  <select class="custom-select" id="btnCertification">
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="btnCertification">
                     <option selected disabled>Certification</option>
                     <option value="1">ANAC</option>
                     <option value="2">EASA</option>
@@ -92,11 +92,24 @@
             <div class="col-4">
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Wind</h5> 
+                  <h5 class="card-title">Speed additive</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
-                    <span class="input-group-text" id="Wind"></span>
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
+                    <span class="input-group-text" id="SpeedAdditive"></span>
                   </div>
+              </div>
+            </div>
+
+            <div class="col-4">
+              <div class="card border-0">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Braking application level</h5> 
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="braking">
+                    <option selected disabled>Braking application level</option>                
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
               </div>
             </div>
 
@@ -111,32 +124,25 @@
               </div>
             </div>
 
+            
             <div class="col-4">
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Braking application level</h5> 
+                  <h5 class="card-title">Wind</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="braking">
+                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
+                    <span class="input-group-text" id="Wind"></span>
                   </div>
               </div>
             </div>
 
-            <div class="col-4">
-              <div class="card border-0">
-                  <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Speed additive</h5> 
-                  <div class="input-group input-group-sm mb-3">
-                    <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="speedAdditive">
-                    <span class="input-group-text" id="SpeedAdditive"></span>
-                  </div>
-              </div>
-            </div>
+            
 
             <div class="col-4">
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Runway condition</h5>
-                  <select class="custom-select" id="btnCondition">
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="btnCondition">
                     <option selected disabled>Runway condition</option>                
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -162,7 +168,7 @@
             <div class="col-4">
               <div class="card border-0">
                   <i style="font-size:3rem"></i>
-                  <h5 class="card-title">AirportAltitude</h5> 
+                  <h5 class="card-title">Airport Altitude</h5> 
                   <div class="input-group input-group-sm mb-3">
                     <input type="text" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="altitude">
                     <span class="input-group-text" id="AirportAltitude"></span>
@@ -177,7 +183,7 @@
                   type="checkbox" 
                   role="switch" 
                   id="reverserSwitch" 
-                  style="transform: scale(1.75);">
+                  style="transform: scale(1.75); margin-left: -1.7em !important">
                 </input>
                 </div>
               </div>
@@ -190,7 +196,7 @@
                   type="checkbox" 
                   role="switch" 
                   id="flapSwitch" 
-                  style="transform: scale(1.75);">
+                  style="transform: scale(1.75); margin-left: -1.7em !important">
                 </input>
                 </div>
                 </div>
@@ -227,7 +233,7 @@
           saidaWind.innerHTML = 'Km'
           saidaSpeedA.innerHTML = 'Km'
           saidaAirportA.innerHTML = 'M'
-          saidaSlopeRunway.innerHTML = 'M'
+          saidaSlopeRunway.innerHTML = '%'
 
         }
       else{
@@ -236,7 +242,7 @@
           saidaWind.innerHTML = 'Kt'
           saidaSpeedA.innerHTML = 'Mi'
           saidaAirportA.innerHTML = 'Ft'
-          saidaSlopeRunway.innerHTML = 'Ft'
+          saidaSlopeRunway.innerHTML = '%'
 
       }  
   }); 
