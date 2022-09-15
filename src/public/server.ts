@@ -5,7 +5,7 @@ const app = express()
 
 var path = require('path');
 var publico = path.join(__dirname);
-
+ 
 app.get('/', function(req, res) {
     res.sendFile(path.join(publico, 'index.html'));
 });  
@@ -20,4 +20,4 @@ app.use('/js', express.static(path.join(__dirname, '..', 'js')))
 app.listen(3000, () => {
     console.log('Server strarted on port 3000!')
 })
-        
+         
