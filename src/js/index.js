@@ -14,7 +14,6 @@ function dadosInput(){
     let slope = $('#slope').val();
     let slopeRunway = $('#slopeRunway').val();
     let altitude = $("#altitude").val();
-    let  = $("#altitude").val();
 
     //Pegando valor do Dropbox Flap
     var selectFlap = document.getElementById('flap');
