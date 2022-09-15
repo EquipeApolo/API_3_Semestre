@@ -120,13 +120,51 @@
             <div class="col-4 fundo">
               <div class="card border-0 fundo">
                   <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Braking application level</h5> 
-                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="braking">
-                    <option selected disabled>Braking application level</option>                
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                  <h5 class="card-title">Flap</h5> 
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="flap">
+                    <option selected disabled>Flap</option>                
+                    <option value="1">220</option>
+                    <option value="2">450</option>
                   </select>
+              </div>
+            </div>
+            
+            <div class="col-4 fundo">
+              <div class="card border-0 fundo">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Wind</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
+                    <span class="input-group-text" id="Wind"></span>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-4 fundo">
+              <div class="card border-0 fundo">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Type of Wind</h5> 
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="typeWind">
+                    <option selected disabled>Type of Wind</option>                
+                    <option value="1">Head Wind</option>
+                    <option value="2">Tail Wind</option>
+                  </select>
+              </div>
+            </div>            
+
+            <div class="col-4 fundo">
+              <div class="card border-0 fundo">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Runway condition (Braking Action)</h5>
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="btnCondition">
+                    <option selected disabled>Runway condition</option>                
+                    <option value="1">1 (Poor)</option>
+                    <option value="2">2 (Medium to Poor)</option>
+                    <option value="3">3 (Medium)</option>
+                    <option value="4">4 (Good to Medium)</option>
+                    <option value="5">5 (Good)</option>
+                    <option value="6">6 (Dry)</option>
+                  </select>                 
               </div>
             </div>
 
@@ -141,44 +179,26 @@
               </div>
             </div>
 
-            
-            <div class="col-4 fundo">
-              <div class="card border-0 fundo">
-                  <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Wind</h5> 
-                  <div class="input-group input-group-sm mb-3">
-                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="wind">
-                    <span class="input-group-text" id="Wind"></span>
-                  </div>
-              </div>
-            </div>
-
-            
-
-            <div class="col-4 fundo">
-              <div class="card border-0 fundo">
-                  <i style="font-size:3rem"></i>
-                  <h5 class="card-title">Runway condition</h5>
-                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="btnCondition">
-                    <option selected disabled>Runway condition</option>                
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>                 
-              </div>
-            </div>
-
             <div class="col-4 fundo">
               <div class="card border-0 fundo">
                   <i style="font-size:3rem"></i>
                   <h5 class="card-title">Slope of the runway</h5> 
                   <div class="input-group input-group-sm mb-3">
-                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slopeRunway">
                     <span class="input-group-text" id="SlopeRunway"></span>
                   </div>
+              </div>
+            </div>
+
+            <div class="col-4 fundo">
+              <div class="card border-0 fundo">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Type of Slope</h5> 
+                  <select class="form-select form-select-sm form-control form-control-sm custom-select mb-3" id="typeSlope">
+                    <option selected disabled>Type of Slope</option>                
+                    <option value="1">Downhill</option>
+                    <option value="2">Uphill</option>
+                  </select>
               </div>
             </div>
 
@@ -194,25 +214,23 @@
             </div>
 
             <div class="col-4 fundo">
-              <h5 class="card-title justify-content-start" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" for="reverserSwitch">Use of reverser?</h5>
-              <div class="form-check form-switch">
-                    <input class="form-check-input" 
-                  type="checkbox" 
-                  role="switch" 
-                  id="reverserSwitch" 
-                  style="transform: scale(1.75); margin-left: -1.7em !important">
-                </input>
-                </div>
+              <div class="card border-0 fundo">
+                  <i style="font-size:3rem"></i>
+                  <h5 class="card-title">Slope</h5> 
+                  <div class="input-group input-group-sm mb-3">
+                    <input type="number" class="form-control" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" id="slope">
+                  </div>
               </div>
+            </div>
 
               <div class="col-4 fundo">
-                <h5 class="form-check-label justify-content-start" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" for="flapSwitch">Has landing flap?</h5>
+                <h5 class="form-check-label justify-content-start" aria-label="Exemplo do tamanho do input" aria-describedby="inputGroup-sizing-sm" for="flapSwitch">With Ice Accreation?</h5>
               <div class="form-check form-switch">
                   <div class="input-group input-group-sm">
                     <input class="form-check-input" 
                   type="checkbox" 
                   role="switch" 
-                  id="flapSwitch" 
+                  id="IceAccreation" 
                   style="transform: scale(1.75); margin-left: -1.7em !important">
                 </input>
                 </div>
