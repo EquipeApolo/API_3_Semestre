@@ -9,10 +9,10 @@ var publico = path.join(__dirname);
 app.get('/', function(req, res) {
     res.sendFile(path.join(publico, 'index.html'));
 });  
-
+ 
 app.use('/Icons', express.static(path.join(__dirname, '..', 'public', 'Icons')))
-  
-
+   
+ 
 app.use('/dist', express.static(path.join(__dirname, '..', 'dist')))
 
 app.use('/js', express.static(path.join(__dirname, '..', 'js')))   
