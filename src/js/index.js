@@ -1,11 +1,11 @@
-const { FLAP220, FLAP450, Processamento } = require("calculo");
-import {calculo} from FLAP220, FLAP450
+
 
 $(document).ready( function () {
     loadMasks();
   });
 
 function dadosInput(){  
+   let moduloCalculo = require('calculo')
 
     //Pegando valor do Input
     let model = $("#model").val();
@@ -93,20 +93,19 @@ function dadosInput(){
         else{
             IceAccreationCheck;}
 
-       
-    let calculoPouso = 0
+  
     if (flapNumero == 220){
-        calculoPouso = new FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+        calculoPouso = moduloCalculo.FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
             reversor,IceAccreationCheck,2000,wind,slope)
     }else if(flapNumero = 450){
-        calculoPouso = new FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+        calculoPouso = moduloCalculo.FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
             reversor,IceAccreationCheck,2000,wind,slope)
     }else{
         console.log("ERRO!")
     }
 
     //Input Resultado   
-    $('#Result').val(calculoPouso.calcular());       
+    $('#Result').val(calculoPouso);       
 
     console.log(flapNumero);
 
@@ -126,15 +125,13 @@ function loadMasks() {
         let saidaWind = document.getElementById('Wind')
         let saidaSpeedA = document.getElementById('SpeedAdditive')
         let saidaAirportA = document.getElementById('AirportAltitude')
-        let saidaSlopeRunway = document.getElementById('SlopeRunway')
-    
+
         if(sistemaMedidas == "1"){ 
               saidaWeight.innerHTML = 'Kg'
               saidaTemp.innerHTML = '°C'
               saidaWind.innerHTML = 'Km/h'
               saidaSpeedA.innerHTML = 'Km/h'
               saidaAirportA.innerHTML = 'M'
-              saidaSlopeRunway.innerHTML = '%'
     
             }
           else{
@@ -143,7 +140,6 @@ function loadMasks() {
               saidaWind.innerHTML = 'Kt/h'
               saidaSpeedA.innerHTML = 'Mi/h'
               saidaAirportA.innerHTML = 'Ft'
-              saidaSlopeRunway.innerHTML = '%'
     
           }  
       }); 

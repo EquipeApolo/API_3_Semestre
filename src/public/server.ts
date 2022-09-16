@@ -20,4 +20,4 @@ app.use('/js', express.static(path.join(__dirname, '..', 'js')))
 app.listen(3000, () => {
     console.log('Server strarted on port 3000!')
 })
-           
+             
