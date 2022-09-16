@@ -1,3 +1,6 @@
+const { FLAP220, FLAP450, Processamento } = require("calculo");
+import {calculo} from FLAP220, FLAP450
+
 $(document).ready( function () {
     loadMasks();
   });
@@ -12,8 +15,8 @@ function dadosInput(){
     let wind =  $("#wind").val();
     let speedAdditive = $("#speedAdditive").val();
     let slope = $('#slope').val();
-    let slopeRunway = $('#slopeRunway').val();
     let altitude = $("#altitude").val();
+    let reversor = $("#reversor").val();
 
     //Pegando valor do Dropbox Flap
     var selectFlap = document.getElementById('flap');
@@ -47,33 +50,33 @@ function dadosInput(){
         //Pegando valor do Dropbox Type Slope
         var selectSlope = document.getElementById('typeSlope');
         var valueTypeSlope = selectSlope.options[selectSlope.selectedIndex].value;
-        let typeSlope = ' ';
+        /*let typeSlope = ' ';
         if(valueTypeSlope == 1){
             typeSlope = 'Downhill'
             console.log('Downhill')
-        }else if(valueTypeSlope == 2){
+        }else if(valueTypeSlope == 0){
             typeSlope = 'Uphill'
             console.log('Uphill')
         }
         else{
             console.log('Nada selecionado')
-        }
+        }*/
 
 
     //Pegando valor do Dropbox Type Wind
     var selectTypeWind = document.getElementById('typeWind');
     var valueTypeWind = selectTypeWind.options[selectTypeWind.selectedIndex].value;
-    let typeWind = ' ';
-    if(valueTypeWind == 1){
+    /*let typeWind = ' ';
+    if(valueTypeWind == 0){
         typeWind = 'Head Wind'
         console.log('Head Wind')
-    }else if(valueTypeWind == 2){
+    }else if(valueTypeWind == 1){
         typeWind = 'Tail Wind'
         console.log('Tail Wind')
     }
     else{
         console.log('Nada selecionado')
-    }
+    }*/
 
     //Pegando valor do Dropbox Runway condition
     var selectx = document.getElementById('btnCondition');
@@ -91,9 +94,19 @@ function dadosInput(){
             IceAccreationCheck;}
 
        
+    let calculoPouso = 0
+    if (flapNumero == 220){
+        calculoPouso = new FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+            reversor,IceAccreationCheck,2000,wind,slope)
+    }else if(flapNumero = 450){
+        calculoPouso = new FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+            reversor,IceAccreationCheck,2000,wind,slope)
+    }else{
+        console.log("ERRO!")
+    }
+
     //Input Resultado   
-    let soma = new Number(weight) + new Number(wind);
-    $('#Result').val(soma);       
+    $('#Result').val(calculoPouso.calcular());       
 
     console.log(flapNumero);
 

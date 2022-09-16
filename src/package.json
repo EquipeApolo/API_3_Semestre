@@ -15,6 +15,7 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "calculo": "github:mateushlsilva/calculo",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "jquery": "^3.6.1"
