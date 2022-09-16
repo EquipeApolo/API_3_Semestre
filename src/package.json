@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "ts-node-dev --inspect --ignore-watch node_modules public/server.ts"
   },

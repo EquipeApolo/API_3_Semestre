@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 });  
 
 app.use('/Icons', express.static(path.join(__dirname, '..', 'public', 'Icons')))
-
+  
 
 app.use('/dist', express.static(path.join(__dirname, '..', 'dist')))
 

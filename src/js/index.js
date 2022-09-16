@@ -1,11 +1,5 @@
-
-
-$(document).ready( function () {
-    loadMasks();
-  });
-
 function dadosInput(){  
-    import { FLAP220, FLAP450} from "../calculo/app.js"
+    //import {FLAP220, FLAP450} from "../calculo/app.js"
     //Pegando valor do Input
     let model = $("#model").val();
     let temperature = $("#temperature").val();
@@ -16,6 +10,7 @@ function dadosInput(){
     let slope = $('#slope').val();
     let altitude = $("#altitude").val();
     let reversor = $("#reversor").val();
+   
 
     //Pegando valor do Dropbox Flap
     var selectFlap = document.getElementById('flap');
@@ -92,26 +87,28 @@ function dadosInput(){
         else{
             IceAccreationCheck;}
 
-    let calculoPouso = null 
-    if (flapNumero == 220){
-        calculoPouso = new FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
-            reversor,IceAccreationCheck,2000,wind,slope)
-    }else if(flapNumero = 450){
-        calculoPouso = new FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
-            reversor,IceAccreationCheck,2000,wind,slope)
-    }else{
-        console.log("ERRO!")
-    }
+    // let calculoPouso = null 
+    // if (flapNumero == 220){
+    //     calculoPouso = new FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+    //         reversor,IceAccreationCheck,2000,wind,slope)
+    // }else if(flapNumero = 450){
+    //     calculoPouso = new FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+    //         reversor,IceAccreationCheck,2000,wind,slope)
+    // }else{
+    //     console.log("ERRO!")
+    // }
 
     //Input Resultado   
-    $('#Result').val(calculoPouso.calcular());       
+
+    let soma = new Number(weight) + new Number(wind);
+    $('#Result').val(soma);
+    console.log(2+2);    
 
     console.log(flapNumero);
 
     console.log(IceAccreationCheck);
-
     console.log(valuex); 
-    console.log(model, engine, temperature , weight, wind, speedAdditive, slope, slopeRunway, altitude)
+    console.log(model, temperature, engine , weight, wind, speedAdditive, slope, altitude, reversor)
 
 
-} 
+}   
