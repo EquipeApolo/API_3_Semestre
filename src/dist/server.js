@@ -13,6 +13,7 @@ app.get('/', function (req, res) {
 });
 app.use('/Icons', express_1.default.static(path.join(__dirname, '..', 'public', 'Icons')));
 app.use('/dist', express_1.default.static(path.join(__dirname, '..', 'dist')));
+app.use('/js', express_1.default.static(path.join(__dirname, '..', 'js')));
 app.listen(3000, () => {
     console.log('Server strarted on port 3000!');
 });

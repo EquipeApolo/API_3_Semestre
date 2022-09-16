@@ -5,8 +5,7 @@ $(document).ready( function () {
   });
 
 function dadosInput(){  
-   let moduloCalculo = require('calculo')
-
+    import { FLAP220, FLAP450} from "../calculo/app.js"
     //Pegando valor do Input
     let model = $("#model").val();
     let temperature = $("#temperature").val();
@@ -93,19 +92,19 @@ function dadosInput(){
         else{
             IceAccreationCheck;}
 
-  
+    let calculoPouso = null 
     if (flapNumero == 220){
-        calculoPouso = moduloCalculo.FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+        calculoPouso = new FLAP220(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
             reversor,IceAccreationCheck,2000,wind,slope)
     }else if(flapNumero = 450){
-        calculoPouso = moduloCalculo.FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
+        calculoPouso = new FLAP450(valuex,weight,altitude,valueTypeWind,temperature, valueTypeSlope,speedAdditive,
             reversor,IceAccreationCheck,2000,wind,slope)
     }else{
         console.log("ERRO!")
     }
 
     //Input Resultado   
-    $('#Result').val(calculoPouso);       
+    $('#Result').val(calculoPouso.calcular());       
 
     console.log(flapNumero);
 
@@ -116,32 +115,3 @@ function dadosInput(){
 
 
 } 
-
-function loadMasks() {
-    $('#btnMeasurement').change(function (){
-        var sistemaMedidas = $(this).val();
-        let saidaWeight = document.getElementById('AircraftWeight')
-        let saidaTemp = document.getElementById('Temperature')
-        let saidaWind = document.getElementById('Wind')
-        let saidaSpeedA = document.getElementById('SpeedAdditive')
-        let saidaAirportA = document.getElementById('AirportAltitude')
-
-        if(sistemaMedidas == "1"){ 
-              saidaWeight.innerHTML = 'Kg'
-              saidaTemp.innerHTML = '°C'
-              saidaWind.innerHTML = 'Km/h'
-              saidaSpeedA.innerHTML = 'Km/h'
-              saidaAirportA.innerHTML = 'M'
-    
-            }
-          else{
-              saidaWeight.innerHTML = 'Lbs'
-              saidaTemp.innerHTML = '°F'
-              saidaWind.innerHTML = 'Kt/h'
-              saidaSpeedA.innerHTML = 'Mi/h'
-              saidaAirportA.innerHTML = 'Ft'
-    
-          }  
-      }); 
-}
-
