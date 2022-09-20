@@ -96,8 +96,9 @@ $( "#btnResult" ).click(function() {
          console.log("ERRO!")
      }
 
+     let teste = parseFloat(calculoPouso).toFixed(2);
     //Input Resultado   
-    $('#Result').val(calculoPouso);
+    $('#Result').val(teste);
     
 
     console.log(flapNumero);
