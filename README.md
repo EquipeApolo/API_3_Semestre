@@ -51,7 +51,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
     
 | Sprint | Entrega | Status | Relatório |
 |:-----:|:----------:|:---------:|:---------:|
-| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório]() |
+| 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](relatorios/1sprint.md) |
 | 02 | 09/10/2022 | :clock12:	 | [ver relatório]() |
 | 03 | 06/11/2022 | :clock12:	 | [ver relatório]() |
 | 04 | 27/11/2022 | :clock12:	 | [ver relatório]() |
