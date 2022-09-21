@@ -15,20 +15,20 @@
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "imagens/Protótipo - Página de Cálculo.png"></p>
+<p align="center"> <img src = "../imagens/Protótipo - Página de Cálculo.png"></p>
 <br>
   
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "imagens/burndown1sprint.png"></p>
+<p align="center"> <img src = "../imagens/burndown1sprint.png"></p>
 <br>
 
   
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "imagens/video-primeiraentrega.gif"></p>
+<p align="center"> <img src = "../imagens/video-primeiraentrega.gif"></p>
 <br>
    
   → [Voltar ao topo](#topo)
