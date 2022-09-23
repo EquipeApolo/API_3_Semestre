@@ -63,7 +63,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = "imagens/Backlog priorizado.png"></p>
+<p align="center"> <img src = "imagens/backlogPriorizado.png"></p>
  
  ## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
