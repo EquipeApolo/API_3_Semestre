@@ -73,9 +73,10 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 01 | Página de cálculo do comprimento de pista. |
 | 01 | Interface de cálculo visando acesso via tablet. |
 | 01 | Aplicar sistemas de unidade de medida. |
+| 02 | Realização da lógica dos cálculos a partir das tabelas. |
 | 02 | Página de cadastro de aeronaves. |
-| 02 | Página de edição de aeronaves. |
 | 02 | Adequar interface às configurações da aeronave. |
+| 03 | Página de edição de aeronaves. |
 | 03 | Página de visualização do histórico de cálculos. |
 | 03 | Salvar histórico de cálculos no banco. |
 | 04 | Página de cadastro de usuário. |
