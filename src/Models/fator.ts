@@ -1,4 +1,4 @@
-import { UnitMeasurement } from "../Enuns/unitMeasurement";
+import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 
 export default abstract class FatorCalculo{
