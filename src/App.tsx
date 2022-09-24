@@ -43,7 +43,8 @@ class App extends Component<props, state>{
     this.slopeChange = this.slopeChange.bind(this);
     this.aircraftSpeedAdctiveChange = this.aircraftSpeedAdctiveChange.bind(this);
     this.airportAltitudeChange = this.airportAltitudeChange.bind(this);
-    this.brakingLevelChange = this.brakingLevelChange.bind(this)
+    this.brakingLevelChange = this.brakingLevelChange.bind(this);
+    this.runwayConditionChange = this.runwayConditionChange.bind(this);
   }
 
   
@@ -96,14 +97,20 @@ class App extends Component<props, state>{
   brakingLevelChange(event){
     const target = event.target;
     this.setState({
-      slope: target.value
+      brakingLevel: target.value
+    })
+  }
+  runwayConditionChange(event){
+    const target = event.target;
+    this.setState({
+      runwayCondition: target.value
     })
   }
 
 
   calculate(event){
     this.setState({
-      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature +  ", Peso Avião: " + this.state.aircraftWeight + ", SpeedAdditive: " + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Braking application: " + this.state.brakingLevel + ", Slope: " + this.state.slope
+      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", SpeedAdditive: " + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight + ", Slope: " + this.state.slope
     });
   }
 
@@ -178,11 +185,14 @@ class App extends Component<props, state>{
           <Form>
               <Col>
                 <h5 className="card-title">Runway condition</h5>
-                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
+                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.runwayConditionChange}>
                       <option defaultValue="Runway condition" disabled>Runway condition</option>
                       <option value="1">Poor</option>
-                      <option value="2">Bad</option>
-                      <option value="3">Ok</option>
+                      <option value="2">Medium to poor</option>
+                      <option value="3">Medium</option>
+                      <option value="4">Good to medium</option>
+                      <option value="5">Good</option>
+                      <option value="6">Dry</option>
                 </select>  
               </Col>           
             </Form>
