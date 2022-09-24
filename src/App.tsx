@@ -33,8 +33,10 @@ class App extends Component<props, state>{
 
   constructor(props) {
     super(props);
-    this.state = { unitMeasurement:0, aircraftModel:"", aircraftCertification:"", aircraftEngine:"", aircraftFlap:0, aircraftSpeedAdctive:0, aircraftWeight:0, 
-    airportAltitude:0,iceAccreation:false,reversor:0,runwayCondition:0,slope:0,temperature:0,typeOfSlope:0,wind:0,typeOfWind:0,result:"", brakingLevel:0}
+    this.state = {
+      unitMeasurement: 0, aircraftModel: "", aircraftCertification: "", aircraftEngine: "", aircraftFlap: 0, aircraftSpeedAdctive: 0, aircraftWeight: 0,
+      airportAltitude: 0, iceAccreation: false, reversor: 0, runwayCondition: 0, slope: 0, temperature: 0, typeOfSlope: 0, wind: 0, typeOfWind: 0, result: "", brakingLevel: 0
+    }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
     this.aircraftWeightChange = this.aircraftWeightChange.bind(this);
@@ -45,77 +47,88 @@ class App extends Component<props, state>{
     this.airportAltitudeChange = this.airportAltitudeChange.bind(this);
     this.brakingLevelChange = this.brakingLevelChange.bind(this);
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
+    this.typeOfSlopeChange = this.typeOfSlopeChange.bind(this);
+    this.typeOfWindChange = this.typeOfWindChange.bind(this);
   }
 
-  
-
-  temperatureChange(event) {
-    const target = event.target;    
-    this.setState({
-      temperature: target.value
-    });
-  }
-
-  windChange(event) {
-    const target = event.target;    
-    this.setState({
-      wind: target.value
-    });
-  }
-
-  aircraftWeightChange(event){
-    const target = event.target;
-    this.setState({
-      aircraftWeight: target.value
-    })
-  }
-
-  unitMeasurementChange(event){
+  unitMeasurementChange(event) {
     const target = event.target;
     this.setState({
       unitMeasurement: target.value
     })
   }
-  slopeChange(event){
+  temperatureChange(event) {
     const target = event.target;
     this.setState({
-      slope: target.value
+      temperature: target.value
+    });
+  }
+  windChange(event) {
+    const target = event.target;
+    this.setState({
+      wind: target.value
+    });
+  }
+  typeOfWindChange(event){
+    const target = event.target;
+    this.setState({
+      typeOfWind: target.value
     })
   }
-  aircraftSpeedAdctiveChange(event){
+  typeOfSlopeChange(event) {
+    const target = event.target;
+    this.setState({
+      typeOfSlope: target.value
+    })
+  }
+  aircraftSpeedAdctiveChange(event) {
     const target = event.target;
     this.setState({
       aircraftSpeedAdctive: target.value
     })
   }
-  airportAltitudeChange(event){
+  aircraftWeightChange(event) {
+    const target = event.target;
+    this.setState({
+      aircraftWeight: target.value
+    })
+  }
+  slopeChange(event) {
+    const target = event.target;
+    this.setState({
+      slope: target.value
+    })
+  }
+
+  airportAltitudeChange(event) {
     const target = event.target;
     this.setState({
       airportAltitude: target.value
     })
   }
-  brakingLevelChange(event){
+  brakingLevelChange(event) {
     const target = event.target;
     this.setState({
       brakingLevel: target.value
     })
   }
-  runwayConditionChange(event){
+  runwayConditionChange(event) {
     const target = event.target;
     this.setState({
       runwayCondition: target.value
     })
   }
 
-
-  calculate(event){
+  calculate(event) {
     this.setState({
-      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", SpeedAdditive: " + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight + ", Slope: " + this.state.slope
+      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", SpeedAdditive: "
+        + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight
+        + ", Slope: " + this.state.slope + ", tipo Slope: " + this.state.typeOfSlope + ", tipo vento: " + this.state.typeOfWind
     });
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <Container mb-5>
         <Container>
           <Row mt-5 mb-5>
@@ -124,101 +137,126 @@ class App extends Component<props, state>{
           </Row>
         </Container>
         <Row mb-5>
-            <Col>
-              Resultado: {this.state.result}
-            </Col>
+          <Col>
+            Resultado: {this.state.result}
+          </Col>
         </Row>
-        
+
         <Row>
           <Col>
             <Form>
-              <Col>             
+              <Col>
                 <h5 className="card-title">Unit of measurement</h5>
                 <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
-                      <option defaultValue="Unit of measurement" disabled>Unit of measurement</option>
-                      <option value="1">Internacional</option>
-                      <option value="2">Imperial</option>
-                </select>  
-              </Col>
-              <Col>
-                <h5 className="card-title">Wind</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Wind" onChange={this.windChange}/>
-                
+                  <option defaultValue="Unit of measurement" disabled>Unit of measurement</option>
+                  <option value="1">Internacional</option>
+                  <option value="2">Imperial</option>
+                </select>
               </Col>
               <Col>
                 <h5 className="card-title">Temperature</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Temperature" onChange={this.temperatureChange}/>
-              </Col>           
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange}/>
+              </Col>
+              <Col>
+                <h5 className="card-title">Wind</h5>
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
+              </Col>
             </Form>
           </Col>
-          </Row>
+        </Row>
 
-          <Row>
+        <Row>
           <Col>
             <Form>
               <Col>
-                <h5 className="card-title">Braking application level</h5>
-                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.brakingLevelChange}>
-                      <option defaultValue="Braking level" disabled>Braking level</option>
-                      <option value="1">Maximum Manual</option>
-                      <option value="2">Autobrake Med.</option>
-                      <option value="3">Autobrake Low</option>
-                </select>  
-              </Col>           
+                <h5 className="card-title">Type of wind</h5>
+                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="typeWind" onChange={this.typeOfWindChange}>
+                  <option defaultValue="Type of wind" disabled>Type of wind</option>
+                  <option value="1">Head wind</option>
+                  <option value="2">Tail wind</option>
+                </select>
+              </Col>
             </Form>
             <Form>
               <Col>
                 <h5 className="card-title">Speed additive</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange}/>
-              </Col>           
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="speedAdditive" placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange} />
+              </Col>
             </Form>
             <Form>
               <Col>
                 <h5 className="card-title">Airport altitude</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Airport altitude" onChange={this.airportAltitudeChange}/>
-              </Col>           
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="AirportAltitude" placeholder="Airport altitude" onChange={this.airportAltitudeChange} />
+              </Col>
             </Form>
           </Col>
-          </Row>
-          <Row>
+        </Row>
+
+        <Row>
           <Col>
-          <Form>
+            <Form>
               <Col>
-                <h5 className="card-title">Runway condition</h5>
-                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.runwayConditionChange}>
-                      <option defaultValue="Runway condition" disabled>Runway condition</option>
-                      <option value="1">Poor</option>
-                      <option value="2">Medium to poor</option>
-                      <option value="3">Medium</option>
-                      <option value="4">Good to medium</option>
-                      <option value="5">Good</option>
-                      <option value="6">Dry</option>
-                </select>  
-              </Col>           
+                <h5 className="card-title">Braking application level</h5>
+                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+                  <option defaultValue="Braking level" disabled>Braking level</option>
+                  <option value="1">Maximum Manual</option>
+                  <option value="2">Autobrake Med.</option>
+                  <option value="3">Autobrake Low</option>
+                </select>
+              </Col>
             </Form>
-          <Form>
-            <Col>
-              <h5 className="card-title">Aircraft Weight</h5>
-              <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Aircraft Weight" onChange={this.aircraftWeightChange}/>
-            </Col>           
-          </Form>
+            <Form>
+              <Col>
+                <h5 className="card-title">Aircraft Weight</h5>
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
+              </Col>
+            </Form>
             <Form>
               <Col>
                 <h5 className="card-title">Slope of the runway</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' placeholder="Slope of the runway" onChange={this.slopeChange}/>
-              </Col>           
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="slope" placeholder="Slope of the runway" onChange={this.slopeChange} />
+              </Col>
             </Form>
           </Col>
-          </Row>
+        </Row>
 
-          <Row>
+        <Row>
           <Col>
-          <Form>
-              <Button onClick={this.calculate}>Teste</Button>
-          </Form>
+            <Form>
+              <Col>
+                <h5 className="card-title">Type of slope</h5>
+                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="typeSlope" onChange={this.typeOfSlopeChange}>
+                  <option defaultValue="Type of slope" disabled>Type of slope</option>
+                  <option value="1">Downhill</option>
+                  <option value="2">Uphill</option>
+                </select>
+              </Col>
+            </Form>
+            <Form>
+              <Col>
+                <h5 className="card-title">Runway condition</h5>
+                <select className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
+                  <option defaultValue="Runway condition" disabled>Runway condition</option>
+                  <option value="1">1 (Poor)</option>
+                  <option value="2">2 (Medium to poor)</option>
+                  <option value="3">3 (Medium)</option>
+                  <option value="4">4 (Good to medium)</option>
+                  <option value="5">5 (Good)</option>
+                  <option value="6">6 (Dry)</option>
+                </select>
+              </Col>
+            </Form>
           </Col>
-          </Row>
-        
+        </Row>
+
+        <Row>
+          <Col>
+            <Form>
+              <Button onClick={this.calculate}>Teste</Button>
+            </Form>
+          </Col>
+        </Row>
+
       </Container>
     );
   }
