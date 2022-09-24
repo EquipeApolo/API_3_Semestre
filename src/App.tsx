@@ -8,23 +8,23 @@ type props = {
   Teste: String
 }
 type state = {
-  unitMeasurement: Number,
-  aircraftModel: String,
-  aircraftEngine: String,
-  aircraftCertification: String,
-  aircraftWeight: Number,
-  aircraftSpeedAdctive: Number,
-  aircraftFlap: Number,
+  unitMeasurement: number,
+  aircraftModel: string,
+  aircraftEngine: string,
+  aircraftCertification: string,
+  aircraftWeight: number,
+  aircraftSpeedAdctive: number,
+  aircraftFlap: number,
   wind: number,
-  typeOfWind: Number,
-  runwayCondition: Number,
+  typeOfWind: number,
+  runwayCondition: number,
   temperature: number,
-  airportAltitude: Number,
-  slope: Number,
-  typeOfSlope: Number,
-  reversor: Number,
-  iceAccreation: Boolean,
-  result: String
+  airportAltitude: number,
+  slope: number,
+  typeOfSlope: number,
+  reversor: number,
+  iceAccreation: boolean,
+  result: string
 }
 
 class App extends Component<props, state>{
@@ -54,7 +54,7 @@ class App extends Component<props, state>{
 
   calculate(event){
     this.setState({
-      result: "Temperatura: " + this.state.temperature + ", Vento: " + this.state.wind
+      result: (this.state.temperature * this.state.wind).toFixed(2)
     });
   }
 
