@@ -11,24 +11,24 @@
 <span id="mvp">
  
 <h1> :rocket: MVP </h1>
-<p align="justify">Nesta sprint desenvolvemos um sistema para realizar o cadastro de mensagens enviadas por clientes à empresa, que estão armazenadas no banco de dados que criamos, além de uma tela para visualizar estas mensagens, podendo buscar por alguma específica por meio de uma palavra-chave.</p>
+<p align="justify">Nesta sprint desenvolvemos a página para a realização dos cálculos de distância necessária para a realização de um pouso seguro a partir dos parâmetros informados pelo cliente. Essa página foi feita visando acesso em tablets.</p>
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "imagens/Protótipo - Página de Cálculo.png"></p>
+<p align="center"> <img src = "../imagens/Protótipo - Página de Cálculo.png"></p>
 <br>
   
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "imagens/burndown1sprint.png"></p>
+<p align="center"> <img src = "../imagens/burndown1sprint.png"></p>
 <br>
 
   
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "imagens/video-primeiraentrega.gif"></p>
+<p align="center"> <img src = "../imagens/video-primeiraentrega.gif"></p>
 <br>
    
   → [Voltar ao topo](#topo)
