@@ -28,3 +28,10 @@ input[type=number] {
   padding-right: "20px";
   padding-left: "20px";
 }
+
+.teste {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  color: #5E6278;
+}

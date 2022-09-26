@@ -128,114 +128,94 @@ class App extends Component<props, state>{
 
   render() {
     return (
-      <Container mb-5>
-        <Container>
-          <Row mt-5 mb-5>
-            <img src={aviao} className="img col-sm-5 col-md-3 col-lg-2"></img>
-            <h1 className='text-center mt-5 col-sm-7 col-md-9'>Performance calculation</h1>
+      <Container className="mb-5">
+        <Container className="ajusteCalculo">
+          <Row className="mt-5 mb-5">
+            <Col className="w-50"><img src={aviao} alt="Imagem de um avião." className="img col-sm-5 col-md-3 col-lg-2"/></Col>
+            <Col className="w-50"><h1 className='text-center mt-5 col-sm-7 col-md-9'>Performance calculation</h1></Col>
+            <Col className="w-50"></Col>
           </Row>
         </Container>
-        <Row mb-5>
-          <Col>
-            Resultado: {this.state.result}
-          </Col>
-        </Row>
 
         <Container className="ajusteCalculo">
+        <Form>
         <Row>
           <Col>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Unit of measurement</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
+                <select id="select" defaultValue="-1" className="form-select teste form-select-sm form-control-sm custom-select mb-3" onChange={this.unitMeasurementChange}>
                   <option value="-1" disabled>Select</option>
                   <option value="1">Internacional</option>
                   <option value="2">Imperial</option>
                 </select>
               </Col>
               <Col style={{width: "33%"}}>
-                <h5 className="card-title">Temperature</h5>
+                <h5 className="card-title">Temperature (ºC)</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange}/>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Wind</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
               </Col>
-            </Form>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Type of wind</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select mb-3" id="typeWind" onChange={this.typeOfWindChange}>
+                <select defaultValue="-1" className="form-select teste form-select-sm form-control-sm custom-select mb-3" id="typeWind" onChange={this.typeOfWindChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">Head wind</option>
                   <option value="2">Tail wind</option>
                 </select>
               </Col>
-            </Form>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Speed additive</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="speedAdditive" placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange} />
               </Col>
-            </Form>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Airport altitude</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="AirportAltitude" placeholder="Airport altitude" onChange={this.airportAltitudeChange} />
               </Col>
-            </Form>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Braking application level</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+                <select defaultValue="-1" className="form-select teste form-select-sm form-control-sm custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">Maximum Manual</option>
                   <option value="2">Autobrake Med.</option>
                   <option value="3">Autobrake Low</option>
                 </select>
               </Col>
-            </Form>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft Weight</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
               </Col>
-            </Form>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Slope of the runway</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="slope" placeholder="Slope of the runway" onChange={this.slopeChange} />
               </Col>
-            </Form>
           </Col>
         </Row>
 
         <Row>
           <Col>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Type of slope</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select mb-3" id="typeSlope" onChange={this.typeOfSlopeChange}>
+                <select defaultValue="-1" className="form-select form-select-sm teste form-control-sm custom-select mb-3" id="typeSlope" onChange={this.typeOfSlopeChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">Downhill</option>
                   <option value="2">Uphill</option>
                 </select>
               </Col>
-            </Form>
-            <Form>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Runway condition</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
+                <select defaultValue="-1" className="form-select form-select-sm teste form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">1 (Poor)</option>
                   <option value="2">2 (Medium to poor)</option>
@@ -245,8 +225,6 @@ class App extends Component<props, state>{
                   <option value="6">6 (Dry)</option>
                 </select>
               </Col>
-            </Form>
-            <Form>
               <Col>
               <h5 className="card-title">Has Ice Accreation?</h5>
               <Form.Check 
@@ -254,17 +232,18 @@ class App extends Component<props, state>{
                   id="0"
                 />
               </Col>
-            </Form>
           </Col>
         </Row>
 
-        <Row>
+        <Row className="mb-5 mt-5">
           <Col>
-            <Form>
-              <Button onClick={this.calculate}>Teste</Button>
-            </Form>
+              <Button className="btn-primary btn-hover-scale me-5" onClick={this.calculate}>Teste</Button>
+          </Col>
+          <Col>
+            Resultado: {this.state.result}
           </Col>
         </Row>
+        </Form>
         </Container>
       </Container>
     );
