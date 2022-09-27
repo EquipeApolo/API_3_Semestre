@@ -4,9 +4,6 @@ import aviao from "../Icons/aviao.png";
 import '../Style/App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
-type props = {
-  Teste: String
-}
 type state = {
   unitMeasurement: Number,
   aircraftModel: String,
@@ -28,10 +25,10 @@ type state = {
   brakingLevel: Number
 }
 
-class Calculo extends Component<props, state>{
+class Calculo extends Component<{}, state>{
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super({});
     this.state = {
       unitMeasurement: 0, aircraftModel: "", aircraftCertification: "", aircraftEngine: "", aircraftFlap: 0, aircraftSpeedAdctive: 0, aircraftWeight: 0,
       airportAltitude: 0, iceAccreation: false, reversor: 0, runwayCondition: 0, slope: 0, temperature: 0, typeOfSlope: 0, wind: 0, typeOfWind: 0, result: "", brakingLevel: 0

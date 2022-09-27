@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-    <Route index element={<Calculo Teste="a"/>}/>
+    <Route index element={<Calculo/>}/>
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
     </Routes>
