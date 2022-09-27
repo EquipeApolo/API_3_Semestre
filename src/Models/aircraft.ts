@@ -5,9 +5,7 @@ export default class Aircraft{
     private certification!: string;
     private speedAdctive!: number;
     private weight!: number;
-    private hasAircraftFlap!: boolean;
     private flap!: number;
-    private hasAircraftReverser!: boolean;
     private reverserAmount!: number
 
     // constructor(model: string, engine: string, certification: string, speedAdctive: number, weight: number, hasFlap: boolean, flap: number, hasReverser: boolean, reverserAmount: number){
@@ -42,17 +40,11 @@ export default class Aircraft{
         this.weight = this.weight;
     }
 
-    set setHasFlap(value: boolean){
-        this.hasAircraftFlap = value;
-    }
 
     set setFlapValue(value: number){
         this.flap = value;
     }
 
-    set setHasReverser(value: boolean){
-        this.hasAircraftReverser = value;
-    }
 
     set setReverserAmount(value: number){
         this.reverserAmount = value;
@@ -70,7 +62,4 @@ export default class Aircraft{
 
     get getWeight(): number { return this.weight; }
 
-    get hasFlap(): boolean { return this.hasFlap; }
-
-    get hasReverser(): boolean { return this.hasReverser; }
 }

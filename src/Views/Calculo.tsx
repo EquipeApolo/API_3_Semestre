@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import aviao from "../Icons/aviao.png";
 import '../Style/App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
 type state = {
   unitMeasurement: Number,
@@ -45,6 +46,7 @@ class Calculo extends Component<{}, state>{
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.typeOfSlopeChange = this.typeOfSlopeChange.bind(this);
     this.typeOfWindChange = this.typeOfWindChange.bind(this);
+    this.iceAccreationChange = this.iceAccreationChange.bind(this);
   }
 
   unitMeasurementChange(event) {
@@ -115,12 +117,19 @@ class Calculo extends Component<{}, state>{
     })
   }
 
+  iceAccreationChange(event){
+    const target = event.target;
+    this.setState({
+      iceAccreation: target.value
+    })
+  }
+
   calculate(event) {
     const target = event.target;
     this.setState({
       result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", SpeedAdditive: "
         + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight
-        + ", Slope: " + this.state.slope + ", tipo Slope: " + this.state.typeOfSlope + ", tipo vento: " + this.state.typeOfWind
+        + ", Slope: " + this.state.slope + ", tipo Slope: " + this.state.typeOfSlope + ", tipo vento: " + this.state.typeOfWind + ", tem ice: " + this.state.iceAccreation
     });
   }
 
@@ -210,13 +219,11 @@ class Calculo extends Component<{}, state>{
 
         <Row>
           <Col>
-              <Col>
-              <h5 className="card-title">Has Ice Accreation?</h5>
-              <Form.Check 
-                  type="switch"
-                  id="0"
-                />
-              </Col>
+          <h5 className='card-tittle'>Has ice accreation?</h5>
+          <BootstrapSwitchButton
+              checked={true}
+              onChange={this.iceAccreationChange}
+          />
           </Col>
         </Row>
 
