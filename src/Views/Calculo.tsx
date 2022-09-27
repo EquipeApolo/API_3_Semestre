@@ -132,7 +132,7 @@ class Calculo extends Component<props, state>{
       <Container className="px-2 mb-5">
         <Container>
           <Row className="px-2 mb-5 mt-5">
-            <img src={aviao} className="img col-sm-5 col-md-3 col-lg-2"></img>
+            <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
             <h1 className='text-center mt-5 col-sm-7 col-md-9'>Performance calculation</h1>
           </Row>
         </Container>
@@ -143,7 +143,7 @@ class Calculo extends Component<props, state>{
           <Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Unit of measurement</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
+                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
                   <option value="-1" disabled>Select</option>
                   <option value="1">Internacional</option>
                   <option value="2">Imperial</option>
@@ -151,7 +151,7 @@ class Calculo extends Component<props, state>{
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm custom-select select mb-3" onChange={this.unitMeasurementChange}>
+                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" onChange={this.unitMeasurementChange}>
                   <option value="-1" disabled>Select</option>
                   <option value="1">Model XPTO</option>
                   <option value="2">Model XXYY</option>
@@ -168,7 +168,7 @@ class Calculo extends Component<props, state>{
           <Col>
             <Col style={{width: "33%"}}>
                 <h5 className="card-title">Braking application level</h5>
-                <select defaultValue="-1" className="form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">Maximum Manual</option>
                   <option value="2">Autobrake Med.</option>
@@ -190,7 +190,7 @@ class Calculo extends Component<props, state>{
           <Col>
           <Col style={{width: "33%"}}>
                 <h5 className="card-title">Runway condition</h5>
-                <select defaultValue="-1" className="form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
+                <select defaultValue="-1" className="text-select form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">1 (Poor)</option>
                   <option value="2">2 (Medium to poor)</option>

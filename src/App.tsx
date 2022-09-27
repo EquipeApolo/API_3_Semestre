@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
 import Calculo from './Views/calculo';
 import Teste from './Views/teste';
 
@@ -8,7 +8,8 @@ function App() {
     <BrowserRouter>
     <Routes>
     <Route index element={<Calculo Teste="a"/>}/>
-    <Route path="/teste" element={<Teste Thales="b"/>}/>
+    <Route path="*" element={<Navigate to="/" />}/>
+    <Route path="/teste" element={<Teste/>}/>
     </Routes>
     </BrowserRouter>
   );

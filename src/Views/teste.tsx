@@ -1,13 +1,6 @@
 import { Component } from "react";
 
-type props = {
-    Thales: String
-}
-class Teste extends Component<props>{
-
-    constructor(props){
-        super(props);
-    }
+class Teste extends Component{
 
     render() {
         return (

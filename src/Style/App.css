@@ -12,13 +12,16 @@ input[type=number] {
 .fundo{
   background: #F0F0F0 !important;
 }
+
 .text{
   font-size:3rem;
 }
+
 .transform{
   transform: scale(1.75); 
   margin-left: -1.7em !important;
 }
+
 .height{
   height: 7vh;
 }
@@ -41,4 +44,8 @@ input[type=number] {
   font-size: large;
   font-weight: bold;
   width: 50%;
+}
+
+.text-select {
+  font-size: 16px !important;
 }
