@@ -29,9 +29,16 @@ input[type=number] {
   padding-left: "20px";
 }
 
-.teste {
+.select {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid #9e9e9e;
   color: #5E6278;
+}
+
+.botao-resultado{
+  height: 7vh;
+  font-size: large;
+  font-weight: bold;
+  width: 50%;
 }
