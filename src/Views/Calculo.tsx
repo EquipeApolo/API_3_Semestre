@@ -7,19 +7,16 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 
 type state = {
   unitMeasurement: Number,
-  aircraftModel: String,
-  aircraftEngine: String,
-  aircraftCertification: String,
   aircraftWeight: Number,
-  aircraftSpeedAdctive: Number,
-  aircraftFlap: Number,
+  weightTitle: string,
   wind: number,
-  typeOfWind: Number,
+  windTitle: string,
   runwayCondition: Number,
   temperature: number,
+  temperatureTitle: string,
   airportAltitude: Number,
+  airportAltitudeTitle: string,
   slope: Number,
-  typeOfSlope: Number,
   reversor: Number,
   iceAccreation: Boolean,
   result: string
@@ -28,11 +25,11 @@ type state = {
 
 class Calculo extends Component<{}, state>{
 
-  constructor() {
-    super({});
-    this.state = {
-      unitMeasurement: 0, aircraftModel: "", aircraftCertification: "", aircraftEngine: "", aircraftFlap: 0, aircraftSpeedAdctive: 0, aircraftWeight: 0,
-      airportAltitude: 0, iceAccreation: false, reversor: 0, runwayCondition: 0, slope: 0, temperature: 0, typeOfSlope: 0, wind: 0, typeOfWind: 0, result: "", brakingLevel: 0
+  constructor(props) {
+    super(props);
+    this.state = { airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
+      unitMeasurement: 0, aircraftWeight: 0,
+      airportAltitude: 0, iceAccreation: false, reversor: 0, runwayCondition: 0, slope: 0, temperature: 0, wind: 0, result: "", brakingLevel: 0
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -40,12 +37,9 @@ class Calculo extends Component<{}, state>{
     this.unitMeasurementChange = this.unitMeasurementChange.bind(this);
     this.calculate = this.calculate.bind(this);
     this.slopeChange = this.slopeChange.bind(this);
-    this.aircraftSpeedAdctiveChange = this.aircraftSpeedAdctiveChange.bind(this);
     this.airportAltitudeChange = this.airportAltitudeChange.bind(this);
     this.brakingLevelChange = this.brakingLevelChange.bind(this);
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
-    this.typeOfSlopeChange = this.typeOfSlopeChange.bind(this);
-    this.typeOfWindChange = this.typeOfWindChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
   }
 
@@ -54,6 +48,21 @@ class Calculo extends Component<{}, state>{
     this.setState({
       unitMeasurement: target.value
     })
+    if(target.value == 1){
+      this.setState({
+        weightTitle: "(Kg)",
+        windTitle: "(Km/h)",
+        airportAltitudeTitle: "(M)",
+        temperatureTitle: "(ºC)"
+      });
+    }else{
+      this.setState({
+        weightTitle: "(Lb)",
+        windTitle: "(Wt)",
+        airportAltitudeTitle: "(Ft)",
+        temperatureTitle: "(ºF)"
+      });
+    }
   }
   temperatureChange(event) {
     const target = event.target;
@@ -66,24 +75,6 @@ class Calculo extends Component<{}, state>{
     this.setState({
       wind: target.value
     });
-  }
-  typeOfWindChange(event){
-    const target = event.target;
-    this.setState({
-      typeOfWind: target.value
-    })
-  }
-  typeOfSlopeChange(event) {
-    const target = event.target;
-    this.setState({
-      typeOfSlope: target.value
-    })
-  }
-  aircraftSpeedAdctiveChange(event) {
-    const target = event.target;
-    this.setState({
-      aircraftSpeedAdctive: target.value
-    })
   }
   aircraftWeightChange(event) {
     const target = event.target;
@@ -120,16 +111,15 @@ class Calculo extends Component<{}, state>{
   iceAccreationChange(event){
     const target = event.target;
     this.setState({
-      iceAccreation: target.value
+      iceAccreation: target.state
     })
   }
 
   calculate(event) {
     const target = event.target;
     this.setState({
-      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", SpeedAdditive: "
-        + this.state.aircraftSpeedAdctive + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight
-        + ", Slope: " + this.state.slope + ", tipo Slope: " + this.state.typeOfSlope + ", tipo vento: " + this.state.typeOfWind + ", tem ice: " + this.state.iceAccreation
+      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight
+        + ", Slope: " + this.state.slope + ", tem ice: " + this.state.iceAccreation
     });
   }
 
@@ -164,7 +154,7 @@ class Calculo extends Component<{}, state>{
                 </select>
               </Col>
               <Col style={{width: "33%"}}>
-                <h5 className="card-title">Aircraft Weight</h5>
+                <h5 className="card-title">Aircraft Weight {this.state.weightTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
               </Col>
           </Col>
@@ -182,12 +172,12 @@ class Calculo extends Component<{}, state>{
                 </select>
               </Col>
               <Col style={{width: "33%"}}>
-                <h5 className="card-title">Temperature</h5>
+                <h5 className="card-title">Temperature {this.state.temperatureTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange}/>
               </Col>
               <Col style={{width: "33%"}}>
-                <h5 className="card-title">Wind</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
+                <h5 className="card-title">Wind {this.state.windTitle}</h5>
+                <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
               </Col>
           </Col>
         </Row>
@@ -207,7 +197,7 @@ class Calculo extends Component<{}, state>{
                 </select>
               </Col>
               <Col style={{width: "33%"}}>
-                <h5 className="card-title">Airport altitude</h5>
+                <h5 className="card-title">Airport altitude {this.state.airportAltitudeTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="AirportAltitude" placeholder="Airport altitude" onChange={this.airportAltitudeChange} />
               </Col>
               <Col style={{width: "33%"}}>
@@ -221,8 +211,9 @@ class Calculo extends Component<{}, state>{
           <Col>
           <h5 className='card-tittle'>Has ice accreation?</h5>
           <BootstrapSwitchButton
-              checked={true}
-              onChange={this.iceAccreationChange}
+              onChange={(checked: boolean) => {
+                this.setState({ iceAccreation: checked })
+            }}
           />
           </Col>
         </Row>
