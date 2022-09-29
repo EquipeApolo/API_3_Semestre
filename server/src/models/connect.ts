@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize'
 
 
-const connection = new Sequelize("embraer", "root", "fatec", {
+const connection = new Sequelize("embraer", "root", "Diego@000", {
     host: 'localhost',
     dialect: 'mysql'
 })
