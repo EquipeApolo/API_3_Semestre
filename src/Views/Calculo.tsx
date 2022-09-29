@@ -4,6 +4,7 @@ import aviao from "../Icons/aviao.png";
 import '../Style/App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+import Switch from 'react-bootstrap-switch';
 
 type state = {
   unitMeasurement: Number,
@@ -221,9 +222,12 @@ class Calculo extends Component<{}, state>{
           <Col>
           <h5 className='card-tittle'>Has ice accreation?</h5>
           <BootstrapSwitchButton
-              checked={true}
+              checked={false}
               onChange={this.iceAccreationChange}
           />
+          <Col>
+            <Switch  onChange={this.iceAccreationChange}/>
+          </Col>
           </Col>
         </Row>
 
@@ -245,6 +249,9 @@ class Calculo extends Component<{}, state>{
     );
   }
 }
+
+
+
 
 export default Calculo;
 
