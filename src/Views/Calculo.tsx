@@ -4,7 +4,6 @@ import aviao from "../Icons/aviao.png";
 import '../Style/App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
-import Switch from 'react-bootstrap-switch';
 
 type state = {
   unitMeasurement: Number,
@@ -133,7 +132,7 @@ class Calculo extends Component<{}, state>{
 
   render() {
     return (
-      <Container className="px-2 mb-5">
+      <Container className=" px-2 mb-5">
         <Container>
           <Row className="px-2 mb-5 mt-5">
             <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
@@ -141,8 +140,8 @@ class Calculo extends Component<{}, state>{
           </Row>
         </Container>
 
-        <Container>
-        <Form>
+        <Container className="px-2">
+        <Form >
         <Row>
           <Col>
               <Col style={{width: "33%"}}>
@@ -215,8 +214,8 @@ class Calculo extends Component<{}, state>{
           </Col>
         </Row>
 
-        <Row>
-          <Col>
+        <Row className="px-2">
+          <Col style={{width: "33%"}}>
           <h5 className='card-tittle'>Has ice accreation?</h5>
           <BootstrapSwitchButton
               onChange={(checked: boolean) => {
@@ -224,6 +223,8 @@ class Calculo extends Component<{}, state>{
             }}
           />
           </Col>
+          <Col style={{width: "33%"}}></Col>
+          <Col style={{width: "33%"}}></Col>
         </Row>
 
         <Row className="px-2 mt-5">
