@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom';
-import Calculo from './Views/Calculo';
+import Calculo from './Views/calculo';
 import Teste from './Views/teste';
 
 function App() {
