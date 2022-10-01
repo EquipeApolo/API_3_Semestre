@@ -4,33 +4,35 @@ import aviao from "../Icons/aviao.png";
 import '../Style/App.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
+import Aircraft from '../Models/aircraft';
 
 type state = {
   unitMeasurement: Number,
-  aircraftWeight: Number,
   weightTitle: string,
-  wind: number,
   windTitle: string,
-  runwayCondition: Number,
-  temperature: number,
   temperatureTitle: string,
-  airportAltitude: Number,
   airportAltitudeTitle: string,
-  slope: Number,
-  reversor: Number,
-  iceAccreation: Boolean,
   result: string
-  brakingLevel: Number
 }
 
 class Calculo extends Component<{}, state>{
 
+  private aircraftSelected!: Aircraft;
+  private aircraftWeight: number = 0;
+  private wind: number = 0;
+  private runwayCondition: number = 0;
+  private temperature: number = 0;
+  private airportAltitude: number = 0;
+  private slope: number = 0;
+  private reversor: number = 0;
+  private iceAccreation: boolean = false;
+  private result: string = "";
+  private brakingLevel: number = 0;
+
   constructor(props) {
     super(props);
     this.state = { airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
-      unitMeasurement: 0, aircraftWeight: 0,
-      airportAltitude: 0, iceAccreation: false, reversor: 0, runwayCondition: 0, slope: 0, temperature: 0, wind: 0, result: "", brakingLevel: 0
-    }
+      unitMeasurement: 0, result: ""}
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
     this.aircraftWeightChange = this.aircraftWeightChange.bind(this);
@@ -48,14 +50,14 @@ class Calculo extends Component<{}, state>{
     this.setState({
       unitMeasurement: target.value
     })
-    if(target.value == 1){
+    if(target.value === 1){
       this.setState({
         weightTitle: "(Kg)",
         windTitle: "(Km/h)",
         airportAltitudeTitle: "(M)",
         temperatureTitle: "(ºC)"
       });
-    }else if(target.value == 2){
+    }else if(target.value === 2){
       this.setState({
         weightTitle: "(Lb)",
         windTitle: "(Wt)",
@@ -73,62 +75,50 @@ class Calculo extends Component<{}, state>{
   }
   temperatureChange(event) {
     const target = event.target;
-    this.setState({
-      temperature: target.value
-    });
+    this.temperature = target.value;
   }
   windChange(event) {
     const target = event.target;
-    this.setState({
-      wind: target.value
-    });
+    this.wind = target.value;
   }
   aircraftWeightChange(event) {
     const target = event.target;
-    this.setState({
-      aircraftWeight: target.value
-    })
+    this.aircraftWeight = target.value;
   }
   slopeChange(event) {
     const target = event.target;
-    this.setState({
-      slope: target.value
-    })
+    this.slope = target.value;
   }
 
   airportAltitudeChange(event) {
     const target = event.target;
-    this.setState({
-      airportAltitude: target.value
-    })
+    this.airportAltitude = target.value;
   }
   brakingLevelChange(event) {
     const target = event.target;
-    this.setState({
-      brakingLevel: target.value
-    })
+    this.brakingLevel = target.value;
   }
   runwayConditionChange(event) {
     const target = event.target;
-    this.setState({
-      runwayCondition: target.value
-    })
+    this.runwayCondition = target.value;
   }
 
   iceAccreationChange(event){
     const target = event.target;
-    this.setState({
-      iceAccreation: target.state
-    })
+    this.iceAccreation = target.value;
   }
 
   calculate(event) {
-    const target = event.target;
+    event.preventDefault()
+    if(this.aircraftSelected === undefined) return;
+
+
     this.setState({
-      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.state.wind + ", Temperatura: " + this.state.temperature + ", Braking application: " + this.state.brakingLevel + ", airportAltitude: " + this.state.airportAltitude + ", Runway Condition: " + this.state.runwayCondition + ", Peso Avião: " + this.state.aircraftWeight
-        + ", Slope: " + this.state.slope + ", tem ice: " + this.state.iceAccreation
+      result: "Unidade Medida: " + this.state.unitMeasurement + ", Vento: " + this.wind + ", Temperatura: " + this.temperature + ", Braking application: " + this.brakingLevel + ", airportAltitude: " + this.airportAltitude + ", Runway Condition: " + this.runwayCondition + ", Peso Avião: " + this.aircraftWeight
+      + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
     });
   }
+
 
   render() {
     return (
@@ -141,7 +131,7 @@ class Calculo extends Component<{}, state>{
         </Container>
 
         <Container className="px-2">
-        <Form >
+        <Form onSubmit={(e) => this.calculate(e)} >
         <Row>
           <Col>
               <Col style={{width: "33%"}}>
@@ -154,7 +144,7 @@ class Calculo extends Component<{}, state>{
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft</h5>
-                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" onChange={this.unitMeasurementChange}>
+                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
                   <option value="1">Model XPTO</option>
                   <option value="2">Model XXYY</option>
@@ -219,7 +209,7 @@ class Calculo extends Component<{}, state>{
           <h5 className='card-tittle'>Has ice accreation?</h5>
           <BootstrapSwitchButton
               onChange={(checked: boolean) => {
-                this.setState({ iceAccreation: checked })
+                this.iceAccreation = checked
             }}
           />
           </Col>
@@ -233,7 +223,7 @@ class Calculo extends Component<{}, state>{
         </Row>
         <Row className="px-2">
           <Col>
-              <Button className="botao-resultado" size="lg" onClick={this.calculate}>Calculate</Button>
+              <Button type='submit' className="botao-resultado" size="lg" >Calculate</Button>
           </Col>
           <Col>
           <textarea className="botao-resultado w-100" disabled value={this.state.result}/>
@@ -253,9 +243,9 @@ export default Calculo;
 
 
 // Caso seja necessário incluir o "Aditivo de velocidade" basta copiar abaixo e colocar no formulário.
-{/* <Form>
+/* <Form>
 <Col style={{width: "33%"}}>
   <h5 className="card-title">Speed additive</h5>
   <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="speedAdditive" placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange} />
 </Col>
-</Form> */}
+</Form> */
