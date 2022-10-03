@@ -153,6 +153,9 @@ class Calculo extends Component<{}, state>{
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft Weight {this.state.weightTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
+                {/* <div style={{ fontSize: 12, color: "red" }}>
+                   teste
+              </div> */}
               </Col>
           </Col>
         </Row>

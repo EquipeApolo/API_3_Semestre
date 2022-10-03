@@ -3,9 +3,6 @@ import axios from 'axios';
 
 
 type state = {
-  nome: string,
-  senha: string;
-  email: string,
   nameError: string,
   emailError: string,
   senhaError: string
@@ -14,13 +11,12 @@ type state = {
 
 
 class Teste extends Component<any, state>{
-	
+	private nome:string = ""
+  private senha:string = ""
+  private email:string = ""
   constructor(props: any) {
     super(props)
     this.state = {
-      nome: '',
-      senha: '',
-      email: '',
       nameError: '',
       emailError: '',
       senhaError: ''
@@ -31,46 +27,44 @@ class Teste extends Component<any, state>{
   }
 
   obterNome = (evento: any) => {
-    this.setState({
-      nome: evento.target.value
-    })
-    console.log(this.state.nome)
+    this.nome = evento.target.value
   }
 
   obterSenha = (evento: any) => {
-    this.setState({
-      senha: evento.target.value
-    })
-    console.log(this.state.senha)
+    this.senha = evento.target.value
   }
 
   obterEmail = (evento: any) => {
-    this.setState({
-      email: evento.target.value
-    })
-    console.log(this.state.email)
+    this.email = evento.target.value
   }
 
   validate = () => {
     let nameError = "";
-    let emailError = "";
+    let emailError = ""; 
     let senhaError = ""
   
 
-    if (!this.state.nome) {
+    if (!this.nome) {
       nameError = "O nome não pode ficar vazio";
+    }else{
+      nameError = ""
     }
 
-    if (!this.state.senha) {
-      senhaError = "A senha não pode ficar vazio";
+    if (!this.senha) {
+      senhaError = "A senha não pode ficar vazia";
+    }else if(this.senha.length < 8){
+      senhaError = "Senha tem que ter 8 digitos ou mais"
+    }else{
+      senhaError = ""
     }
 
-    if (!this.state.email.includes("@")) {
+    if (!this.email.includes("@")) {
       emailError = "Email inválido";
+    }else{
+      emailError = ""
     }
-
-    if (emailError || nameError || senhaError) {
-      this.setState({ emailError, nameError, senhaError});
+    this.setState({ emailError, nameError, senhaError});
+    if (emailError || nameError|| senhaError) {
       return false;
     }
 
@@ -82,11 +76,11 @@ class Teste extends Component<any, state>{
     const isValid = this.validate();
     if (isValid) {
         axios.post("http://localhost:3001/users/cadastrar",{
-         name: this.state.nome,
-         senha: this.state.senha,
-         email: this.state.email
+         name: this.nome,
+         senha: this.senha,
+         email: this.email
+         
        })
-      this.setState(this.state);
     }
   }
 
