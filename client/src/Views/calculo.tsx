@@ -40,9 +40,11 @@ class Calculo extends Component<{}, state>{
 
   constructor(props) {
     super(props);
-    this.state = { airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
+    this.state = {
+      airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
-      temperatureError: "", unitMeasurementError: "", weightError: "", windError: ""}
+      temperatureError: "", unitMeasurementError: "", weightError: "", windError: ""
+    }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
     this.aircraftWeightChange = this.aircraftWeightChange.bind(this);
@@ -58,21 +60,21 @@ class Calculo extends Component<{}, state>{
   unitMeasurementChange(event) {
     const target = event.target;
     this.unitMeasurement = target.value;
-    if(target.value == 1){
+    if (target.value == 1) {
       this.setState({
         weightTitle: "(Kg)",
         windTitle: "(Km/h)",
         airportAltitudeTitle: "(M)",
         temperatureTitle: "(ºC)"
       });
-    }else if(target.value == 2){
+    } else if (target.value == 2) {
       this.setState({
         weightTitle: "(Lb)",
         windTitle: "(Wt)",
         airportAltitudeTitle: "(Ft)",
         temperatureTitle: "(ºF)"
       });
-    }else{
+    } else {
       this.setState({
         weightTitle: "",
         windTitle: "",
@@ -111,7 +113,7 @@ class Calculo extends Component<{}, state>{
     this.runwayCondition = target.value;
   }
 
-  iceAccreationChange(event){
+  iceAccreationChange(event) {
     const target = event.target;
     this.iceAccreation = target.value;
   }
@@ -119,18 +121,18 @@ class Calculo extends Component<{}, state>{
   calculate(event) {
     event.preventDefault()
     // if(this.aircraftSelected === undefined) return;
-    if(this.unitMeasurement === UnitMeasurement.IMPERIAL){
+    if (this.unitMeasurement === UnitMeasurement.IMPERIAL) {
       console.log("teste")
     }
 
     const isValid = this.validate();
 
-    if(isValid){
+    if (isValid) {
       console.log("validou")
-    }else{
+    } else {
       this.setState({
         result: "Unidade Medida: " + this.unitMeasurement + ", Vento: " + this.wind + ", Temperatura: " + this.temperature + ", Braking application: " + this.brakingLevel + ", airportAltitude: " + this.airportAltitude + ", Runway Condition: " + this.runwayCondition + ", Peso Avião: " + this.aircraftWeight
-        + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
+          + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
       });
     }
 
@@ -144,7 +146,7 @@ class Calculo extends Component<{}, state>{
 
     if (!this.unitMeasurement) {
       unitMeasurementError = "Select an unit of measurement";
-    }else{
+    } else {
       unitMeasurementError = ""
     }
 
@@ -156,52 +158,54 @@ class Calculo extends Component<{}, state>{
 
     if (!this.aircraftWeight) {
       weightError = "The weight is required";
-    }else if(this.aircraftWeight < 10000) {
+    } else if (this.aircraftWeight < 10000) {
       weightError = "The weight must be above 10000";
-    }else{
+    } else {
       weightError = ""
     }
 
     if (!this.brakingLevel) {
       breakingError = "Select a braking level";
-    }else{
+    } else {
       breakingError = ""
     }
 
     if (!this.temperature) {
       temperatureError = "The temperature is required";
-    }else{
+    } else {
       temperatureError = ""
     }
 
     if (!this.wind) {
       windError = "The wind is required";
-    }else if(this.wind == 0) {
+    } else if (this.wind == 0) {
       windError = "The wind must be different than 0";
-    }else{
+    } else {
       windError = ""
     }
 
     if (!this.runwayCondition) {
       runwayError = "Select a runway condition";
-    }else{
+    } else {
       runwayError = ""
     }
 
     if (!this.airportAltitude) {
       altitudeError = "The airport altitude is required";
-    }else{
+    } else {
       altitudeError = ""
     }
 
     if (!this.slope) {
       slopeError = "The slope is required";
-    }else{
+    } else {
       slopeError = ""
     }
-    this.setState({ aircraftError: aircraftError, altitudeError: altitudeError, breakingError: breakingError,
-    runwayError: runwayError, slopeError: slopeError, temperatureError: temperatureError, weightError: weightError,
-    unitMeasurementError: unitMeasurementError, windError: windError });
+    this.setState({
+      aircraftError: aircraftError, altitudeError: altitudeError, breakingError: breakingError,
+      runwayError: runwayError, slopeError: slopeError, temperatureError: temperatureError, weightError: weightError,
+      unitMeasurementError: unitMeasurementError, windError: windError
+    });
     if (aircraftError || altitudeError || breakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
       return false;
     }
@@ -212,7 +216,7 @@ class Calculo extends Component<{}, state>{
 
   render() {
     return (
-      <Container className=" px-2 mb-5">
+      <Container fluid className=" px-2 mb-5">
         <Container>
           <Row className="px-2 mb-5 mt-5">
             <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
@@ -221,10 +225,9 @@ class Calculo extends Component<{}, state>{
         </Container>
 
         <Container className="px-2">
-        <Form onSubmit={(e) => this.calculate(e)} >
-        <Row>
-          <Col>
-              <Col style={{width: "33%"}}>
+          <Form onSubmit={(e) => this.calculate(e)} >
+            <Row>
+              <Col >
                 <h5 className="card-title">Unit of measurement</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
                   <option value="-1" disabled>Select</option>
@@ -232,10 +235,10 @@ class Calculo extends Component<{}, state>{
                   <option value="2">Imperial</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.unitMeasurementError}
-              </div>
+                  {this.state.unitMeasurementError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col >
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
@@ -243,22 +246,20 @@ class Calculo extends Component<{}, state>{
                   <option value="2">Model XXYY</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.aircraftError}
-              </div>
+                  {this.state.aircraftError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col>
                 <h5 className="card-title">Aircraft Weight {this.state.weightTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.weightError}
-              </div>
+                  {this.state.weightError}
+                </div>
               </Col>
-          </Col>
-        </Row>
+            </Row>
 
-        <Row>
-          <Col>
-            <Col style={{width: "33%"}}>
+            <Row>
+              <Col >
                 <h5 className="card-title">Braking application level</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                   <option value="-1" disabled>Select...</option>
@@ -267,29 +268,27 @@ class Calculo extends Component<{}, state>{
                   <option value="3">Autobrake Low</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.breakingError}
-              </div>
+                  {this.state.breakingError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col>
                 <h5 className="card-title">Temperature {this.state.temperatureTitle}</h5>
-                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange}/>
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.temperatureError}
-              </div>
+                  {this.state.temperatureError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col>
                 <h5 className="card-title">Wind {this.state.windTitle}</h5>
-                <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
+                <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.windError}
-              </div>
+                  {this.state.windError}
+                </div>
               </Col>
-          </Col>
-        </Row>
+            </Row>
 
-        <Row>
-          <Col>
-          <Col style={{width: "33%"}}>
+            <Row>
+              <Col>
                 <h5 className="card-title">Runway condition</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
                   <option value="-1" disabled>Select...</option>
@@ -301,52 +300,51 @@ class Calculo extends Component<{}, state>{
                   <option value="6">6 (Dry)</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.runwayError}
-              </div>
+                  {this.state.runwayError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col>
                 <h5 className="card-title">Airport altitude {this.state.airportAltitudeTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="AirportAltitude" placeholder="Airport altitude" onChange={this.airportAltitudeChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.altitudeError}
-              </div>
+                  {this.state.altitudeError}
+                </div>
               </Col>
-              <Col style={{width: "33%"}}>
+              <Col>
                 <h5 className="card-title">Slope of the runway</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="slope" placeholder="Slope of the runway" onChange={this.slopeChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
-                   {this.state.slopeError}
-              </div>
+                  {this.state.slopeError}
+                </div>
               </Col>
-          </Col>
-        </Row>
+            </Row>
 
-        <Row className="px-2">
-          <Col style={{width: "33%"}}>
-          <h5 className='card-tittle'>Has ice accreation?</h5>
-          <BootstrapSwitchButton
-              onChange={(checked: boolean) => {
-                this.iceAccreation = checked
-            }}
-          />
-          </Col>
-          <Col style={{width: "33%"}}></Col>
-          <Col style={{width: "33%"}}></Col>
-        </Row>
+            <Row className="px-2">
+              <Col>
+                <h5 className='card-tittle'>Has ice accreation?</h5>
+                <BootstrapSwitchButton
+                  onChange={(checked: boolean) => {
+                    this.iceAccreation = checked
+                  }}
+                />
+              </Col>
+              <Col></Col>
+              <Col></Col>
+            </Row>
 
-        <Row className="px-2 mt-5">
-            <Col/>
-            <Col><h5 className="card-title">Resultado:</h5></Col>
-        </Row>
-        <Row className="px-2">
-          <Col>
-              <Button type='submit' className="botao-resultado" size="lg" >Calculate</Button>
-          </Col>
-          <Col>
-          <textarea className="botao-resultado w-100" disabled value={this.state.result}/>
-          </Col>
-        </Row>
-        </Form>
+            <Row className="px-2 mt-5">
+              <Col />
+              <Col><h5 className="card-title">Resultado:</h5></Col>
+            </Row>
+            <Row className="px-2">
+              <Col>
+                <Button type='submit' className="botao-resultado" size="lg" >Calculate</Button>
+              </Col>
+              <Col>
+                <textarea className="botao-resultado w-100" disabled value={this.state.result} />
+              </Col>
+            </Row>
+          </Form>
         </Container>
       </Container>
     );
