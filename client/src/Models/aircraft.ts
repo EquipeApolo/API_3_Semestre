@@ -1,6 +1,6 @@
 export default class Aircraft{
     
-    public model!: string;
+    private model!: string;
     private engine!: string;
     private certification!: string;
     //private speedAdctive!: number;
@@ -47,6 +47,8 @@ export default class Aircraft{
     set setReverserAmount(value: number){
         this.reverserAmount = value;
     }
+
+    get getModel(): string { return this.model; }
 
     get getEngine(): string { return this.engine; }
 
