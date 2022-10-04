@@ -93,28 +93,21 @@ reversorChange(event) {
                                 <option value="2">450</option>
                                 </select>
                             </Col>
-                            <Col>
-                                <h5 className="card-title">Certification</h5>
-                                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" id="btnCertification" onChange={this.certificationChange}>
+                            <Col md={4} sm={4}>
+                                <h5 className="card-tittle">Certification</h5>
+                                <select defaultValue="-1" className="text-select form-select form-control-sm custom-select select" id="btnCertification" onChange={this.certificationChange}>
                                 <option value="-1" disabled>Select</option>
                                 <option value="1">ANAC</option>
                                 <option value="2">EASA</option>
-                                <option value="2">FAA</option>
+                                <option value="3">FAA</option>
                                 </select>
                             </Col>
                         </Row>
-                        <Row className="px-2 mt-5">
-            <Col/>
-            <Col><h5 className="card-title">Resultado:</h5></Col>
-        </Row>
-        <Row className="px-2">
-          <Col>
-              <Button className="botao-resultado" size="lg" /*onClick={this.cadastrar}*/>Cadastrar</Button>
-          </Col>
-          <Col>
-          <textarea className="botao-resultado w-100" disabled value={"Result"}/>
-          </Col>
-        </Row>
+                        <Row>
+                            <Col className="px-2 mb-5 mt-5 text-center">
+                                <Button className="botao-resultado" size="lg" /*onClick={this.cadastrar}*/>Cadastrar</Button>
+                            </Col>
+                        </Row>
                     </Form>
                 </Container>
             </Container>

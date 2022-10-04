@@ -12,7 +12,16 @@ type state = {
   windTitle: string,
   temperatureTitle: string,
   airportAltitudeTitle: string,
-  result: string
+  result: string,
+  unitMeasurementError: string,
+  aircraftError: string,
+  weightError: string,
+  breakingError: string,
+  temperatureError: string,
+  windError: string,
+  runwayError: string,
+  altitudeError: string,
+  slopeError: string
 }
 
 class Calculo extends Component<{}, state>{
@@ -32,7 +41,8 @@ class Calculo extends Component<{}, state>{
   constructor(props) {
     super(props);
     this.state = { airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
-      result: ""}
+      result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
+      temperatureError: "", unitMeasurementError: "", weightError: "", windError: ""}
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
     this.aircraftWeightChange = this.aircraftWeightChange.bind(this);
@@ -113,11 +123,91 @@ class Calculo extends Component<{}, state>{
       console.log("teste")
     }
 
-    this.setState({
-      result: "Unidade Medida: " + this.unitMeasurement.toString() + ", Vento: " + this.wind + ", Temperatura: " + this.temperature + ", Braking application: " + this.brakingLevel + ", airportAltitude: " + this.airportAltitude + ", Runway Condition: " + this.runwayCondition + ", Peso Avião: " + this.aircraftWeight
-      + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
-    });
+    const isValid = this.validate();
+
+    if(isValid){
+      console.log("validou")
+    }else{
+      this.setState({
+        result: "Unidade Medida: " + this.unitMeasurement + ", Vento: " + this.wind + ", Temperatura: " + this.temperature + ", Braking application: " + this.brakingLevel + ", airportAltitude: " + this.airportAltitude + ", Runway Condition: " + this.runwayCondition + ", Peso Avião: " + this.aircraftWeight
+        + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
+      });
+    }
+
   }
+
+
+  validate = () => {
+    let unitMeasurementError = ""; let aircraftError = ""; let weightError = "";
+    let breakingError = ""; let temperatureError = ""; let windError = "";
+    let runwayError = ""; let altitudeError = ""; let slopeError = "";
+
+    if (!this.unitMeasurement) {
+      unitMeasurementError = "Select an unit of measurement";
+    }else{
+      unitMeasurementError = ""
+    }
+
+    // if (!this.aircraftSelected) {
+    //   aircraftError = "Select an aircraft";
+    // }else{
+    //   aircraftError = ""
+    // }
+
+    if (!this.aircraftWeight) {
+      weightError = "The weight is required";
+    }else if(this.aircraftWeight < 10000) {
+      weightError = "The weight must be above 10000";
+    }else{
+      weightError = ""
+    }
+
+    if (!this.brakingLevel) {
+      breakingError = "Select a braking level";
+    }else{
+      breakingError = ""
+    }
+
+    if (!this.temperature) {
+      temperatureError = "The temperature is required";
+    }else{
+      temperatureError = ""
+    }
+
+    if (!this.wind) {
+      windError = "The wind is required";
+    }else if(this.wind == 0) {
+      windError = "The wind must be different than 0";
+    }else{
+      windError = ""
+    }
+
+    if (!this.runwayCondition) {
+      runwayError = "Select a runway condition";
+    }else{
+      runwayError = ""
+    }
+
+    if (!this.airportAltitude) {
+      altitudeError = "The airport altitude is required";
+    }else{
+      altitudeError = ""
+    }
+
+    if (!this.slope) {
+      slopeError = "The slope is required";
+    }else{
+      slopeError = ""
+    }
+    this.setState({ aircraftError: aircraftError, altitudeError: altitudeError, breakingError: breakingError,
+    runwayError: runwayError, slopeError: slopeError, temperatureError: temperatureError, weightError: weightError,
+    unitMeasurementError: unitMeasurementError, windError: windError });
+    if (aircraftError || altitudeError || breakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
+      return false;
+    }
+
+    return true;
+  };
 
 
   render() {
@@ -141,6 +231,9 @@ class Calculo extends Component<{}, state>{
                   <option value="1">Internacional</option>
                   <option value="2">Imperial</option>
                 </select>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.unitMeasurementError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft</h5>
@@ -149,13 +242,16 @@ class Calculo extends Component<{}, state>{
                   <option value="1">Model XPTO</option>
                   <option value="2">Model XXYY</option>
                 </select>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.aircraftError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Aircraft Weight {this.state.weightTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
-                {/* <div style={{ fontSize: 12, color: "red" }}>
-                   teste
-              </div> */}
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.weightError}
+              </div>
               </Col>
           </Col>
         </Row>
@@ -170,14 +266,23 @@ class Calculo extends Component<{}, state>{
                   <option value="2">Autobrake Med.</option>
                   <option value="3">Autobrake Low</option>
                 </select>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.breakingError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Temperature {this.state.temperatureTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange}/>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.temperatureError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Wind {this.state.windTitle}</h5>
                 <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange}/>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.windError}
+              </div>
               </Col>
           </Col>
         </Row>
@@ -195,14 +300,23 @@ class Calculo extends Component<{}, state>{
                   <option value="5">5 (Good)</option>
                   <option value="6">6 (Dry)</option>
                 </select>
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.runwayError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Airport altitude {this.state.airportAltitudeTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="AirportAltitude" placeholder="Airport altitude" onChange={this.airportAltitudeChange} />
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.altitudeError}
+              </div>
               </Col>
               <Col style={{width: "33%"}}>
                 <h5 className="card-title">Slope of the runway</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="slope" placeholder="Slope of the runway" onChange={this.slopeChange} />
+                <div style={{ fontSize: 12, color: "red" }}>
+                   {this.state.slopeError}
+              </div>
               </Col>
           </Col>
         </Row>
