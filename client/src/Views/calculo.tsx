@@ -80,35 +80,101 @@ class Calculo extends Component<{}, state>{
         temperatureTitle: ""
       });
     }
+    let unitMeasurementError = ""
+    if (!this.unitMeasurement) {
+      unitMeasurementError = "Select an unit of measurement";
+    }else{
+      unitMeasurementError = ""
+    }
+    this.setState({unitMeasurementError: unitMeasurementError})
   }
   temperatureChange(event) {
+    let temperatureError = ""
     const target = event.target;
     this.temperature = target.value;
+    if (!this.temperature) {
+      temperatureError = "The temperature is required";
+    }else{
+      temperatureError = ""
+    }
+    this.setState({temperatureError: temperatureError})
   }
+
   windChange(event) {
+    let windError = ""
     const target = event.target;
     this.wind = target.value;
+    if (!this.wind) {
+      windError = "The wind is required";
+    }else if(this.wind == 0) {
+      windError = "The wind must be different than 0";
+    }else{
+      windError = ""
+    }
+    this.setState({windError:windError})
+
   }
   aircraftWeightChange(event) {
+    let weightError = ""
     const target = event.target;
     this.aircraftWeight = target.value;
+
+    if (!this.aircraftWeight) {
+      weightError = "The weight is required";
+    }else if(this.aircraftWeight < 10000) {
+      weightError = "The weight must be above 10000";
+    }else{
+      weightError = ""
+    }
+    this.setState({weightError:weightError})
   }
   slopeChange(event) {
+    let slopeError = ""
     const target = event.target;
     this.slope = target.value;
+
+    if (!this.slope) {
+      slopeError = "The slope is required";
+    }else{
+      slopeError = ""
+    }
+    this.setState({slopeError:slopeError})
   }
 
   airportAltitudeChange(event) {
+    let altitudeError = ""
     const target = event.target;
     this.airportAltitude = target.value;
+
+    if (!this.airportAltitude) {
+      altitudeError = "The airport altitude is required";
+    }else{
+      altitudeError = ""
+    }
+    this.setState({altitudeError:altitudeError})
   }
   brakingLevelChange(event) {
+    let breakingError = ""
     const target = event.target;
     this.brakingLevel = target.value;
+    if (!this.brakingLevel) {
+      breakingError = "Select a braking level";
+    }else{
+      breakingError = ""
+    }
+    this.setState({breakingError:breakingError})
   }
   runwayConditionChange(event) {
+    let runwayError = ""
     const target = event.target;
     this.runwayCondition = target.value;
+
+    if (!this.runwayCondition) {
+      runwayError = "Select a runway condition";
+    }else{
+      runwayError = ""
+    }
+    this.setState({runwayError:runwayError})
   }
 
   iceAccreationChange(event){
