@@ -4,9 +4,10 @@ export enum UnitMeasurement{
 }
 
 export enum BrakingLevel{
-    MANUAL = 1,
-    AUTOBRAKEMED = 2,
-    AUTOBRAKELOW = 3
+    MAXMANUAL = 1,
+    HIGH = 2,
+    AUTOBRAKEMED = 3,
+    AUTOBRAKELOW = 4
 }
 
 export enum RunwayCondition{

@@ -2,111 +2,105 @@ import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
 
-export default class Wind extends FatorCalculo{
+export default class Slope extends FatorCalculo{
 
     private aircraft: Aircraft;
-    constructor(aircraft: Aircraft,input: number, unidadeMedida: UnitMeasurement, temGelo: boolean,BRK: number){
+    constructor(aircraft: Aircraft, input: number, temGelo: boolean, BRK: number){
         super();
-        this.valorInput = input;
-        this.unidadeMedida = unidadeMedida;
+        this.valor = input;
         this.temGelo = temGelo;
         this.BRK = BRK;
         this.aircraft = aircraft;
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        if(unitMeasurement == UnitMeasurement.INTERNACIONAL){
-            this.valor = this.valorInput / 1.151
-        }else{
-            this.valor = this.valorInput;
-        }
+        
+        
     }
 
     calcular(): number {
-        this.converterSistema(UnitMeasurement.IMPERIAL);
-
         if(this.aircraft.getFlapValue == 220){
             if(this.temGelo == false){
                 if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * 101;
+                        return this.valor/1 * 139;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * 108;
+                        return this.valor/1 * 128;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * 147;
+                        return this.valor/1 * 123;
                     else //LO
-                        return this.valor/5 * 245;
+                        return this.valor/1 * 131;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -22;
+                        return this.valor/1 * -5;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -26;
+                        return this.valor/1 * -4;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -33;
+                        return this.valor/1 * -4;
                     else //LO
-                        return this.valor/5 * -51;
+                        return this.valor/1 * -8;
                 }
             } else {
                 if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * 111;
+                        return this.valor/1 * 148;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * 113;
+                        return this.valor/1 * 135;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * 154;
+                        return this.valor/1 * 129;
                     else //LO
-                        return this.valor/5 * 257;
+                        return this.valor/1 * 138;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -23;
+                        return this.valor/1 * -6;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -27;
+                        return this.valor/1 * -4;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -34;
+                        return this.valor/1 * -5;
                     else //LO
-                        return this.valor/5 * -53;
+                        return this.valor/1 * -9;
                 }
             }
         } else {
             if(this.temGelo == false){
                 if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * 95;
+                        return this.valor/1 * 127;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * 106;
+                        return this.valor/1 * 118;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * 144;
+                        return this.valor/1 * 114;
                     else //LO
-                        return this.valor/5 * 239;
+                        return this.valor/1 * 122;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -22;
+                        return this.valor/5 * -5;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -26;
+                        return this.valor/5 * -3;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -33;
+                        return this.valor/5 * -4;
                     else //LO
-                        return this.valor/5 * -50;
+                        return this.valor/5 * -8;
                 }
             } else {
                 if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * 95;
+                        return this.valor/1 * 127;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * 1066;
+                        return this.valor/1 * 118;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * 144;
+                        return this.valor/1 * 114;
                     else //LO
-                        return this.valor/5 * 239;
+                        return this.valor/1 * 122;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -22;
+                        return this.valor/1 * -5;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -26;
+                        return this.valor/1 * -3;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -33;
+                        return this.valor/1 * -4;
                     else //LO
-                        return this.valor/5 * -50;
+                        return this.valor/1 * -8;
                 }
             }
         }
