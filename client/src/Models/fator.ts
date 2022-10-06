@@ -7,6 +7,7 @@ export default abstract class FatorCalculo{
     public referencia!: number;
     public unidadeMedida!: UnitMeasurement;
     public temGelo!: boolean;
+    public BRK!: number;
     public abstract converterSistema(unitMeasurement: UnitMeasurement): void;
     public abstract calcular(aircraft: Aircraft): number;
     constructor(){

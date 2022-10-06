@@ -11,6 +11,8 @@ type state = {
     modelError: string,
     engineError: string,
     reversorError: string,
+    certificationError: string,
+    flapError: string
 }
 
 class cadastroAeronave extends Component<any, state>{
@@ -22,7 +24,9 @@ class cadastroAeronave extends Component<any, state>{
     this.state = {
         modelError: '',
         engineError: '',
-        reversorError: ''
+        reversorError: '',
+        certificationError: '',
+        flapError: ''
     }
     this.modelChange = this.modelChange.bind(this);
     this.engineChange = this.engineChange.bind(this);
@@ -46,24 +50,59 @@ eventoFormulario = (evento: any) => {
 }*/
 
 modelChange(event) {
+    let modelError = ""
     const target = event.target;
     this.aircraft.setModel = target.value;
+    if (!this.aircraft.getModel) {
+        modelError = "The model is required";
+    }else{
+        modelError = ""
+    }
+    this.setState({modelError: modelError})
 }
 engineChange(event) {
+    let engineError = ""
     const target = event.target;
     this.aircraft.setEngine = target.value;
+    if (!this.aircraft.getEngine) {
+        engineError = "The engine is required";
+    }else{
+        engineError = ""
+    }
+    this.setState({engineError: engineError})
 }
 certificationChange(event) {
+    let certificationError
     const target = event.target;
     this.aircraft.setCertification = target.value;
+    if (!this.aircraft.getCertification){
+        certificationError = "Select a certification"
+    }else{
+        certificationError = ""
+    }
+    this.setState({certificationError: certificationError})
 }
 flapChange(event) {
+    let flapError
     const target = event.target;
     this.aircraft.setFlapValue = target.value;
+    if (!this.aircraft.getFlapValue){
+        flapError = "Select a flap"
+    }else{
+        flapError = ""
+    }
+    this.setState({flapError: flapError})
 } 
 reversorChange(event) {
+    let reversorError
     const target = event.target;
     this.aircraft.setReverserAmount = target.value;
+    if (!this.aircraft.getReverserAmount) {
+        reversorError = "The aircraft must have at least one(1) reversor."
+    }else{
+        reversorError = ""
+    }
+    this.setState({reversorError: reversorError})
 }
 
 /*cadastrar(event) {
@@ -74,26 +113,37 @@ reversorChange(event) {
 validate = () => {
     let modelError = "";
     let engineError = "";
-    let reversorError = ""
+    let reversorError = "";
+    let certificationError = "";
+    let flapError = "";
 
     if (!this.aircraft.getModel) {
-        modelError = "O modelo não pode ficar vazio";
+
     }else{
         modelError = ""
     }
-
     if (!this.aircraft.getEngine) {
-        engineError = "O motor não pode ficar vazio";
-    }else if(this.aircraft.getEngine.length < 3){
-        engineError = "O motor tem que ter 3 digitos ou mais"
+        engineError = "The engine is required";
     }else{
         engineError = ""
     }
     if (!this.aircraft.getReverserAmount) {
         reversorError = "The aircraft must have at least one(1) reversor."
+    }else{
+        reversorError = ""
     }
-    this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError});
-    if (modelError || engineError || reversorError){
+    if (!this.aircraft.getCertification){
+        certificationError = "Select a certification"
+    }else{
+        certificationError = ""
+    }
+    if (!this.aircraft.getFlapValue){
+        flapError = "Select a flap"
+    }else{
+        flapError = ""
+    }
+    this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError});
+    if (modelError || engineError || reversorError || certificationError || flapError){
         return false
     }
 
@@ -105,8 +155,11 @@ postClickButton = (event: any) => {
     const isValid = this.validate();
     if (isValid) {
         axios.post("http://localhost:3001/airplane/cadastrar",{
-            model: this.aircraft.model,
-            engine: this.aircraft.getEngine
+            model: this.aircraft.getModel,
+            engine: this.aircraft.getEngine,
+            certification: this.aircraft.getCertification,
+            flap: this.aircraft.getFlapValue,
+            reverserAmount: this.aircraft.getReverserAmount
         })
     }
 }
@@ -126,7 +179,7 @@ postClickButton = (event: any) => {
                         <Row>
                             <Col>
                                 <h5 className="card-title">Aircraft model</h5>
-                                <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="model" placeholder="Aircraft model" onChange={this.obterModel} />
+                                <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="model" placeholder="Aircraft model" onChange={this.modelChange} />
                                 <div style={{ fontSize: 12, color: "red"}}>
                                     {this.state.modelError}
                                 </div>
@@ -144,7 +197,7 @@ postClickButton = (event: any) => {
                                 <input type='number' className="form-control form-control-lg inputGroup-sizing-sm" id='reversor' placeholder='Reversor' onChange={this.reversorChange} />
                                 <div style={{ fontSize: 12, color:"red"}}>
                                     {this.state.reversorError}
-                                    </div>
+                                </div>
                             </Col>
                         </Row>
                         <Row>
@@ -156,6 +209,9 @@ postClickButton = (event: any) => {
                                 <option value="2">EASA</option>
                                 <option value="2">FAA</option>
                                 </select>
+                                <div style={{ fontSize: 12, color:"red"}}>
+                                    {this.state.certificationError}
+                                </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Flap</h5>
@@ -164,21 +220,20 @@ postClickButton = (event: any) => {
                                 <option value="1">220</option>
                                 <option value="2">450</option>
                                 </select>
+                                <div style={{ fontSize: 12, color:"red"}}>
+                                    {this.state.flapError}
+                                </div>
                             </Col>
                             <Col>
                             </Col>
                         </Row>
                         <Row className="px-2 mt-5">
             <Col/>
-            <Col><h5 className="card-title">Resultado:</h5></Col>
         </Row>
         <Row className="px-2">
           <Col>
               <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Cadastrar</Button>
               
-          </Col>
-          <Col>
-          <textarea className="botao-resultado w-100" disabled value={"Result"}/>
           </Col>
         </Row>
                     </Form>

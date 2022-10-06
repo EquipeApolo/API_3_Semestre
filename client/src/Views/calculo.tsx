@@ -6,6 +6,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Aircraft from '../Models/aircraft';
 import { BrakingLevel, RunwayCondition, UnitMeasurement } from '../Enuns/enuns';
+import Calcular from '../Models/calcular';
 
 type state = {
   weightTitle: string,
@@ -195,10 +196,13 @@ class Calculo extends Component<{}, state>{
 
     if (isValid) {
       console.log("validou")
+      console.log(this.teste())
+      this.setState({
+        result: this.teste() + " metros"
+      });
     } else {
       this.setState({
-        result: "Unidade Medida: " + this.unitMeasurement + ", Vento: " + this.wind + ", Temperatura: " + this.temperature + ", Braking application: " + this.brakingLevel + ", airportAltitude: " + this.airportAltitude + ", Runway Condition: " + this.runwayCondition + ", Peso Avião: " + this.aircraftWeight
-          + ", Slope: " + this.slope + ", tem ice: " + this.iceAccreation
+        result: ""
       });
     }
 
@@ -280,6 +284,15 @@ class Calculo extends Component<{}, state>{
   };
 
 
+  teste(): number{
+
+    let aircraft = new Aircraft("Modelo X", "Motor Y", "XXX", 0, 220, 2);
+    let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
+      this.brakingLevel, this.iceAccreation);
+    
+      return calcular.calcular();
+  }
+
   render() {
     return (
       <Container fluid className=" px-2 mb-5">
@@ -330,8 +343,9 @@ class Calculo extends Component<{}, state>{
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                   <option value="-1" disabled>Select...</option>
                   <option value="1">Maximum Manual</option>
-                  <option value="2">Autobrake Med.</option>
-                  <option value="3">Autobrake Low</option>
+                  <option value="2">Autobrake High</option>
+                  <option value="3">Autobrake Med.</option>
+                  <option value="4">Autobrake Low</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.breakingError}
@@ -407,7 +421,7 @@ class Calculo extends Component<{}, state>{
                 <Button type='submit' className="botao-resultado" size="lg" >Calculate</Button>
               </Col>
               <Col>
-                <textarea className="botao-resultado w-100" disabled value={this.state.result} />
+                <textarea className="text-area" disabled value={this.state.result} />
               </Col>
             </Row>
           </Form>

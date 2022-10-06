@@ -49,3 +49,10 @@ input[type=number] {
   width: "33%" !important;
   padding-left: "0.5rem" !important;
 }
+
+.text-area{
+  height: 12vh;
+  font-size: large;
+  font-weight: bold;
+  width: 100%;
+}

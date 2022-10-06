@@ -1,6 +1,6 @@
 export default class Aircraft{
     
-    public model!: string;
+    private model!: string;
     private engine!: string;
     private certification!: string;
     //private speedAdctive!: number;
