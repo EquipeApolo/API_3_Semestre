@@ -7,6 +7,7 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Aircraft from '../Models/aircraft';
 import { BrakingLevel, RunwayCondition, UnitMeasurement } from '../Enuns/enuns';
 import Calcular from '../Models/calcular';
+import axios from "axios";
 
 type state = {
   weightTitle: string,
@@ -40,6 +41,10 @@ class Calculo extends Component<{}, state>{
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
   private overspeed: number = 0;
+  private dados: [];
+  private airplane = [axios.get('/airplane').then(response => {
+    this.dados = response.data
+ })]
 
   constructor(props) {
     super(props);
@@ -323,8 +328,12 @@ class Calculo extends Component<{}, state>{
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  <option value="1">Model XPTO</option>
-                  <option value="2">Model XXYY</option>
+                  {this.dados.forEach(item => {
+                    <option value={item.id}>{item.model}</option>
+                  })} 
+                  {/* {this.dados.map(airplane => (<option key={airplane.id} value={airplane.id}>{airplane.model}</option>))} */}
+                  {/* <option value="1">Model XPTO</option>
+                  <option value="2">Model XXYY</option> */}
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.aircraftError}
