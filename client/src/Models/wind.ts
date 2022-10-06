@@ -15,8 +15,8 @@ export default class Wind extends FatorCalculo{
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        if(unitMeasurement == UnitMeasurement.INTERNACIONAL){
-            this.valor = this.valorInput / 1.151
+        if(this.unidadeMedida != unitMeasurement){
+            this.valor = this.valorInput / 1.856
         }else{
             this.valor = this.valorInput;
         }

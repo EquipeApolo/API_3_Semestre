@@ -15,7 +15,7 @@ export default class Temperature extends FatorCalculo{
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        if(unitMeasurement == UnitMeasurement.IMPERIAL){
+        if(this.unidadeMedida != unitMeasurement){
             this.valor = (this.valorInput - 32) / 1.8
         }else{
             this.valor = this.valorInput;
@@ -26,7 +26,7 @@ export default class Temperature extends FatorCalculo{
         this.converterSistema(UnitMeasurement.INTERNACIONAL);
         if(this.aircraft.getFlapValue == 220){
             if(this.temGelo == false){
-                if(this.valor > 15){
+                if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
                         return this.valor/5 * 18;
                     else if (this.BRK == 2) //HI
@@ -37,16 +37,16 @@ export default class Temperature extends FatorCalculo{
                         return this.valor/5 * 45;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -10;
+                        return this.valor/5 * -10 * -1;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -11;
+                        return this.valor/5 * -11 * -1;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -14;
+                        return this.valor/5 * -14 * -1;
                     else //LO
-                        return this.valor/5 * -22;
+                        return this.valor/5 * -22 * -1;
                 }
             } else {
-                if(this.valor > 15){
+                if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
                         return this.valor/5 * 20;
                     else if (this.BRK == 2) //HI
@@ -57,18 +57,18 @@ export default class Temperature extends FatorCalculo{
                         return this.valor/5 * 50;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -11;
+                        return this.valor/5 * -11 * -1;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -13;
+                        return this.valor/5 * -13 * -1;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -16;
+                        return this.valor/5 * -16 * -1;
                     else //LO
-                        return this.valor/5 * -25;
+                        return this.valor/5 * -25 * -1;
                 }
             }
         } else {
             if(this.temGelo == false){
-                if(this.valor > 15){
+                if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
                         return this.valor/5 * 17;
                     else if (this.BRK == 2) //HI
@@ -79,16 +79,16 @@ export default class Temperature extends FatorCalculo{
                         return this.valor/5 * 42;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -9;
+                        return this.valor/5 * -9 * -1;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -10;
+                        return this.valor/5 * -10 * -1;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -13;
+                        return this.valor/5 * -13 * -1;
                     else //LO
-                        return this.valor/5 * -21;
+                        return this.valor/5 * -21 * -1;
                 }
             } else {
-                if(this.valor > 15){
+                if(this.valor > 0){
                     if(this.BRK == 1) //MAX MAN
                         return this.valor/5 * 17;
                     else if (this.BRK == 2) //HI
@@ -99,13 +99,13 @@ export default class Temperature extends FatorCalculo{
                         return this.valor/5 * 42;
                 } else {
                     if(this.BRK == 1) //MAX MAN
-                        return this.valor/5 * -9;
+                        return this.valor/5 * -9 * -1;
                     else if (this.BRK == 2) //HI
-                        return this.valor/5 * -10;
+                        return this.valor/5 * -10 * -1;
                     else if (this.BRK == 3) //MED
-                        return this.valor/5 * -13;
+                        return this.valor/5 * -13 * -1;
                     else //LO
-                        return this.valor/5 * -21;
+                        return this.valor/5 * -21 * -1;
                 }
             }
         }

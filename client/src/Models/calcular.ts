@@ -5,9 +5,10 @@ import Ref from "./ref";
 import Rev from "./rev";
 import Slope from "./slope";
 import Temperature from "./temp";
-import Vap from "./vap";
+import Vap from "./overspeed";
 import Weight from "./weight";
 import Wind from "./wind";
+import Overspeed from "./overspeed";
 
 export default class Calcular{
     private unitMeasurement: UnitMeasurement;
@@ -21,7 +22,7 @@ export default class Calcular{
     private wind: Wind;
     private braking: BrakingLevel;
     private iceAccreation: boolean;
-    private vap: Vap;
+    private overspeed: Overspeed;
 
     constructor(aircraft: Aircraft, unitMeasurement: UnitMeasurement, inputWeight: number, inputAltitude: number,
         inputSlope: number, inputTemperature: number, inputWind: number, braking: BrakingLevel, ice: boolean, inputVap: number){
@@ -34,13 +35,13 @@ export default class Calcular{
             this.slope = new Slope(aircraft, inputSlope, ice, braking);
             this.temp = new Temperature(aircraft, inputTemperature, unitMeasurement, ice, braking);
             this.wind = new Wind(aircraft, inputWind, unitMeasurement, ice, braking);
-            this.vap = new Vap(aircraft, inputVap, unitMeasurement, ice, braking)
+            this.overspeed = new Overspeed(aircraft, inputVap, unitMeasurement, ice, braking)
             this.braking = braking;
             this.iceAccreation = ice;
     }
 
     calcular(): number{
- 
+        debugger
         let cref = this.ref.calcular();
         let cwei = this.weight.calcular();
         let calt = this.alt.calcular();
@@ -48,8 +49,9 @@ export default class Calcular{
         let cwind = this.wind.calcular();
         let cslope = this.slope.calcular();
         let crev = this.rev.calcular();
+        let overspeed = this.overspeed.calcular();
         return this.ref.calcular() + this.weight.calcular() + this.alt.calcular() + this.temp.calcular() + this.wind.calcular() +
-        this.slope.calcular() + this.rev.calcular() + this.vap.calcular();
+        this.slope.calcular() + this.rev.calcular() + this.overspeed.calcular();
     }
 
 }

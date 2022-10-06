@@ -13,7 +13,7 @@ export default class Ref extends FatorCalculo{
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        if(unitMeasurement == UnitMeasurement.IMPERIAL){
+        if(this.unidadeMedida != unitMeasurement){
             this.valor = this.valorInput / 1.825
         }else{
             this.valor = this.valorInput;

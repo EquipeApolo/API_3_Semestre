@@ -16,7 +16,7 @@ export default class AirportAltitude extends FatorCalculo{
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
         // Aqui convertemos caso a unidade de medida escolhida pelo usuário seja IMPERIAL para o sistema de medida INTERNACIONAL, que é o da referência para PESO.
-        if(unitMeasurement == UnitMeasurement.INTERNACIONAL){
+        if(this.unidadeMedida != unitMeasurement){
             this.valor = this.valorInput * 3.280;
         }else{
             this.valor = this.valorInput;

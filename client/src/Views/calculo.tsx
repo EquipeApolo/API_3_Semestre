@@ -22,7 +22,8 @@ type state = {
   windError: string,
   runwayError: string,
   altitudeError: string,
-  slopeError: string
+  slopeError: string,
+  overspeedTitle: string
 }
 
 class Calculo extends Component<{}, state>{
@@ -38,13 +39,14 @@ class Calculo extends Component<{}, state>{
   private iceAccreation: boolean = false;
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
+  private overspeed: number = 0;
 
   constructor(props) {
     super(props);
     this.state = {
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
-      temperatureError: "", unitMeasurementError: "", weightError: "", windError: ""
+      temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: ""
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -56,149 +58,140 @@ class Calculo extends Component<{}, state>{
     this.brakingLevelChange = this.brakingLevelChange.bind(this);
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
+    this.overspeedChange = this.overspeedChange.bind(this);
   }
 
+  //#region eventos change
   unitMeasurementChange(event) {
     const target = event.target;
-    this.unitMeasurement = target.value;
+    if(this.state.result != "") this.setState({result: ""})
     if (target.value == 1) {
+      this.unitMeasurement = UnitMeasurement.INTERNACIONAL;
       this.setState({
         weightTitle: "(Kg)",
         windTitle: "(Km/h)",
         airportAltitudeTitle: "(M)",
-        temperatureTitle: "(ºC)"
+        temperatureTitle: "(ºC)",
+        overspeedTitle: "(Km/h)"
       });
     } else if (target.value == 2) {
+      this.unitMeasurement = UnitMeasurement.IMPERIAL;
       this.setState({
         weightTitle: "(Lb)",
         windTitle: "(Wt)",
         airportAltitudeTitle: "(Ft)",
-        temperatureTitle: "(ºF)"
+        temperatureTitle: "(ºF)",
+        overspeedTitle: "(Wt)"
       });
     } else {
       this.setState({
         weightTitle: "",
         windTitle: "",
         airportAltitudeTitle: "",
-        temperatureTitle: ""
+        temperatureTitle: "",
+        overspeedTitle: ""
       });
+      return;
     }
-    let unitMeasurementError = ""
-    if (!this.unitMeasurement) {
-      unitMeasurementError = "Select an unit of measurement";
-    }else{
-      unitMeasurementError = ""
+    if (this.state.unitMeasurementError.includes("Select")) {
+      this.setState({unitMeasurementError: ""})
     }
-    this.setState({unitMeasurementError: unitMeasurementError})
   }
+
   temperatureChange(event) {
-    let temperatureError = ""
     const target = event.target;
     this.temperature = target.value;
-    if (!this.temperature) {
-      temperatureError = "The temperature is required";
-    }else{
-      temperatureError = ""
+    if (this.state.temperatureError.includes("required")) {
+      this.setState({temperatureError: ""})
     }
-    this.setState({temperatureError: temperatureError})
+    if(this.state.result != "") this.setState({result: ""})
+  }
+
+  overspeedChange(event) {
+    const target = event.target;
+    this.overspeed = target.value;
   }
 
   windChange(event) {
-    let windError = ""
     const target = event.target;
     this.wind = target.value;
-    if (!this.wind) {
-      windError = "The wind is required";
-    }else if(this.wind == 0) {
-      windError = "The wind must be different than 0";
-    }else{
-      windError = ""
+    if (this.state.windError.includes("required")) {
+      this.setState({windError: ""})
     }
-    this.setState({windError:windError})
-
+    if(this.wind == 0){
+      this.setState({windError: "The wind must be different than 0"})
+    }
+    if(this.state.result != "") this.setState({result: ""})
   }
+
   aircraftWeightChange(event) {
-    let weightError = ""
     const target = event.target;
     this.aircraftWeight = target.value;
-
-    if (!this.aircraftWeight) {
-      weightError = "The weight is required";
-    }else if(this.aircraftWeight < 10000) {
-      weightError = "The weight must be above 10000";
-    }else{
-      weightError = ""
+    if(this.aircraftWeight < 10000){
+      this.setState({weightError: "The weight must be above 10000"})
     }
-    this.setState({weightError:weightError})
+    
+    if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+      this.setState({weightError: ""})
+    }
+    if(this.state.result != "") this.setState({result: ""})
   }
   slopeChange(event) {
-    let slopeError = ""
     const target = event.target;
     this.slope = target.value;
-
-    if (!this.slope) {
-      slopeError = "The slope is required";
-    }else{
-      slopeError = ""
+    if (this.state.slopeError.includes("required")) {
+      this.setState({slopeError: ""})
     }
-    this.setState({slopeError:slopeError})
+    if(this.state.result != "") this.setState({result: ""})
   }
 
   airportAltitudeChange(event) {
-    let altitudeError = ""
     const target = event.target;
     this.airportAltitude = target.value;
-
-    if (!this.airportAltitude) {
-      altitudeError = "The airport altitude is required";
-    }else{
-      altitudeError = ""
+    if (this.state.altitudeError.includes("required")) {
+      this.setState({altitudeError: ""})
     }
-    this.setState({altitudeError:altitudeError})
+    if(this.state.result != "") this.setState({result: ""})
   }
+
   brakingLevelChange(event) {
-    let breakingError = ""
     const target = event.target;
     this.brakingLevel = target.value;
-    if (!this.brakingLevel) {
-      breakingError = "Select a braking level";
-    }else{
-      breakingError = ""
+    if (this.state.breakingError.includes("Select")) {
+      this.setState({breakingError: ""})
     }
-    this.setState({breakingError:breakingError})
+    if(this.state.result != "") this.setState({result: ""})
   }
+
   runwayConditionChange(event) {
-    let runwayError = ""
     const target = event.target;
     this.runwayCondition = target.value;
-
-    if (!this.runwayCondition) {
-      runwayError = "Select a runway condition";
-    }else{
-      runwayError = ""
+    if (this.state.runwayError.includes("Select")) {
+      this.setState({runwayError: ""})
     }
-    this.setState({runwayError:runwayError})
+    if(this.state.result != "") this.setState({result: ""})
   }
 
   iceAccreationChange(event) {
     const target = event.target;
     this.iceAccreation = target.value;
+    if(this.state.result != "") this.setState({result: ""})
   }
+
+  //#endregion
 
   calculate(event) {
     event.preventDefault()
     // if(this.aircraftSelected === undefined) return;
-    if (this.unitMeasurement === UnitMeasurement.IMPERIAL) {
-      console.log("teste")
-    }
 
     const isValid = this.validate();
 
     if (isValid) {
-      console.log("validou")
-      console.log(this.teste())
+      let calculado = this.teste();
+      let convertido = this.converter(calculado)
+      console.log((calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts"))
       this.setState({
-        result: this.teste() + " metros"
+        result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
       });
     } else {
       this.setState({
@@ -208,7 +201,14 @@ class Calculo extends Component<{}, state>{
 
   }
 
+  converter(valor: number): number{
+    if(this.unitMeasurement == UnitMeasurement.IMPERIAL){
+      return valor * 3.281;
+    }
+    return valor;
+  }
 
+//#region validate
   validate = () => {
     let unitMeasurementError = ""; let aircraftError = ""; let weightError = "";
     let breakingError = ""; let temperatureError = ""; let windError = "";
@@ -283,14 +283,16 @@ class Calculo extends Component<{}, state>{
     return true;
   };
 
-
+//#endregion
   teste(): number{
 
     let aircraft = new Aircraft("Modelo X", "Motor Y", "XXX", 0, 220, 2);
     let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
-      this.brakingLevel, this.iceAccreation);
+      this.brakingLevel, this.iceAccreation, this.overspeed);
+      let calculo = calcular.calcular();
+      console.log(calculo);
     
-      return calcular.calcular();
+      return calculo;
   }
 
   render() {
@@ -352,7 +354,7 @@ class Calculo extends Component<{}, state>{
                 </div>
               </Col>
               <Col>
-                <h5 className="card-title">Temperature {this.state.temperatureTitle}</h5>
+                <h5 className="card-title">Temperature bellow/above ISA {this.state.temperatureTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="temperature" placeholder="Temperature" onChange={this.temperatureChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.temperatureError}
@@ -400,6 +402,10 @@ class Calculo extends Component<{}, state>{
             </Row>
 
             <Row className="px-2">
+            <Col>
+                <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
+              </Col>
               <Col>
                 <h5 className='card-tittle'>Has ice accreation?</h5>
                 <BootstrapSwitchButton
@@ -409,12 +415,11 @@ class Calculo extends Component<{}, state>{
                 />
               </Col>
               <Col></Col>
-              <Col></Col>
             </Row>
 
             <Row className="px-2 mt-5">
               <Col />
-              <Col><h5 className="card-title">Resultado:</h5></Col>
+              <Col><h5 className="card-title">Result:</h5></Col>
             </Row>
             <Row className="px-2">
               <Col>

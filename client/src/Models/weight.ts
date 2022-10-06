@@ -16,7 +16,7 @@ export default class Weight extends FatorCalculo{
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
         // Aqui convertemos caso a unidade de medida escolhida pelo usuário seja IMPERIAL para o sistema de medida INTERNACIONAL, que é o da referência para PESO.
-        if(unitMeasurement == UnitMeasurement.IMPERIAL){
+        if(this.unidadeMedida != unitMeasurement){
             this.valor = this.valorInput / 2.205;
         }else{
             this.valor = this.valorInput;
