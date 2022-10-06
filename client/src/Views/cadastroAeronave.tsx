@@ -233,8 +233,8 @@ postClickButton = (event: any) => {
         <Row className="px-2">
           <Col>
               <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Cadastrar</Button>
-              
           </Col>
+          <Col></Col>
         </Row>
                     </Form>
                 </Container>
