@@ -48,6 +48,8 @@ export default class Aircraft{
         this.reverserAmount = value;
     }
 
+    get getModel(): string { return this.model; }
+
     get getEngine(): string { return this.engine; }
 
     get getCertification(): string { return this.certification; }

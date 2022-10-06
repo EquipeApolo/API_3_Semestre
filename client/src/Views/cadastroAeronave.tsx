@@ -45,10 +45,6 @@ eventoFormulario = (evento: any) => {
     })
 }*/
 
-obterModel = (evento: any) => {
-    this.aircraft.model = evento.target.value;
-}
-
 modelChange(event) {
     const target = event.target;
     this.aircraft.setModel = target.value;
@@ -80,7 +76,7 @@ validate = () => {
     let engineError = "";
     let reversorError = ""
 
-    if (!this.aircraft.model) {
+    if (!this.aircraft.getModel) {
         modelError = "O modelo não pode ficar vazio";
     }else{
         modelError = ""
