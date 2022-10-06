@@ -2,7 +2,7 @@ import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
 
-export default class Vap extends FatorCalculo{
+export default class Overspeed extends FatorCalculo{
 
     private aircraft: Aircraft;
     constructor(aircraft: Aircraft,input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number){
@@ -15,8 +15,7 @@ export default class Vap extends FatorCalculo{
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        // Aqui convertemos caso a unidade de medida escolhida pelo usuário seja IMPERIAL para o sistema de medida INTERNACIONAL, que é o da referência para PESO.
-        if(unitMeasurement == UnitMeasurement.INTERNACIONAL){
+        if(this.unidadeMedida != unitMeasurement){
             this.valor = this.valorInput * 1.944;
         }else{
             this.valor = this.valorInput;

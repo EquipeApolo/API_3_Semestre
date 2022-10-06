@@ -22,7 +22,8 @@ type state = {
   windError: string,
   runwayError: string,
   altitudeError: string,
-  slopeError: string
+  slopeError: string,
+  overspeedTitle: string
 }
 
 class Calculo extends Component<{}, state>{
@@ -38,13 +39,14 @@ class Calculo extends Component<{}, state>{
   private iceAccreation: boolean = false;
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
+  private overspeed: number = 0;
 
   constructor(props) {
     super(props);
     this.state = {
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
-      temperatureError: "", unitMeasurementError: "", weightError: "", windError: ""
+      temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: ""
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -56,6 +58,7 @@ class Calculo extends Component<{}, state>{
     this.brakingLevelChange = this.brakingLevelChange.bind(this);
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
+    this.overspeedChange = this.overspeedChange.bind(this);
   }
 
   //#region eventos change
@@ -68,7 +71,8 @@ class Calculo extends Component<{}, state>{
         weightTitle: "(Kg)",
         windTitle: "(Km/h)",
         airportAltitudeTitle: "(M)",
-        temperatureTitle: "(ºC)"
+        temperatureTitle: "(ºC)",
+        overspeedTitle: "(Km/h)"
       });
     } else if (target.value == 2) {
       this.unitMeasurement = UnitMeasurement.IMPERIAL;
@@ -76,14 +80,16 @@ class Calculo extends Component<{}, state>{
         weightTitle: "(Lb)",
         windTitle: "(Wt)",
         airportAltitudeTitle: "(Ft)",
-        temperatureTitle: "(ºF)"
+        temperatureTitle: "(ºF)",
+        overspeedTitle: "(Wt)"
       });
     } else {
       this.setState({
         weightTitle: "",
         windTitle: "",
         airportAltitudeTitle: "",
-        temperatureTitle: ""
+        temperatureTitle: "",
+        overspeedTitle: ""
       });
       return;
     }
@@ -99,6 +105,11 @@ class Calculo extends Component<{}, state>{
       this.setState({temperatureError: ""})
     }
     if(this.state.result != "") this.setState({result: ""})
+  }
+
+  overspeedChange(event) {
+    const target = event.target;
+    this.overspeed = target.value;
   }
 
   windChange(event) {
@@ -277,9 +288,11 @@ class Calculo extends Component<{}, state>{
 
     let aircraft = new Aircraft("Modelo X", "Motor Y", "XXX", 0, 220, 2);
     let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
-      this.brakingLevel, this.iceAccreation);
+      this.brakingLevel, this.iceAccreation, this.overspeed);
+      let calculo = calcular.calcular();
+      console.log(calculo);
     
-      return calcular.calcular();
+      return calculo;
   }
 
   render() {
@@ -389,6 +402,10 @@ class Calculo extends Component<{}, state>{
             </Row>
 
             <Row className="px-2">
+            <Col>
+                <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
+                <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
+              </Col>
               <Col>
                 <h5 className='card-tittle'>Has ice accreation?</h5>
                 <BootstrapSwitchButton
@@ -398,12 +415,11 @@ class Calculo extends Component<{}, state>{
                 />
               </Col>
               <Col></Col>
-              <Col></Col>
             </Row>
 
             <Row className="px-2 mt-5">
               <Col />
-              <Col><h5 className="card-title">Resultado:</h5></Col>
+              <Col><h5 className="card-title">Result:</h5></Col>
             </Row>
             <Row className="px-2">
               <Col>
