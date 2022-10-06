@@ -41,7 +41,7 @@ class Calculo extends Component<{}, state>{
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
   private overspeed: number = 0;
-  private dados: [];
+  private dados:any = [];
   private json = axios.get('http://localhost:3001/airplane').then(response => {
     this.dados = response.data
  })
@@ -296,7 +296,6 @@ class Calculo extends Component<{}, state>{
       this.brakingLevel, this.iceAccreation, this.overspeed);
       let calculo = calcular.calcular();
       console.log(calculo);
-      console.log(this.dados);
       
     
       return calculo;
@@ -330,10 +329,7 @@ class Calculo extends Component<{}, state>{
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  {/* {this.dados.forEach(item => {
-                    <option value={item.id}>{item.model}</option>
-                  })}  */}
-                  {this.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))}
+                  {this.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))} 
                   {/* <option value="1">Model XPTO</option>
                   <option value="2">Model XXYY</option> */}
                 </select>

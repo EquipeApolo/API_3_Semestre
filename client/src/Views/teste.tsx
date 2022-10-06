@@ -104,8 +104,6 @@ class Teste extends Component<any, state>{
         <div style={{ fontSize: 12, color: "red" }}>
             {this.state.senhaError}
         </div>
-
-  
         <input type="button" value="enviar" onClick={this.postClickButton} /> 
       </div>
       </form>

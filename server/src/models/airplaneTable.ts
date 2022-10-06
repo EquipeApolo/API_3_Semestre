@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const database = require('./connect')
 
  
-const airplane = database.define('airplane', {
+const airplane = database.define('airplanes', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
