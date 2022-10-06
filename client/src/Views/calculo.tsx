@@ -426,7 +426,7 @@ class Calculo extends Component<{}, state>{
                 <Button type='submit' className="botao-resultado" size="lg" >Calculate</Button>
               </Col>
               <Col>
-                <textarea className="text-area" disabled value={this.state.result} />
+                <textarea className="text-area form-control" disabled value={this.state.result} />
               </Col>
             </Row>
           </Form>

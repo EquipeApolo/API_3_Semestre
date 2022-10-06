@@ -52,7 +52,7 @@ input[type=number] {
 
 .text-area{
   height: 12vh;
-  font-size: large;
-  font-weight: bold;
+  font-size: 4vh;
+  font-weight: 500;
   width: 100%;
 }
