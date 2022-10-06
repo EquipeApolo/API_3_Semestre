@@ -37,7 +37,7 @@ export default class Calcular{
     }
 
     calcular(): number{
- 
+
         let cref = this.ref.calcular();
         let cwei = this.weight.calcular();
         let calt = this.alt.calcular();
