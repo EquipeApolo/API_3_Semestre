@@ -5,6 +5,7 @@ import Ref from "./ref";
 import Rev from "./rev";
 import Slope from "./slope";
 import Temperature from "./temp";
+import Vap from "./vap";
 import Weight from "./weight";
 import Wind from "./wind";
 
@@ -20,9 +21,10 @@ export default class Calcular{
     private wind: Wind;
     private braking: BrakingLevel;
     private iceAccreation: boolean;
+    private vap: Vap;
 
     constructor(aircraft: Aircraft, unitMeasurement: UnitMeasurement, inputWeight: number, inputAltitude: number,
-        inputSlope: number, inputTemperature: number, inputWind: number, braking: BrakingLevel, ice: boolean){
+        inputSlope: number, inputTemperature: number, inputWind: number, braking: BrakingLevel, ice: boolean, inputVap: number){
             this.aircraft = aircraft;
             this.unitMeasurement = unitMeasurement;
             this.weight = new Weight(aircraft, inputWeight, unitMeasurement, ice, braking);
@@ -32,6 +34,7 @@ export default class Calcular{
             this.slope = new Slope(aircraft, inputSlope, ice, braking);
             this.temp = new Temperature(aircraft, inputTemperature, unitMeasurement, ice, braking);
             this.wind = new Wind(aircraft, inputWind, unitMeasurement, ice, braking);
+            this.vap = new Vap(aircraft, inputVap, unitMeasurement, ice, braking)
             this.braking = braking;
             this.iceAccreation = ice;
     }
@@ -46,7 +49,7 @@ export default class Calcular{
         let cslope = this.slope.calcular();
         let crev = this.rev.calcular();
         return this.ref.calcular() + this.weight.calcular() + this.alt.calcular() + this.temp.calcular() + this.wind.calcular() +
-        this.slope.calcular() + this.rev.calcular();
+        this.slope.calcular() + this.rev.calcular() + this.vap.calcular();
     }
 
 }

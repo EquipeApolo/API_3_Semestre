@@ -13,26 +13,36 @@ const historic = database.define('historic', {
         allowNull: false,
         primaryKey: true
     },
-    userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {      
-          model: 'users',
-          key: 'id'
-        },
-    },
-    airplaneId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {      
-          model: 'airplane',
-          key: 'id'
-        },
-    },
+    // userId: {
+    //     type: Sequelize.INTEGER,
+    //     allowNull: false,
+    //     references: {      
+    //       model: 'users',
+    //       key: 'id'
+    //     },
+    // },
+    // airplaneId: {
+    //     type: Sequelize.INTEGER,
+    //     allowNull: false,
+    //     references: {      
+    //       model: 'airplane',
+    //       key: 'id'
+    //     },
+    // },
     result: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
+})
+
+historic.belongsTo(usersId, {
+    constraint: true,
+    foreignKey: 'usersId'
+})
+
+historic.belongsTo(airplaneId, {
+    constraint: true,
+    foreignKey: 'airplaneId'
 })
 
 historic.sync({ alter: true });
