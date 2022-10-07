@@ -1,21 +1,20 @@
-import { Component } from "react";
-import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import { Component, useState } from "react";
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Aircraft from "../Models/aircraft";
 import aviao from "../Icons/aviao.png";
 import { getValue } from "@testing-library/user-event/dist/utils";
 import React from "react";
 import axios from 'axios';
-import Popup from "./alert";
+import Swal from 'sweetalert2'
 
 type state = {
     modelError: string,
     engineError: string,
     reversorError: string,
     certificationError: string,
-    flapError: string
+    flapError: string,
 }
-
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0);
@@ -35,7 +34,6 @@ class cadastroAeronave extends Component<any, state>{
         this.reversorChange = this.reversorChange.bind(this);
         this.flapChange = this.flapChange.bind(this);
         //this.cadastrar = this.cadastrar.bind(this);
-
     }
 
     eventoFormulario = (evento: any) => {
@@ -106,7 +104,6 @@ class cadastroAeronave extends Component<any, state>{
         this.setState({ reversorError: reversorError })
     }
 
-
     /*cadastrar(event) {
         const target = event.target.value
         this.aircraft.result = //Adicionar result à aeronave novamente para colocar os valores necessários aqui
@@ -120,7 +117,7 @@ class cadastroAeronave extends Component<any, state>{
         let flapError = "";
 
         if (!this.aircraft.getModel) {
-
+            modelError = "The model is required"
         } else {
             modelError = ""
         }
@@ -163,12 +160,22 @@ class cadastroAeronave extends Component<any, state>{
                 flap: this.aircraft.getFlapValue,
                 reverserAmount: this.aircraft.getReverserAmount
             })
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Register completed',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            setTimeout(function() {
+                window.location.reload();
+              }, 1500);
         }
     }
 
     render() {
         return (
-            <form onSubmit={this.eventoFormulario}>
+            <form onSubmit={this.eventoFormulario} id="form">
                 <Container className="px-2 mb-5">
                     <Container>
                         <Row className="px-2 mb-5 mt-5">
@@ -181,7 +188,8 @@ class cadastroAeronave extends Component<any, state>{
                             <Row>
                                 <Col>
                                     <h5 className="card-title">Aircraft model</h5>
-                                    <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="model" placeholder="Aircraft model" onChange={this.modelChange} />
+                                    <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="model"
+                                        placeholder="Aircraft model" onChange={this.modelChange} value={this.aircraft.setModel} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.modelError}
                                     </div>
@@ -230,11 +238,11 @@ class cadastroAeronave extends Component<any, state>{
                                 </Col>
                             </Row>
                             <Row className="px-2 mt-5">
-                                <Col />
+                                <Col/>
                             </Row>
                             <Row className="px-2">
                                 <Col>
-                                    <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Cadastrar</Button>
+                                    <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Register</Button>
                                 </Col>
                                 <Col></Col>
                             </Row>

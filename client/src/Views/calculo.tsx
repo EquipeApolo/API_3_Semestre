@@ -25,7 +25,7 @@ type state = {
   altitudeError: string,
   slopeError: string,
   overspeedTitle: string,
-  dados:any[]
+  dados: any[]
 }
 
 class Calculo extends Component<{}, state>{
@@ -42,7 +42,7 @@ class Calculo extends Component<{}, state>{
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
   private overspeed: number = 0;
-  
+
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class Calculo extends Component<{}, state>{
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
       temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
-      dados:[]
+      dados: []
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -82,7 +82,7 @@ class Calculo extends Component<{}, state>{
   //#region eventos change
   unitMeasurementChange(event) {
     const target = event.target;
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
     if (target.value == 1) {
       this.unitMeasurement = UnitMeasurement.INTERNACIONAL;
       this.setState({
@@ -112,7 +112,7 @@ class Calculo extends Component<{}, state>{
       return;
     }
     if (this.state.unitMeasurementError.includes("Select")) {
-      this.setState({unitMeasurementError: ""})
+      this.setState({ unitMeasurementError: "" })
     }
   }
 
@@ -120,9 +120,9 @@ class Calculo extends Component<{}, state>{
     const target = event.target;
     this.temperature = target.value;
     if (this.state.temperatureError.includes("required")) {
-      this.setState({temperatureError: ""})
+      this.setState({ temperatureError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   overspeedChange(event) {
@@ -134,66 +134,66 @@ class Calculo extends Component<{}, state>{
     const target = event.target;
     this.wind = target.value;
     if (this.state.windError.includes("required")) {
-      this.setState({windError: ""})
+      this.setState({ windError: "" })
     }
-    if(this.wind == 0){
-      this.setState({windError: "The wind must be different than 0"})
+    if (this.wind == 0) {
+      this.setState({ windError: "The wind must be different than 0" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   aircraftWeightChange(event) {
     const target = event.target;
     this.aircraftWeight = target.value;
-    if(this.aircraftWeight < 10000){
-      this.setState({weightError: "The weight must be above 10000"})
+    if (this.aircraftWeight < 10000) {
+      this.setState({ weightError: "The weight must be above 10000" })
     }
-    
+
     if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
-      this.setState({weightError: ""})
+      this.setState({ weightError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
   slopeChange(event) {
     const target = event.target;
     this.slope = target.value;
     if (this.state.slopeError.includes("required")) {
-      this.setState({slopeError: ""})
+      this.setState({ slopeError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   airportAltitudeChange(event) {
     const target = event.target;
     this.airportAltitude = target.value;
     if (this.state.altitudeError.includes("required")) {
-      this.setState({altitudeError: ""})
+      this.setState({ altitudeError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   brakingLevelChange(event) {
     const target = event.target;
     this.brakingLevel = target.value;
     if (this.state.breakingError.includes("Select")) {
-      this.setState({breakingError: ""})
+      this.setState({ breakingError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   runwayConditionChange(event) {
     const target = event.target;
     this.runwayCondition = target.value;
     if (this.state.runwayError.includes("Select")) {
-      this.setState({runwayError: ""})
+      this.setState({ runwayError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   iceAccreationChange(event) {
     const target = event.target;
     this.iceAccreation = target.value;
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   //#endregion
@@ -219,14 +219,14 @@ class Calculo extends Component<{}, state>{
 
   }
 
-  converter(valor: number): number{
-    if(this.unitMeasurement == UnitMeasurement.IMPERIAL){
+  converter(valor: number): number {
+    if (this.unitMeasurement == UnitMeasurement.IMPERIAL) {
       return valor * 3.281;
     }
     return valor;
   }
 
-//#region validate
+  //#region validate
   validate = () => {
     let unitMeasurementError = ""; let aircraftError = ""; let weightError = "";
     let breakingError = ""; let temperatureError = ""; let windError = "";
@@ -238,11 +238,11 @@ class Calculo extends Component<{}, state>{
       unitMeasurementError = ""
     }
 
-    // if (!this.aircraftSelected) {
-    //   aircraftError = "Select an aircraft";
-    // }else{
-    //   aircraftError = ""
-    // }
+    if (!this.aircraftSelected) {
+      aircraftError = "Select an aircraft";
+    } else {
+      aircraftError = ""
+    }
 
     if (!this.aircraftWeight) {
       weightError = "The weight is required";
@@ -301,17 +301,17 @@ class Calculo extends Component<{}, state>{
     return true;
   };
 
-//#endregion
-  teste(): number{
+  //#endregion
+  teste(): number {
 
     let aircraft = new Aircraft("Modelo X", "Motor Y", "XXX", 0, 220, 2);
     let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
       this.brakingLevel, this.iceAccreation, this.overspeed);
-      let calculo = calcular.calcular();
-      console.log(calculo);
-      
-    
-      return calculo;
+    let calculo = calcular.calcular();
+    console.log(calculo);
+
+
+    return calculo;
   }
 
   render() {
@@ -342,7 +342,7 @@ class Calculo extends Component<{}, state>{
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  {this.state.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))} 
+                  {this.state.dados.map((airplane) => (<option key={airplane.id} value={airplane.id}>{airplane.model}</option>))}
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.aircraftError}
@@ -420,7 +420,7 @@ class Calculo extends Component<{}, state>{
             </Row>
 
             <Row className="px-2">
-            <Col>
+              <Col>
                 <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
                 <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
               </Col>
@@ -454,11 +454,7 @@ class Calculo extends Component<{}, state>{
   }
 }
 
-
-
-
 export default Calculo;
-
 
 // Caso seja necessário incluir o "Aditivo de velocidade" basta copiar abaixo e colocar no formulário.
 /* <Form>
