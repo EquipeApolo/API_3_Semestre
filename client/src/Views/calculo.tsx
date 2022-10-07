@@ -24,7 +24,8 @@ type state = {
   runwayError: string,
   altitudeError: string,
   slopeError: string,
-  overspeedTitle: string
+  overspeedTitle: string,
+  dados:any[]
 }
 
 class Calculo extends Component<{}, state>{
@@ -41,17 +42,15 @@ class Calculo extends Component<{}, state>{
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
   private overspeed: number = 0;
-  private dados:any = [];
-  private json = axios.get('http://localhost:3001/airplane').then(response => {
-    this.dados = response.data
- })
+  
 
   constructor(props) {
     super(props);
     this.state = {
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
-      temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: ""
+      temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
+      dados:[]
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -64,6 +63,20 @@ class Calculo extends Component<{}, state>{
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
     this.overspeedChange = this.overspeedChange.bind(this);
+
+    /*let json = axios.get('http://localhost:3001/airplane').then(response => {
+      this.dados = response.data
+      console.log(this.dados);
+    })*/
+  }
+
+  componentDidMount(): void {
+    axios.get('http://localhost:3001/airplane').then(response => {
+      let dadosBanco = response.data
+      this.setState({
+        dados: dadosBanco
+      })
+    })
   }
 
   //#region eventos change
@@ -329,9 +342,7 @@ class Calculo extends Component<{}, state>{
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  {this.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))} 
-                  {/* <option value="1">Model XPTO</option>
-                  <option value="2">Model XXYY</option> */}
+                  {this.state.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))} 
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.aircraftError}
@@ -456,3 +467,4 @@ export default Calculo;
   <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="speedAdditive" placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange} />
 </Col>
 </Form> */
+
