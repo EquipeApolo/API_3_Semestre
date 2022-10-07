@@ -30,7 +30,7 @@ type state = {
 
 class Calculo extends Component<{}, state>{
 
-  private aircraftSelected!: Aircraft;
+  private aircraftSelected!: number;
   private aircraftWeight: number = 0;
   private wind: number = 0;
   private runwayCondition: RunwayCondition;
@@ -63,6 +63,7 @@ class Calculo extends Component<{}, state>{
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
     this.overspeedChange = this.overspeedChange.bind(this);
+    this.onAircraftChange = this.onAircraftChange.bind(this);
 
     /*let json = axios.get('http://localhost:3001/airplane').then(response => {
       this.dados = response.data
@@ -79,7 +80,21 @@ class Calculo extends Component<{}, state>{
     })
   }
 
+
   //#region eventos change
+  onAircraftChange(event){
+    const target = event.target;
+    let value = target.value;
+    if(value == -1) return;
+
+    this.aircraftSelected = value;
+
+    if (this.state.aircraftError.includes("Select")) {
+      this.setState({aircraftError: ""})
+    }
+    if(this.state.result != "") this.setState({result: ""})
+  }
+
   unitMeasurementChange(event) {
     const target = event.target;
     if(this.state.result != "") this.setState({result: ""})
@@ -182,7 +197,7 @@ class Calculo extends Component<{}, state>{
   }
 
   runwayConditionChange(event) {
-    const target = event.target;
+    const target = event.target;  
     this.runwayCondition = target.value;
     if (this.state.runwayError.includes("Select")) {
       this.setState({runwayError: ""})
@@ -205,12 +220,12 @@ class Calculo extends Component<{}, state>{
     const isValid = this.validate();
 
     if (isValid) {
-      let calculado = this.teste();
-      let convertido = this.converter(calculado)
-      console.log((calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts"))
-      this.setState({
-        result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
-      });
+      let calculado = this.generateCalculo();
+        let convertido = this.converter(calculado)
+        console.log((calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts"))
+        this.setState({
+          result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
+        });
     } else {
       this.setState({
         result: ""
@@ -238,11 +253,11 @@ class Calculo extends Component<{}, state>{
       unitMeasurementError = ""
     }
 
-    // if (!this.aircraftSelected) {
-    //   aircraftError = "Select an aircraft";
-    // }else{
-    //   aircraftError = ""
-    // }
+    if (!this.aircraftSelected) {
+      aircraftError = "Select an aircraft";
+    }else{
+      aircraftError = ""
+    }
 
     if (!this.aircraftWeight) {
       weightError = "The weight is required";
@@ -302,16 +317,19 @@ class Calculo extends Component<{}, state>{
   };
 
 //#endregion
-  teste(): number{
-
-    let aircraft = new Aircraft("Modelo X", "Motor Y", "XXX", 0, 220, 2);
-    let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
-      this.brakingLevel, this.iceAccreation, this.overspeed);
-      let calculo = calcular.calcular();
-      console.log(calculo);
-      
+  generateCalculo(): number{
+    let calculo = this.getAircraft();
+    let calcular = new Calcular(calculo, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
+        this.brakingLevel, this.iceAccreation, this.overspeed);
     
-      return calculo;
+    return calcular.calcular();
+  }
+
+  getAircraft(): Aircraft{
+    let dado = this.state.dados.find(item => item.id == this.aircraftSelected);
+    let aircraft = new Aircraft(dado.model, dado.engine, dado.certification, dado.flap, dado.reverserAmount);
+    console.log(aircraft);
+    return aircraft;
   }
 
   render() {
@@ -340,7 +358,7 @@ class Calculo extends Component<{}, state>{
               </Col>
               <Col >
                 <h5 className="card-title">Aircraft</h5>
-                <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
+                <select defaultValue="-1" onChange={this.onAircraftChange} className="text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
                   {this.state.dados.map((airplane) => (<option key={ airplane.id } value={ airplane.id }>{ airplane.model }</option>))} 
                 </select>

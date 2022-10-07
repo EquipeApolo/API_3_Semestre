@@ -41,7 +41,6 @@ export default class Calcular{
     }
 
     calcular(): number{
-        debugger
         let cref = this.ref.calcular();
         let cwei = this.weight.calcular();
         let calt = this.alt.calcular();

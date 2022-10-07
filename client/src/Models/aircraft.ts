@@ -3,17 +3,14 @@ export default class Aircraft{
     private model!: string;
     private engine!: string;
     private certification!: string;
-    //private speedAdctive!: number;
     private weight!: number;
     private flap!: number;
     private reverserAmount!: number
 
-    constructor(model: string, engine: string, certification: string, peso: number, flap: number, reverserAmount: number){
+    constructor(model: string, engine: string, certification: string, flap: number, reverserAmount: number){
         this.model = model;
         this.engine = engine;
         this.certification = certification;
-        //this.speedAdctive = speedAdctive;
-        this.weight = peso;
         this.flap = flap;
         this.reverserAmount = reverserAmount;
     }
@@ -29,11 +26,7 @@ export default class Aircraft{
     set setCertification(certification: string){
         this.certification = certification;
     }
-
-    // set setSpeedAdctive(speed: number){
-    //     this.speedAdctive = speed;
-    // }
-
+    
     set setWeight(weight: number){
         this.weight = weight;
     }
@@ -53,8 +46,6 @@ export default class Aircraft{
     get getEngine(): string { return this.engine; }
 
     get getCertification(): string { return this.certification; }
-
-    // get getSpeedAdctive(): number { return this.speedAdctive; }
 
     get getFlapValue(): number { return this.flap; }
 
