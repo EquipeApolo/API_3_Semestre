@@ -18,7 +18,7 @@
 <span id="requisitos">
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
-- [ ] Cadastros de modelos de aeronaves;
+- [x] Cadastros de modelos de aeronaves;
 - [ ] Perfis diferentes (administrador, usuário);
 - [x] Interface amigável para cálculo de perfomace via celular ou tablet;
 - [x] Gerar cálculo do comprimento mínimo da pista de pouso pelos fatores considerados;
@@ -74,7 +74,8 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 01 | Interface de cálculo visando acesso via tablet. |
 | 01 | Aplicar sistemas de unidade de medida. |
 | 02 | Página de cadastro de aeronaves. |
-| 02 | Página de edição de aeronaves. |
+| 02 | Realização da lógica dos cálculos a partir das tabelas. |
+| 03 | Página de edição de aeronaves. |
 | 02 | Adequar interface às configurações da aeronave. |
 | 03 | Página de visualização do histórico de cálculos. |
 | 03 | Salvar histórico de cálculos no banco. |
