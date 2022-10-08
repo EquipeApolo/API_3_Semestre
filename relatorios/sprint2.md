@@ -15,13 +15,13 @@
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "../imagens/Wireframe - Sprint 2" style="height:6vh"></p>
+<p align="center"> <img src = "../imagens/Wireframe - Sprint 2" style="height:200vh"></p>
 <br>
   
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "../imagens/burndown1sprint.png"></p>
+<p align="center"> <img src = "[../imagens/burndown1sprint.pn](https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/burndown%20-%20Sprint%202.JPG)g"></p>
 <br>
 
   
