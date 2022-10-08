@@ -15,7 +15,7 @@
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "../imagens/Wireframe - Sprint 2" style="height:100vh"></p>
+<p align="center"> <img src = "../imagens/Wireframe - Sprint 2"></p>
 <br>
   
 <span id="burndown">
