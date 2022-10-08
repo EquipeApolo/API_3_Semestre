@@ -28,7 +28,7 @@
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "../imagens/video-primeiraentrega.gif"></p>
+<p align="center"> <img src = "../imagens/"></p>
 <br>
    
   → [Voltar ao topo](#topo)
