@@ -37,7 +37,7 @@
 <h4> Entrega da Sprint 1 </h4>
 <p align="center"> <img src = "imagens/video-primeiraentrega.gif"></p>
 <h4> Entrega da Sprint 2 </h4>
-<p align="center"> <img src = "../imagens/video - sprint2.gif"></p>
+<p align="center"> <img src = "imagens/video - sprint2.gif"></p>
 <h4> Entrega da Sprint 3 </h4>
 <p align="center"> <img src = ""></p>
 <h4> Entrega da Sprint 4 </h4>
