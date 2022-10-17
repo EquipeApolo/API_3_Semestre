@@ -53,8 +53,8 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 |:-----:|:----------:|:---------:|:---------:|
 | 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/1sprint.md) |
 | 02 | 09/10/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint2.md) |
-| 03 | 06/11/2022 | :clock12:	 | [ver relatório]() |
-| 04 | 27/11/2022 | :clock12:	 | [ver relatório]() |
+| 03 | 06/11/2022 | :clock12:	 | ver relatório |
+| 04 | 27/11/2022 | :clock12:	 | ver relatório |
  
 <span id="projeto">
     
@@ -112,6 +112,8 @@ Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execuçã
 - [Teams](https://teams.microsoft.com): Comunicação
 - [Azure DevOPS](https://azure.microsoft.com/pt-br/): Ferramenta de controle
 - [Whimsical](https://whimsical.com): Prototipagem
+- [Node](https://nodejs.org/): Runtime
+- [React](https://pt-br.reactjs.org/): Framework
 
 → [Voltar ao topo](#topo)
 
