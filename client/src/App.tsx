@@ -11,7 +11,9 @@ function App() {
     <Route index element={<Calculo/>}/>
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
-    <Route path="/cadastroAeronave" element={<CadastroAeronave/>}/>
+    <Route path="/cadastroAeronave"private name() {
+      
+    }element={<CadastroAeronave/>}/>
     </Routes>
     </BrowserRouter>
   );

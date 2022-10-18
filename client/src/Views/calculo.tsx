@@ -37,7 +37,6 @@ class Calculo extends Component<{}, state>{
   private temperature: number = 0;
   private airportAltitude: number = 0;
   private slope: number = 0;
-  private reversor: number = 0;
   private iceAccreation: boolean = false;
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
@@ -64,11 +63,6 @@ class Calculo extends Component<{}, state>{
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
     this.overspeedChange = this.overspeedChange.bind(this);
     this.onAircraftChange = this.onAircraftChange.bind(this);
-
-    /*let json = axios.get('http://localhost:3001/airplane').then(response => {
-      this.dados = response.data
-      console.log(this.dados);
-    })*/
   }
 
   componentDidMount(): void {
@@ -328,7 +322,6 @@ class Calculo extends Component<{}, state>{
   getAircraft(): Aircraft{
     let dado = this.state.dados.find(item => item.id == this.aircraftSelected);
     let aircraft = new Aircraft(dado.model, dado.engine, dado.certification, dado.flap, dado.reverserAmount);
-    console.log(aircraft);
     return aircraft;
   }
 

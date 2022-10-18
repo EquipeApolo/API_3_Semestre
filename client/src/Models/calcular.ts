@@ -41,14 +41,6 @@ export default class Calcular{
     }
 
     calcular(): number{
-        let cref = this.ref.calcular();
-        let cwei = this.weight.calcular();
-        let calt = this.alt.calcular();
-        let ctemp = this.temp.calcular();
-        let cwind = this.wind.calcular();
-        let cslope = this.slope.calcular();
-        let crev = this.rev.calcular();
-        let overspeed = this.overspeed.calcular();
         return this.ref.calcular() + this.weight.calcular() + this.alt.calcular() + this.temp.calcular() + this.wind.calcular() +
         this.slope.calcular() + this.rev.calcular() + this.overspeed.calcular();
     }
