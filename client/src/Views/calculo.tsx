@@ -18,7 +18,7 @@ type state = {
   unitMeasurementError: string,
   aircraftError: string,
   weightError: string,
-  breakingError: string,
+  brakingError: string,
   temperatureError: string,
   windError: string,
   runwayError: string,
@@ -47,7 +47,7 @@ class Calculo extends Component<{}, state>{
     super(props);
     this.state = {
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
-      result: "", slopeError: "", aircraftError: "", altitudeError: "", breakingError: "", runwayError: "",
+      result: "", slopeError: "", aircraftError: "", altitudeError: "", brakingError: "", runwayError: "",
       temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
       dados: []
     }
@@ -184,8 +184,8 @@ class Calculo extends Component<{}, state>{
   brakingLevelChange(event) {
     const target = event.target;
     this.brakingLevel = target.value;
-    if (this.state.breakingError.includes("Select")) {
-      this.setState({ breakingError: "" })
+    if (this.state.brakingError.includes("Select")) {
+      this.setState({ brakingError: "" })
     }
     if (this.state.result != "") this.setState({ result: "" })
   }
@@ -209,8 +209,6 @@ class Calculo extends Component<{}, state>{
 
   calculate(event) {
     event.preventDefault()
-    // if(this.aircraftSelected === undefined) return;
-
     const isValid = this.validate();
 
     if (isValid) {
@@ -238,7 +236,7 @@ class Calculo extends Component<{}, state>{
   //#region validate
   validate = () => {
     let unitMeasurementError = ""; let aircraftError = ""; let weightError = "";
-    let breakingError = ""; let temperatureError = ""; let windError = "";
+    let brakingError = ""; let temperatureError = ""; let windError = "";
     let runwayError = ""; let altitudeError = ""; let slopeError = "";
 
     if (!this.unitMeasurement) {
@@ -262,9 +260,9 @@ class Calculo extends Component<{}, state>{
     }
 
     if (!this.brakingLevel) {
-      breakingError = "Select a braking level";
+      brakingError = "Select a braking level";
     } else {
-      breakingError = ""
+      brakingError = ""
     }
 
     if (!this.temperature) {
@@ -299,11 +297,11 @@ class Calculo extends Component<{}, state>{
       slopeError = ""
     }
     this.setState({
-      aircraftError: aircraftError, altitudeError: altitudeError, breakingError: breakingError,
+      aircraftError: aircraftError, altitudeError: altitudeError, brakingError: brakingError,
       runwayError: runwayError, slopeError: slopeError, temperatureError: temperatureError, weightError: weightError,
       unitMeasurementError: unitMeasurementError, windError: windError
     });
-    if (aircraftError || altitudeError || breakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
+    if (aircraftError || altitudeError || brakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
       return false;
     }
 
@@ -312,8 +310,8 @@ class Calculo extends Component<{}, state>{
 
 //#endregion
   generateCalculo(): number{
-    let calculo = this.getAircraft();
-    let calcular = new Calcular(calculo, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
+    let aircraft = this.getAircraft();
+    let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
         this.brakingLevel, this.iceAccreation, this.overspeed);
     
     return calcular.calcular();
@@ -379,7 +377,7 @@ class Calculo extends Component<{}, state>{
                   <option value="4">Autobrake Low</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {this.state.breakingError}
+                  {this.state.brakingError}
                 </div>
               </Col>
               <Col>

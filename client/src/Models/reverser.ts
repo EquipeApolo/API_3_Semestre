@@ -2,7 +2,7 @@ import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
 
-export default class Rev extends FatorCalculo{
+export default class Reverser extends FatorCalculo{
 
     private aircraft: Aircraft;
     constructor(aircraft: Aircraft,input: number, temGelo: boolean, BRK: number){
