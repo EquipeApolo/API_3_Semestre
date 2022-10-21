@@ -6,13 +6,19 @@ export default class Aircraft{
     private weight!: number;
     private flap!: number;
     private reverserAmount!: number
+    private aircraftWeightMin: number;
+    private aircraftWeightMax: number;
+    private brakingApplicationLevel: number;
 
-    constructor(model: string, engine: string, certification: string, flap: number, reverserAmount: number){
+    constructor(model: string, engine: string, certification: string, flap: number, reverserAmount: number, aircraftWeightMin: number, aircraftWeightMax: number, brakingApplicationLevel: number){
         this.model = model;
         this.engine = engine;
         this.certification = certification;
         this.flap = flap;
         this.reverserAmount = reverserAmount;
+        this.aircraftWeightMin = aircraftWeightMin;
+        this.aircraftWeightMax = aircraftWeightMax;
+        this.brakingApplicationLevel = brakingApplicationLevel;
     }
 
     set setModel(model: string){
@@ -41,6 +47,18 @@ export default class Aircraft{
         this.reverserAmount = value;
     }
 
+    set setAircraftWeightMin(value: number){
+        this.aircraftWeightMin = value
+    }
+
+    set setAircraftWeightMax(value: number){
+        this.aircraftWeightMax = value
+    }
+
+    set setBrakingApplicationLevel(value: number){
+        this.brakingApplicationLevel = value
+    }
+
     get getModel(): string { return this.model; }
 
     get getEngine(): string { return this.engine; }
@@ -52,5 +70,11 @@ export default class Aircraft{
     get getReverserAmount(): number { return this.reverserAmount; }
 
     get getWeight(): number { return this.weight; }
+
+    get getAircraftWeightMin(): number { return this.aircraftWeightMin; }
+
+    get getAircraftWeightMax(): number { return this.getAircraftWeightMax; }
+
+    get getBrakingApplicationLevel(): number { return this.getBrakingApplicationLevel; }
 
 }
