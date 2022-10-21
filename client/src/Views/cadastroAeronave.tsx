@@ -22,7 +22,7 @@ type state = {
 }
 class cadastroAeronave extends Component<any, state>{
 
-    private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0);
+    private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
 
     private brakingLevel: BrakingLevel;
     private aircraftWeightMin: number = 0;
