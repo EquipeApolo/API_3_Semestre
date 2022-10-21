@@ -10,7 +10,4 @@ export default abstract class FatorCalculo{
     public BRK!: number;
     public abstract converterSistema(unitMeasurement: UnitMeasurement): void;
     public abstract calcular(aircraft: Aircraft): number;
-    constructor(){
-
-    }
 }
