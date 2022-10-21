@@ -73,8 +73,8 @@ export default class Aircraft{
 
     get getAircraftWeightMin(): number { return this.aircraftWeightMin; }
 
-    get getAircraftWeightMax(): number { return this.getAircraftWeightMax; }
+    get getAircraftWeightMax(): number { return this.aircraftWeightMax; }
 
-    get getBrakingApplicationLevel(): number { return this.getBrakingApplicationLevel; }
+    get getBrakingApplicationLevel(): number { return this.brakingApplicationLevel; }
 
 }
