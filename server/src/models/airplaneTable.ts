@@ -23,10 +23,6 @@ const airplane = database.define('airplanes', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    unidadeMedidaWeight: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
     aircraftWeightMin:{
         type: Sequelize.INTEGER,
         allowNull: false

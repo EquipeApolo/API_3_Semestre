@@ -4,6 +4,7 @@ import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Aircraft from "../Models/aircraft";
 import aviao from "../Icons/aviao.png";
 import { getValue } from "@testing-library/user-event/dist/utils";
+import { BrakingLevel } from '../Enuns/enuns';
 import React from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
@@ -17,7 +18,7 @@ type state = {
     flapError: string,
     breakingError: string,
     weightError: string,
-    unitMeasurementError: string,
+    result: string,
     dados: any[],
 }
 class editarAeronave extends Component<any, state>{
@@ -25,7 +26,7 @@ class editarAeronave extends Component<any, state>{
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0);
 
     private brakingLevel: BrakingLevel;
-    private unitMeasurement: UnitMeasurement;
+    private aircraftWeight: number = 0;
 
     constructor(props: any) {
         super(props);
@@ -38,7 +39,7 @@ class editarAeronave extends Component<any, state>{
             flapError: '',
             breakingError: '',
             weightError: '',
-            unitMeasurementError: '',
+            result: '',
             dados: []
         }
         this.modelChange = this.modelChange.bind(this);
@@ -131,26 +132,26 @@ class editarAeronave extends Component<any, state>{
     }
 
     brakingLevelChange(event) {
-        const target = event.target;
-        this.brakingLevel = target.value;
-        if (this.state.breakingError.includes("Select")) {
-          this.setState({ breakingError: "" })
-        }
-        if (this.state.result != "") this.setState({ result: "" })
-      }
+         const target = event.target;
+         this.brakingLevel = target.value;
+         if (this.state.breakingError.includes("Select")) {
+           this.setState({ breakingError: "" })
+         }
+         if (this.state.result != "") this.setState({ result: "" })
+       }
 
-      aircraftWeightChange(event) {
-        const target = event.target;
-        this.aircraftWeight = target.value;
-        if (this.aircraftWeight < 10000) {
-          this.setState({ weightError: "The weight must be above 10000" })
-        }
+    aircraftWeightChange(event) {
+         const target = event.target;
+         this.aircraftWeight = target.value;
+         if (this.aircraftWeight < 10000) {
+           this.setState({ weightError: "The weight must be above 10000" })
+         }
     
-        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
-          this.setState({ weightError: "" })
-        }
-        if (this.state.result != "") this.setState({ result: "" })
-      }
+         if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+           this.setState({ weightError: "" })
+         }
+         if (this.state.result != "") this.setState({ result: "" })
+       }
     /*cadastrar(event) {
         const target = event.target.value
         this.aircraft.result = //Adicionar result à aeronave novamente para colocar os valores necessários aqui
@@ -162,6 +163,8 @@ class editarAeronave extends Component<any, state>{
         let reversorError = "";
         let certificationError = "";
         let flapError = "";
+        let breakingError = "";
+        let weightError = "";
 
         if (!this.aircraft.getModel) {
             modelError = "The model is required"
@@ -188,8 +191,21 @@ class editarAeronave extends Component<any, state>{
         } else {
             flapError = ""
         }
-        this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError });
-        if (modelError || engineError || reversorError || certificationError || flapError) {
+        if (!this.brakingLevel) {
+            breakingError = "Select a braking level";
+        } else {
+            breakingError = ""
+        }
+        if (!this.aircraftWeight) {
+            weightError = "The weight is required";
+        } else if (this.aircraftWeight < 10000) {
+            weightError = "The weight must be above 10000";
+        } else {
+            weightError = ""
+        }
+      
+        this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError,  breakingError: breakingError, weightError: weightError});
+        if (modelError || engineError || reversorError || certificationError || flapError || breakingError || weightError) {
             return false
         }
 
@@ -272,22 +288,6 @@ class editarAeronave extends Component<any, state>{
                                     </div>
                                 </Col>
                                 <Col>
-                                    <h5 className="card-title">Aircraft Weight Min {this.state.weightTitle}</h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                    {this.state.weightError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Aircraft Weight Max {this.state.weightTitle}</h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                    {this.state.weightError}
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
                                     <h5 className="card-title">Certification</h5>
                                     <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnCertification" onChange={this.certificationChange} value={this.state.dados.certification}>
                                         <option value="-1" disabled>Select</option>
@@ -310,18 +310,26 @@ class editarAeronave extends Component<any, state>{
                                         {this.state.flapError}
                                     </div>
                                 </Col>
-                                <Col >
-                                    <h5 className="card-title">Unit of measurement</h5>
-                                    <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select mb-3" id="btnMeasurement" onChange={this.unitMeasurementChange}>
-                                        <option value="-1" disabled>Select</option>
-                                        <option value="1">Internacional</option>
-                                        <option value="2">Imperial</option>
-                                    </select>
+                                
+                               
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <h5 className="card-title">Aircraft Weight Min </h5>
+                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
                                     <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.unitMeasurementError}
+                                    {this.state.weightError}
                                     </div>
                                 </Col>
-                               
+                                <Col>
+                                    <h5 className="card-title">Aircraft Weight Max </h5>
+                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
+                                    <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.weightError}
+                                    </div>
+                                </Col>
+                                <Col>
+                                </Col>
                             </Row>
                             <Row className="px-2 mt-5">
                                 <Col/>
@@ -341,4 +349,4 @@ class editarAeronave extends Component<any, state>{
 }
 
 
-export default cadastroAeronave;
+export default editarAeronave;
