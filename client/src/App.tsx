@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Router, Routes } from 'react-router-dom
 import Calculo from './Views/calculo';
 import Teste from './Views/teste';
 import CadastroAeronave from './Views/cadastroAeronave';
+import EditarAeronave from './Views/editarAeronave';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
     <Route path="/cadastroAeronave" element={<CadastroAeronave/>}/>
+    <Route path="/editarAeronave" element={<EditarAeronave/>}/>
     </Routes>
     </BrowserRouter>
   );

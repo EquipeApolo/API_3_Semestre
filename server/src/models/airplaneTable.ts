@@ -23,11 +23,27 @@ const airplane = database.define('airplanes', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    unidadeMedidaWeight: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    aircraftWeightMin:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    aircraftWeightMax:{
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     flap: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
     reverserAmount: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    brakingApplicationLevel: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
