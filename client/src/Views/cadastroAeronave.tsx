@@ -24,11 +24,7 @@ type state = {
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
-
-    private brakingLevel: BrakingLevel;
-    private aircraftWeightMin: number = 0;
-    private aircraftWeightMax: number = 0;
-
+    
     constructor(props: any) {
         super(props);
         this.state = {
@@ -123,7 +119,7 @@ class cadastroAeronave extends Component<any, state>{
     }
     brakingLevelChange(event) {
         const target = event.target;
-        this.brakingLevel = target.value;
+        this.aircraft.setBrakingApplicationLevel = target.value;
         if (this.state.breakingError.includes("Select")) {
           this.setState({ breakingError: "" })
         }
@@ -132,27 +128,27 @@ class cadastroAeronave extends Component<any, state>{
 
    aircraftWeightChangeMin(event) {
         const target = event.target;
-        this.aircraftWeightMin = target.value;
-        if (this.aircraftWeightMin < 5000) {
+        this.aircraft.setAircraftWeightMin = target.value;
+        if (this.aircraft.getAircraftWeightMin < 5000) {
           this.setState({ weightMinError: "The weight must be above 5000" })
         }
    
-        if (this.state.weightMinError.includes("required") || this.state.weightMinError.includes("above") && this.aircraftWeightMin >= 5000) {
+        if (this.state.weightMinError.includes("required") || this.state.weightMinError.includes("above") && this.aircraft.getAircraftWeightMin >= 5000) {
           this.setState({ weightMinError: "" })
         }
         if (this.state.result != "") this.setState({ result: "" })
       }
    aircraftWeightChangeMax(event) {
        const target = event.target;
-       this.aircraftWeightMax = target.value;
-       if (this.aircraftWeightMax < 10000) {
+       this.aircraft.setAircraftWeightMax = target.value;
+       if ( this.aircraft.getAircraftWeightMax < 10000) {
            this.setState({ weightMaxError: "The weight must be above 10000" })
        }
-       if (this.aircraftWeightMax > 100000){
+       if ( this.aircraft.getAircraftWeightMax > 100000){
            this.setState({weightMaxError: "The weight must be below 100000"})
        }
 
-       if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") && this.aircraftWeightMax >= 10000) {
+       if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") && this.aircraft.getAircraftWeightMax >= 10000) {
            this.setState({ weightMaxError: "" })
        }
        if (this.state.result != "") this.setState({ result: "" })
@@ -197,21 +193,21 @@ class cadastroAeronave extends Component<any, state>{
        } else {
            flapError = ""
        }
-       if (!this.brakingLevel) {
+       if (!this.aircraft.getBrakingApplicationLevel) {
            breakingError = "Select a braking level";
        } else {
            breakingError = ""
        }
-       if (!this.aircraftWeightMin) {
+       if (!this.aircraft.getAircraftWeightMin) {
            weightMinError = "The weight is required";
-       } else if (this.aircraftWeightMin < 5000) {
+       } else if (this.aircraft.getAircraftWeightMin < 5000) {
            weightMinError = "The weight must be above 5000";
        } else {
            weightMinError = ""
        }
-       if (!this.aircraftWeightMax) {
+       if (!this.aircraft.getAircraftWeightMax) {
            weightMaxError = "The weight is required";
-       } else if (this.aircraftWeightMax > 100000) {
+       } else if (this.aircraft.getAircraftWeightMax > 100000) {
            weightMaxError = "The weight must be above 100000";
        } else {
            weightMaxError = ""
