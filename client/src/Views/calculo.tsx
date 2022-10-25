@@ -367,17 +367,19 @@ class Calculo extends Component<{}, state>{
             </Row>
 
             <Row>
-              <Col >
-                <h5 className="card-title">Braking application level</h5>
-                <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+              <Col>
+                <h5 className="card-title">Runway condition</h5>
+                <select defaultValue="-1" className="input text-select form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
                   <option value="-1" disabled>Select...</option>
-                  <option value="1">Maximum Manual</option>
-                  <option value="2">Autobrake High</option>
-                  <option value="3">Autobrake Med.</option>
-                  <option value="4">Autobrake Low</option>
+                  <option value="1">1 (Poor)</option>
+                  <option value="2">2 (Medium to poor)</option>
+                  <option value="3">3 (Medium)</option>
+                  <option value="4">4 (Good to medium)</option>
+                  <option value="5">5 (Good)</option>
+                  <option value="6">6 (Dry)</option>
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {this.state.brakingError}
+                  {this.state.runwayError}
                 </div>
               </Col>
               <Col>
@@ -398,19 +400,8 @@ class Calculo extends Component<{}, state>{
 
             <Row>
               <Col>
-                <h5 className="card-title">Runway condition</h5>
-                <select defaultValue="-1" className="input text-select form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
-                  <option value="-1" disabled>Select...</option>
-                  <option value="1">1 (Poor)</option>
-                  <option value="2">2 (Medium to poor)</option>
-                  <option value="3">3 (Medium)</option>
-                  <option value="4">4 (Good to medium)</option>
-                  <option value="5">5 (Good)</option>
-                  <option value="6">6 (Dry)</option>
-                </select>
-                <div style={{ fontSize: 12, color: "red" }}>
-                  {this.state.runwayError}
-                </div>
+                <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
+                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
               </Col>
               <Col>
                 <h5 className="card-title">Airport altitude {this.state.airportAltitudeTitle}</h5>
@@ -429,10 +420,6 @@ class Calculo extends Component<{}, state>{
             </Row>
 
             <Row className="px-2">
-              <Col>
-                <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
-                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
-              </Col>
               <Col>
                 <h5 className='card-tittle'>Has ice accreation?</h5>
                 <BootstrapSwitchButton
