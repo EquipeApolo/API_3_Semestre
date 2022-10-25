@@ -245,8 +245,11 @@ class editarAeronave extends Component<any, state>{
                 model: this.aircraft.getModel,
                 engine: this.aircraft.getEngine,
                 certification: this.aircraft.getCertification,
+                aircraftWeightMin: this.aircraft.getAircraftWeightMin,
+                aircraftWeightMax: this.aircraft.getAircraftWeightMax,
                 flap: this.aircraft.getFlapValue,
-                reverserAmount: this.aircraft.getReverserAmount
+                reverserAmount: this.aircraft.getReverserAmount,
+                brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
             })
             Swal.fire({
                 position: 'center',
@@ -302,11 +305,11 @@ class editarAeronave extends Component<any, state>{
                                 <Col >
                                     <h5 className="card-title">Braking application level</h5>
                                     <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
-                                    <option value="-1" disabled>Select...</option>
-                                    <option value="1">Maximum Manual</option>
-                                    <option value="2">Autobrake High</option>
-                                    <option value="3">Autobrake Med.</option>
-                                    <option value="4">Autobrake Low</option>
+                                    <option  value="-1" disabled>Select...</option>
+                                    <option  value="1">Maximum Manual</option>
+                                    <option  value="2">Autobrake High</option>
+                                    <option  value="3">Autobrake Med.</option>
+                                    <option  value="4">Autobrake Low</option>
                                     </select>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.breakingError}
@@ -341,14 +344,14 @@ class editarAeronave extends Component<any, state>{
                             <Row>
                                 <Col>
                                     <h5 className="card-title">Aircraft Weight Min </h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} />
+                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} value={this.state.dados.aircraftWeightMin}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMinError}
                                     </div>
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Aircraft Weight Max </h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} />
+                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} value={this.state.dados.aircraftWeightMax} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMaxError}
                                     </div>

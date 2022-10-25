@@ -30,6 +30,7 @@ airplaneRoute.post('/airplane/cadastrar', async (req: Request, res: Response, ne
     await airplane.create(newAirplane)
     .then(() =>{
         return res.json({
+            // id: newAirplane.id,
             erro: false,
             mensagem: "Airplane cadastrado com sucesso!"
         })

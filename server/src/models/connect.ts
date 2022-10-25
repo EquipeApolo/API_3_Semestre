@@ -1,16 +1,16 @@
 import { Sequelize } from 'sequelize'
 
 
-const connection = new Sequelize("embraer", "fatecsjc", "Aluno123", {
-    host: 'embraer.mysql.database.azure.com',
-    dialect: 'mysql'
- })
+// const connection = new Sequelize("embraer", "fatecsjc", "Aluno123", {
+//     host: 'embraer.mysql.database.azure.com',
+//     dialect: 'mysql'
+//  })
 
-/*
+
 const connection = new Sequelize("embraer", "root", "fatecsjc", {
     host: 'localhost',
     dialect: 'mysql'
- })*/
+ })
 
 connection.authenticate()
 .then(function(){
