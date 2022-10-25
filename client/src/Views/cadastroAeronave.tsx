@@ -2,6 +2,7 @@ import { Component, useState } from "react";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react';
 import Aircraft from "../Models/aircraft";
+import '../Style/App.css';
 import aviao from "../Icons/aviao.png";
 import { getValue } from "@testing-library/user-event/dist/utils";
 import { BrakingLevel } from '../Enuns/enuns';
@@ -266,7 +267,7 @@ class cadastroAeronave extends Component<any, state>{
                             <Row>
                                 <Col>
                                     <h5 className="card-title">Aircraft model</h5>
-                                    <input type='text' className='form-control form-control-lg inputGroup-sizing-sm' id="model"
+                                    <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="model"
                                         placeholder="Aircraft model" onChange={this.modelChange} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.modelError}
@@ -275,14 +276,14 @@ class cadastroAeronave extends Component<any, state>{
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Engine</h5>
-                                    <input type='text' className="form-control form-control-lg inputGroup-sizing-sm" id='engine' placeholder='Engine' onChange={this.engineChange} />
+                                    <input type='text' className="input form-control form-control-lg inputGroup-sizing-sm" id='engine' placeholder='Engine' onChange={this.engineChange} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.engineError}
                                     </div>
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Reversor</h5>
-                                    <input type='number' className="form-control form-control-lg inputGroup-sizing-sm" id='reversor' placeholder='Reversor' onChange={this.reversorChange} />
+                                    <input type='number' className="input form-control form-control-lg inputGroup-sizing-sm" id='reversor' placeholder='Reversor' onChange={this.reversorChange} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                         {this.state.reversorError}
                                     </div>
@@ -291,7 +292,7 @@ class cadastroAeronave extends Component<any, state>{
                             <Row>
                                 <Col >
                                     <h5 className="card-title">Braking application level</h5>
-                                    <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+                                    <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                                     <option value="-1" disabled>Select...</option>
                                     <option value="1">Maximum Manual</option>
                                     <option value="2">Autobrake High</option>
@@ -304,7 +305,7 @@ class cadastroAeronave extends Component<any, state>{
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Certification</h5>
-                                    <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnCertification" onChange={this.certificationChange}>
+                                    <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnCertification" onChange={this.certificationChange}>
                                         <option value="-1" disabled>Select</option>
                                         <option value="1">ANAC</option>
                                         <option value="2">EASA</option>
@@ -316,7 +317,7 @@ class cadastroAeronave extends Component<any, state>{
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Flap</h5>
-                                    <select defaultValue="-1" className="text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnFlap" onChange={this.flapChange}>
+                                    <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnFlap" onChange={this.flapChange}>
                                         <option value="-1" disabled>Select</option>
                                         <option value="1">220</option>
                                         <option value="2">450</option>
@@ -331,14 +332,14 @@ class cadastroAeronave extends Component<any, state>{
                             <Row>
                                 <Col>
                                     <h5 className="card-title">Aircraft Weight Min </h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} />
+                                    <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMinError}
                                     </div>
                                 </Col>
                                 <Col>
                                     <h5 className="card-title">Aircraft Weight Max </h5>
-                                    <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} />
+                                    <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMaxError}
                                     </div>
