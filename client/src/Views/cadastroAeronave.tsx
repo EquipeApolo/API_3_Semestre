@@ -235,6 +235,13 @@ class cadastroAeronave extends Component<any, state>{
                 reverserAmount: this.aircraft.getReverserAmount,
                 brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
             })
+            
+            // axios.post("http://localhost:3001/users/cadastrar",{
+            //     name: "teste",
+            //     email: "linux@gmail.com",
+            //     senha: "linuxRUIM"
+            // })
+
             Swal.fire({
                 position: 'center',
                 icon: 'success',

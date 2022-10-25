@@ -55,7 +55,7 @@ class editarAeronave extends Component<any, state>{
     }
 
     componentDidMount(): void {
-        axios.get('http://localhost:3001/airplane/1').then(response => {
+        axios.get('http://localhost:3001/airplane/2').then(response => {
           let dadosBanco = response.data
           this.setState({
             dados: dadosBanco
