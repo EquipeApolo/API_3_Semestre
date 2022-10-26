@@ -21,8 +21,6 @@ type state = {
     aircraft: Aircraft
 }
 class editarAeronave extends Component<any, state>{
-
-    private brakingLevel: BrakingLevel;
     private aircraftWeightMin: number = 0;
     private aircraftWeightMax: number = 0;
 
@@ -96,6 +94,7 @@ class editarAeronave extends Component<any, state>{
         }
         this.setState({ engineError: engineError })
     }
+    
     certificationChange(event) {
         let certificationError
         const target = event.target;
@@ -118,6 +117,17 @@ class editarAeronave extends Component<any, state>{
         }
         this.setState({ flapError: flapError })
     }
+    brakingLevelChange(event) {
+        let breakingError
+        const target = event.target;
+        this.state.aircraft.setBrakingApplicationLevel = target.value;
+        if (!this.state.aircraft.getBrakingApplicationLevel){
+            breakingError = "Select a Branking Level"
+        }else{
+            breakingError = ""
+        }
+        this.setState({breakingError: breakingError})
+      }
     reversorChange(event) {
         let reversorError
         const target = event.target;
@@ -129,15 +139,6 @@ class editarAeronave extends Component<any, state>{
         }
         this.setState({ reversorError: reversorError })
     }
-
-    brakingLevelChange(event) {
-         const target = event.target;
-         this.state.aircraft.setBrakingApplicationLevel = target.value;
-         if (this.state.breakingError.includes("Select")) {
-           this.setState({ breakingError: "" })
-         }
-         if (this.state.result != "") this.setState({ result: "" })
-       }
 
     aircraftWeightChangeMin(event) {
          const target = event.target;
