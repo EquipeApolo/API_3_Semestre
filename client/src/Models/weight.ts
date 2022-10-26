@@ -1,17 +1,20 @@
 import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
+import Table from "./table";
 
 export default class Weight extends FatorCalculo{
 
     private aircraft: Aircraft;
-    constructor(aircraft: Aircraft,input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number){
+    private table: Table;
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number){
         super();
         this.valorInput = input;
         this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
         this.BRK = BRK;
         this.aircraft = aircraft;
+        // this.table = table;
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
@@ -25,6 +28,20 @@ export default class Weight extends FatorCalculo{
 
     calcular(): number {
         this.converterSistema(UnitMeasurement.INTERNACIONAL);
+
+        if(this.temGelo){
+            if(this.valor > this.table.weightReference){
+                let peso = this.valor - this.table.weightReference;
+                return peso / 1000 * this.table.weightAboveWithIce;
+            }else{
+                let peso = this.table.weightReference - this.valor;
+                return peso / 1000 * this.table.weightBellowWithIce;         
+            }
+        }else{
+
+        }
+
+
         if(this.aircraft.getFlapValue == 220)
         {
             if(this.temGelo == false)

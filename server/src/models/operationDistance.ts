@@ -23,7 +23,11 @@ const operationDistance = database.define('operationDistance', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    weightWithIce: {
+    weightBellowWithoutIce: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    weightAboveWithoutIce: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
