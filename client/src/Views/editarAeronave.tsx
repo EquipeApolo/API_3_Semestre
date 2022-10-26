@@ -21,10 +21,12 @@ type state = {
     aircraft: Aircraft
 }
 class editarAeronave extends Component<any, state>{
+
+    private brakingLevel: BrakingLevel;
     private aircraftWeightMin: number = 0;
     private aircraftWeightMax: number = 0;
 
-    constructor(props: any) {
+    constructor(props) {
         super(props);
         this.state = {
             modelError: '',
@@ -49,8 +51,9 @@ class editarAeronave extends Component<any, state>{
         this.aircraftWeightChangeMax = this.aircraftWeightChangeMax.bind(this);
         //this.cadastrar = this.cadastrar.bind(this);
     }
-
+    // let idAirplane = this.props.params.id
     componentDidMount(): void {
+        
         axios.get('http://localhost:3001/airplane/2').then(response => {
           let dadosBanco = response.data
           this.setState({

@@ -235,12 +235,39 @@ class cadastroAeronave extends Component<any, state>{
                 reverserAmount: this.aircraft.getReverserAmount,
                 brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
             })
-            
-            // axios.post("http://localhost:3001/users/cadastrar",{
-            //     name: "teste",
-            //     email: "linux@gmail.com",
-            //     senha: "linuxRUIM"
-            // })
+            /*
+            axios.post("http://localhost:3001/operationDistance/cadastrar",{
+                refWithouIce: 2312321,
+                refWithIce: 324234,
+                weightReference: 4324,
+                weightWithIce: 21121,
+                weightBellowWithIce: 121212121,
+                weightAboveWithIce: 1,
+                altitudeReference: 2,
+                altitudeWithIce: 0,
+                altitudeWithoutIce: 65656,
+                tempReference: 9077,
+                tempBellowWithIce: 213,
+                tempAboveWithIce: 21121,
+                tempBellowWithoutIce: 121212121,
+                tempAboveWithoutIce: 1,
+                windReference: 2,
+                windHeadWithIce: 0,
+                windTailWithIce: 35325,
+                windHeadWithoutIce: 5235,
+                windTailWithoutIce: 35,
+                slopeReference: 21121,
+                slopeUphillWithIce: 121212121,
+                slopeDownhillWithIce: 1,
+                slopeUphillWithoutIce: 2,
+                slopeDownhillWithoutIce: 0,
+                overspeedReference: 435435,
+                overspeedWithIce: 45345,
+                overspeedWithotIce: 89789,
+                reverserWithIce: 21121,
+                reverserWithoutIce: 121212121,
+                airplaneId: 1
+            })*/
 
             Swal.fire({
                 position: 'center',

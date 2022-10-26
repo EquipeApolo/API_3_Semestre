@@ -13,7 +13,7 @@ function App() {
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
     <Route path="/cadastroAeronave" element={<CadastroAeronave/>}/>
-    <Route path="/editarAeronave" element={<EditarAeronave/>}/>
+    <Route path="/editarAeronave/:id" element={<EditarAeronave />}/>
     </Routes>
     </BrowserRouter>
   );
