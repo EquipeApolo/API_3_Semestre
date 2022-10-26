@@ -289,7 +289,7 @@ class cadastroAeronave extends Component<any, state>{
                     <Container>
                         <Row className="px-2 mb-5 mt-5">
                             <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
-                            <h1 className='text-center mt-5 col-sm-7 col-md-9'>Aircraft model</h1>
+                            <h1 className='text-center mt-5 col-sm-7 col-md-9'>New Aircraft</h1>
                         </Row>
                     </Container>
                     <Container fluid>

@@ -38,7 +38,13 @@ export default class Weight extends FatorCalculo{
                 return peso / 1000 * this.table.weightBellowWithIce;         
             }
         }else{
-
+            if(this.valor > this.table.weightReference){
+                let peso = this.valor - this.table.weightReference;
+                return peso / 1000 * this.table.weightAboveWithoutIce;
+            }else{
+                let peso = this.table.weightReference - this.valor;
+                return peso / 1000 * this.table.weightBellowWithoutIce;         
+            }
         }
 
 
