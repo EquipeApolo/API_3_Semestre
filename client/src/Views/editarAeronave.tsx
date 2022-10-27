@@ -54,7 +54,7 @@ class editarAeronave extends Component<any, state>{
     // let idAirplane = this.props.params.id
     componentDidMount(): void {
         
-        axios.get('http://localhost:3001/airplane/2').then(response => {
+        axios.get('http://localhost:3001/airplane/' + this.props.taskId).then(response => {
           let dadosBanco = response.data
           this.setState({
             dados: dadosBanco,
@@ -237,7 +237,8 @@ class editarAeronave extends Component<any, state>{
         event.preventDefault();
         const isValid = this.validate();
         if (isValid) {
-            axios.put("http://localhost:3001/airplane/modificar/2", {
+            console.log("teste " + this.props.taskId)
+            axios.put("http://localhost:3001/airplane/modificar/" + this.props.taskId, {
                 model: this.state.aircraft.getModel,
                 engine: this.state.aircraft.getEngine,
                 certification: this.state.aircraft.getCertification,
