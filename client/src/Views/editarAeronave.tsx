@@ -102,33 +102,18 @@ class editarAeronave extends Component<any, state>{
         let certificationError
         const target = event.target;
         this.state.aircraft.setCertification = target.value;
-        if (!this.state.aircraft.getCertification) {
-            certificationError = "Select a certification"
-        } else {
-            certificationError = ""
-        }
         this.setState({ certificationError: certificationError })
     }
     flapChange(event) {
         let flapError
         const target = event.target;
         this.state.aircraft.setFlapValue = target.value;
-        if (!this.state.aircraft.getFlapValue) {
-            flapError = "Select a flap"
-        } else {
-            flapError = ""
-        }
         this.setState({ flapError: flapError })
     }
     brakingLevelChange(event) {
         let breakingError
         const target = event.target;
         this.state.aircraft.setBrakingApplicationLevel = target.value;
-        if (!this.state.aircraft.getBrakingApplicationLevel){
-            breakingError = "Select a Branking Level"
-        }else{
-            breakingError = ""
-        }
         this.setState({breakingError: breakingError})
       }
     reversorChange(event) {
@@ -146,26 +131,23 @@ class editarAeronave extends Component<any, state>{
     aircraftWeightChangeMin(event) {
          const target = event.target;
          this.state.aircraft.setAircraftWeightMin = target.value;
-         if (this.aircraftWeightMin < 5000) {
-           this.setState({ weightMinError: "The weight must be above 5000" })
+         if (this.aircraftWeightMin <= 0) {
+           this.setState({ weightMinError: "The weight must be above zero" })
          }
-    
-         if (this.state.weightMinError.includes("required") || this.state.weightMinError.includes("above") && this.aircraftWeightMin >= 5000) {
+         if (this.state.weightMinError.includes("required") || this.state.weightMinError.includes("above") || this.aircraftWeightMin >= 0) {
            this.setState({ weightMinError: "" })
          }
          if (this.state.result != "") this.setState({ result: "" })
        }
+
+
     aircraftWeightChangeMax(event) {
         const target = event.target;
         this.state.aircraft.setAircraftWeightMax = target.value;
-        if (this.aircraftWeightMax < 10000) {
-            this.setState({ weightMaxError: "The weight must be above 10000" })
+        if (this.aircraftWeightMax <= 0) {
+            this.setState({ weightMaxError: "The weight must be above zero" })
         }
-        if (this.aircraftWeightMax > 100000){
-            this.setState({weightMaxError: "The weight must be below 100000"})
-        }
-
-        if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") && this.aircraftWeightMax >= 10000) {
+        if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") || this.aircraftWeightMax >= 0) {
             this.setState({ weightMaxError: "" })
         }
         if (this.state.result != "") this.setState({ result: "" })
@@ -179,9 +161,6 @@ class editarAeronave extends Component<any, state>{
         let modelError = "";
         let engineError = "";
         let reversorError = "";
-        let certificationError = "";
-        let flapError = "";
-        let breakingError = "";
         let weightMinError = "";
         let weightMaxError = "";
 
@@ -200,33 +179,26 @@ class editarAeronave extends Component<any, state>{
         } else {
             reversorError = ""
         }
-        if (!this.state.aircraft.getCertification) {
-            certificationError = "Select a certification"
-        } else {
-            certificationError = ""
-        }
-        if (!this.state.aircraft.getFlapValue) {
-            flapError = "Select a flap"
-        } else {
-            flapError = ""
-        }
-        if (!this.state.aircraft.getBrakingApplicationLevel) {
-            breakingError = "Select a braking level";
-        } else {
-            breakingError = ""
-        }
+
         if (!this.state.aircraft.getAircraftWeightMin) {
             weightMinError = "The minimum weight is required";
+        } else if (this.state.aircraft.getAircraftWeightMin <= 0) {
+            weightMinError = "The weight must be above zero";
         } else {
             weightMinError = ""
         }
+
+
         if (!this.state.aircraft.getAircraftWeightMax) {
             weightMaxError = "The maximum weight is required";
-            weightMaxError = ""
+        }else if(this.state.aircraft.getAircraftWeightMax <= 0){
+            weightMaxError = "The weight must be above zero"
+        }else{
+            weightMaxError= ""
         }
       
-        this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError,  breakingError: breakingError, weightMinError: weightMinError, weightMaxError: weightMaxError});
-        if (modelError || engineError || reversorError || certificationError || flapError || breakingError || weightMinError || weightMaxError) {
+        this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, weightMinError: weightMinError, weightMaxError: weightMaxError});
+        if (modelError || engineError || reversorError || weightMinError || weightMaxError) {
             return false
         }
 
