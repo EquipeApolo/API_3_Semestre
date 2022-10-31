@@ -1,10 +1,9 @@
 import React, { Component, ReactNode } from "react";
 import { Button, Form, FormControl, FormGroup, FormLabel, Col, Row } from "react-bootstrap";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
 
-class ModalFormWeight extends Component<any,any>{
+class ModalFormWeight extends Component<any, any>{
 
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 

@@ -123,15 +123,15 @@ export default Teste;
 */
 
 import React, { Component } from 'react';
-import ModalWrapper from './modalWrapper';
+import ModalWrapper from '../Components/modalWrapper';
 
 export default class Teste extends Component {
 
   render() {
     return (
       <div>
-        <h1>Here Come the Modals</h1>
-      	<ModalWrapper buttonText={"Click me I'm a button"} title={"Weight"} showModal={true} body={"Look at me I'm a modal"}/>
+      	<ModalWrapper buttonText={"Click me I'm a button"} title={"Weight"} showModal={true}/>
+        <ModalWrapper buttonText={"Click me I'm a button"} title={"Temperature"} showModal={true}/>
       </div>
     );
   }

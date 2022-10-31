@@ -65,11 +65,14 @@
 
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import ModalFormWeight from '../Components/modalFormWeight';
+import ModalFormWeight from './modalFormWeight';
+import ModalFormTemperature from './modalFormWeight';
 
 var createReactClass = require('create-react-class');
+let test;
 
 const ModalWrapper = createReactClass({
+
   getInitialState() {
     return { showModal: false };
   },
@@ -80,6 +83,16 @@ const ModalWrapper = createReactClass({
 
   open() {
     this.setState({ showModal: true });
+    if(this.props.title == "Weight"){
+      test = <ModalFormWeight/>
+    }else{
+      test = <ModalFormTemperature/>
+    }
+  },
+
+  teste() {
+    if(this.props.title == "Weight") (<ModalFormWeight></ModalFormWeight>)
+    return (<ModalFormTemperature></ModalFormTemperature>)
   },
 
   render() {
@@ -98,8 +111,7 @@ const ModalWrapper = createReactClass({
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {/* {this.props.body} */}
-            <ModalFormWeight></ModalFormWeight>
+            {this.props.title == "Weight" ? <ModalFormWeight></ModalFormWeight> : <ModalFormTemperature></ModalFormTemperature>}
           </Modal.Body>
         </Modal>
       </div>
