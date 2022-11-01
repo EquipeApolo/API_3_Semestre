@@ -11,23 +11,23 @@ class ModalFormTemperature extends Component<any,any>{
         return (
             <Form className="mt-3">
                 <FormGroup className="mt-3">
-                    <FormLabel htmlFor="t_reference">Temperature Reference (Kg)</FormLabel>
+                    <FormLabel htmlFor="t_reference">Temperature Reference (ºC)</FormLabel>
                     <FormControl className="input" placeholder="Temperature Reference" name="t_reference" type="number"></FormControl>
                 </FormGroup>
                 <FormGroup className="mt-3">
-                    <FormLabel htmlFor="t_aboveice">Temperature Above W/Ice (Kg)</FormLabel>
+                    <FormLabel htmlFor="t_aboveice">Temperature Above W/Ice (ºC)</FormLabel>
                     <FormControl className="input" placeholder="Temperature Above W/Ice" name="t_aboveice" type="number"></FormControl>
                 </FormGroup>
                 <FormGroup className="mt-3">
-                    <FormLabel htmlFor="t_bellowice">Temperature Bellow W/Ice (Kg)</FormLabel>
+                    <FormLabel htmlFor="t_bellowice">Temperature Bellow W/Ice (ºC)</FormLabel>
                     <FormControl className="input" placeholder="Temperature Bellow W/Ice" name="t_bellowice" type="number"></FormControl>
                 </FormGroup>
                 <FormGroup className="mt-3">
-                    <FormLabel htmlFor="t_abovewoutice">Temperature Above Wout/Ice (Kg)</FormLabel>
+                    <FormLabel htmlFor="t_abovewoutice">Temperature Above Wout/Ice (ºC)</FormLabel>
                     <FormControl className="input" placeholder="Temperature Above Wout/Ice" name="t_abovewoutice" type="number"></FormControl>
                 </FormGroup>
                 <FormGroup className="mt-3">
-                    <FormLabel htmlFor="t_bellowwoutice">Temperature Bellow Wout/Ice (Kg)</FormLabel>
+                    <FormLabel htmlFor="t_bellowwoutice">Temperature Bellow Wout/Ice (ºC)</FormLabel>
                     <FormControl className="input" placeholder="Temperature Bellow Wout/Ice" name="t_bellowwoutice" type="number"></FormControl>
                 </FormGroup>
 
