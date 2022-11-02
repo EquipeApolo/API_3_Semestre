@@ -83,17 +83,8 @@ const ModalWrapper = createReactClass({
 
   open() {
     this.setState({ showModal: true });
-    if(this.props.title == "Weight"){
-      test = <ModalFormWeight/>
-    }else{
-      test = <ModalFormTemperature/>
-    }
   },
 
-  teste() {
-    if(this.props.title == "Weight") (<ModalFormWeight></ModalFormWeight>)
-    return (<ModalFormTemperature></ModalFormTemperature>)
-  },
 
   render() {
 
@@ -111,7 +102,7 @@ const ModalWrapper = createReactClass({
             <Modal.Title>{this.props.title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {this.props.title == "Weight" ? <ModalFormWeight></ModalFormWeight> : <ModalFormTemperature></ModalFormTemperature>}
+            {this.props.body}
           </Modal.Body>
         </Modal>
       </div>
