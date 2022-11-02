@@ -4,6 +4,8 @@ import React from 'react';
 import { Component } from "react";
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import aviao from "../Icons/aviao.png";
+import edit from "../Icons/editar.png"
+import delet from "../Icons/excluir.png"
 
 type table = {
     id: string,
@@ -53,7 +55,7 @@ render() {
                 <h1 className='text-center mt-5 col-sm-7 col-md-9'>Registered aircrafts</h1>
             </Row>
         </Container>
-        <Container fluid>
+        <Container>
         <Table striped bordered hover>
         <thead>
             <tr>
@@ -63,6 +65,8 @@ render() {
                 <th>Flap</th>
                 <th>Reverser Amount</th>
                 <th>Created at</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -75,6 +79,8 @@ render() {
                         <td>{item.flap}</td>
                         <td>{item.reverserAmount}</td>
                         <td>{item.createdAt}</td>
+                        <td className='col-xs-1 col-md-4 col-lg-2'><img src={edit} alt="Editar." className='img col-xs-1 col-sm-12 col-md-10 col-lg-4'/></td>
+                        <td className='col-xs-1 col-sm-1 col-lg-2'><img src={delet} alt="Excluir." className='img col-xs-2 col-sm-10 col-md-10 col-lg-4'/></td>
                         </tr>
                 )})}
         </tbody>
