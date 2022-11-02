@@ -5,7 +5,7 @@ import Teste from './Views/teste';
 import CadastroAeronave from './Views/cadastroAeronave';
 import EditarAeronave from './Views/editarAeronave';
 import AircraftTables from './Models/aircraftTable';
-import AircraftTable from './Views/AircraftTable';
+import AircraftTable from './Views/listaAeronaves';
 
 function GetId(){
   const { id } = useParams()
@@ -26,7 +26,7 @@ function App() {
     <Route path="/teste" element={<Teste/>}/>
     <Route path="/cadastroAeronave" element={<CadastroAeronave/>}/>
     <Route path="/editarAeronave/:id" element={<GetId/>}/>
-    <Route path="/aircraftTable" element={<AircraftTable/>}/>
+    <Route path="/listaAeronaves" element={<AircraftTable/>}/>
     </Routes>
     </BrowserRouter>
   );
