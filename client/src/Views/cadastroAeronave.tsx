@@ -122,7 +122,7 @@ class cadastroAeronave extends Component<any, state>{
         this.tempBellowWithIceChange = this.tempBellowWithIceChange.bind(this);
         this.tempAboveWithIceChange = this.tempAboveWithIceChange.bind(this);
         this.tempBellowWithoutIceChange = this.tempBellowWithoutIceChange.bind(this);
-        this.tempAboveWithoutIceChange = this.tempAboveWithoutIceChange.bind;
+        this.tempAboveWithoutIceChange = this.tempAboveWithoutIceChange.bind(this);
         this.windReferenceChange = this.windReferenceChange.bind(this);
         this.windHeadWithIceChange = this.windHeadWithIceChange.bind(this);
         this.windTailWithIceChange = this.windTailWithIceChange.bind(this);
@@ -298,7 +298,7 @@ class cadastroAeronave extends Component<any, state>{
 
    weightAboveWithoutIceChange(event) {
     let weightAboveWithoutIceError;
-    const target = event.value;
+    const target = event.target;
     this.aircraft.setWeightAboveWithoutIce = target.value;
     if (!this.aircraft.getWeightAboveWithoutIce) {
         weightAboveWithoutIceError = "The weight above without ice is required";
@@ -310,7 +310,7 @@ class cadastroAeronave extends Component<any, state>{
 
    weightBellowWithIceChange(event) {
     let weightBellowWithIceError;
-    const target = event.value;
+    const target = event.target;
     this.aircraft.setWeightBellowWithIce = target.value;
     if (!this.aircraft.getWeightBellowWithIce) {
         weightBellowWithIceError = "The weight bellow with ice is required";
