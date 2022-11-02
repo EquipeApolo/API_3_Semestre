@@ -227,9 +227,6 @@ class editarAeronave extends Component<any, state>{
                 showConfirmButton: false,
                 timer: 1500
               })
-            setTimeout(function() {
-                window.location.reload();
-              }, 1500);
         }
     }
 
