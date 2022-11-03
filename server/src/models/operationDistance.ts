@@ -138,6 +138,6 @@ operationDistance.belongsTo(airplaneId, {
     foreignKey: 'airplaneId'
 })
 
-// operationDistance.sync({ alter: true });
+operationDistance.sync({ alter: true });
 
 module.exports = operationDistance;

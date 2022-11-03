@@ -27,8 +27,10 @@ airplaneRoute.get('/airplane/:uuid', async(req: Request<{ uuid: string }>, res: 
 
 airplaneRoute.post('/airplane/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newAirplane = req.body
-    let test = await airplane.create(newAirplane)
-    .then(() =>{
+    await airplane.create(newAirplane)
+    .then((test) =>{
+        console.log(test)
+        console.log(test.id)
         return res.json({
             id: test.id,
             erro: false,
