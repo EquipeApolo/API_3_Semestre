@@ -7,19 +7,18 @@ export default class Weight extends FatorCalculo{
 
     private aircraft: Aircraft;
     private table: Table;
-    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number){
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, table: Table){
         super();
         this.valorInput = input;
         this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
-        this.BRK = BRK;
         this.aircraft = aircraft;
-        // this.table = table;
+        this.table = table;
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
         // Aqui convertemos caso a unidade de medida escolhida pelo usuário seja IMPERIAL para o sistema de medida INTERNACIONAL, que é o da referência para PESO.
-        if(this.unidadeMedida != unitMeasurement){
+        if(this.unidadeMedida !== unitMeasurement){
             this.valor = this.valorInput / 2.205;
         }else{
             this.valor = this.valorInput;
@@ -28,16 +27,15 @@ export default class Weight extends FatorCalculo{
 
     calcular(): number {
         this.converterSistema(UnitMeasurement.INTERNACIONAL);
-
         if(this.temGelo){
             if(this.valor > this.table.weightReference){
                 let peso = this.valor - this.table.weightReference;
                 return peso / 1000 * this.table.weightAboveWithIce;
-            }else{
+            } else{
                 let peso = this.table.weightReference - this.valor;
                 return peso / 1000 * this.table.weightBellowWithIce;         
             }
-        }else{
+        } else{
             if(this.valor > this.table.weightReference){
                 let peso = this.valor - this.table.weightReference;
                 return peso / 1000 * this.table.weightAboveWithoutIce;
@@ -47,112 +45,6 @@ export default class Weight extends FatorCalculo{
             }
         }
 
-
-        if(this.aircraft.getFlapValue == 220)
-        {
-            if(this.temGelo == false)
-            {
-                if(this.valor > 43000){
-                    let peso = this.valor - 43000;
-                    if(this.BRK == 1){
-                        return peso / 1000 * 16;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * 19;
-                    }else if(peso== 3){
-                        return peso / 1000 * 25;
-                    }else{
-                        return peso / 1000 * 39;
-                    }
-                } else{
-                    let peso = 43000 - this.valor;
-                    if(this.BRK == 1){
-                        return peso / 1000 * -17;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * -19;
-                    }else if(this.BRK == 3){
-                        return peso / 1000 * -26;
-                    }else{
-                        return peso / 1000 * -42;
-                    }
-                }
-            } else {
-                if(this.valor > 43000){
-                    let peso = this.valor - 43000;
-                    if(this.BRK == 1){
-                        return peso / 1000 * 18;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * 21;
-                    }else if(peso== 3){
-                        return peso / 1000 * 27;
-                    }else{
-                        return peso / 1000 * 44;
-                    }
-                } else{
-                    let peso = 43000 - this.valor;
-                    if(this.BRK == 1){
-                        return peso / 1000 * -18;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * -21;
-                    }else if(this.BRK == 3){
-                        return peso / 1000 * -29;
-                    }else{
-                        return peso / 1000 * -47;
-                    }
-                }
-            }
-        } else {
-            if(this.temGelo == false)
-            {
-                if(this.valor > 43000){
-                    let peso = this.valor - 43000;
-                    if(this.BRK == 1){
-                        return peso / 1000 * 17;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * 20;
-                    }else if(peso== 3){
-                        return peso / 1000 * 26;
-                    }else{
-                        return peso / 1000 * 41;
-                    }
-                } else{
-                    let peso = 43000 - this.valor;
-                    if(this.BRK == 1){
-                        return peso / 1000 * -14;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * -17;
-                    }else if(this.BRK == 3){
-                        return peso / 1000 * -23;
-                    }else{
-                        return peso / 1000 * -36;
-                    }
-                }
-            } else {
-                if(this.valor > 43000){
-                    let peso = this.valor - 43000;
-                    if(this.BRK == 1){
-                        return peso / 1000 * 17;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * 20;
-                    }else if(peso== 3){
-                        return peso / 1000 * 26;
-                    }else{
-                        return peso / 1000 * 41;
-                    }
-                } else{
-                    let peso = 43000 - this.valor;
-                    if(this.BRK == 1){
-                        return peso / 1000 * -14;
-                    }else if(this.BRK == 2){
-                        return peso / 1000 * -17;
-                    }else if(this.BRK == 3){
-                        return peso / 1000 * -23;
-                    }else{
-                        return peso / 1000 * -36;
-                    }
-                }
-            }
-        }
-        return 0;
     }
     
 }

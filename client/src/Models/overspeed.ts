@@ -1,21 +1,24 @@
 import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
+import Table from "./table";
 
 export default class Overspeed extends FatorCalculo{
 
     private aircraft: Aircraft;
-    constructor(aircraft: Aircraft,input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number){
+    private table: Table;
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number, table: Table){
         super();
         this.valorInput = input;
         this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
         this.BRK = BRK;
         this.aircraft = aircraft;
+        this.table = table;
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
-        if(this.unidadeMedida != unitMeasurement){
+        if(this.unidadeMedida !== unitMeasurement){
             this.valor = this.valorInput * 1.944;
         }else{
             this.valor = this.valorInput;
@@ -24,55 +27,14 @@ export default class Overspeed extends FatorCalculo{
 
     public calcular(): number {
         this.converterSistema(UnitMeasurement.IMPERIAL);
-        if(this.aircraft.getFlapValue == 220)
-        {
-            if(this.temGelo == false)
+            if(this.temGelo)
             {
-                if(this.BRK == 1){
-                    return this.valor/5 * 110;
-                }else if(this.BRK == 2){
-                    return this.valor/5 * 114;
-                }else if(this.BRK == 3){
-                    return this.valor/5 * 149;
-                }else{
-                    return this.valor/5 * 247;
-                }
+                let peso = this.valor - this.table.overspeedReference;
+                return peso / 5 * this.table.overspeedWithIce
             } else {
-                if(this.BRK == 1){
-                    return this.valor / 5 * 115;
-                }else if(this.BRK == 2){
-                    return this.valor / 5 * 119;
-                }else if(this.BRK== 3){
-                    return this.valor / 5 * 155;
-                }else{
-                    return this.valor / 5 * 251;
-                }
+                let peso = this.valor - this.table.overspeedReference;
+                return peso / 5 * this.table.overspeedWithotIce;
             }
-        } else {
-            if(this.temGelo = false)
-            {
-                if(this.BRK == 1){
-                    return this.valor / 5 * 100;
-                }else if(this.BRK == 2){
-                    return this.valor / 5 * 110;
-                }else if(this.BRK== 3){
-                    return this.valor / 5 * 147;
-                }else{
-                    return this.valor / 5 * 242;
-                }
-            } else {
-                if(this.BRK == 1){
-                    return this.valor / 5 * 100;
-                }else if(this.BRK == 2){
-                    return this.valor / 5 * 110;
-                }else if(this.BRK== 3){
-                    return this.valor / 5 * 147;
-                }else{
-                    return this.valor / 5 * 242;
-                }
-            }
-        }
-        return 0;
     }
     
 }

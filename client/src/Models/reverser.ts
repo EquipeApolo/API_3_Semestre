@@ -1,16 +1,19 @@
 import { UnitMeasurement } from "../Enuns/enuns";
 import Aircraft from "./aircraft";
 import FatorCalculo from "./fator";
+import Table from "./table";
 
 export default class Reverser extends FatorCalculo{
 
     private aircraft: Aircraft;
-    constructor(aircraft: Aircraft,input: number, temGelo: boolean, BRK: number){
+    private table: Table;
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number, table: Table){
         super();
-        this.valor = input;
+        this.valorInput = input;
+        this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
-        this.BRK = BRK;
-        this.aircraft = aircraft
+        this.aircraft = aircraft;
+        this.table = table;
     }
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
@@ -18,55 +21,12 @@ export default class Reverser extends FatorCalculo{
     }
 
     public calcular(): number {
-        if(this.aircraft.getFlapValue == 220)
+        if(this.temGelo)
         {
-            if(this.temGelo = false)
-            {
-                if(this.BRK == 1){
-                    return this.valor * 24;
-                }else if(this.BRK == 2){
-                    return this.valor * 9;
-                }else if(this.BRK == 3){
-                    return this.valor * 0;
-                }else{
-                    return this.valor * 0;
-                }
-            } else {
-                if(this.BRK == 1){
-                    return this.valor * 30;
-                }else if(this.BRK == 2){
-                    return this.valor * 13;
-                }else if(this.BRK== 3){
-                    return this.valor * 0;
-                }else{
-                    return this.valor * 0;
-                }
-            }
+            return this.valor * this.table.reverserWithIce
         } else {
-            if(this.temGelo = false)
-            {
-                if(this.BRK == 1){
-                    return this.valor * 16;
-                }else if(this.BRK == 2){
-                    return this.valor * 3;
-                }else if(this.BRK== 3){
-                    return this.valor * 0;
-                }else{
-                    return this.valor * 0;
-                }
-            } else {
-                if(this.BRK == 1){
-                    return this.valor * 16;
-                }else if(this.BRK == 2){
-                    return this.valor * 3;
-                }else if(this.BRK== 3){
-                    return this.valor * 0;
-                }else{
-                    return this.valor * 0;
-                }
-            }
+            return this.valor * this.table.reverserWithoutIce
         }
-        return 0;
     }
     
 }
