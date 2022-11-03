@@ -23,6 +23,7 @@ export default class Calcular{
 
     constructor(aircraft: Aircraft, table: Table, unitMeasurement: UnitMeasurement, inputWeight: number, inputAltitude: number,
         inputSlope: number, inputTemperature: number, inputWind: number, ice: boolean, inputVap: number){
+            this.table = table
             this.weight = new Weight(aircraft, inputWeight, unitMeasurement, ice, table);
             this.alt = new AirportAltitude(aircraft, inputAltitude, unitMeasurement, ice, table);
             this.ref = new Reference(aircraft, ice, table);
@@ -34,6 +35,15 @@ export default class Calcular{
     }
 
     calcular(): number{
+        let r = this.ref.calcular()
+        let w = this.weight.calcular()
+        let a = this.alt.calcular()
+        let t = this.temp.calcular()
+        let wi = this.wind.calcular()
+        let s = this.slope.calcular()
+        let re = this.rev.calcular()
+        let o = this.overspeed.calcular()
+
         return this.ref.calcular() + this.weight.calcular() + this.alt.calcular() + this.temp.calcular() + this.wind.calcular() +
         this.slope.calcular() + this.rev.calcular() + this.overspeed.calcular();
     }

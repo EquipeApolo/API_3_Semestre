@@ -231,6 +231,8 @@ class editarAeronave extends Component<any, state>{
         this.state.aircraft.setReverserAmount = target.value;
         if (!this.state.aircraft.getReverserAmount) {
             reversorError = "The reverser is required."
+        }else if(this.state.aircraft.getReverserAmount < 0){
+            reversorError = "The reverser amount cannot be negative"
         } else {
             reversorError = ""
         }
@@ -674,6 +676,8 @@ class editarAeronave extends Component<any, state>{
         }
         if (!this.state.aircraft.getReverserAmount) {
             reversorError = "The reverser is required."
+        }else if(this.state.aircraft.getReverserAmount < 0){
+            reversorError = "The reverser amount cannot be negative"
         } else {
             reversorError = ""
         }
@@ -682,6 +686,8 @@ class editarAeronave extends Component<any, state>{
             weightMinError = "The minimum weight is required";
         } else if (this.state.aircraft.getAircraftWeightMin <= 0) {
             weightMinError = "The weight must be above zero";
+        } else if (this.state.aircraft.getAircraftWeightMin >= this.state.aircraft.getAircraftWeightMax){
+            weightMinError = "The weight must be bellow the maximum weight";
         } else {
             weightMinError = ""
         }
@@ -691,6 +697,8 @@ class editarAeronave extends Component<any, state>{
             weightMaxError = "The maximum weight is required";
         }else if(this.state.aircraft.getAircraftWeightMax <= 0){
             weightMaxError = "The weight must be above zero"
+        } else if (this.state.aircraft.getAircraftWeightMax <= this.state.aircraft.getAircraftWeightMin){
+            weightMinError = "The weight must be above the minimum weight";
         }else{
             weightMaxError= ""
         }
@@ -923,6 +931,9 @@ class editarAeronave extends Component<any, state>{
                 showConfirmButton: false,
                 timer: 1500
               })
+              setTimeout(function() {
+                window.location.href = "/airplanes"
+              }, 1500);
         }
     }
 
@@ -1001,14 +1012,14 @@ class editarAeronave extends Component<any, state>{
                             </Row>
                             <Row>
                                 <Col>
-                                    <h5 className="card-title">Aircraft Weight Min </h5>
+                                    <h5 className="card-title">Aircraft Weight Min (Kg)</h5>
                                     <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} value={this.state.aircraft.getAircraftWeightMin}/>
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMinError}
                                     </div>
                                 </Col>
                                 <Col>
-                                    <h5 className="card-title">Aircraft Weight Max </h5>
+                                    <h5 className="card-title">Aircraft Weight Max (Kg)</h5>
                                     <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} value={this.state.aircraft.getAircraftWeightMax} />
                                     <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMaxError}
@@ -1056,14 +1067,14 @@ class editarAeronave extends Component<any, state>{
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Weight Bellow Without Ice (Kg)</h5>
+                                                <h5 className="card-title">Weight Bellow Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithoutIce" placeholder="Weight Bellow Without Ice" onChange={this.weightBellowWithoutIceChange} value={this.state.table.weightBellowWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.weightBellowWithoutIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Weight Above Without Ice (Kg)</h5>
+                                                <h5 className="card-title">Weight Above Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithoutIce" placeholder="Weight Above Without Ice" onChange={this.weightAboveWithoutIceChange} value={this.state.table.weightAboveWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.weightAboveWithoutIceError}
@@ -1073,14 +1084,14 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Weight Bellow With Ice (Kg)</h5>
+                                                <h5 className="card-title">Weight Bellow With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithIce" placeholder="Weight Bellow With Ice" onChange={this.weightBellowWithIceChange} value={this.state.table.weightBellowWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.weightBellowWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Weight Above With Ice (Kg)</h5>
+                                                <h5 className="card-title">Weight Above With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithIce" placeholder="Weight Above With Ice" onChange={this.weightAboveWithIceChange} value={this.state.table.weightAboveWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.weightAboveWithIceError}
@@ -1096,21 +1107,21 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Altitude Reference (Ft)</h5>
+                                                <h5 className="card-title">Altitude Reference (Per Ft)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeReference" placeholder="Altitude Reference" onChange={this.altitudeReferenceChange} value={this.state.table.altitudeReference}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.altitudeReferenceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Altitude With Ice (Ft)</h5>
+                                                <h5 className="card-title">Altitude With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithIce" placeholder="Altitude With Ice" onChange={this.altitudeWithIceChange} value={this.state.table.altitudeWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.altitudeWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Altitude Without Ice (Ft)</h5>
+                                                <h5 className="card-title">Altitude Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithoutIce" placeholder="Altitude Without Ice" onChange={this.altitudeWithoutIceChange} value={this.state.table.altitudeWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.altitudeWithoutIceError}
@@ -1125,21 +1136,21 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Temperature Reference (ºC)</h5>
+                                                <h5 className="card-title">Temperature Reference (Per ºC)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempReference" placeholder="Temperature Reference" onChange={this.tempReferenceChange} value={this.state.table.tempReference}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.tempReferenceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Temperature Bellow With Ice (ºC)</h5>
+                                                <h5 className="card-title">Temperature Bellow With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithIce" placeholder="Temperature Bellow With Ice" onChange={this.tempBellowWithIceChange} value={this.state.table.tempBellowWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.tempBellowWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Temperature Above With Ice (ºC)</h5>
+                                                <h5 className="card-title">Temperature Above With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithIce" placeholder="Temperature Above With Ice" onChange={this.tempAboveWithIceChange} value={this.state.table.tempAboveWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.tempAboveWithIceError}
@@ -1148,14 +1159,14 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Temperature Bellow Without Ice (ºC)</h5>
+                                                <h5 className="card-title">Temperature Bellow Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithoutIce" placeholder="Temperature Bellow Without Ice" onChange={this.tempBellowWithoutIceChange} value={this.state.table.tempBellowWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.tempBellowWithoutIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Temperature Above Without Ice (ºC)</h5>
+                                                <h5 className="card-title">Temperature Above Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithoutIce" placeholder="Temperature Above Without Ice" onChange={this.tempAboveWithoutIceChange} value={this.state.table.tempAboveWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.tempAboveWithoutIceError}
@@ -1171,21 +1182,21 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Wind Reference (Kt)</h5>
+                                                <h5 className="card-title">Wind Reference (Per Kt)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windReference" placeholder="Wind Reference" onChange={this.windReferenceChange} value={this.state.table.windReference}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.windReferenceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Wind Head With Ice (Kt)</h5>
+                                                <h5 className="card-title">Wind Head With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithIce" placeholder="Wind Head With Ice" onChange={this.windHeadWithIceChange} value={this.state.table.windHeadWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.windHeadWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Wind Tail With Ice (Kt)</h5>
+                                                <h5 className="card-title">Wind Tail With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithIce" placeholder="Wind Tail With Ice" onChange={this.windTailWithIceChange} value={this.state.table.windTailWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.windTailWithIceError}
@@ -1194,14 +1205,14 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Wind Head Without Ice (Kt)</h5>
+                                                <h5 className="card-title">Wind Head Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithoutIce" placeholder="Wind Head Without Ice" onChange={this.windHeadWithoutIceChange} value={this.state.table.windHeadWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.windHeadWithoutIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Wind Tail Without Ice (Kt)</h5>
+                                                <h5 className="card-title">Wind Tail Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithoutIce" placeholder="Wind Tail Without Ice" onChange={this.windTailWithoutIceChange} value={this.state.table.windTailWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.windTailWithoutIceError}
@@ -1217,21 +1228,21 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Slope Reference</h5>
+                                                <h5 className="card-title">Slope Reference (Per %)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeReference" placeholder="Slope Reference" onChange={this.slopeReferenceChange} value={this.state.table.slopeReference}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.slopeReferenceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Slope Uphill With Ice</h5>
+                                                <h5 className="card-title">Slope Uphill With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithIce" placeholder="Slope Uphill With Ice" onChange={this.slopeUphillWithIceChange} value={this.state.table.slopeUphillWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.slopeUphillWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Slope Downhill With Ice</h5>
+                                                <h5 className="card-title">Slope Downhill With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithIce" placeholder="Slope Downhill With Ice" onChange={this.slopeDownhillWithIceChange} value={this.state.table.slopeDownhillWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.slopeDownhillWithIceError}
@@ -1240,14 +1251,14 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Slope Uphill Without Ice</h5>
+                                                <h5 className="card-title">Slope Uphill Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithoutIce" placeholder="Slope Uphill Without Ice" onChange={this.slopeUphillWithoutIceChange} value={this.state.table.slopeUphillWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.slopeUphillWithoutIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Slope Downhill Without Ice</h5>
+                                                <h5 className="card-title">Slope Downhill Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithoutIce" placeholder="Slope Downhill Without Ice" onChange={this.slopeDownhillWithoutIceChange} value={this.state.table.slopeDownhillWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.slopeDownhillWithoutIceError}
@@ -1263,21 +1274,21 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Overspeed Reference (Kt)</h5>
+                                                <h5 className="card-title">Overspeed Reference (Per Kt)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedReference" placeholder="Overspeed Reference" onChange={this.overspeedReferenceChange} value={this.state.table.overspeedReference}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.overspeedReferenceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Overspeed With Ice (Kt)</h5>
+                                                <h5 className="card-title">Overspeed With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithIce" placeholder="Overspeed With Ice" onChange={this.overspeedWithIceChange} value={this.state.table.overspeedWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.overspeedWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Overspeed Without Ice (Kt)</h5>
+                                                <h5 className="card-title">Overspeed Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithoutIce" placeholder="Overspeed Without Ice" onChange={this.overspeedWithoutIceChange} value={this.state.table.overspeedWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.overspeedWithoutIceError}
@@ -1292,14 +1303,14 @@ class editarAeronave extends Component<any, state>{
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <h5 className="card-title">Reverser With Ice</h5>
+                                                <h5 className="card-title">Reverser With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithIce" placeholder="Reverser With Ice" onChange={this.reverserWithIceChange} value={this.state.table.reverserWithIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.reverserWithIceError}
                                                 </div>
                                             </Col>
                                             <Col>
-                                                <h5 className="card-title">Reverser Without Ice</h5>
+                                                <h5 className="card-title">Reverser Without Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithoutIce" placeholder="Reverser Without Ice" onChange={this.reverserWithoutIceChange} value={this.state.table.reverserWithoutIce}/>
                                                 <div style={{ fontSize: 12, color: "red" }}>
                                                 {this.state.reverserWithoutIceError}

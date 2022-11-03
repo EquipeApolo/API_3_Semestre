@@ -249,7 +249,6 @@ class Calculo extends Component<{}, state>{
   calculate(event) {
     event.preventDefault()
     const isValid = this.validate();
-    debugger
     if (isValid) {
       let calculado = this.generateCalculo();
         let convertido = this.converter(calculado)
@@ -410,16 +409,13 @@ class Calculo extends Component<{}, state>{
   }
 
   getTable(): Table{
-    debugger
-    let dado = this.state.dadosTable.find(item => item.aircraftId == this.aircraftSelected)
-    console.table(dado);
-    console.log(this.state.dadosTable)
+    let dado = this.state.dadosTable.find(item => item.airplaneId == this.aircraftSelected)
     
     let t = new Table(dado.refWithoutIce, dado.refWithIce, dado.weightReference, dado.weightBellowWithoutIce, dado.weightAboveWithoutIce, dado.weightBellowWithIce,
       dado.weightAboveWithIce, dado.altitudeReference, dado.altitudeWithIce, dado.altitudeWithoutIce, dado.tempReference, dado.tempBellowWithIce, dado.tempAboveWithIce,
       dado.tempBellowWithoutIce, dado.tempAboveWithoutIce, dado.windReference, dado.windHeadWithIce, dado.windTailWithIce, dado.windHeadWithoutIce, dado.windTailWithoutIce,
       dado.slopeReference, dado.slopeUphillWithIce, dado.slopeDownhillWithIce, dado.slopeUphillWithoutIce, dado.slopeDownhillWithoutIce, dado.overspeedReference,
-      dado.overspeedWithIce, dado.overspeedWithotIce, dado.reverserWithIce, dado.reverserWithoutIce);
+      dado.overspeedWithIce, dado.overspeedWithoutIce, dado.reverserWithIce, dado.reverserWithoutIce);
     return t;
   }
 
