@@ -7,12 +7,11 @@ export default class Slope extends FatorCalculo{
 
     private aircraft: Aircraft;
     private table: Table;
-    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number, table: Table){
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, table: Table){
         super();
         this.valor = input;
         this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
-        this.BRK = BRK;
         this.aircraft = aircraft;
         this.table = table;
     }

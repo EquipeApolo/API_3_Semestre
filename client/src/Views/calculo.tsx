@@ -26,7 +26,8 @@ type state = {
   altitudeError: string,
   slopeError: string,
   overspeedTitle: string,
-  dados: any[]
+  dados: any[],
+  dadosTable: any[]
 }
 
 class Calculo extends Component<{}, state>{
@@ -50,7 +51,7 @@ class Calculo extends Component<{}, state>{
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", brakingError: "", runwayError: "",
       temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
-      dados: []
+      dados: [], dadosTable: []
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -73,44 +74,20 @@ class Calculo extends Component<{}, state>{
         dados: dadosBanco
       })
     })
-    let aircraft = new Aircraft("", "", "", 220, 2, 100, 100, 100)
-    let table = new Table(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-    table.altitudeReference = 1000
-    table.altitudeWithIce = 29
-    table.altitudeWithoutIce = 26
-    table.overspeedReference = 5
-    table.overspeedWithIce = 115
-    table.overspeedWithoutIce = 110
-    table.refWithIce = 1115
-    table.refWithoutIce = 1026
-    table.reverserWithIce = 30
-    table.reverserWithoutIce = 24
-    table.slopeDownhillWithIce = 148
-    table.slopeDownhillWithoutIce = 139
-    table.slopeReference = 1
-    table.slopeUphillWithIce = -6
-    table.slopeUphillWithoutIce = -5
-    table.tempAboveWithIce = 20
-    table.tempAboveWithoutIce = 18
-    table.tempBellowWithIce = -11
-    table.tempBellowWithoutIce = -10
-    table.tempReference = 5
-    table.weightReference = 43000
-    table.weightAboveWithIce = 18
-    table.weightAboveWithoutIce = 16
-    table.weightBellowWithIce = -18
-    table.weightBellowWithoutIce = -17
-    table.windHeadWithIce = -23
-    table.windHeadWithoutIce = -22
-    table.windReference = 5
-    table.windTailWithIce = 111
-    table.windTailWithoutIce = 101
+    axios.get('http://localhost:3001/operationDistance').then(response => {
+      let data = response.data
+      this.setState({
+        dadosTable: data
+      })
+    })
 
-    debugger
-    let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
-        BrakingLevel.MAXMANUAL, true, 10, table);
-      console.log(calcular.calcular())
+
+    // debugger
+    // let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
+    //     BrakingLevel.MAXMANUAL, true, 10, table);
+    //   console.log(calcular.calcular())
   }
+
 
 
   //#region eventos change
@@ -216,9 +193,9 @@ class Calculo extends Component<{}, state>{
         this.setState({ weightError: "" })
       }
 
-      if(this.aircraftSelected > maxWeight){
+      if(this.aircraftWeight > maxWeight){
         this.setState({ weightError: "The weight must be bellow " + maxWeight })
-      }else if(this.aircraftSelected < minWeight){
+      }else if(this.aircraftWeight < minWeight){
         this.setState({ weightError: "The weight must be above " + minWeight })
       }
 
@@ -272,7 +249,7 @@ class Calculo extends Component<{}, state>{
   calculate(event) {
     event.preventDefault()
     const isValid = this.validate();
-
+    debugger
     if (isValid) {
       let calculado = this.generateCalculo();
         let convertido = this.converter(calculado)
@@ -334,24 +311,51 @@ class Calculo extends Component<{}, state>{
         }
         
         if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
-          this.setState({ weightError: "" })
+          weightError = "" 
         }
   
-        if(this.aircraftSelected > maxWeight){
-          this.setState({ weightError: "The weight must be bellow " + maxWeight })
-        }else if(this.aircraftSelected < minWeight){
-          this.setState({ weightError: "The weight must be above " + minWeight })
+        if(this.aircraftWeight > maxWeight){
+          weightError = "The weight must be bellow " + maxWeight
+        }else if(this.aircraftWeight < minWeight){
+          weightError = "The weight must be above " + minWeight
         }
   
       }
-    } else {
       weightError = ""
-    }
-
-    if (!this.brakingLevel) {
-      brakingError = "Select a braking level";
     } else {
-      brakingError = ""
+
+      if(!this.aircraftSelected){
+        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+          this.setState({ weightError: "" })
+        }
+  
+        if (this.aircraftWeight < 10000) {
+          this.setState({ weightError: "The weight must be above 10000" })
+        }
+  
+      }else{
+        let airplane = this.getAircraft()
+        let minWeight = airplane.getAircraftWeightMin
+        let maxWeight = airplane.getAircraftWeightMax
+  
+        if(this.unitMeasurement == 1){
+          minWeight *= 2.205
+          maxWeight *= 2.205
+        }
+        
+        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+          weightError = "" 
+        }
+  
+        if(this.aircraftWeight > maxWeight){
+          weightError = "The weight must be bellow " + maxWeight
+        }else if(this.aircraftWeight < minWeight){
+          weightError = "The weight must be above " + minWeight
+        }else{
+          weightError = ""
+        }
+  
+      }
     }
 
     if (!this.temperature) {
@@ -362,8 +366,6 @@ class Calculo extends Component<{}, state>{
 
     if (!this.wind) {
       windError = "The wind is required";
-    } else if (this.wind == 0) {
-      windError = "The wind must be different than 0";
     } else {
       windError = ""
     }
@@ -400,42 +402,25 @@ class Calculo extends Component<{}, state>{
 //#endregion
   generateCalculo(): number{
     let aircraft = this.getAircraft();
-    let table = new Table(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-    table.altitudeReference = 1000
-    table.altitudeWithIce = 29
-    table.altitudeWithoutIce = 26
-    table.overspeedReference = 5
-    table.overspeedWithIce = 115
-    table.overspeedWithoutIce = 110
-    table.refWithIce = 1115
-    table.refWithoutIce = 1026
-    table.reverserWithIce = 30
-    table.reverserWithoutIce = 24
-    table.slopeDownhillWithIce = 148
-    table.slopeDownhillWithoutIce = 139
-    table.slopeReference = 1
-    table.slopeUphillWithIce = -6
-    table.slopeUphillWithoutIce = -5
-    table.tempAboveWithIce = 20
-    table.tempAboveWithoutIce = 18
-    table.tempBellowWithIce = -11
-    table.tempBellowWithoutIce = -10
-    table.tempReference = 5
-    table.weightAboveWithIce = 18
-    table.weightAboveWithoutIce = 16
-    table.weightBellowWithIce = -18
-    table.weightBellowWithoutIce = -17
-    table.windHeadWithIce = -23
-    table.windHeadWithoutIce = -22
-    table.windReference = 5
-    table.windTailWithIce = 111
-    table.windTailWithoutIce = 101
+    let table = this.getTable();
 
-    debugger
-    let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
-        BrakingLevel.MAXMANUAL, true, 10, table);
-    
+    let calcular = new Calcular(aircraft, table, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind, 
+      this.iceAccreation, this.overspeed);
     return calcular.calcular();
+  }
+
+  getTable(): Table{
+    debugger
+    let dado = this.state.dadosTable.find(item => item.aircraftId == this.aircraftSelected)
+    console.table(dado);
+    console.log(this.state.dadosTable)
+    
+    let t = new Table(dado.refWithoutIce, dado.refWithIce, dado.weightReference, dado.weightBellowWithoutIce, dado.weightAboveWithoutIce, dado.weightBellowWithIce,
+      dado.weightAboveWithIce, dado.altitudeReference, dado.altitudeWithIce, dado.altitudeWithoutIce, dado.tempReference, dado.tempBellowWithIce, dado.tempAboveWithIce,
+      dado.tempBellowWithoutIce, dado.tempAboveWithoutIce, dado.windReference, dado.windHeadWithIce, dado.windTailWithIce, dado.windHeadWithoutIce, dado.windTailWithoutIce,
+      dado.slopeReference, dado.slopeUphillWithIce, dado.slopeDownhillWithIce, dado.slopeUphillWithoutIce, dado.slopeDownhillWithoutIce, dado.overspeedReference,
+      dado.overspeedWithIce, dado.overspeedWithotIce, dado.reverserWithIce, dado.reverserWithoutIce);
+    return t;
   }
 
   getAircraft(): Aircraft{
@@ -572,12 +557,4 @@ class Calculo extends Component<{}, state>{
 }
 
 export default Calculo;
-
-// Caso seja necessário incluir o "Aditivo de velocidade" basta copiar abaixo e colocar no formulário.
-/* <Form>
-<Col style={{width: "33%"}}>
-  <h5 className="card-title">Speed additive</h5>
-  <input type='number' className='form-control form-control-lg inputGroup-sizing-sm' id="speedAdditive" placeholder="Speed additive" onChange={this.aircraftSpeedAdctiveChange} />
-</Col>
-</Form> */
 

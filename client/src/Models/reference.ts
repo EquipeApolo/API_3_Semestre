@@ -7,10 +7,9 @@ export default class Reference extends FatorCalculo{
 
     private aircraft: Aircraft;
     private table: Table;
-    constructor(aircraft: Aircraft,temGelo: boolean, BRK: number, table: Table){
+    constructor(aircraft: Aircraft,temGelo: boolean, table: Table){
         super();
         this.temGelo = temGelo;
-        this.BRK = BRK;
         this.aircraft = aircraft;
         this.table = table;
     }

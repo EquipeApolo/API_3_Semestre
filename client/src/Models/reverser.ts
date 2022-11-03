@@ -7,7 +7,7 @@ export default class Reverser extends FatorCalculo{
 
     private aircraft: Aircraft;
     private table: Table;
-    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number, table: Table){
+    constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, table: Table){
         super();
         this.valor = input;
         this.unidadeMedida = unidadeMedida;

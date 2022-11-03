@@ -11,8 +11,6 @@ import Overspeed from "./overspeed";
 import Table from "./table";
 
 export default class Calcular{
-    private unitMeasurement: UnitMeasurement;
-    private aircraft: Aircraft;
     private weight: Weight;
     private alt: AirportAltitude;
     private ref: Reference;
@@ -23,18 +21,16 @@ export default class Calcular{
     private overspeed: Overspeed;
     private table: Table;
 
-    constructor(aircraft: Aircraft, unitMeasurement: UnitMeasurement, inputWeight: number, inputAltitude: number,
-        inputSlope: number, inputTemperature: number, inputWind: number, braking: BrakingLevel, ice: boolean, inputVap: number, table: Table){
-            this.aircraft = aircraft;
-            this.unitMeasurement = unitMeasurement;
+    constructor(aircraft: Aircraft, table: Table, unitMeasurement: UnitMeasurement, inputWeight: number, inputAltitude: number,
+        inputSlope: number, inputTemperature: number, inputWind: number, ice: boolean, inputVap: number){
             this.weight = new Weight(aircraft, inputWeight, unitMeasurement, ice, table);
-            this.alt = new AirportAltitude(aircraft, inputAltitude, unitMeasurement, ice, braking, table);
-            this.ref = new Reference(aircraft, ice, braking, table);
-            this.rev = new Reverser(aircraft, aircraft.getReverserAmount, unitMeasurement, ice, braking, table);
-            this.slope = new Slope(aircraft, inputSlope, unitMeasurement, ice, braking, table);
-            this.temp = new Temperature(aircraft, inputTemperature, unitMeasurement, ice, braking, table);
-            this.wind = new Wind(aircraft, inputWind, unitMeasurement, ice, braking, table);
-            this.overspeed = new Overspeed(aircraft, inputVap, unitMeasurement, ice, braking, table)
+            this.alt = new AirportAltitude(aircraft, inputAltitude, unitMeasurement, ice, table);
+            this.ref = new Reference(aircraft, ice, table);
+            this.rev = new Reverser(aircraft, aircraft.getReverserAmount, unitMeasurement, ice, table);
+            this.slope = new Slope(aircraft, inputSlope, unitMeasurement, ice, table);
+            this.temp = new Temperature(aircraft, inputTemperature, unitMeasurement, ice, table);
+            this.wind = new Wind(aircraft, inputWind, unitMeasurement, ice, table);
+            this.overspeed = new Overspeed(aircraft, inputVap, unitMeasurement, ice, table)
     }
 
     calcular(): number{

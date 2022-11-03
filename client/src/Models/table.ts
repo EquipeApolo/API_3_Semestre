@@ -1,5 +1,6 @@
 export default class Table {
 
+    public aircraftId: number
     // referencia
     public refWithoutIce: number
     public refWithIce: number
@@ -60,7 +61,7 @@ export default class Table {
          windHeadWithIce: number,
          windTailWithIce: number,
          windHeadWithoutIce: number,
-        windTailWithoutIce: number,
+         windTailWithoutIce: number,
          slopeReference: number,
          slopeUphillWithIce: number,
          slopeDownhillWithIce: number,
