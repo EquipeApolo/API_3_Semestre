@@ -107,7 +107,7 @@ class AircraftTable extends Component<{}, table>{
                 </Row>
                 <Row className="pb-3">
                     <Col lg>
-                        <Button className="btn-lg">New Aircraft</Button>
+                        <Button className="btn-lg float-end" href='/cadastroAeronave'>New Aircraft</Button>
                     </Col>
                 </Row>
             </Container>
