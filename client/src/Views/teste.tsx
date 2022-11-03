@@ -1,4 +1,4 @@
-/*import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Modal, Form, Row, Col, Container } from 'react-bootstrap';
 
 function Teste() {
@@ -120,20 +120,20 @@ function Teste() {
   );
 }
 export default Teste;
-*/
 
-import React, { Component } from 'react';
-import ModalWrapper from '../Components/modalWrapper';
 
-export default class Teste extends Component {
+// import React, { Component } from 'react';
+// import ModalWrapper from '../Components/modalWrapper';
 
-  render() {
-    return (
-      <div>
-      	<ModalWrapper buttonText={"Click me I'm a button"} title={"Weight"} showModal={true}/>
-        <ModalWrapper buttonText={"Click me I'm a button"} title={"Temperature"} showModal={true}/>
-      </div>
-    );
-  }
-}
+// export default class Teste extends Component {
+
+//   render() {
+//     return (
+//       <div>
+//       	<ModalWrapper buttonText={"Weight"} title={"Weight"} showModal={true}/>
+//         <ModalWrapper buttonText={"Temperature"} title={"Temperature"} showModal={true}/>
+//       </div>
+//     );
+//   }
+// }
   

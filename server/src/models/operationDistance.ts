@@ -11,7 +11,7 @@ const operationDistance = database.define('operationDistance', {
         allowNull: false,
         primaryKey: true
     },
-    refWithouIce:{
+    refWithoutIce:{
         type: Sequelize.INTEGER,
         allowNull: false
     },
@@ -119,7 +119,7 @@ const operationDistance = database.define('operationDistance', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    overspeedWithotIce: {
+    overspeedWithoutIce: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
@@ -138,6 +138,6 @@ operationDistance.belongsTo(airplaneId, {
     foreignKey: 'airplaneId'
 })
 
-// operationDistance.sync({ alter: true });
+//operationDistance.sync({ alter: true });
 
 module.exports = operationDistance;

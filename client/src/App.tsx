@@ -4,6 +4,7 @@ import Calculo from './Views/calculo';
 import Teste from './Views/teste';
 import CadastroAeronave from './Views/cadastroAeronave';
 import EditarAeronave from './Views/editarAeronave';
+import AircraftTable from './Views/listaAeronaves';
 
 function GetId(){
   const { id } = useParams()
@@ -22,8 +23,9 @@ function App() {
     <Route index element={<Calculo/>}/>
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
-    <Route path="/cadastroAeronave" element={<CadastroAeronave/>}/>
-    <Route path="/editarAeronave/:id" element={<GetId/>}/>
+    <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
+    <Route path="/editAirplane/:id" element={<GetId/>}/>
+    <Route path="/airplanes" element={<AircraftTable/>}/>
     </Routes>
     </BrowserRouter>
   );
