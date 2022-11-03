@@ -52,7 +52,7 @@ type state = {
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
-    private table: Table = new Table();
+    private table: Table = new Table(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     
     constructor(props: any) {
         super(props);

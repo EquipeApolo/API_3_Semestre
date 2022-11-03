@@ -74,7 +74,7 @@ class Calculo extends Component<{}, state>{
       })
     })
     let aircraft = new Aircraft("", "", "", 220, 2, 100, 100, 100)
-    let table = new Table();
+    let table = new Table(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     table.altitudeReference = 1000
     table.altitudeWithIce = 29
     table.altitudeWithoutIce = 26
@@ -400,7 +400,7 @@ class Calculo extends Component<{}, state>{
 //#endregion
   generateCalculo(): number{
     let aircraft = this.getAircraft();
-    let table = new Table();
+    let table = new Table(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
     table.altitudeReference = 1000
     table.altitudeWithIce = 29
     table.altitudeWithoutIce = 26

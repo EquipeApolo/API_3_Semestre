@@ -1317,6 +1317,9 @@ class editarAeronave extends Component<any, state>{
                                     <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Save</Button>
                                 </Col>
                                 <Col></Col>
+                                <Col>
+                                    <Button variant="danger" size='lg' href="/airplanes">Back</Button>
+                                </Col>
                             </Row>
                         </Form>
                     </Container>
