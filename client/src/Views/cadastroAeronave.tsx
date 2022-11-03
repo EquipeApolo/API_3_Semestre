@@ -1026,6 +1026,8 @@ class cadastroAeronave extends Component<any, state>{
                                                     <h4>&#x2022; Reference</h4>
                                                 </Col>
                                             </Row>
+                                        </Row>
+                                        <Row>
                                             <Col>
                                                 <h5 className="card-title">Reference With Ice (M)</h5>
                                                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithIce" placeholder="Reference with ice" onChange={this.refWithIceChange} />
@@ -1041,7 +1043,7 @@ class cadastroAeronave extends Component<any, state>{
                                                 </div>
                                             </Col>
                                             <Col></Col>
-
+                                        </Row>
                                             <Row>
                                                 <Col className="pt-4 pb-4">
                                                     <h4>&#x2022; Weight</h4>
@@ -1070,7 +1072,7 @@ class cadastroAeronave extends Component<any, state>{
                                                 </div>
                                             </Col>
                                         </Row>
-                                        </Row>
+                                       
                                         <Row>
                                             <Col>
                                                 <h5 className="card-title">Weight Bellow With Ice (Kg)</h5>
@@ -1318,6 +1320,9 @@ class cadastroAeronave extends Component<any, state>{
                                     <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Save</Button>
                                 </Col>
                                 <Col></Col>
+                                <Col>
+                                    <Button variant="danger" size='lg' href="/airplanes">Back</Button>
+                                </Col>
                             </Row>
                     </Container>
                 </Container>

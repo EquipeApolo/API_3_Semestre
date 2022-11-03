@@ -40,67 +40,79 @@ export default class Table {
     public reverserWithoutIce: number
 
     
-    // constructor(
-    //     refWithouIce: number,
-    //     refWithIce: number,
-    //     weightReference: number,
-    //     weightBellowWithoutIce: number,
-    //     weightAboveWithoutIce: number,
-    //     weightBellowWithIce: number,
-    //     weightAboveWithIce: number,
-    //     altitudeReference: number,
-    //     altitudeWithIce: number,
-    //     altitudeWithoutIce: number,
-    //     tempReference: number,
-    //     tempBellowWithIce: number,
-    //     tempAboveWithIce: number,
-    //     tempBellowWithoutIce: number,
-    //     tempAboveWithoutIce: number,
-    //     windReference: number,
-    //     windHeadWithIce: number,
-    //     windTailWithIce: number,
-    //     windHeadWithoutIce: number,
-    //     windTailWithoutIce: number,
-    //     slopeReference: number,
-    //     slopeUphillWithIce: number,
-    //     slopeDownhillWithIce: number,
-    //     slopeUphillWithoutIce: number,
-    //     slopeDownhillWithoutIce: number,
-    //     overspeedReference: number,
-    //     overspeedWithIce: number,
-    //     overspeedWithotIce: number,
-    //     reverserWithIce: number,
-    //     reverserWithoutIce: number
-    // ) {
-    //     this.refWithouIce = refWithouIce
-    //     this.refWithIce = refWithIce
-    //     this.weightReference = weightReference
-    //     this.weightBellowWithoutIce = weightBellowWithoutIce
-    //     this.weightAboveWithoutIce = weightAboveWithoutIce
-    //     this.weightBellowWithIce = weightBellowWithIce
-    //     this.weightAboveWithIce = weightAboveWithIce
-    //     this.altitudeReference = altitudeReference
-    //     this.altitudeWithIce = altitudeWithIce
-    //     this.altitudeWithoutIce = altitudeWithoutIce
-    //     this.tempReference = tempReference
-    //     this.tempBellowWithIce = tempBellowWithIce
-    //     this.tempAboveWithIce = tempAboveWithIce
-    //     this.tempBellowWithoutIce = tempBellowWithoutIce
-    //     this.tempAboveWithoutIce = tempAboveWithoutIce
-    //     this.windReference = windReference
-    //     this.windHeadWithIce = windHeadWithIce
-    //     this.windTailWithIce = windTailWithIce
-    //     this.windHeadWithoutIce = windHeadWithoutIce
-    //     this.windTailWithoutIce = windTailWithoutIce
-    //     this.slopeReference = slopeReference
-    //     this.slopeUphillWithIce = slopeUphillWithIce
-    //     this.slopeDownhillWithIce = slopeDownhillWithIce
-    //     this.slopeUphillWithoutIce = slopeUphillWithoutIce
-    //     this.slopeDownhillWithoutIce = slopeDownhillWithoutIce
-    //     this.overspeedReference = overspeedReference
-    //     this.overspeedWithIce = overspeedWithIce
-    //     this.overspeedWithotIce = overspeedWithotIce
-    //     this.reverserWithIce = reverserWithIce
-    //     this.reverserWithoutIce = reverserWithoutIce
-    // }
+    constructor(
+         refWithoutIce: number,
+         refWithIce: number,
+         weightReference: number,
+         weightBellowWithoutIce: number,
+         weightAboveWithoutIce: number,
+         weightBellowWithIce: number,
+         weightAboveWithIce: number,
+         altitudeReference: number,
+         altitudeWithIce: number,
+         altitudeWithoutIce: number,
+         tempReference: number,
+         tempBellowWithIce: number,
+         tempAboveWithIce: number,
+         tempBellowWithoutIce: number,
+         tempAboveWithoutIce: number,
+         windReference: number,
+         windHeadWithIce: number,
+         windTailWithIce: number,
+         windHeadWithoutIce: number,
+        windTailWithoutIce: number,
+         slopeReference: number,
+         slopeUphillWithIce: number,
+         slopeDownhillWithIce: number,
+         slopeUphillWithoutIce: number,
+         slopeDownhillWithoutIce: number,
+         overspeedReference: number,
+         overspeedWithIce: number,
+         overspeedWithotIce: number,
+         reverserWithIce: number,
+         reverserWithoutIce: number
+    ) {
+         this.refWithoutIce = refWithoutIce
+         this.refWithIce = refWithIce
+         this.weightReference = weightReference
+         this.weightBellowWithoutIce = weightBellowWithoutIce
+         this.weightAboveWithoutIce = weightAboveWithoutIce
+         this.weightBellowWithIce = weightBellowWithIce
+         this.weightAboveWithIce = weightAboveWithIce
+         this.altitudeReference = altitudeReference
+         this.altitudeWithIce = altitudeWithIce
+         this.altitudeWithoutIce = altitudeWithoutIce
+         this.tempReference = tempReference
+         this.tempBellowWithIce = tempBellowWithIce
+         this.tempAboveWithIce = tempAboveWithIce
+         this.tempBellowWithoutIce = tempBellowWithoutIce
+         this.tempAboveWithoutIce = tempAboveWithoutIce
+         this.windReference = windReference
+         this.windHeadWithIce = windHeadWithIce
+         this.windTailWithIce = windTailWithIce
+         this.windHeadWithoutIce = windHeadWithoutIce
+         this.windTailWithoutIce = windTailWithoutIce
+         this.slopeReference = slopeReference
+         this.slopeUphillWithIce = slopeUphillWithIce
+         this.slopeDownhillWithIce = slopeDownhillWithIce
+         this.slopeUphillWithoutIce = slopeUphillWithoutIce
+         this.slopeDownhillWithoutIce = slopeDownhillWithoutIce
+         this.overspeedReference = overspeedReference
+         this.overspeedWithIce = overspeedWithIce
+         this.overspeedWithoutIce = overspeedWithotIce
+         this.reverserWithIce = reverserWithIce
+         this.reverserWithoutIce = reverserWithoutIce
+    }
+
+    set setRefWithoutIce(value: number){
+        this.refWithoutIce = value
+    }
+    set setRefWithIce(value: number){
+        this.refWithIce = value
+    }
+
+    get getRefWithoutIce(): number { return this.refWithoutIce }
+
+    get getRefWithIce(): number { return this.refWithIce }
+    
 }
