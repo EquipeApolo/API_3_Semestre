@@ -9,6 +9,7 @@ import { BrakingLevel } from '../Enuns/enuns';
 import React from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import Table from "../Models/table";
 
 type state = {
     modelError: string,
@@ -53,8 +54,8 @@ type state = {
 }
 class cadastroAeronave extends Component<any, state>{
 
-    private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 );
+    private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
+    private table: Table = new Table();
     
     constructor(props: any) {
         super(props);
@@ -251,8 +252,8 @@ class cadastroAeronave extends Component<any, state>{
    refWithIceChange(event){
     let refWithIceError;
     const target = event.target;
-    this.aircraft.setRefWithIce = target.value;
-    if (!this.aircraft.getRefWithIce) {
+    this.table.refWithIce = target.value;
+    if (!this.table.refWithIce) {
         refWithIceError = "The reference with ice is required";
     }else{
         refWithIceError = ""
@@ -263,8 +264,8 @@ class cadastroAeronave extends Component<any, state>{
    refWithouIceChange(event) {
     let refWithouIceError;
     const target = event.target;
-    this.aircraft.setRefWithouIce = target.value;
-    if (!this.aircraft.getRefWithouIce) {
+    this.table.refWithoutIce = target.value;
+    if (!this.table.refWithoutIce) {
         refWithouIceError = "The reference without ice is required";
     }else{
         refWithouIceError = ""
@@ -275,8 +276,8 @@ class cadastroAeronave extends Component<any, state>{
    weightReferenceChange(event){
     let weightReferenceError;
     const target = event.target;
-    this.aircraft.setWeightReference = target.value;
-    if (!this.aircraft.getWeightReference) {
+    this.table.weightReference = target.value;
+    if (!this.table.weightReference) {
         weightReferenceError = "The weight reference is required";
     }else{
         weightReferenceError = ""
@@ -287,8 +288,8 @@ class cadastroAeronave extends Component<any, state>{
    weightBellowWithoutIceChange(event) {
     let weightBellowWithoutIceError;
     const target = event.target;
-    this.aircraft.setWeightBellowWithoutIce = target.value;
-    if (!this.aircraft.getWeightBellowWithoutIce) {
+    this.table.weightBellowWithoutIce = target.value;
+    if (!this.table.weightBellowWithoutIce) {
         weightBellowWithoutIceError = "The weight bellow without ice is required";
     }else{
         weightBellowWithoutIceError = ""
@@ -299,8 +300,8 @@ class cadastroAeronave extends Component<any, state>{
    weightAboveWithoutIceChange(event) {
     let weightAboveWithoutIceError;
     const target = event.target;
-    this.aircraft.setWeightAboveWithoutIce = target.value;
-    if (!this.aircraft.getWeightAboveWithoutIce) {
+    this.table.weightAboveWithoutIce = target.value;
+    if (!this.table.weightAboveWithoutIce) {
         weightAboveWithoutIceError = "The weight above without ice is required";
     }else{
         weightAboveWithoutIceError = ""
@@ -311,8 +312,8 @@ class cadastroAeronave extends Component<any, state>{
    weightBellowWithIceChange(event) {
     let weightBellowWithIceError;
     const target = event.target;
-    this.aircraft.setWeightBellowWithIce = target.value;
-    if (!this.aircraft.getWeightBellowWithIce) {
+    this.table.weightBellowWithIce = target.value;
+    if (!this.table.weightBellowWithIce) {
         weightBellowWithIceError = "The weight bellow with ice is required";
     }else{
         weightBellowWithIceError = ""
@@ -323,8 +324,8 @@ class cadastroAeronave extends Component<any, state>{
    weightAboveWithIceChange(event) {
     let weightAboveWithIceError;
     const target = event.target;
-    this.aircraft.setWeightAboveWithIce = target.value;
-    if (!this.aircraft.getWeightAboveWithIce) {
+    this.table.weightAboveWithIce = target.value;
+    if (!this.table.weightAboveWithIce) {
         weightAboveWithIceError = "The weight above with ice is required";
     }else{
         weightAboveWithIceError = ""
@@ -335,8 +336,8 @@ class cadastroAeronave extends Component<any, state>{
    altitudeReferenceChange(event) {
     let altitudeReferenceError;
     const target = event.target;
-    this.aircraft.setAltitudeReference = target.value;
-    if (!this.aircraft.getAltitudeReference) {
+    this.table.altitudeReference = target.value;
+    if (!this.table.altitudeReference) {
         altitudeReferenceError = "The altitude reference is required";
     }else{
         altitudeReferenceError = ""
@@ -347,8 +348,8 @@ class cadastroAeronave extends Component<any, state>{
    altitudeWithIceChange(event) {
     let altitudeWithIceError;
     const target = event.target;
-    this.aircraft.setAltitudeWithIce = target.value;
-    if (!this.aircraft.getAltitudeWithIce) {
+    this.table.altitudeWithIce = target.value;
+    if (!this.table.altitudeWithIce) {
         altitudeWithIceError = "The altitude with ice is required";
     }else{
         altitudeWithIceError = ""
@@ -359,8 +360,8 @@ class cadastroAeronave extends Component<any, state>{
    altitudeWithoutIceChange(event) {
     let altitudeWithoutIceError;
     const target = event.target;
-    this.aircraft.setAltitudeWithoutIce = target.value;
-    if (!this.aircraft.getAltitudeWithoutIce) {
+    this.table.altitudeWithoutIce = target.value;
+    if (!this.table.altitudeWithoutIce) {
         altitudeWithoutIceError = "The altitude without ice is required";
     } else {
         altitudeWithoutIceError = ""
@@ -371,8 +372,8 @@ class cadastroAeronave extends Component<any, state>{
    tempReferenceChange(event) {
     let tempReferenceError;
     const target = event.target;
-    this.aircraft.setTempReference = target.value;
-    if (!this.aircraft.getTempReference) {
+    this.table.tempReference = target.value;
+    if (!this.table.tempReference) {
         tempReferenceError = "The temperature reference is required";
     } else {
         tempReferenceError = ""
@@ -383,8 +384,8 @@ class cadastroAeronave extends Component<any, state>{
    tempBellowWithIceChange(event) {
     let tempBellowWithIceError;
     const target = event.target;
-    this.aircraft.setTempBellowWithIce = target.value;
-    if (!this.aircraft.getTempBellowWithIce) {
+    this.table.tempBellowWithIce = target.value;
+    if (!this.table.tempBellowWithIce) {
         tempBellowWithIceError = "The temperature bellow with ice is required";
     } else {
         tempBellowWithIceError = ""
@@ -395,8 +396,8 @@ class cadastroAeronave extends Component<any, state>{
    tempAboveWithIceChange(event) {
     let tempAboveWithIceError;
     const target = event.target;
-    this.aircraft.setTempAboveWithIce = target.value;
-    if (!this.aircraft.getTempAboveWithIce) {
+    this.table.tempAboveWithIce = target.value;
+    if (!this.table.tempAboveWithIce) {
         tempAboveWithIceError = "The temperature above with ice is required";
     } else {
         tempAboveWithIceError = ""
@@ -407,8 +408,8 @@ class cadastroAeronave extends Component<any, state>{
    tempBellowWithoutIceChange(event) {
     let tempBellowWithoutIceError;
     const target = event.target;
-    this.aircraft.setTempBellowWithoutIce = target.value;
-    if (!this.aircraft.getTempBellowWithoutIce) {
+    this.table.tempBellowWithoutIce = target.value;
+    if (!this.table.tempBellowWithoutIce) {
         tempBellowWithoutIceError = "The temperature bellow with ice is required";
     } else {
         tempBellowWithoutIceError = ""
@@ -419,8 +420,8 @@ class cadastroAeronave extends Component<any, state>{
    tempAboveWithoutIceChange(event) {
     let tempAboveWithoutIceError;
     const target = event.target;
-    this.aircraft.setTempAboveWithoutIce = target.value;
-    if (!this.aircraft.getTempAboveWithoutIce) {
+    this.table.tempAboveWithoutIce = target.value;
+    if (!this.table.tempAboveWithoutIce) {
         tempAboveWithoutIceError = "The temperature above without ice is required";
     } else {
         tempAboveWithoutIceError = ""
@@ -431,8 +432,8 @@ class cadastroAeronave extends Component<any, state>{
    windReferenceChange(event) {
     let windReferenceError;
     const target = event.target;
-    this.aircraft.setWindReference = target.value;
-    if (!this.aircraft.getWindReference) {
+    this.table.windReference = target.value;
+    if (!this.table.windReference) {
         windReferenceError = "The wind reference is required";
     } else {
         windReferenceError = ""
@@ -443,8 +444,8 @@ class cadastroAeronave extends Component<any, state>{
    windHeadWithIceChange(event) {
     let windHeadWithIceError;
     const target = event.target;
-    this.aircraft.setWindHeadWithIce = target.value;
-    if (!this.aircraft.getWindHeadWithIce) {
+    this.table.windHeadWithIce = target.value;
+    if (!this.table.windHeadWithIce) {
         windHeadWithIceError = "The wind head with ice is required";
     } else {
         windHeadWithIceError = ""
@@ -455,8 +456,8 @@ class cadastroAeronave extends Component<any, state>{
    windTailWithIceChange(event) {
     let windTailWithIceError;
     const target = event.target;
-    this.aircraft.setWindTailWithIce = target.value;
-    if (!this.aircraft.getWindTailWithIce) {
+    this.table.windTailWithIce = target.value;
+    if (!this.table.windTailWithIce) {
         windTailWithIceError = "The wind tail with ice is required";
     } else {
         windTailWithIceError = ""
@@ -467,8 +468,8 @@ class cadastroAeronave extends Component<any, state>{
    windHeadWithoutIceChange(event) {
     let windHeadWithoutIceError;
     const target = event.target;
-    this.aircraft.setWindHeadWithoutIce = target.value;
-    if (!this.aircraft.getWindHeadWithoutIce) {
+    this.table.windHeadWithoutIce = target.value;
+    if (!this.table.windHeadWithoutIce) {
         windHeadWithoutIceError = "The wind head without ice is required";
     } else {
         windHeadWithoutIceError = ""
@@ -479,8 +480,8 @@ class cadastroAeronave extends Component<any, state>{
    windTailWithoutIceChange(event) {
     let windTailWithoutIceError;
     const target = event.target;
-    this.aircraft.setWindTailWithoutIce = target.value;
-    if (!this.aircraft.getWindTailWithoutIce) {
+    this.table.windTailWithoutIce = target.value;
+    if (!this.table.windTailWithoutIce) {
         windTailWithoutIceError = "The wind tail without ice is required";
     } else {
         windTailWithoutIceError = ""
@@ -491,8 +492,8 @@ class cadastroAeronave extends Component<any, state>{
    slopeReferenceChange(event) {
     let slopeReferenceError;
     const target = event.target;
-    this.aircraft.setSlopeReference = target.value;
-    if (!this.aircraft.getSlopeReference) {
+    this.table.slopeReference = target.value;
+    if (!this.table.slopeReference) {
         slopeReferenceError = "The slope reference is required";
     } else {
         slopeReferenceError = ""
@@ -503,8 +504,8 @@ class cadastroAeronave extends Component<any, state>{
    slopeUphillWithIceChange(event) {
     let slopeUphillWithIceError;
     const target = event.target;
-    this.aircraft.setSlopeUphillWithIce = target.value;
-    if (!this.aircraft.getSlopeUphillWithIce) {
+    this.table.slopeUphillWithIce = target.value;
+    if (!this.table.slopeUphillWithIce) {
         slopeUphillWithIceError = "The slope uphill with ice is required";
     } else {
         slopeUphillWithIceError = ""
@@ -515,8 +516,8 @@ class cadastroAeronave extends Component<any, state>{
    slopeDownhillWithIceChange(event) {
     let slopeDownhillWithIceError;
     const target = event.target;
-    this.aircraft.setSlopeDownhillWithIce = target.value;
-    if (!this.aircraft.getSlopeDownhillWithIce) {
+    this.table.slopeDownhillWithIce = target.value;
+    if (!this.table.slopeDownhillWithIce) {
         slopeDownhillWithIceError = "The slope downhill with ice is required";
     } else {
         slopeDownhillWithIceError = ""
@@ -527,8 +528,8 @@ class cadastroAeronave extends Component<any, state>{
    slopeUphillWithoutIceChange(event) {
     let slopeUphillWithoutIceError;
     const target = event.target;
-    this.aircraft.setSlopeUphillWithoutIce = target.value;
-    if (!this.aircraft.getSlopeUphillWithoutIce) {
+    this.table.slopeUphillWithoutIce = target.value;
+    if (!this.table.slopeUphillWithoutIce) {
         slopeUphillWithoutIceError = "The slope uphill without ice is required";
     } else {
         slopeUphillWithoutIceError = ""
@@ -539,8 +540,8 @@ class cadastroAeronave extends Component<any, state>{
    slopeDownhillWithoutIceChange(event) {
     let slopeDownhillWithoutIceError;
     const target = event.target;
-    this.aircraft.setSlopeDownhillWithoutIce = target.value;
-    if (!this.aircraft.getSlopeDownhillWithoutIce) {
+    this.table.slopeDownhillWithoutIce = target.value;
+    if (!this.table.slopeDownhillWithoutIce) {
         slopeDownhillWithoutIceError = "The slope downhill without ice is required";
     } else {
         slopeDownhillWithoutIceError = ""
@@ -551,8 +552,8 @@ class cadastroAeronave extends Component<any, state>{
    overspeedReferenceChange(event) {
     let overspeedReferenceError;
     const target = event.target;
-    this.aircraft.setOverspeedReference = target.value;
-    if (!this.aircraft.getOverspeedReference) {
+    this.table.overspeedReference = target.value;
+    if (!this.table.overspeedReference) {
         overspeedReferenceError = "The overspeed reference is required";
     } else {
         overspeedReferenceError = ""
@@ -563,8 +564,8 @@ class cadastroAeronave extends Component<any, state>{
    overspeedWithIceChange(event) {
     let overspeedWithIceError;
     const target = event.target;
-    this.aircraft.setOverspeedWithIce = target.value;
-    if (!this.aircraft.getOverspeedWithIce) {
+    this.table.overspeedWithIce = target.value;
+    if (!this.table.overspeedWithIce) {
         overspeedWithIceError = "The overspeed with ice is required";
     } else {
         overspeedWithIceError = ""
@@ -575,8 +576,8 @@ class cadastroAeronave extends Component<any, state>{
    overspeedWithoutIceChange(event) {
     let overspeedWithoutIceError;
     const target = event.target;
-    this.aircraft.setOverspeedWithoutIce = target.value;
-    if (!this.aircraft.getOverspeedWithoutIce) {
+    this.table.overspeedWithoutIce = target.value;
+    if (!this.table.overspeedWithoutIce) {
         overspeedWithoutIceError = "The overspeed without ice is required";
     } else {
         overspeedWithoutIceError = ""
@@ -587,8 +588,8 @@ class cadastroAeronave extends Component<any, state>{
    reverserWithIceChange(event) {
     let reverserWithIceError;
     const target = event.target;
-    this.aircraft.setReverserWithIce = target.value;
-    if (!this.aircraft.getReverserWithIce) {
+    this.table.reverserWithIce = target.value;
+    if (!this.table.reverserWithIce) {
         reverserWithIceError = "The reverser with ice is required";
     } else {
         reverserWithIceError = ""
@@ -599,8 +600,8 @@ class cadastroAeronave extends Component<any, state>{
    reverserWithoutIceChange(event) {
     let reverserWithoutIceError;
     const target = event.target;
-    this.aircraft.setReverserWithoutIce = target.value;
-    if (!this.aircraft.getReverserWithoutIce) {
+    this.table.reverserWithoutIce = target.value;
+    if (!this.table.reverserWithoutIce) {
         reverserWithoutIceError = "The reverser without ice is required";
     } else {
         reverserWithoutIceError = ""
@@ -692,152 +693,152 @@ class cadastroAeronave extends Component<any, state>{
        } else {
            weightMaxError = ""
        }
-       if (!this.aircraft.getRefWithIce) {
+       if (!this.table.refWithIce) {
         refWithIceError = "The reference with ice is required";
        } else {
         refWithIceError = ""
        }
-       if (!this.aircraft.getRefWithouIce) {
+       if (!this.table.refWithoutIce) {
         refWithouIceError = "The reference without is required";
        } else {
         refWithouIceError = ""
        }
-       if (!this.aircraft.getWeightReference) {
+       if (!this.table.weightReference) {
         weightReferenceError = "The weight reference is required";
        } else {
         weightReferenceError = ""
        }
-       if (!this.aircraft.getWeightBellowWithoutIce) {
+       if (!this.table.weightBellowWithoutIce) {
         weightBellowWithoutIceError = "The weight bellow without ice is required";
        } else {
         weightBellowWithoutIceError = ""
        }
-       if (!this.aircraft.getWeightAboveWithoutIce) {
+       if (!this.table.weightAboveWithoutIce) {
         weightAboveWithoutIceError = "The weight above without is required";
        } else {
         weightAboveWithoutIceError = ""
        }
-       if (!this.aircraft.getWeightBellowWithIce) {
+       if (!this.table.weightBellowWithIce) {
         weightBellowWithIceError = "The weight bellow with ice is required";
        } else {
         weightBellowWithIceError = ""
        }
-       if (!this.aircraft.getWeightAboveWithIce) {
+       if (!this.table.weightAboveWithIce) {
         weightAboveWithIceError = "The weight above with ice is required";
        } else {
         weightAboveWithIceError = ""
        }
-       if (!this.aircraft.getAltitudeReference) {
+       if (!this.table.altitudeReference) {
         altitudeReferenceError = "The altitude reference is required";
        } else {
         altitudeReferenceError = ""
        }
-       if (!this.aircraft.getAltitudeWithIce) {
+       if (!this.table.altitudeWithIce) {
         altitudeWithIceError = "The altitude with ice is required";
        } else {
         altitudeWithIceError = ""
        }
-       if (!this.aircraft.getAltitudeWithoutIce) {
+       if (!this.table.altitudeWithoutIce) {
         altitudeWithoutIceError = "The altitude without ice is required";
        } else {
         altitudeWithoutIceError = ""
        }
-       if (!this.aircraft.getTempReference) {
+       if (!this.table.tempReference) {
         tempReferenceError = "The temperature reference is required";
        } else {
         tempReferenceError = ""
        }
-       if (!this.aircraft.getTempBellowWithIce) {
+       if (!this.table.tempBellowWithIce) {
         tempBellowWithIceError = "The temperature bellow with ice is required";
        } else {
         tempBellowWithIceError = ""
        }
-       if (!this.aircraft.getTempAboveWithIce) {
+       if (!this.table.tempAboveWithIce) {
         tempAboveWithIceError = "The temperature above with ice is required";
        } else {
         tempAboveWithIceError = ""
        }
-       if (!this.aircraft.getTempBellowWithoutIce) {
+       if (!this.table.tempBellowWithoutIce) {
         tempBellowWithoutIceError = "The temperature bellow with ice is required";
        } else {
         tempBellowWithoutIceError = ""
        }
-       if (!this.aircraft.getTempAboveWithoutIce) {
+       if (!this.table.tempAboveWithoutIce) {
         tempAboveWithoutIceError = "The temperature above without ice is required";
        } else {
         tempAboveWithoutIceError = ""
        }
-       if (!this.aircraft.getWindReference) {
+       if (!this.table.windReference) {
         windReferenceError = "The wind reference is required";
        } else {
         windReferenceError = ""
        }
-       if (!this.aircraft.getWindHeadWithIce) {
+       if (!this.table.windHeadWithIce) {
         windHeadWithIceError = "The wind head with ice is required";
        } else {
         windHeadWithIceError = ""
        }
-       if (!this.aircraft.getWindTailWithIce) {
+       if (!this.table.windTailWithIce) {
         windTailWithIceError = "The wind tail with ice is required";
        } else {
         windTailWithIceError = ""
        }
-       if (!this.aircraft.getWindHeadWithoutIce) {
+       if (!this.table.windHeadWithoutIce) {
         windHeadWithoutIceError = "The wind head without is required";
        } else {
         windHeadWithoutIceError = ""
        }
-       if (!this.aircraft.getWindTailWithoutIce) {
+       if (!this.table.windTailWithoutIce) {
         windTailWithoutIceError = "The wind tail without ice is required";
        } else {
         windTailWithoutIceError = ""
        }
-       if (!this.aircraft.getSlopeReference) {
+       if (!this.table.slopeReference) {
         slopeReferenceError = "The slope reference is required";
        } else {
         slopeReferenceError = ""
        }
-       if (!this.aircraft.getSlopeUphillWithIce) {
+       if (!this.table.slopeUphillWithIce) {
         slopeUphillWithIceError = "The slope uphill with ice is required";
        } else {
         slopeUphillWithIceError = ""
        }
-       if (!this.aircraft.getSlopeDownhillWithIce) {
+       if (!this.table.slopeDownhillWithIce) {
         slopeDownhillWithIceError = "The slope downhill with ice is required";
        } else {
         slopeDownhillWithIceError = ""
        }
-       if (!this.aircraft.getSlopeUphillWithoutIce) {
+       if (!this.table.slopeUphillWithoutIce) {
         slopeUphillWithoutIceError = "The slope uphill without ice is required";
        } else {
         slopeUphillWithoutIceError = ""
        }
-       if (!this.aircraft.getSlopeDownhillWithoutIce) {
+       if (!this.table.slopeDownhillWithoutIce) {
         slopeDownhillWithoutIceError = "The slope downhill without ice is required";
        } else {
         slopeDownhillWithoutIceError = ""
        }
-       if (!this.aircraft.getOverspeedReference) {
+       if (!this.table.overspeedReference) {
         overspeedReferenceError = "The overspeed reference is required";
        } else {
         overspeedReferenceError = ""
        }
-       if (!this.aircraft.getOverspeedWithIce) {
+       if (!this.table.overspeedWithIce) {
         overspeedWithIceError = "The overspeed with ice is required";
        } else {
         overspeedWithIceError = ""
        }
-       if (!this.aircraft.getOverspeedWithoutIce) {
+       if (!this.table.overspeedWithoutIce) {
         overspeedWithoutIceError = "The overspeed without ice is required";
        } else {
         overspeedWithoutIceError = ""
        }
-       if (!this.aircraft.getReverserWithIce) {
+       if (!this.table.reverserWithIce) {
         reverserWithIceError = "The reverser with ice is required";
        } else {
         reverserWithIceError = ""
        }
-       if (!this.aircraft.getReverserWithoutIce) {
+       if (!this.table.reverserWithoutIce) {
         reverserWithoutIceError = "The reverser without ice is required";
        } else {
         reverserWithoutIceError = ""
@@ -878,41 +879,41 @@ class cadastroAeronave extends Component<any, state>{
                 flap: this.aircraft.getFlapValue,
                 reverserAmount: this.aircraft.getReverserAmount,
                 brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
-            })
-            
-            axios.post("http://localhost:3001/operationDistance/cadastrar",{
-                refWithouIce: 2312321,
-                refWithIce: 324234,
-                weightReference: 21121,
-                weightBellowWithoutIce: 121212121,
-                weightAboveWithoutIce: 1,
-                weightBellowWithIce: 2,
-                weightAboveWithIce: 0,
-                altitudeReference: 65656,
-                altitudeWithIce: 9077,
-                altitudeWithoutIce: 213,
-                tempReference: 21121,
-                tempBellowWithIce: 121212121,
-                tempAboveWithIce: 1,
-                tempBellowWithoutIce: 2,
-                tempAboveWithoutIce: 0,
-                windReference: 35325,
-                windHeadWithIce: 5235,
-                windTailWithIce: 35,
-                windHeadWithoutIce: 21121,
-                windTailWithoutIce: 121212121,
-                slopeReference: 1,
-                slopeUphillWithIce: 2,
-                slopeDownhillWithIce: 0,
-                slopeUphillWithoutIce: 435435,
-                slopeDownhillWithoutIce: 45345,
-                overspeedReference: 89789,
-                overspeedWithIce: 21121,
-                overspeedWithotIce: 121212121,
-                reverserWithIce: 851818,
-                reverserWithoutIce: 949498,
-                airplaneId: 1
-            })
+            }).then((response) => {
+                axios.post("http://localhost:3001/operationDistance/cadastrar",{
+                    refWithoutIce: this.table.refWithoutIce,
+                    refWithIce: this.table.refWithIce,
+                    weightReference: this.table.weightReference,
+                    weightBellowWithoutIce: this.table.weightBellowWithoutIce,
+                    weightAboveWithoutIce: this.table.weightAboveWithoutIce,
+                    weightBellowWithIce: this.table.weightBellowWithIce,
+                    weightAboveWithIce: this.table.weightAboveWithIce,
+                    altitudeReference: this.table.altitudeReference,
+                    altitudeWithIce: this.table.altitudeWithIce,
+                    altitudeWithoutIce: this.table.altitudeWithoutIce,
+                    tempReference: this.table.tempReference,
+                    tempBellowWithIce: this.table.tempBellowWithIce,
+                    tempAboveWithIce: this.table.tempAboveWithIce,
+                    tempBellowWithoutIce: this.table.tempBellowWithoutIce,
+                    tempAboveWithoutIce: this.table.tempAboveWithoutIce,
+                    windReference: this.table.windReference,
+                    windHeadWithIce: this.table.windHeadWithIce,
+                    windTailWithIce: this.table.windTailWithIce,
+                    windHeadWithoutIce: this.table.windHeadWithoutIce,
+                    windTailWithoutIce: this.table.windTailWithoutIce,
+                    slopeReference: this.table.slopeReference,
+                    slopeUphillWithIce: this.table.slopeUphillWithIce,
+                    slopeDownhillWithIce: this.table.slopeDownhillWithIce,
+                    slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
+                    slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
+                    overspeedReference: this.table.overspeedReference,
+                    overspeedWithIce: this.table.overspeedWithIce,
+                    overspeedWithoutIce: this.table.overspeedWithoutIce,
+                    reverserWithIce: this.table.reverserWithIce,
+                    reverserWithoutIce: this.table.reverserWithoutIce,
+                    airplaneId: response.data.id
+                })
+            });
 
             Swal.fire({
                 position: 'center',
