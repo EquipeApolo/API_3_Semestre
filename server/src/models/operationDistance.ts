@@ -7,7 +7,6 @@ const airplaneId = require('./airplaneTable')
 const operationDistance = database.define('operationDistance', {
     id: {
         type: Sequelize.INTEGER,
-        autoIncrement: true,
         allowNull: false,
         primaryKey: true
     },

@@ -883,6 +883,7 @@ class editarAeronave extends Component<any, state>{
                 brakingApplicationLevel: this.state.aircraft.getBrakingApplicationLevel
             })
             axios.put("http://localhost:3001/operationDistance/modificar/" + this.props.taskId,{
+                    id: this.props.taskId,
                     refWithoutIce: this.state.table.refWithoutIce,
                     refWithIce: this.state.table.refWithIce,
                     weightReference: this.state.table.weightReference,

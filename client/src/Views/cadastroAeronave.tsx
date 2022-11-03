@@ -875,6 +875,7 @@ class cadastroAeronave extends Component<any, state>{
             console.log(res);
 
             axios.post("http://localhost:3001/operationDistance/cadastrar",{
+                    id: res,
                     refWithoutIce: this.table.refWithoutIce,
                     refWithIce: this.table.refWithIce,
                     weightReference: this.table.weightReference,
