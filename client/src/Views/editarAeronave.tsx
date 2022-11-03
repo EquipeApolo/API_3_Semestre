@@ -998,6 +998,299 @@ class editarAeronave extends Component<any, state>{
                                 </Col>
                                 <Col>
                                 </Col>
+                                <Container>
+                                    <Form>
+                                        <Row>
+                                            <h2 className="pt-5 pb-5 text-center">Operational Landing Configuration</h2>
+                                            <Row></Row>
+                                            <Row>
+                                                <Col className="pb-4">
+                                                    <h4>&#x2022; Reference</h4>
+                                                </Col>
+                                            </Row>
+                                            <Col>
+                                                <h5 className="card-title">Reference With Ice (M)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithIce" placeholder="Reference with ice" onChange={this.refWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.refWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Reference Without Ice (M)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithoutIce" placeholder="Reference without ice" onChange={this.refWithouIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.refWithouIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+
+                                            <Row>
+                                                <Col className="pt-4 pb-4">
+                                                    <h4>&#x2022; Weight</h4>
+                                                </Col>
+                                            </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Weight Reference (Kg)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightReference" placeholder="Wheight Reference" onChange={this.weightReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.weightReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Weight Bellow Without Ice (Kg)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithoutIce" placeholder="Weight Bellow Without Ice" onChange={this.weightBellowWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.weightBellowWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Weight Above Without Ice (Kg)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithoutIce" placeholder="Weight Above Without Ice" onChange={this.weightAboveWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.weightAboveWithoutIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Weight Bellow With Ice (Kg)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithIce" placeholder="Weight Bellow With Ice" onChange={this.weightBellowWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.weightBellowWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Weight Above With Ice (Kg)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithIce" placeholder="Weight Above With Ice" onChange={this.weightAboveWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.weightAboveWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Altitude</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Altitude Reference (Ft)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeReference" placeholder="Altitude Reference" onChange={this.altitudeReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.altitudeReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Altitude With Ice (Ft)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithIce" placeholder="Altitude With Ice" onChange={this.altitudeWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.altitudeWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Altitude Without Ice (Ft)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithoutIce" placeholder="Altitude Without Ice" onChange={this.altitudeWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.altitudeWithoutIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Temperature</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Temperature Reference (ºC)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempReference" placeholder="Temperature Reference" onChange={this.tempReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.tempReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Temperature Bellow With Ice (ºC)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithIce" placeholder="Temperature Bellow With Ice" onChange={this.tempBellowWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.tempBellowWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Temperature Above With Ice (ºC)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithIce" placeholder="Temperature Above With Ice" onChange={this.tempAboveWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.tempAboveWithIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Temperature Bellow Without Ice (ºC)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithoutIce" placeholder="Temperature Bellow Without Ice" onChange={this.tempBellowWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.tempBellowWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Temperature Above Without Ice (ºC)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithoutIce" placeholder="Temperature Above Without Ice" onChange={this.tempAboveWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.tempAboveWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Wind</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Wind Reference (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windReference" placeholder="Wind Reference" onChange={this.windReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.windReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Wind Head With Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithIce" placeholder="Wind Head With Ice" onChange={this.windHeadWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.windHeadWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Wind Tail With Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithIce" placeholder="Wind Tail With Ice" onChange={this.windTailWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.windTailWithIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Wind Head Without Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithoutIce" placeholder="Wind Head Without Ice" onChange={this.windHeadWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.windHeadWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Wind Tail Without Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithoutIce" placeholder="Wind Tail Without Ice" onChange={this.windTailWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.windTailWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Slope</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Slope Reference</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeReference" placeholder="Slope Reference" onChange={this.slopeReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.slopeReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Slope Uphill With Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithIce" placeholder="Slope Uphill With Ice" onChange={this.slopeUphillWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.slopeUphillWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Slope Downhill With Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithIce" placeholder="Slope Downhill With Ice" onChange={this.slopeDownhillWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.slopeDownhillWithIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Slope Uphill Without Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithoutIce" placeholder="Slope Uphill Without Ice" onChange={this.slopeUphillWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.slopeUphillWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Slope Downhill Without Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithoutIce" placeholder="Slope Downhill Without Ice" onChange={this.slopeDownhillWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.slopeDownhillWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+                                        </Row>
+                                            
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Overspeed</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Overspeed Reference (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedReference" placeholder="Overspeed Reference" onChange={this.overspeedReferenceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.overspeedReferenceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Overspeed With Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithIce" placeholder="Overspeed With Ice" onChange={this.overspeedWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.overspeedWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Overspeed Without Ice (Kt)</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithoutIce" placeholder="Overspeed Without Ice" onChange={this.overspeedWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.overspeedWithoutIceError}
+                                                </div>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col className="pt-4 pb-4">
+                                                <h4>&#x2022; Reverser</h4>
+                                            </Col>
+                                        </Row>
+                                        <Row>
+                                            <Col>
+                                                <h5 className="card-title">Reverser With Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithIce" placeholder="Reverser With Ice" onChange={this.reverserWithIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.reverserWithIceError}
+                                                </div>
+                                            </Col>
+                                            <Col>
+                                                <h5 className="card-title">Reverser Without Ice</h5>
+                                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithoutIce" placeholder="Reverser Without Ice" onChange={this.reverserWithoutIceChange} />
+                                                <div style={{ fontSize: 12, color: "red" }}>
+                                                {this.state.reverserWithoutIceError}
+                                                </div>
+                                            </Col>
+                                            <Col></Col>
+                                        </Row>
+                                    </Form>
+                                </Container>
                             </Row>
                             <Row className="px-2 mt-5">
                                 <Col/>
