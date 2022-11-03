@@ -8,6 +8,7 @@ import Aircraft from '../Models/aircraft';
 import { BrakingLevel, RunwayCondition, UnitMeasurement } from '../Enuns/enuns';
 import Calcular from '../Models/calcular';
 import axios from "axios";
+import Table from '../Models/table';
 
 type state = {
   weightTitle: string,
@@ -72,6 +73,43 @@ class Calculo extends Component<{}, state>{
         dados: dadosBanco
       })
     })
+    let aircraft = new Aircraft("", "", "", 220, 2, 100, 100, 100)
+    let table = new Table();
+    table.altitudeReference = 1000
+    table.altitudeWithIce = 29
+    table.altitudeWithoutIce = 26
+    table.overspeedReference = 5
+    table.overspeedWithIce = 115
+    table.overspeedWithoutIce = 110
+    table.refWithIce = 1115
+    table.refWithoutIce = 1026
+    table.reverserWithIce = 30
+    table.reverserWithoutIce = 24
+    table.slopeDownhillWithIce = 148
+    table.slopeDownhillWithoutIce = 139
+    table.slopeReference = 1
+    table.slopeUphillWithIce = -6
+    table.slopeUphillWithoutIce = -5
+    table.tempAboveWithIce = 20
+    table.tempAboveWithoutIce = 18
+    table.tempBellowWithIce = -11
+    table.tempBellowWithoutIce = -10
+    table.tempReference = 5
+    table.weightReference = 43000
+    table.weightAboveWithIce = 18
+    table.weightAboveWithoutIce = 16
+    table.weightBellowWithIce = -18
+    table.weightBellowWithoutIce = -17
+    table.windHeadWithIce = -23
+    table.windHeadWithoutIce = -22
+    table.windReference = 5
+    table.windTailWithIce = 111
+    table.windTailWithoutIce = 101
+
+    debugger
+    let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
+        BrakingLevel.MAXMANUAL, true, 10, table);
+      console.log(calcular.calcular())
   }
 
 
@@ -362,8 +400,40 @@ class Calculo extends Component<{}, state>{
 //#endregion
   generateCalculo(): number{
     let aircraft = this.getAircraft();
-    let calcular = new Calcular(aircraft, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
-        this.brakingLevel, this.iceAccreation, this.overspeed);
+    let table = new Table();
+    table.altitudeReference = 1000
+    table.altitudeWithIce = 29
+    table.altitudeWithoutIce = 26
+    table.overspeedReference = 5
+    table.overspeedWithIce = 115
+    table.overspeedWithoutIce = 110
+    table.refWithIce = 1115
+    table.refWithoutIce = 1026
+    table.reverserWithIce = 30
+    table.reverserWithoutIce = 24
+    table.slopeDownhillWithIce = 148
+    table.slopeDownhillWithoutIce = 139
+    table.slopeReference = 1
+    table.slopeUphillWithIce = -6
+    table.slopeUphillWithoutIce = -5
+    table.tempAboveWithIce = 20
+    table.tempAboveWithoutIce = 18
+    table.tempBellowWithIce = -11
+    table.tempBellowWithoutIce = -10
+    table.tempReference = 5
+    table.weightAboveWithIce = 18
+    table.weightAboveWithoutIce = 16
+    table.weightBellowWithIce = -18
+    table.weightBellowWithoutIce = -17
+    table.windHeadWithIce = -23
+    table.windHeadWithoutIce = -22
+    table.windReference = 5
+    table.windTailWithIce = 111
+    table.windTailWithoutIce = 101
+
+    debugger
+    let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
+        BrakingLevel.MAXMANUAL, true, 10, table);
     
     return calcular.calcular();
   }

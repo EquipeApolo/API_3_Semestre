@@ -9,7 +9,7 @@ export default class Slope extends FatorCalculo{
     private table: Table;
     constructor(aircraft: Aircraft, input: number, unidadeMedida: UnitMeasurement, temGelo: boolean, BRK: number, table: Table){
         super();
-        this.valorInput = input;
+        this.valor = input;
         this.unidadeMedida = unidadeMedida;
         this.temGelo = temGelo;
         this.BRK = BRK;
@@ -24,20 +24,20 @@ export default class Slope extends FatorCalculo{
 
     calcular(): number {
         if(this.temGelo){
-            if(this.valor > this.table.slopeReference){
-                let peso = this.valor - this.table.slopeReference;
-                return peso / 5 * this.table.slopeDownhillWithIce
-            } else {
-                let peso = this.table.slopeReference - this.valor;
-                return peso / 5 * this.table.slopeUphillWithIce
+            if(this.valor > 0){
+                return this.valor / this.table.slopeReference * this.table.slopeDownhillWithIce
+            } else if(this.valor < 0){
+                return this.valor / this.table.slopeReference * this.table.slopeUphillWithIce
+            }else{
+                return 0
             }
         } else {
-            if(this.valor > this.table.slopeReference){
-                let peso = this.valor - this.table.slopeReference;
-                return peso / 5 * this.table.slopeDownhillWithoutIce
-            } else {
-                let peso = this.table.slopeReference - this.valor;
-                return peso / 5 * this.table.slopeUphillWithoutIce
+            if(this.valor > 0){
+                return this.valor / this.table.slopeReference * this.table.slopeDownhillWithoutIce
+            } else if(this.valor < 0){
+                return this.valor / this.table.slopeReference * this.table.slopeUphillWithoutIce
+            }else{
+                return 0
             }
         }
     }

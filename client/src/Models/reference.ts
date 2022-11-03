@@ -25,9 +25,9 @@ export default class Reference extends FatorCalculo{
 
     public calcular(): number {
         if(this.temGelo){
-            return this.valor + this.table.refWithIce
+            return this.table.refWithIce
         } else {
-            return this.valor + this.table.refWithouIce
+            return this.table.refWithoutIce
         }
     }
 }

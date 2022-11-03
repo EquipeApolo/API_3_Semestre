@@ -19,7 +19,7 @@ export default class Overspeed extends FatorCalculo{
 
     public converterSistema(unitMeasurement: UnitMeasurement): void {
         if(this.unidadeMedida !== unitMeasurement){
-            this.valor = this.valorInput * 1.944;
+            this.valor = this.valorInput / 1.852;
         }else{
             this.valor = this.valorInput;
         }
@@ -29,11 +29,9 @@ export default class Overspeed extends FatorCalculo{
         this.converterSistema(UnitMeasurement.IMPERIAL);
             if(this.temGelo)
             {
-                let peso = this.valor - this.table.overspeedReference;
-                return peso / 5 * this.table.overspeedWithIce
+                return this.valor / this.table.overspeedReference * this.table.overspeedWithIce
             } else {
-                let peso = this.valor - this.table.overspeedReference;
-                return peso / 5 * this.table.overspeedWithotIce;
+                return  this.valor / this.table.overspeedReference * this.table.overspeedWithoutIce;
             }
     }
     

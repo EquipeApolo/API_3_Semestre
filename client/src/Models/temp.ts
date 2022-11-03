@@ -28,20 +28,20 @@ export default class Temperature extends FatorCalculo{
     public calcular(): number {
         this.converterSistema(UnitMeasurement.INTERNACIONAL);
         if(this.temGelo){
-            if(this.valor > this.table.tempReference){
-                let peso = this.valor - this.table.tempReference;
-                return peso / 5 * this.table.tempAboveWithIce
-            } else {
-                let peso = this.table.tempReference - this.valor;
-                return peso / 5 * this.table.tempBellowWithIce
+            if(this.valor > 0){
+                return this.valor / this.table.tempReference * this.table.tempAboveWithIce
+            }else if (this.valor < 0){
+                return this.valor / this.table.tempReference * this.table.tempBellowWithIce
+            }else{
+                return 0
             }
         } else {
-            if(this.valor > this.table.tempReference){
-                let peso = this.valor - this.table.tempReference;
-                return peso / 5 * this.table.tempAboveWithoutIce
-            } else {
-                let peso = this.table.tempReference - this.valor;
-                return peso / 5 * this.table.tempBellowWithoutIce
+            if(this.valor > 0){
+                return this.valor / this.table.tempReference * this.table.tempAboveWithoutIce
+            } else if(this.valor < 0) {
+                return this.valor / this.table.tempReference * this.table.tempBellowWithoutIce
+            }else{
+                return 0
             }
         }
     }
