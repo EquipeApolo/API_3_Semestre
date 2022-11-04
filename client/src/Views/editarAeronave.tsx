@@ -1324,14 +1324,13 @@ class editarAeronave extends Component<any, state>{
                             <Row className="px-2 mt-5">
                                 <Col/>
                             </Row>
-                            <Row className="px-2">
+                            <Row>
                                 <Col>
-                                    <Button className="botao-resultado" size="lg" onClick={this.postClickButton}>Save</Button>
+                                    <Button variant="danger" style={{margin:'10px', marginTop:'0px'}} size='lg' href="/airplanes">Back</Button>
+                                    <Button className="botao-resultado" style={{margin:'10px', marginTop:'0px'}} size="lg" onClick={this.postClickButton}>Save</Button>
                                 </Col>
                                 <Col></Col>
-                                <Col>
-                                    <Button variant="danger" size='lg' href="/airplanes">Back</Button>
-                                </Col>
+                                <Col></Col>
                             </Row>
                         </Form>
                     </Container>
