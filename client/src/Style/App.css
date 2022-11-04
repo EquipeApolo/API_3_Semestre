@@ -9,6 +9,13 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+@media (max-width: 500px){
+	.row{
+		display:block;
+	}
+}
+
+
 .input{
   background-color: transparent;
     border: none;
