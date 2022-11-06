@@ -16,13 +16,13 @@
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "../imagens/Wireframe - Sprint 2"></p>
+<p align="center"> <img src = ""></p>
 <br>
   
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "../burndown3print.png"></p>
+<p align="center"> <img src = "../burndown3print"></p>
 <br>
 
   
