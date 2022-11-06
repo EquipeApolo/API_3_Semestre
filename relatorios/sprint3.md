@@ -29,7 +29,7 @@
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "../imagens/"></p>
+<p align="center"> <img src = "../imagens/features3sprint.gif"></p>
 <br>
    
   → [Voltar ao topo](#topo)
