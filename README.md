@@ -39,7 +39,7 @@
 <h4> Entrega da Sprint 2 </h4>
 <p align="center"> <img src = "imagens/video - sprint2.gif"></p>
 <h4> Entrega da Sprint 3 </h4>
-<p align="center"> <img src = ""></p>
+<p align="center"> <img src = "imagens/features3sprint.gif"></p>
 <h4> Entrega da Sprint 4 </h4>
 <p align="center"> <img src = ""></p>
 <br>
@@ -53,7 +53,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 |:-----:|:----------:|:---------:|:---------:|
 | 01 | 18/09/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/1sprint.md) |
 | 02 | 09/10/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint2.md) |
-| 03 | 06/11/2022 | :clock12:	         | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
+| 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
 | 04 | 27/11/2022 | :clock12:	 | ver relatório |
  
 <span id="projeto">
