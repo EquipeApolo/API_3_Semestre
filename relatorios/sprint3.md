@@ -16,7 +16,7 @@
   
   
  <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = ""></p>
+<p align="center"> <img src = "../imagens/wireframe3sprint.jfif"></p>
 <br>
   
 <span id="burndown">
