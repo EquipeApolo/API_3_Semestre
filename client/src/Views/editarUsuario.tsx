@@ -139,8 +139,8 @@ class EditarUsuario extends Component<any, state>{
             axios.put("http://localhost:3001/users/modificar/" + this.props.taskId, {
                 name: this.state.user.getName,
                 email: this.state.user.getEmail,
-                password: this.state.user.getPassword,
-                typeUser: this.state.user.getTypeUser
+                senha: this.state.user.getPassword,
+                tipoUsuario: this.state.user.getTypeUser
             })
 
             Swal.fire({
@@ -204,8 +204,7 @@ class EditarUsuario extends Component<any, state>{
                     <Row>
                         <Col md={{ span: 6, offset: 3}}>
                             <h5 className="card-title"  style={{ marginTop: "30px" }}>Type of User</h5>
-                            <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnTypeUser" onChange={this.typeUserChange} value={this.state.user.getTypeUser}>
-                                <option value="-1" disabled>Select</option>
+                            <select className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnTypeUser" onChange={this.typeUserChange} value={this.state.user.getTypeUser}>
                                 <option value="User">User</option>
                                 <option value="Adm">Adm</option>
                             </select>
