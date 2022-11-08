@@ -22,6 +22,10 @@ const users = database.define('users', {
     senha: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    tipoUsuario: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 })
 
