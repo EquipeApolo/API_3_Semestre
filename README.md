@@ -63,26 +63,32 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = "imagens/backlog.png"></p>
+<p align="center"> <img src = "imagens/backlogFinal.png"></p>
  
  ## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
 
-| Sprint | Atividade |
-|:-----:|:---------:|
-| 01 | Página de cálculo do comprimento de pista. |
-| 01 | Interface de cálculo visando acesso via tablet. |
-| 01 | Aplicar sistemas de unidade de medida. |
-| 02 | Página de cadastro de aeronaves. |
-| 02 | Realização da lógica dos cálculos a partir das tabelas. |
-| 03 | Página de edição de aeronaves. |
-| 02 | Adequar interface às configurações da aeronave. |
-| 03 | Página de visualização do histórico de cálculos. |
-| 03 | Salvar histórico de cálculos no banco. |
-| 04 | Página de cadastro de usuário. |
-| 04 | Página de login (administrador/usuário) |
-| 04 | Upar servidor na nuvem. |
-| 04 | Documentação de Software. |
+| Sprint | Atividade | Status |
+|:-----:|:---------:|:---------:|
+| 01 | Página de cálculo do comprimento de pista. | :heavy_check_mark: |
+| 01 | Interface de cálculo visando acesso via tablet. | :heavy_check_mark: |
+| 01 | Aplicar sistemas de unidade de medida. | :heavy_check_mark: |
+| 02 | Página de cadastro de aeronaves. | :heavy_check_mark: |
+| 02 | Realização da lógica dos cálculos a partir das tabelas. | :heavy_check_mark: |
+| 02 | Adequar interface às configurações da aeronave. | :heavy_check_mark: |
+| 02 | Banco de dados na nuvem. | :heavy_check_mark: |
+| 02 | Aplicação de validação de campos nos cálculos. | :heavy_check_mark: |
+| 03 | Página de visualização e edição de aeronaves. | :heavy_check_mark: |
+| 03 | Aplicar uma solução agnóstica a tabela fornecida para os cálculos. | :heavy_check_mark: |
+| 03 | Adaptar cadastro de aeronaves para a solução agnóstica. | :heavy_check_mark: |
+| 03 | CRUD de aeronaves completo. | :heavy_check_mark: |
+| 04 | Página de histórico de cálculos. | :clock12: |
+| 04 | CRUD de usuários completo. | :clock12: |
+| 04 | Página de cadastro de usuário. | :clock12: |
+| 04 | Página de visualização e edição de usuários. | :clock12: |
+| 04 | Página de login (administrador/usuário) | :clock12: |
+| 04 | Upar servidor na nuvem. | :clock12: |
+| 04 | Navegação do sistema (paginação). | :clock12: |
  
 <br>
 <span id="equipe">
