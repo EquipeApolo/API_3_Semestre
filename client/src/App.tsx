@@ -6,8 +6,9 @@ import CadastroAeronave from './Views/cadastroAeronave';
 import EditarAeronave from './Views/editarAeronave';
 import AircraftTable from './Views/listaAeronaves';
 import CadastroUsuario from './Views/cadastroUsuario';
+import EditarUsuario from './Views/editarUsuario';
 
-function GetId(){
+function GetIdAeronave(){
   const { id } = useParams()
   console.log(id)
   return (
@@ -16,7 +17,15 @@ function GetId(){
     </div>
   )
 }
-
+function GetIdUsuario(){
+  const { id } = useParams()
+  console.log(id)
+  return (
+    <div>
+      <EditarUsuario taskId={id}></EditarUsuario>
+    </div>
+  )
+}
 function App() {
   return (
     <BrowserRouter>
@@ -25,9 +34,10 @@ function App() {
     <Route path="*" element={<Navigate to="/" />}/>
     <Route path="/teste" element={<Teste/>}/>
     <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
-    <Route path="/editAirplane/:id" element={<GetId/>}/>
+    <Route path="/editAirplane/:id" element={<GetIdAeronave/>}/>
     <Route path="/airplanes" element={<AircraftTable/>}/>
     <Route path="/registerUser" element={<CadastroUsuario />}/>
+    <Route path="/editarUsuario/:id" element={<GetIdUsuario/>}/>
     </Routes>
     </BrowserRouter>
   );
