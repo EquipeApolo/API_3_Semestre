@@ -7,6 +7,7 @@ import EditarAeronave from './Views/editarAeronave';
 import AircraftTable from './Views/listaAeronaves';
 import CadastroUsuario from './Views/cadastroUsuario';
 import EditarUsuario from './Views/editarUsuario';
+import TelaLogin from './Views/telaLogin';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -29,16 +30,17 @@ function GetIdUsuario(){
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-    <Route index element={<Calculo/>}/>
-    <Route path="*" element={<Navigate to="/" />}/>
-    <Route path="/teste" element={<Teste/>}/>
-    <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
-    <Route path="/editAirplane/:id" element={<GetIdAeronave/>}/>
-    <Route path="/airplanes" element={<AircraftTable/>}/>
-    <Route path="/registerUser" element={<CadastroUsuario />}/>
-    <Route path="/editarUsuario/:id" element={<GetIdUsuario/>}/>
-    </Routes>
+      <Routes>
+        <Route index element={<Calculo/>}/>
+        <Route path="*" element={<Navigate to="/" />}/>
+        <Route path="/teste" element={<Teste/>}/>
+        <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
+        <Route path="/editAirplane/:id" element={<GetIdAeronave/>}/>
+        <Route path="/airplanes" element={<AircraftTable/>}/>
+        <Route path="/telaLogin" element={<TelaLogin/>}/>
+        <Route path="/registerUser" element={<CadastroUsuario />}/>
+        <Route path="/editarUsuario/:id" element={<GetIdUsuario/>}/>
+      </Routes>
     </BrowserRouter>
   );
 }
