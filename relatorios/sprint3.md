@@ -22,7 +22,7 @@
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "../imagens/burndown3print.png"></p>
+<p align="center"> <img src = "../imagens/burndown3sprint.png"></p>
 <br>
 
   
