@@ -25,7 +25,8 @@ export default class Wind extends FatorCalculo{
     }
 
     calcular(): number {
-        this.converterSistema(UnitMeasurement.IMPERIAL);
+        // this.converterSistema(UnitMeasurement.IMPERIAL);
+        this.valor = this.valorInput;
             if(this.temGelo){
                 if(this.valor > 0){
                     return this.valor / this.table.windReference * this.table.windTailWithIce

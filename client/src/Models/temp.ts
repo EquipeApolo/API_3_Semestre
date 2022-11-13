@@ -25,7 +25,8 @@ export default class Temperature extends FatorCalculo{
     }
 
     public calcular(): number {
-        this.converterSistema(UnitMeasurement.INTERNACIONAL);
+        // this.converterSistema(UnitMeasurement.INTERNACIONAL);
+        this.valor = this.valorInput;
         if(this.temGelo){
             if(this.valor > 0){
                 return this.valor / this.table.tempReference * this.table.tempAboveWithIce

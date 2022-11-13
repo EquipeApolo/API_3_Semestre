@@ -81,7 +81,12 @@ class Calculo extends Component<{}, state>{
       })
     })
 
-
+    this.setState({
+      windTitle: "(Kt)",
+      airportAltitudeTitle: "(Ft)",
+      temperatureTitle: "(ºC)",
+      overspeedTitle: "(Kt)"
+    });
     // debugger
     // let calcular = new Calcular(aircraft, UnitMeasurement.INTERNACIONAL, 40000, 1200, 2, 15, 20,
     //     BrakingLevel.MAXMANUAL, true, 10, table);
@@ -111,19 +116,11 @@ class Calculo extends Component<{}, state>{
       this.unitMeasurement = UnitMeasurement.INTERNACIONAL;
       this.setState({
         weightTitle: "(Kg)",
-        windTitle: "(Km/h)",
-        airportAltitudeTitle: "(M)",
-        temperatureTitle: "(ºC)",
-        overspeedTitle: "(Km/h)"
       });
     } else if (target.value == 2) {
       this.unitMeasurement = UnitMeasurement.IMPERIAL;
       this.setState({
         weightTitle: "(Lb)",
-        windTitle: "(Wt)",
-        airportAltitudeTitle: "(Ft)",
-        temperatureTitle: "(ºF)",
-        overspeedTitle: "(Wt)"
       });
     } else {
       this.setState({
@@ -160,9 +157,7 @@ class Calculo extends Component<{}, state>{
     if (this.state.windError.includes("required")) {
       this.setState({ windError: "" })
     }
-    if (this.wind == 0) {
-      this.setState({ windError: "The wind must be different than 0" })
-    }
+
     if (this.state.result != "") this.setState({ result: "" })
   }
 
@@ -171,14 +166,20 @@ class Calculo extends Component<{}, state>{
     this.aircraftWeight = target.value;
 
     if(!this.aircraftSelected){
-      if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+      let minimumBoth = 10000
+      let maximumBoth = 1000000
+
+      if(this.state.weightTitle == "(Lb)"){
+        minimumBoth *= 2.205
+        maximumBoth *= 2.205
+      }
+      if (this.state.weightError.includes("required") && this.aircraftWeight >= minimumBoth && this.aircraftSelected <= maximumBoth) {
         this.setState({ weightError: "" })
       }
 
-      if (this.aircraftWeight < 10000) {
-        this.setState({ weightError: "The weight must be above 10000" })
+      if (this.state.weightError.includes("must be") && this.aircraftWeight >= minimumBoth && this.aircraftSelected <= maximumBoth) {
+        this.setState({ weightError: "" })
       }
-
     }else{
       let airplane = this.getAircraft()
       let minWeight = airplane.getAircraftWeightMin
@@ -189,14 +190,18 @@ class Calculo extends Component<{}, state>{
         maxWeight *= 2.205
       }
       
-      if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+      if (this.state.weightError.includes("required") && this.aircraftWeight >= minWeight && this.aircraftSelected <= maxWeight) {
+        this.setState({ weightError: "" })
+      }
+
+      if (this.state.weightError.includes("must be") && this.aircraftWeight >= minWeight && this.aircraftSelected <= maxWeight) {
         this.setState({ weightError: "" })
       }
 
       if(this.aircraftWeight > maxWeight){
-        this.setState({ weightError: "The weight must be bellow " + maxWeight })
+        this.setState({ weightError: "The weight must be bellow " + maxWeight + " kg" })
       }else if(this.aircraftWeight < minWeight){
-        this.setState({ weightError: "The weight must be above " + minWeight })
+        this.setState({ weightError: "The weight must be above " + minWeight + " kg"})
       }
 
     }
@@ -205,9 +210,17 @@ class Calculo extends Component<{}, state>{
   slopeChange(event) {
     const target = event.target;
     this.slope = target.value;
-    if (this.state.slopeError.includes("required")) {
+    if (this.state.slopeError.includes("must be") && this.slope <= 25 && this.slope >= -25) {
       this.setState({ slopeError: "" })
     }
+
+    if(this.slope >= 26){
+      this.setState({ slopeError: "The slope must be bellow 25%."})
+    }else if(this.slope <= -26){
+      this.setState({ slopeError: "The slope must be above -25%."})  
+    }
+
+
     if (this.state.result != "") this.setState({ result: "" })
   }
 
@@ -290,46 +303,27 @@ class Calculo extends Component<{}, state>{
     }
 
     if (!this.aircraftWeight) {
-      if(!this.aircraftSelected){
-        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
-          this.setState({ weightError: "" })
-        }
-  
-        if (this.aircraftWeight < 10000) {
-          this.setState({ weightError: "The weight must be above 10000" })
-        }
-  
-      }else{
-        let airplane = this.getAircraft()
-        let minWeight = airplane.getAircraftWeightMin
-        let maxWeight = airplane.getAircraftWeightMax
-  
-        if(this.unitMeasurement == 2){
-          minWeight *= 2.205
-          maxWeight *= 2.205
-        }
-        
-        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
-          weightError = "" 
-        }
-  
-        if(this.aircraftWeight > maxWeight){
-          weightError = "The weight must be bellow " + maxWeight
-        }else if(this.aircraftWeight < minWeight){
-          weightError = "The weight must be above " + minWeight
-        }
-  
-      }
-      weightError = ""
+      weightError = "The weight is required"
     } else {
-
+      let minimumBoth = 10000
+      let maximumBoth = 1000000
+      if(this.unitMeasurement == 2){
+        minimumBoth *= 2.205
+        maximumBoth *= 2.205
+      }
       if(!this.aircraftSelected){
-        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+        if (this.state.weightError.includes("required") && this.aircraftWeight >= minimumBoth && this.aircraftWeight <= maximumBoth) {
+          this.setState({ weightError: "" })
+        }
+
+        if (this.state.weightError.includes("must be") && this.aircraftWeight >= minimumBoth && this.aircraftWeight <= maximumBoth) {
           this.setState({ weightError: "" })
         }
   
-        if (this.aircraftWeight < 10000) {
-          this.setState({ weightError: "The weight must be above 10000" })
+        if (this.aircraftWeight < minimumBoth) {
+          this.setState({ weightError: "The weight must be above 10000 kg" })
+        }else if(this.aircraftWeight > maximumBoth){
+          this.setState({ weightError: "The weight must be bellow 1000000 kg" })
         }
   
       }else{
@@ -342,14 +336,18 @@ class Calculo extends Component<{}, state>{
           maxWeight *= 2.205
         }
         
-        if (this.state.weightError.includes("required") || this.state.weightError.includes("above") && this.aircraftWeight >= 10000) {
+        if (this.state.weightError.includes("required") && this.aircraftWeight >= minWeight && this.aircraftWeight <= maxWeight) {
+          weightError = "" 
+        }
+
+        if (this.state.weightError.includes("must be") && this.aircraftWeight >= minWeight && this.aircraftWeight <= maxWeight) {
           weightError = "" 
         }
   
         if(this.aircraftWeight > maxWeight){
-          weightError = "The weight must be bellow " + maxWeight
+          weightError = "The weight must be bellow " + maxWeight + " kg"
         }else if(this.aircraftWeight < minWeight){
-          weightError = "The weight must be above " + minWeight
+          weightError = "The weight must be above " + minWeight + " kg"
         }else{
           weightError = ""
         }
@@ -384,7 +382,13 @@ class Calculo extends Component<{}, state>{
     if (!this.slope) {
       slopeError = "The slope is required";
     } else {
-      slopeError = ""
+      if(this.slope >= 26){
+        slopeError = "The slope must be bellow 25%."
+      }else if(this.slope <= -26){
+        slopeError = "The slope must be above -25%."
+      }else{
+        slopeError = ""
+      }
     }
     this.setState({
       aircraftError: aircraftError, altitudeError: altitudeError, brakingError: brakingError,

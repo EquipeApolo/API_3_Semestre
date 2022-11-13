@@ -25,7 +25,8 @@ export default class Overspeed extends FatorCalculo{
     }
 
     public calcular(): number {
-        this.converterSistema(UnitMeasurement.IMPERIAL);
+        // this.converterSistema(UnitMeasurement.IMPERIAL);
+        this.valor = this.valorInput;
             if(this.temGelo)
             {
                 return this.valor / this.table.overspeedReference * this.table.overspeedWithIce

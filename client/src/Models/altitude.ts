@@ -26,7 +26,8 @@ export default class AirportAltitude extends FatorCalculo{
     }
 
     public calcular(): number {
-        this.converterSistema(UnitMeasurement.IMPERIAL);
+        // this.converterSistema(UnitMeasurement.IMPERIAL);
+        this.valor = this.valorInput;
         if(this.temGelo)
         {
             let peso = this.valor - this.table.altitudeReference;
