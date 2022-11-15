@@ -8,6 +8,7 @@ import AircraftTable from './Views/listaAeronaves';
 import CadastroUsuario from './Views/cadastroUsuario';
 import EditarUsuario from './Views/editarUsuario';
 import TelaLogin from './Views/telaLogin';
+import UserTable from './Views/listaUsuario';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -37,6 +38,7 @@ function App() {
         <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
         <Route path="/editAirplane/:id" element={<GetIdAeronave/>}/>
         <Route path="/airplanes" element={<AircraftTable/>}/>
+        <Route path="/users" element={<UserTable/>}/>
         <Route path="/telaLogin" element={<TelaLogin/>}/>
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editarUsuario/:id" element={<GetIdUsuario/>}/>
