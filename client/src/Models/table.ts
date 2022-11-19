@@ -1,6 +1,8 @@
 export default class Table {
 
     public aircraftId: number
+    //flap
+    public flap: string
     // referencia
     public refWithoutIce: number
     public refWithIce: number
@@ -71,7 +73,8 @@ export default class Table {
          overspeedWithIce: number,
          overspeedWithotIce: number,
          reverserWithIce: number,
-         reverserWithoutIce: number
+         reverserWithoutIce: number,
+         flap: string
     ) {
          this.refWithoutIce = refWithoutIce
          this.refWithIce = refWithIce
@@ -103,6 +106,7 @@ export default class Table {
          this.overspeedWithoutIce = overspeedWithotIce
          this.reverserWithIce = reverserWithIce
          this.reverserWithoutIce = reverserWithoutIce
+         this.flap = flap
     }
 
     set setRefWithoutIce(value: number){
@@ -111,9 +115,14 @@ export default class Table {
     set setRefWithIce(value: number){
         this.refWithIce = value
     }
+    set setFlap(value: string){
+        this.flap = value
+    }
 
     get getRefWithoutIce(): number { return this.refWithoutIce }
 
     get getRefWithIce(): number { return this.refWithIce }
+
+    get getFlap(): string { return this.flap }
     
 }

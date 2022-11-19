@@ -9,6 +9,7 @@ import { BrakingLevel, RunwayCondition, UnitMeasurement } from '../Enuns/enuns';
 import Calcular from '../Models/calcular';
 import axios from "axios";
 import Table from '../Models/table';
+import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
 type state = {
   weightTitle: string,
@@ -96,17 +97,17 @@ class Calculo extends Component<{}, state>{
 
 
   //#region eventos change
-  onAircraftChange(event){
+  onAircraftChange(event) {
     const target = event.target;
     let value = target.value;
-    if(value == -1) return;
+    if (value == -1) return;
 
     this.aircraftSelected = value;
 
     if (this.state.aircraftError.includes("Select")) {
-      this.setState({aircraftError: ""})
+      this.setState({ aircraftError: "" })
     }
-    if(this.state.result != "") this.setState({result: ""})
+    if (this.state.result != "") this.setState({ result: "" })
   }
 
   unitMeasurementChange(event) {
@@ -165,11 +166,11 @@ class Calculo extends Component<{}, state>{
     const target = event.target;
     this.aircraftWeight = target.value;
 
-    if(!this.aircraftSelected){
+    if (!this.aircraftSelected) {
       let minimumBoth = 10000
       let maximumBoth = 1000000
 
-      if(this.state.weightTitle == "(Lb)"){
+      if (this.state.weightTitle == "(Lb)") {
         minimumBoth *= 2.205
         maximumBoth *= 2.205
       }
@@ -180,16 +181,16 @@ class Calculo extends Component<{}, state>{
       if (this.state.weightError.includes("must be") && this.aircraftWeight >= minimumBoth && this.aircraftSelected <= maximumBoth) {
         this.setState({ weightError: "" })
       }
-    }else{
+    } else {
       let airplane = this.getAircraft()
       let minWeight = airplane.getAircraftWeightMin
       let maxWeight = airplane.getAircraftWeightMax
 
-      if(this.state.weightTitle == "(Lb)"){
+      if (this.state.weightTitle == "(Lb)") {
         minWeight *= 2.205
         maxWeight *= 2.205
       }
-      
+
       if (this.state.weightError.includes("required") && this.aircraftWeight >= minWeight && this.aircraftSelected <= maxWeight) {
         this.setState({ weightError: "" })
       }
@@ -198,10 +199,10 @@ class Calculo extends Component<{}, state>{
         this.setState({ weightError: "" })
       }
 
-      if(this.aircraftWeight > maxWeight){
+      if (this.aircraftWeight > maxWeight) {
         this.setState({ weightError: "The weight must be bellow " + maxWeight + " kg" })
-      }else if(this.aircraftWeight < minWeight){
-        this.setState({ weightError: "The weight must be above " + minWeight + " kg"})
+      } else if (this.aircraftWeight < minWeight) {
+        this.setState({ weightError: "The weight must be above " + minWeight + " kg" })
       }
 
     }
@@ -214,10 +215,10 @@ class Calculo extends Component<{}, state>{
       this.setState({ slopeError: "" })
     }
 
-    if(this.slope >= 26){
-      this.setState({ slopeError: "The slope must be bellow 25%."})
-    }else if(this.slope <= -26){
-      this.setState({ slopeError: "The slope must be above -25%."})  
+    if (this.slope >= 26) {
+      this.setState({ slopeError: "The slope must be bellow 25%." })
+    } else if (this.slope <= -26) {
+      this.setState({ slopeError: "The slope must be above -25%." })
     }
 
 
@@ -243,7 +244,7 @@ class Calculo extends Component<{}, state>{
   }
 
   runwayConditionChange(event) {
-    const target = event.target;  
+    const target = event.target;
     this.runwayCondition = target.value;
     if (this.state.runwayError.includes("Select")) {
       this.setState({ runwayError: "" })
@@ -264,11 +265,11 @@ class Calculo extends Component<{}, state>{
     const isValid = this.validate();
     if (isValid) {
       let calculado = this.generateCalculo();
-        let convertido = this.converter(calculado)
-        console.log((calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts"))
-        this.setState({
-          result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
-        });
+      let convertido = this.converter(calculado)
+      console.log((calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts"))
+      this.setState({
+        result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
+      });
     } else {
       this.setState({
         result: ""
@@ -298,7 +299,7 @@ class Calculo extends Component<{}, state>{
 
     if (!this.aircraftSelected) {
       aircraftError = "Select an aircraft";
-    }else{
+    } else {
       aircraftError = ""
     }
 
@@ -307,11 +308,11 @@ class Calculo extends Component<{}, state>{
     } else {
       let minimumBoth = 10000
       let maximumBoth = 1000000
-      if(this.unitMeasurement == 2){
+      if (this.unitMeasurement == 2) {
         minimumBoth *= 2.205
         maximumBoth *= 2.205
       }
-      if(!this.aircraftSelected){
+      if (!this.aircraftSelected) {
         if (this.state.weightError.includes("required") && this.aircraftWeight >= minimumBoth && this.aircraftWeight <= maximumBoth) {
           this.setState({ weightError: "" })
         }
@@ -319,39 +320,39 @@ class Calculo extends Component<{}, state>{
         if (this.state.weightError.includes("must be") && this.aircraftWeight >= minimumBoth && this.aircraftWeight <= maximumBoth) {
           this.setState({ weightError: "" })
         }
-  
+
         if (this.aircraftWeight < minimumBoth) {
           this.setState({ weightError: "The weight must be above 10000 kg" })
-        }else if(this.aircraftWeight > maximumBoth){
+        } else if (this.aircraftWeight > maximumBoth) {
           this.setState({ weightError: "The weight must be bellow 1000000 kg" })
         }
-  
-      }else{
+
+      } else {
         let airplane = this.getAircraft()
         let minWeight = airplane.getAircraftWeightMin
         let maxWeight = airplane.getAircraftWeightMax
-  
-        if(this.unitMeasurement == 1){
+
+        if (this.unitMeasurement == 1) {
           minWeight *= 2.205
           maxWeight *= 2.205
         }
-        
+
         if (this.state.weightError.includes("required") && this.aircraftWeight >= minWeight && this.aircraftWeight <= maxWeight) {
-          weightError = "" 
+          weightError = ""
         }
 
         if (this.state.weightError.includes("must be") && this.aircraftWeight >= minWeight && this.aircraftWeight <= maxWeight) {
-          weightError = "" 
-        }
-  
-        if(this.aircraftWeight > maxWeight){
-          weightError = "The weight must be bellow " + maxWeight + " kg"
-        }else if(this.aircraftWeight < minWeight){
-          weightError = "The weight must be above " + minWeight + " kg"
-        }else{
           weightError = ""
         }
-  
+
+        if (this.aircraftWeight > maxWeight) {
+          weightError = "The weight must be bellow " + maxWeight + " kg"
+        } else if (this.aircraftWeight < minWeight) {
+          weightError = "The weight must be above " + minWeight + " kg"
+        } else {
+          weightError = ""
+        }
+
       }
     }
 
@@ -382,11 +383,11 @@ class Calculo extends Component<{}, state>{
     if (!this.slope) {
       slopeError = "The slope is required";
     } else {
-      if(this.slope >= 26){
+      if (this.slope >= 26) {
         slopeError = "The slope must be bellow 25%."
-      }else if(this.slope <= -26){
+      } else if (this.slope <= -26) {
         slopeError = "The slope must be above -25%."
-      }else{
+      } else {
         slopeError = ""
       }
     }
@@ -402,28 +403,28 @@ class Calculo extends Component<{}, state>{
     return true;
   };
 
-//#endregion
-  generateCalculo(): number{
+  //#endregion
+  generateCalculo(): number {
     let aircraft = this.getAircraft();
     let table = this.getTable();
 
-    let calcular = new Calcular(aircraft, table, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind, 
+    let calcular = new Calcular(aircraft, table, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
       this.iceAccreation, this.overspeed);
     return calcular.calcular();
   }
 
-  getTable(): Table{
+  getTable(): Table {
     let dado = this.state.dadosTable.find(item => item.airplaneId == this.aircraftSelected)
-    
+
     let t = new Table(dado.refWithoutIce, dado.refWithIce, dado.weightReference, dado.weightBellowWithoutIce, dado.weightAboveWithoutIce, dado.weightBellowWithIce,
       dado.weightAboveWithIce, dado.altitudeReference, dado.altitudeWithIce, dado.altitudeWithoutIce, dado.tempReference, dado.tempBellowWithIce, dado.tempAboveWithIce,
       dado.tempBellowWithoutIce, dado.tempAboveWithoutIce, dado.windReference, dado.windHeadWithIce, dado.windTailWithIce, dado.windHeadWithoutIce, dado.windTailWithoutIce,
       dado.slopeReference, dado.slopeUphillWithIce, dado.slopeDownhillWithIce, dado.slopeUphillWithoutIce, dado.slopeDownhillWithoutIce, dado.overspeedReference,
-      dado.overspeedWithIce, dado.overspeedWithoutIce, dado.reverserWithIce, dado.reverserWithoutIce);
+      dado.overspeedWithIce, dado.overspeedWithoutIce, dado.reverserWithIce, dado.reverserWithoutIce, dado.flap);
     return t;
   }
 
-  getAircraft(): Aircraft{
+  getAircraft(): Aircraft {
     let dado = this.state.dados.find(item => item.id == this.aircraftSelected);
     let aircraft = new Aircraft(dado.model, dado.engine, dado.certification, dado.flap, dado.reverserAmount, dado.aircraftWeightMin, dado.aircraftWeightMax, dado.brakingApplicationLevel);
     return aircraft;
@@ -453,7 +454,7 @@ class Calculo extends Component<{}, state>{
                   {this.state.unitMeasurementError}
                 </div>
               </Col>
-              <Col >
+              <Col>
                 <h5 className="card-title">Aircraft</h5>
                 <select defaultValue="-1" onChange={this.onAircraftChange} className="input text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
@@ -464,15 +465,23 @@ class Calculo extends Component<{}, state>{
                 </div>
               </Col>
               <Col>
+                <h5 className="card-title">Flap</h5>
+                <DropdownMultiselect
+                  options={["1", "2", "3", "A", "B", "C"]}
+                  name="flaps"
+                />
+              </Col>
+
+            </Row>
+
+            <Row>
+              <Col>
                 <h5 className="card-title">Aircraft Weight {this.state.weightTitle}</h5>
                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChange} />
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.weightError}
                 </div>
               </Col>
-            </Row>
-
-            <Row>
               <Col>
                 <h5 className="card-title">Runway condition</h5>
                 <select defaultValue="-1" className="input text-select form-select form-select-sm select form-control-sm custom-select mb-3" id="btnCondition" onChange={this.runwayConditionChange}>
@@ -495,6 +504,10 @@ class Calculo extends Component<{}, state>{
                   {this.state.temperatureError}
                 </div>
               </Col>
+
+            </Row>
+
+            <Row>
               <Col>
                 <h5 className="card-title">Wind {this.state.windTitle}</h5>
                 <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="wind" placeholder="Wind" onChange={this.windChange} />
@@ -502,9 +515,6 @@ class Calculo extends Component<{}, state>{
                   {this.state.windError}
                 </div>
               </Col>
-            </Row>
-
-            <Row>
               <Col>
                 <h5 className="card-title">Overspeed above VREF {this.state.overspeedTitle}</h5>
                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeed" placeholder="Overspeed above VREF" onChange={this.overspeedChange} />
@@ -516,6 +526,10 @@ class Calculo extends Component<{}, state>{
                   {this.state.altitudeError}
                 </div>
               </Col>
+
+            </Row>
+
+            <Row>
               <Col>
                 <h5 className="card-title">Slope of the runway</h5>
                 <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slope" placeholder="Slope of the runway" onChange={this.slopeChange} />
@@ -523,9 +537,6 @@ class Calculo extends Component<{}, state>{
                   {this.state.slopeError}
                 </div>
               </Col>
-            </Row>
-
-            <Row className="px-2">
               <Col>
                 <h5 className='card-tittle'>Has ice accreation?</h5>
                 <BootstrapSwitchButton
