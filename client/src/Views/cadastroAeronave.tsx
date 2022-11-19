@@ -248,7 +248,7 @@ class cadastroAeronave extends Component<any, state>{
                 timer: 1500
               })
             setTimeout(function() {
-                window.location.href = "/airplanes"
+                window.location.href = "/aircrafts"
               }, 1500);
         }
     }
@@ -350,7 +350,7 @@ class cadastroAeronave extends Component<any, state>{
                             </Row>
                             <Row>
                                 <Col>
-                                    <Button variant="danger" style={{margin:'10px', marginTop:'0px'}} size='lg' href="/airplanes">Back</Button>
+                                    <Button variant="danger" style={{margin:'10px', marginTop:'0px'}} size='lg' href="/aircrafts">Back</Button>
                                     <Button className="botao-resultado" style={{margin:'10px', marginTop:'0px'}} size="lg" onClick={this.postClickButton}>Save</Button>
                                 </Col>
                                 <Col></Col>

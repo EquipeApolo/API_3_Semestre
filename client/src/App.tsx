@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Navigate, Route, Router, Routes, useParams } from 'react-router-dom';
 import Calculo from './Views/calculo';
-import Teste from './Views/teste';
 import CadastroAeronave from './Views/cadastroAeronave';
 import EditarAeronave from './Views/editarAeronave';
 import AircraftTable from './Views/listaAeronaves';
@@ -35,15 +34,14 @@ function App() {
       <Routes>
         <Route index element={<Calculo/>}/>
         <Route path="*" element={<Navigate to="/" />}/>
-        <Route path="/teste" element={<Teste/>}/>
-        <Route path="/registerAirplane" element={<CadastroAeronave/>}/>
+        <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<Flap/>}/>
-        <Route path="/editAirplane/:id" element={<GetIdAeronave/>}/>
-        <Route path="/airplanes" element={<AircraftTable/>}/>
+        <Route path="/editAircraft/:id" element={<GetIdAeronave/>}/>
+        <Route path="/aircrafts" element={<AircraftTable/>}/>
         <Route path="/users" element={<UserTable/>}/>
         <Route path="/telaLogin" element={<TelaLogin/>}/>
         <Route path="/registerUser" element={<CadastroUsuario />}/>
-        <Route path="/editarUsuario/:id" element={<GetIdUsuario/>}/>
+        <Route path="/editUser/:id" element={<GetIdUsuario/>}/>
       </Routes>
     </BrowserRouter>
   );

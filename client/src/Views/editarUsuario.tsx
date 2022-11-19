@@ -151,7 +151,7 @@ class EditarUsuario extends Component<any, state>{
                 timer: 1500
               })
             setTimeout(function() {
-                window.location.href = "/"
+                window.location.href = "/users"
               }, 1500);
         }
     }
@@ -216,7 +216,7 @@ class EditarUsuario extends Component<any, state>{
 
                     <Row>
                         <Col md={{ span: 6, offset: 4}}>
-                            <Button variant="danger" style={{margin:'10px', marginTop:'15px'}} size='lg' href="/">Back</Button>
+                            <Button variant="danger" style={{margin:'10px', marginTop:'15px'}} size='lg' href="/users">Back</Button>
                             <Button className="botao-resultado" style={{margin:'10px', marginTop:'15px'}} size="lg" onClick={this.postClickButton}>Save</Button>
                         </Col>
                     </Row>

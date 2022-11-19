@@ -106,7 +106,7 @@ class AircraftTable extends Component<{}, table>{
                 </Row>
                 <Row className="pb-3">
                     <Col lg>
-                        <Button className="btn-lg float-end" href='/registerAirplane'>New Aircraft</Button>
+                        <Button className="btn-lg float-end" href='/registerAircraft'>New Aircraft</Button>
                     </Col>
                 </Row>
             </Container>
@@ -132,7 +132,7 @@ class AircraftTable extends Component<{}, table>{
                                 <td className='text-center'>{item.certification}</td>
                                 <td className='text-center'>{dateFormat}</td>
                                 <td className='text-center col-xs-1 col-sm-1 col-lg-2'>
-                                    <Link to={"/editAirplane/" + item.id}>
+                                    <Link to={"/editAircraft/" + item.id}>
                                         <img src={edit} alt="Editar." id={item.id} />
                                     </Link>
                                     <img src={delet} alt="Excluir." onClick={this.onClickDelete} id={item.id} />

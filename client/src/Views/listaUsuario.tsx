@@ -132,7 +132,7 @@ class UserTable extends Component<{}, table>{
                                 <td className='text-center'>{item.tipoUsuario}</td>
                                 <td className='text-center'>{dateFormat}</td>
                                 <td className='text-center col-xs-1 col-sm-1 col-lg-2'>
-                                    <Link to={"/editarUsuario/" + item.id}>
+                                    <Link to={"/editUser/" + item.id}>
                                         <img src={edit} alt="Editar." id={item.id} />
                                     </Link>
                                     <img src={delet} alt="Excluir." onClick={this.onClickDelete} id={item.id} />
