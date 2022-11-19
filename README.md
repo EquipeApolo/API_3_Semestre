@@ -19,15 +19,15 @@
 <h2> :bookmark_tabs: Requisitos Funcionais </h2>
 
 - [x] Cadastros de modelos de aeronaves;
-- [ ] Perfis diferentes (administrador, usuário);
+- [x] Perfis diferentes (administrador, usuário);
 - [x] Interface amigável para cálculo de perfomace via celular ou tablet;
 - [x] Gerar cálculo do comprimento mínimo da pista de pouso pelos fatores considerados;
-- [ ] Gerar histórico dos cálculos realizados;
+- [x] Gerar histórico dos cálculos realizados;
 
 <h3> Requisitos Não Funcionais </h3>
 
 - [x] Linguagem Typescript;
-- [ ] Documentações;
+- [x] Documentações;
  
 
  → [Voltar ao topo](#topo)
@@ -63,7 +63,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
  
  ## 📌 Backlog Priorizado
     
-<p align="center"> <img src = "imagens/backlogFinal.png"></p>
+<p align="center"> <img src = "imagens/backlog.png"></p>
  
  ## 📆 Sprints
 Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sprints.
@@ -82,13 +82,16 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 03 | Aplicar uma solução agnóstica a tabela fornecida para os cálculos. | :heavy_check_mark: |
 | 03 | Adaptar cadastro de aeronaves para a solução agnóstica. | :heavy_check_mark: |
 | 03 | CRUD de aeronaves completo. | :heavy_check_mark: |
+| 04 | CRUD de flaps completo. | :clock12: | 
+| 04 | Páginas de visualização, cadastro e edição de flaps. | :clock12: |
 | 04 | Página de histórico de cálculos. | :clock12: |
+| 04 | Ajuste nas unidades de medida da página de cálculo. | :clock12: |
 | 04 | CRUD de usuários completo. | :clock12: |
-| 04 | Página de cadastro de usuário. | :clock12: |
-| 04 | Página de visualização e edição de usuários. | :clock12: |
-| 04 | Página de login (administrador/usuário) | :clock12: |
+| 04 | Página de visualização, cadastro e edição de usuários. | :clock12: |
 | 04 | Upar servidor na nuvem. | :clock12: |
-| 04 | Navegação do sistema (paginação). | :clock12: |
+| 04 | Navegação do sistema administrativo (paginação). | :clock12: |
+| 04 | Página de login. | :clock12: |
+| 04 | Documentação para explicação e how-to da solução agnóstica apresentada. | :clock12: |
  
 <br>
 <span id="equipe">
@@ -116,7 +119,6 @@ Foram usadas as seguintes ferramentas, linguagens e tecnologias para a execuçã
 - [Git](https://git-scm.com): Versionamento
 - [GitHub](https://github.com/): Armazenamento de código
 - [Teams](https://teams.microsoft.com): Comunicação
-- [Azure DevOPS](https://azure.microsoft.com/pt-br/): Ferramenta de controle
 - [Whimsical](https://whimsical.com): Prototipagem
 - [Node](https://nodejs.org/): Runtime
 - [React](https://pt-br.reactjs.org/): Framework
