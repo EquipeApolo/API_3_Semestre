@@ -162,7 +162,7 @@ class EditarUsuario extends Component<any, state>{
             <Container>
                 <Form>
                     <Row className="px-2 mt-3">
-                        <img src={user} style={{paddingLeft: '15vh', height:'100px'}} alt="User." className="col-md-2"></img>
+                        <img src={user} style={{width: '100px', height:'100px'}} alt="User." className="col-md-2"></img>
                         <h1 style={{}} className='mt-8 col-sm-7 col-md-9'>Register User</h1>
                     </Row>
                 </Form>

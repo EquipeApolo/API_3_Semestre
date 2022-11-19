@@ -133,9 +133,9 @@ class AircraftTable extends Component<{}, table>{
                                 <td className='text-center'>{dateFormat}</td>
                                 <td className='text-center col-xs-1 col-sm-1 col-lg-2'>
                                     <Link to={"/editAirplane/" + item.id}>
-                                        <img src={edit} alt="Editar." id={item.id} className='img col-xs-1 col-sm-12 col-md-10 col-lg-4'/>
+                                        <img src={edit} alt="Editar." id={item.id} />
                                     </Link>
-                                    <img src={delet} alt="Excluir." onClick={this.onClickDelete} id={item.id} className='img col-xs-2 col-sm-10 col-md-10 col-lg-4'/>
+                                    <img src={delet} alt="Excluir." onClick={this.onClickDelete} id={item.id} />
                                 </td>
                             </tr>
                     )})}
