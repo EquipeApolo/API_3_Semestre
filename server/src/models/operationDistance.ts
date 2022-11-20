@@ -2,7 +2,7 @@ import {  } from 'mysql2';
 const Sequelize = require('sequelize');
 
 const database = require('./connect')
-const airplaneId = require('./airplaneTable')
+const flapId = require('./flapTable')
  
 const operationDistance = database.define('operationDistance', {
     id: {
@@ -132,9 +132,9 @@ const operationDistance = database.define('operationDistance', {
     }
 })
 
-operationDistance.belongsTo(airplaneId, {
+operationDistance.belongsTo(flapId, {
     constraint: true,
-    foreignKey: 'airplaneId'
+    foreignKey: 'flapId'
 })
 
 //operationDistance.sync({ alter: true });

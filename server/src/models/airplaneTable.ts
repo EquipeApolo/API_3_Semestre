@@ -31,10 +31,6 @@ const airplane = database.define('airplanes', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    flap: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
     reverserAmount: {
         type: Sequelize.INTEGER,
         allowNull: false
