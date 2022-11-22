@@ -8,7 +8,9 @@ import CadastroUsuario from './Views/cadastroUsuario';
 import EditarUsuario from './Views/editarUsuario';
 import TelaLogin from './Views/telaLogin';
 import UserTable from './Views/listaUsuario';
-import Flap from './Views/flap';
+import Flap from './Views/CadastroFlap';
+import ListaFlap from './Views/listaFlap';
+import EditarFlap from './Views/editarFlap';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -28,6 +30,15 @@ function GetIdUsuario(){
     </div>
   )
 }
+function GetIdFlap(){
+  const { id } = useParams()
+  console.log(id)
+  return (
+    <div>
+      <EditarFlap taskId={id}></EditarFlap>
+    </div>
+  )
+}
 function App() {
   return (
     <BrowserRouter>
@@ -37,8 +48,10 @@ function App() {
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<Flap/>}/>
         <Route path="/editAircraft/:id" element={<GetIdAeronave/>}/>
+        <Route path="/editFlap/:id" element={<GetIdFlap/>}/>
         <Route path="/aircrafts" element={<AircraftTable/>}/>
         <Route path="/users" element={<UserTable/>}/>
+        <Route path="/flaps" element={<ListaFlap/>} />
         <Route path="/telaLogin" element={<TelaLogin/>}/>
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editUser/:id" element={<GetIdUsuario/>}/>

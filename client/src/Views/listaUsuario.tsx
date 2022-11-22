@@ -128,7 +128,7 @@ class UserTable extends Component<{}, table>{
                             <tr>
                                 <td className='text-center'>{item.name}</td>
                                 <td className='text-center'>{item.email}</td>
-                                <td className='text-center'>{item.senha}</td>
+                                <td className='text-center'>******</td>
                                 <td className='text-center'>{item.tipoUsuario}</td>
                                 <td className='text-center'>{dateFormat}</td>
                                 <td className='text-center col-xs-1 col-sm-1 col-lg-2'>

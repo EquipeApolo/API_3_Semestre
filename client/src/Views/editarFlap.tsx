@@ -1,11 +1,10 @@
-import { Component, useState } from "react";
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import '../Style/App.css';
-import aviao from "../Icons/aviao.png";
-import React from "react";
+import { Component } from "react"
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import Table from "../Models/table";
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import React from "react";
+import aviao from "../Icons/aviao.png";
 
 type state = {
     refWithIceError: string,
@@ -38,14 +37,18 @@ type state = {
     overspeedWithoutIceError: string,
     reverserWithIceError: string,
     reverserWithoutIceError: string,
-    flapError: string
+    flapError: string,
+    result: string,
+    dados: any[]
+    table: Table
 }
 
-class flap extends Component<any, state>{
+class EditarFlap extends Component<any, state>{
     private table: Table = new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '');
-    constructor(props: any) {
-        super(props);
+    constructor(props) {
+        super(props)
         this.state = {
+            table: new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
             altitudeReferenceError: '',
             altitudeWithIceError: '',
             altitudeWithoutIceError: '',
@@ -76,8 +79,11 @@ class flap extends Component<any, state>{
             windReferenceError: '',
             windTailWithIceError: '',
             windTailWithoutIceError: '',
-            flapError: ''
+            flapError: '',
+            result: '',
+            dados: []
         }
+
         this.refWithIceChange = this.refWithIceChange.bind(this);
         this.refWithouIceChange = this.refWithouIceChange.bind(this);
         this.weightReferenceChange = this.weightReferenceChange.bind(this);
@@ -115,11 +121,30 @@ class flap extends Component<any, state>{
         evento.preventDefault()
     }
 
+    componentDidMount(): void {
+        axios.get('http://localhost:3001/operationDistance/' + this.props.taskId).then(res => {
+            let dadosBanco = res.data
+            this.setState({
+                // dadosOperation: dadosBanco,
+                table: new Table(dadosBanco.refWithoutIce, dadosBanco.refWithIce, dadosBanco.weightReference, dadosBanco.weightBellowWithoutIce, dadosBanco.weightAboveWithoutIce, dadosBanco.weightBellowWithIce,
+                    dadosBanco.weightAboveWithIce, dadosBanco.altitudeReference, dadosBanco.altitudeWithIce, dadosBanco.altitudeWithoutIce, dadosBanco.tempReference, dadosBanco.tempBellowWithIce, dadosBanco.tempAboveWithIce,
+                    dadosBanco.tempBellowWithoutIce, dadosBanco.tempAboveWithoutIce, dadosBanco.windReference, dadosBanco.windHeadWithIce, dadosBanco.windTailWithIce, dadosBanco.windHeadWithoutIce, dadosBanco.windTailWithoutIce,
+                    dadosBanco.slopeReference, dadosBanco.slopeUphillWithIce, dadosBanco.slopeDownhillWithIce, dadosBanco.slopeUphillWithoutIce, dadosBanco.slopeDownhillWithoutIce, dadosBanco.overspeedReference, dadosBanco.overspeedWithIce,
+                    dadosBanco.overspeedWithoutIce, dadosBanco.reverserWithIce, dadosBanco.reverserWithoutIce, dadosBanco.flap)
+            })
+            console.log(dadosBanco);
+            console.log(this.state.table.refWithIce);
+
+
+        })
+
+    }
+
     refWithIceChange(event) {
         let refWithIceError;
         const target = event.target;
-        this.table.refWithIce = target.value;
-        if (!this.table.refWithIce) {
+        this.state.table.refWithIce = target.value;
+        if (!this.state.table.refWithIce) {
             refWithIceError = "The reference with ice is required";
         } else {
             refWithIceError = ""
@@ -130,8 +155,8 @@ class flap extends Component<any, state>{
     refWithouIceChange(event) {
         let refWithouIceError;
         const target = event.target;
-        this.table.refWithoutIce = target.value;
-        if (!this.table.refWithoutIce) {
+        this.state.table.refWithoutIce = target.value;
+        if (!this.state.table.refWithoutIce) {
             refWithouIceError = "The reference without ice is required";
         } else {
             refWithouIceError = ""
@@ -142,8 +167,8 @@ class flap extends Component<any, state>{
     weightReferenceChange(event) {
         let weightReferenceError;
         const target = event.target;
-        this.table.weightReference = target.value;
-        if (!this.table.weightReference) {
+        this.state.table.weightReference = target.value;
+        if (!this.state.table.weightReference) {
             weightReferenceError = "The weight reference is required";
         } else {
             weightReferenceError = ""
@@ -154,8 +179,8 @@ class flap extends Component<any, state>{
     weightBellowWithoutIceChange(event) {
         let weightBellowWithoutIceError;
         const target = event.target;
-        this.table.weightBellowWithoutIce = target.value;
-        if (!this.table.weightBellowWithoutIce) {
+        this.state.table.weightBellowWithoutIce = target.value;
+        if (!this.state.table.weightBellowWithoutIce) {
             weightBellowWithoutIceError = "The weight bellow without ice is required";
         } else {
             weightBellowWithoutIceError = ""
@@ -166,8 +191,8 @@ class flap extends Component<any, state>{
     weightAboveWithoutIceChange(event) {
         let weightAboveWithoutIceError;
         const target = event.target;
-        this.table.weightAboveWithoutIce = target.value;
-        if (!this.table.weightAboveWithoutIce) {
+        this.state.table.weightAboveWithoutIce = target.value;
+        if (!this.state.table.weightAboveWithoutIce) {
             weightAboveWithoutIceError = "The weight above without ice is required";
         } else {
             weightAboveWithoutIceError = ""
@@ -178,8 +203,8 @@ class flap extends Component<any, state>{
     weightBellowWithIceChange(event) {
         let weightBellowWithIceError;
         const target = event.target;
-        this.table.weightBellowWithIce = target.value;
-        if (!this.table.weightBellowWithIce) {
+        this.state.table.weightBellowWithIce = target.value;
+        if (!this.state.table.weightBellowWithIce) {
             weightBellowWithIceError = "The weight bellow with ice is required";
         } else {
             weightBellowWithIceError = ""
@@ -190,8 +215,8 @@ class flap extends Component<any, state>{
     weightAboveWithIceChange(event) {
         let weightAboveWithIceError;
         const target = event.target;
-        this.table.weightAboveWithIce = target.value;
-        if (!this.table.weightAboveWithIce) {
+        this.state.table.weightAboveWithIce = target.value;
+        if (!this.state.table.weightAboveWithIce) {
             weightAboveWithIceError = "The weight above with ice is required";
         } else {
             weightAboveWithIceError = ""
@@ -202,8 +227,8 @@ class flap extends Component<any, state>{
     altitudeReferenceChange(event) {
         let altitudeReferenceError;
         const target = event.target;
-        this.table.altitudeReference = target.value;
-        if (!this.table.altitudeReference) {
+        this.state.table.altitudeReference = target.value;
+        if (!this.state.table.altitudeReference) {
             altitudeReferenceError = "The altitude reference is required";
         } else {
             altitudeReferenceError = ""
@@ -214,8 +239,8 @@ class flap extends Component<any, state>{
     altitudeWithIceChange(event) {
         let altitudeWithIceError;
         const target = event.target;
-        this.table.altitudeWithIce = target.value;
-        if (!this.table.altitudeWithIce) {
+        this.state.table.altitudeWithIce = target.value;
+        if (!this.state.table.altitudeWithIce) {
             altitudeWithIceError = "The altitude with ice is required";
         } else {
             altitudeWithIceError = ""
@@ -226,8 +251,8 @@ class flap extends Component<any, state>{
     altitudeWithoutIceChange(event) {
         let altitudeWithoutIceError;
         const target = event.target;
-        this.table.altitudeWithoutIce = target.value;
-        if (!this.table.altitudeWithoutIce) {
+        this.state.table.altitudeWithoutIce = target.value;
+        if (!this.state.table.altitudeWithoutIce) {
             altitudeWithoutIceError = "The altitude without ice is required";
         } else {
             altitudeWithoutIceError = ""
@@ -238,8 +263,8 @@ class flap extends Component<any, state>{
     tempReferenceChange(event) {
         let tempReferenceError;
         const target = event.target;
-        this.table.tempReference = target.value;
-        if (!this.table.tempReference) {
+        this.state.table.tempReference = target.value;
+        if (!this.state.table.tempReference) {
             tempReferenceError = "The temperature reference is required";
         } else {
             tempReferenceError = ""
@@ -250,8 +275,8 @@ class flap extends Component<any, state>{
     tempBellowWithIceChange(event) {
         let tempBellowWithIceError;
         const target = event.target;
-        this.table.tempBellowWithIce = target.value;
-        if (!this.table.tempBellowWithIce) {
+        this.state.table.tempBellowWithIce = target.value;
+        if (!this.state.table.tempBellowWithIce) {
             tempBellowWithIceError = "The temperature bellow with ice is required";
         } else {
             tempBellowWithIceError = ""
@@ -262,8 +287,8 @@ class flap extends Component<any, state>{
     tempAboveWithIceChange(event) {
         let tempAboveWithIceError;
         const target = event.target;
-        this.table.tempAboveWithIce = target.value;
-        if (!this.table.tempAboveWithIce) {
+        this.state.table.tempAboveWithIce = target.value;
+        if (!this.state.table.tempAboveWithIce) {
             tempAboveWithIceError = "The temperature above with ice is required";
         } else {
             tempAboveWithIceError = ""
@@ -274,8 +299,8 @@ class flap extends Component<any, state>{
     tempBellowWithoutIceChange(event) {
         let tempBellowWithoutIceError;
         const target = event.target;
-        this.table.tempBellowWithoutIce = target.value;
-        if (!this.table.tempBellowWithoutIce) {
+        this.state.table.tempBellowWithoutIce = target.value;
+        if (!this.state.table.tempBellowWithoutIce) {
             tempBellowWithoutIceError = "The temperature bellow with ice is required";
         } else {
             tempBellowWithoutIceError = ""
@@ -286,8 +311,8 @@ class flap extends Component<any, state>{
     tempAboveWithoutIceChange(event) {
         let tempAboveWithoutIceError;
         const target = event.target;
-        this.table.tempAboveWithoutIce = target.value;
-        if (!this.table.tempAboveWithoutIce) {
+        this.state.table.tempAboveWithoutIce = target.value;
+        if (!this.state.table.tempAboveWithoutIce) {
             tempAboveWithoutIceError = "The temperature above without ice is required";
         } else {
             tempAboveWithoutIceError = ""
@@ -298,8 +323,8 @@ class flap extends Component<any, state>{
     windReferenceChange(event) {
         let windReferenceError;
         const target = event.target;
-        this.table.windReference = target.value;
-        if (!this.table.windReference) {
+        this.state.table.windReference = target.value;
+        if (!this.state.table.windReference) {
             windReferenceError = "The wind reference is required";
         } else {
             windReferenceError = ""
@@ -310,8 +335,8 @@ class flap extends Component<any, state>{
     windHeadWithIceChange(event) {
         let windHeadWithIceError;
         const target = event.target;
-        this.table.windHeadWithIce = target.value;
-        if (!this.table.windHeadWithIce) {
+        this.state.table.windHeadWithIce = target.value;
+        if (!this.state.table.windHeadWithIce) {
             windHeadWithIceError = "The wind head with ice is required";
         } else {
             windHeadWithIceError = ""
@@ -322,8 +347,8 @@ class flap extends Component<any, state>{
     windTailWithIceChange(event) {
         let windTailWithIceError;
         const target = event.target;
-        this.table.windTailWithIce = target.value;
-        if (!this.table.windTailWithIce) {
+        this.state.table.windTailWithIce = target.value;
+        if (!this.state.table.windTailWithIce) {
             windTailWithIceError = "The wind tail with ice is required";
         } else {
             windTailWithIceError = ""
@@ -334,8 +359,8 @@ class flap extends Component<any, state>{
     windHeadWithoutIceChange(event) {
         let windHeadWithoutIceError;
         const target = event.target;
-        this.table.windHeadWithoutIce = target.value;
-        if (!this.table.windHeadWithoutIce) {
+        this.state.table.windHeadWithoutIce = target.value;
+        if (!this.state.table.windHeadWithoutIce) {
             windHeadWithoutIceError = "The wind head without ice is required";
         } else {
             windHeadWithoutIceError = ""
@@ -346,8 +371,8 @@ class flap extends Component<any, state>{
     windTailWithoutIceChange(event) {
         let windTailWithoutIceError;
         const target = event.target;
-        this.table.windTailWithoutIce = target.value;
-        if (!this.table.windTailWithoutIce) {
+        this.state.table.windTailWithoutIce = target.value;
+        if (!this.state.table.windTailWithoutIce) {
             windTailWithoutIceError = "The wind tail without ice is required";
         } else {
             windTailWithoutIceError = ""
@@ -358,8 +383,8 @@ class flap extends Component<any, state>{
     slopeReferenceChange(event) {
         let slopeReferenceError;
         const target = event.target;
-        this.table.slopeReference = target.value;
-        if (!this.table.slopeReference) {
+        this.state.table.slopeReference = target.value;
+        if (!this.state.table.slopeReference) {
             slopeReferenceError = "The slope reference is required";
         } else {
             slopeReferenceError = ""
@@ -370,8 +395,8 @@ class flap extends Component<any, state>{
     slopeUphillWithIceChange(event) {
         let slopeUphillWithIceError;
         const target = event.target;
-        this.table.slopeUphillWithIce = target.value;
-        if (!this.table.slopeUphillWithIce) {
+        this.state.table.slopeUphillWithIce = target.value;
+        if (!this.state.table.slopeUphillWithIce) {
             slopeUphillWithIceError = "The slope uphill with ice is required";
         } else {
             slopeUphillWithIceError = ""
@@ -382,8 +407,8 @@ class flap extends Component<any, state>{
     slopeDownhillWithIceChange(event) {
         let slopeDownhillWithIceError;
         const target = event.target;
-        this.table.slopeDownhillWithIce = target.value;
-        if (!this.table.slopeDownhillWithIce) {
+        this.state.table.slopeDownhillWithIce = target.value;
+        if (!this.state.table.slopeDownhillWithIce) {
             slopeDownhillWithIceError = "The slope downhill with ice is required";
         } else {
             slopeDownhillWithIceError = ""
@@ -394,8 +419,8 @@ class flap extends Component<any, state>{
     slopeUphillWithoutIceChange(event) {
         let slopeUphillWithoutIceError;
         const target = event.target;
-        this.table.slopeUphillWithoutIce = target.value;
-        if (!this.table.slopeUphillWithoutIce) {
+        this.state.table.slopeUphillWithoutIce = target.value;
+        if (!this.state.table.slopeUphillWithoutIce) {
             slopeUphillWithoutIceError = "The slope uphill without ice is required";
         } else {
             slopeUphillWithoutIceError = ""
@@ -406,8 +431,8 @@ class flap extends Component<any, state>{
     slopeDownhillWithoutIceChange(event) {
         let slopeDownhillWithoutIceError;
         const target = event.target;
-        this.table.slopeDownhillWithoutIce = target.value;
-        if (!this.table.slopeDownhillWithoutIce) {
+        this.state.table.slopeDownhillWithoutIce = target.value;
+        if (!this.state.table.slopeDownhillWithoutIce) {
             slopeDownhillWithoutIceError = "The slope downhill without ice is required";
         } else {
             slopeDownhillWithoutIceError = ""
@@ -418,8 +443,8 @@ class flap extends Component<any, state>{
     overspeedReferenceChange(event) {
         let overspeedReferenceError;
         const target = event.target;
-        this.table.overspeedReference = target.value;
-        if (!this.table.overspeedReference) {
+        this.state.table.overspeedReference = target.value;
+        if (!this.state.table.overspeedReference) {
             overspeedReferenceError = "The overspeed reference is required";
         } else {
             overspeedReferenceError = ""
@@ -430,8 +455,8 @@ class flap extends Component<any, state>{
     overspeedWithIceChange(event) {
         let overspeedWithIceError;
         const target = event.target;
-        this.table.overspeedWithIce = target.value;
-        if (!this.table.overspeedWithIce) {
+        this.state.table.overspeedWithIce = target.value;
+        if (!this.state.table.overspeedWithIce) {
             overspeedWithIceError = "The overspeed with ice is required";
         } else {
             overspeedWithIceError = ""
@@ -442,8 +467,8 @@ class flap extends Component<any, state>{
     overspeedWithoutIceChange(event) {
         let overspeedWithoutIceError;
         const target = event.target;
-        this.table.overspeedWithoutIce = target.value;
-        if (!this.table.overspeedWithoutIce) {
+        this.state.table.overspeedWithoutIce = target.value;
+        if (!this.state.table.overspeedWithoutIce) {
             overspeedWithoutIceError = "The overspeed without ice is required";
         } else {
             overspeedWithoutIceError = ""
@@ -454,8 +479,8 @@ class flap extends Component<any, state>{
     reverserWithIceChange(event) {
         let reverserWithIceError;
         const target = event.target;
-        this.table.reverserWithIce = target.value;
-        if (!this.table.reverserWithIce) {
+        this.state.table.reverserWithIce = target.value;
+        if (!this.state.table.reverserWithIce) {
             reverserWithIceError = "The reverser with ice is required";
         } else {
             reverserWithIceError = ""
@@ -466,8 +491,8 @@ class flap extends Component<any, state>{
     reverserWithoutIceChange(event) {
         let reverserWithoutIceError;
         const target = event.target;
-        this.table.reverserWithoutIce = target.value;
-        if (!this.table.reverserWithoutIce) {
+        this.state.table.reverserWithoutIce = target.value;
+        if (!this.state.table.reverserWithoutIce) {
             reverserWithoutIceError = "The reverser without ice is required";
         } else {
             reverserWithoutIceError = ""
@@ -518,242 +543,241 @@ class flap extends Component<any, state>{
         let overspeedWithoutIceError = "";
         let reverserWithIceError = "";
         let reverserWithoutIceError = "";
-        let flapError = "";
 
-        if (!this.table.refWithIce) {
+        if (!this.state.table.refWithIce) {
             refWithIceError = "The reference with ice is required";
         } else {
             refWithIceError = ""
         }
-        if (!this.table.refWithoutIce) {
+        if (!this.state.table.refWithoutIce) {
             refWithouIceError = "The reference without is required";
         } else {
             refWithouIceError = ""
         }
-        if (!this.table.weightReference) {
+        if (!this.state.table.weightReference) {
             weightReferenceError = "The weight reference is required";
         } else {
             weightReferenceError = ""
         }
-        if (!this.table.weightBellowWithoutIce) {
+        if (!this.state.table.weightBellowWithoutIce) {
             weightBellowWithoutIceError = "The weight bellow without ice is required";
         } else {
             weightBellowWithoutIceError = ""
         }
-        if (!this.table.weightAboveWithoutIce) {
+        if (!this.state.table.weightAboveWithoutIce) {
             weightAboveWithoutIceError = "The weight above without is required";
         } else {
             weightAboveWithoutIceError = ""
         }
-        if (!this.table.weightBellowWithIce) {
+        if (!this.state.table.weightBellowWithIce) {
             weightBellowWithIceError = "The weight bellow with ice is required";
         } else {
             weightBellowWithIceError = ""
         }
-        if (!this.table.weightAboveWithIce) {
+        if (!this.state.table.weightAboveWithIce) {
             weightAboveWithIceError = "The weight above with ice is required";
         } else {
             weightAboveWithIceError = ""
         }
-        if (!this.table.altitudeReference) {
+        if (!this.state.table.altitudeReference) {
             altitudeReferenceError = "The altitude reference is required";
         } else {
             altitudeReferenceError = ""
         }
-        if (!this.table.altitudeWithIce) {
+        if (!this.state.table.altitudeWithIce) {
             altitudeWithIceError = "The altitude with ice is required";
         } else {
             altitudeWithIceError = ""
         }
-        if (!this.table.altitudeWithoutIce) {
+        if (!this.state.table.altitudeWithoutIce) {
             altitudeWithoutIceError = "The altitude without ice is required";
         } else {
             altitudeWithoutIceError = ""
         }
-        if (!this.table.tempReference) {
+        if (!this.state.table.tempReference) {
             tempReferenceError = "The temperature reference is required";
         } else {
             tempReferenceError = ""
         }
-        if (!this.table.tempBellowWithIce) {
+        if (!this.state.table.tempBellowWithIce) {
             tempBellowWithIceError = "The temperature bellow with ice is required";
         } else {
             tempBellowWithIceError = ""
         }
-        if (!this.table.tempAboveWithIce) {
+        if (!this.state.table.tempAboveWithIce) {
             tempAboveWithIceError = "The temperature above with ice is required";
         } else {
             tempAboveWithIceError = ""
         }
-        if (!this.table.tempBellowWithoutIce) {
+        if (!this.state.table.tempBellowWithoutIce) {
             tempBellowWithoutIceError = "The temperature bellow with ice is required";
         } else {
             tempBellowWithoutIceError = ""
         }
-        if (!this.table.tempAboveWithoutIce) {
+        if (!this.state.table.tempAboveWithoutIce) {
             tempAboveWithoutIceError = "The temperature above without ice is required";
         } else {
             tempAboveWithoutIceError = ""
         }
-        if (!this.table.windReference) {
+        if (!this.state.table.windReference) {
             windReferenceError = "The wind reference is required";
         } else {
             windReferenceError = ""
         }
-        if (!this.table.windHeadWithIce) {
+        if (!this.state.table.windHeadWithIce) {
             windHeadWithIceError = "The wind head with ice is required";
         } else {
             windHeadWithIceError = ""
         }
-        if (!this.table.windTailWithIce) {
+        if (!this.state.table.windTailWithIce) {
             windTailWithIceError = "The wind tail with ice is required";
         } else {
             windTailWithIceError = ""
         }
-        if (!this.table.windHeadWithoutIce) {
+        if (!this.state.table.windHeadWithoutIce) {
             windHeadWithoutIceError = "The wind head without is required";
         } else {
             windHeadWithoutIceError = ""
         }
-        if (!this.table.windTailWithoutIce) {
+        if (!this.state.table.windTailWithoutIce) {
             windTailWithoutIceError = "The wind tail without ice is required";
         } else {
             windTailWithoutIceError = ""
         }
-        if (!this.table.slopeReference) {
+        if (!this.state.table.slopeReference) {
             slopeReferenceError = "The slope reference is required";
         } else {
             slopeReferenceError = ""
         }
-        if (!this.table.slopeUphillWithIce) {
+        if (!this.state.table.slopeUphillWithIce) {
             slopeUphillWithIceError = "The slope uphill with ice is required";
         } else {
             slopeUphillWithIceError = ""
         }
-        if (!this.table.slopeDownhillWithIce) {
+        if (!this.state.table.slopeDownhillWithIce) {
             slopeDownhillWithIceError = "The slope downhill with ice is required";
         } else {
             slopeDownhillWithIceError = ""
         }
-        if (!this.table.slopeUphillWithoutIce) {
+        if (!this.state.table.slopeUphillWithoutIce) {
             slopeUphillWithoutIceError = "The slope uphill without ice is required";
         } else {
             slopeUphillWithoutIceError = ""
         }
-        if (!this.table.slopeDownhillWithoutIce) {
+        if (!this.state.table.slopeDownhillWithoutIce) {
             slopeDownhillWithoutIceError = "The slope downhill without ice is required";
         } else {
             slopeDownhillWithoutIceError = ""
         }
-        if (!this.table.overspeedReference) {
+        if (!this.state.table.overspeedReference) {
             overspeedReferenceError = "The overspeed reference is required";
         } else {
             overspeedReferenceError = ""
         }
-        if (!this.table.overspeedWithIce) {
+        if (!this.state.table.overspeedWithIce) {
             overspeedWithIceError = "The overspeed with ice is required";
         } else {
             overspeedWithIceError = ""
         }
-        if (!this.table.overspeedWithoutIce) {
+        if (!this.state.table.overspeedWithoutIce) {
             overspeedWithoutIceError = "The overspeed without ice is required";
         } else {
             overspeedWithoutIceError = ""
         }
-        if (!this.table.reverserWithIce) {
+        if (!this.state.table.reverserWithIce) {
             reverserWithIceError = "The reverser with ice is required";
         } else {
             reverserWithIceError = ""
         }
-        if (!this.table.reverserWithoutIce) {
+        if (!this.state.table.reverserWithoutIce) {
             reverserWithoutIceError = "The reverser without ice is required";
         } else {
             reverserWithoutIceError = ""
         }
-        if (!this.table.flap) {
-            flapError = "The flap is required";
-        } else {
-            flapError = ""
-        }
 
         this.setState({
-            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError,
-            weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError, weightAboveWithoutIceError: weightAboveWithoutIceError,
-            weightBellowWithIceError: weightBellowWithIceError, weightAboveWithIceError: weightAboveWithIceError, altitudeReferenceError: altitudeReferenceError, altitudeWithIceError: altitudeWithIceError,
-            altitudeWithoutIceError: altitudeWithoutIceError, tempReferenceError: tempReferenceError, tempBellowWithIceError: tempBellowWithIceError, tempAboveWithIceError: tempAboveWithIceError,
+            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError, weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError,
+            weightAboveWithoutIceError: weightAboveWithoutIceError, weightBellowWithIceError: weightBellowWithIceError, weightAboveWithIceError: weightAboveWithIceError, altitudeReferenceError: altitudeReferenceError,
+            altitudeWithIceError: altitudeWithIceError, altitudeWithoutIceError: altitudeWithoutIceError, tempReferenceError: tempReferenceError, tempBellowWithIceError: tempBellowWithIceError, tempAboveWithIceError: tempAboveWithIceError,
             tempBellowWithoutIceError: tempBellowWithoutIceError, tempAboveWithoutIceError: tempAboveWithoutIceError, windReferenceError: windReferenceError, windHeadWithIceError: windHeadWithIceError,
             windTailWithIceError: windTailWithIceError, windHeadWithoutIceError: windHeadWithoutIceError, windTailWithoutIceError: windTailWithoutIceError, slopeReferenceError: slopeReferenceError,
             slopeUphillWithIceError: slopeUphillWithIceError, slopeDownhillWithIceError: slopeDownhillWithIceError, slopeUphillWithoutIceError: slopeUphillWithoutIceError,
             slopeDownhillWithoutIceError: slopeDownhillWithoutIceError, overspeedReferenceError: overspeedReferenceError, overspeedWithIceError: overspeedWithIceError,
-            overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError, flapError: flapError
+            overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError
         })
-        if (refWithIceError
-            || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
+        if (refWithIceError || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
             || altitudeReferenceError || altitudeWithIceError || altitudeWithoutIceError || tempReferenceError || tempBellowWithIceError || tempAboveWithIceError || tempBellowWithoutIceError
             || tempAboveWithoutIceError || windReferenceError || windHeadWithIceError || windTailWithIceError || windHeadWithoutIceError || windTailWithoutIceError || slopeReferenceError
             || slopeUphillWithIceError || slopeDownhillWithIceError || slopeUphillWithoutIceError || slopeDownhillWithoutIceError || overspeedReferenceError || overspeedWithIceError
-            || overspeedWithoutIceError || reverserWithIceError || reverserWithoutIceError || flapError) {
+            || overspeedWithoutIceError || reverserWithIceError || reverserWithoutIceError) {
             return false
         }
         return true
     }
+
     postClickButton = async (event: any) => {
         event.preventDefault();
         const isValid = this.validate();
         if (isValid) {
             let res = -1
-            await axios.post("http://localhost:3001/operationDistance/cadastrar", {
-                id: res,
-                refWithoutIce: this.table.refWithoutIce,
-                refWithIce: this.table.refWithIce,
-                weightReference: this.table.weightReference,
-                weightBellowWithoutIce: this.table.weightBellowWithoutIce,
-                weightAboveWithoutIce: this.table.weightAboveWithoutIce,
-                weightBellowWithIce: this.table.weightBellowWithIce,
-                weightAboveWithIce: this.table.weightAboveWithIce,
-                altitudeReference: this.table.altitudeReference,
-                altitudeWithIce: this.table.altitudeWithIce,
-                altitudeWithoutIce: this.table.altitudeWithoutIce,
-                tempReference: this.table.tempReference,
-                tempBellowWithIce: this.table.tempBellowWithIce,
-                tempAboveWithIce: this.table.tempAboveWithIce,
-                tempBellowWithoutIce: this.table.tempBellowWithoutIce,
-                tempAboveWithoutIce: this.table.tempAboveWithoutIce,
-                windReference: this.table.windReference,
-                windHeadWithIce: this.table.windHeadWithIce,
-                windTailWithIce: this.table.windTailWithIce,
-                windHeadWithoutIce: this.table.windHeadWithoutIce,
-                windTailWithoutIce: this.table.windTailWithoutIce,
-                slopeReference: this.table.slopeReference,
-                slopeUphillWithIce: this.table.slopeUphillWithIce,
-                slopeDownhillWithIce: this.table.slopeDownhillWithIce,
-                slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
-                slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
-                overspeedReference: this.table.overspeedReference,
-                overspeedWithIce: this.table.overspeedWithIce,
-                overspeedWithoutIce: this.table.overspeedWithoutIce,
-                reverserWithIce: this.table.reverserWithIce,
-                reverserWithoutIce: this.table.reverserWithoutIce,
-                flap: this.table.flap,
-                airplaneId: res
+            await axios.put("http://localhost:3001/flap/modificar" + this.props.taskId, {
+
+                tipoFlap: this.state.table.getFlap
+                // airplaneId: res
+            }).then((response) => {
+                res = response.data.id
+                //axios
+                axios.put("http://localhost:3001/operationDistance/modificar", {
+                    id: res,
+                    refWithoutIce: this.state.table.getRefWithoutIce,
+                    refWithIce: this.state.table.getRefWithIce,
+                    weightReference: this.state.table.getWeightReference,
+                    weightBellowWithoutIce: this.state.table.getWeightBellowWithoutIce,
+                    weightAboveWithoutIce: this.state.table.getWeightAboveWithoutIce,
+                    weightBellowWithIce: this.state.table.getWeightBellowWithIce,
+                    weightAboveWithIce: this.state.table.getWeightAboveWithIce,
+                    altitudeReference: this.state.table.getAltitudeReference,
+                    altitudeWithIce: this.state.table.getAltitudeWithIce,
+                    altitudeWithoutIce: this.state.table.getAltitudeWithoutIce,
+                    tempReference: this.state.table.getTempReference,
+                    tempBellowWithIce: this.state.table.getTempBellowWithIce,
+                    tempAboveWithIce: this.state.table.getTempAboveWithIce,
+                    tempBellowWithoutIce: this.state.table.getTempBellowWithoutIce,
+                    tempAboveWithoutIce: this.state.table.getTempAboveWithoutIce,
+                    windReference: this.state.table.getWindReference,
+                    windHeadWithIce: this.state.table.getWindHeadWithIce,
+                    windTailWithIce: this.state.table.getWindTailWithIce,
+                    windHeadWithoutIce: this.state.table.getWindHeadWithoutIce,
+                    windTailWithoutIce: this.state.table.getWindTailWithoutIce,
+                    slopeReference: this.state.table.getSlopeReference,
+                    slopeUphillWithIce: this.state.table.getSlopeUphillWithIce,
+                    slopeDownhillWithIce: this.state.table.getSlopeDownhillWithIce,
+                    slopeUphillWithoutIce: this.state.table.getSlopeUphillWithoutIce,
+                    slopeDownhillWithoutIce: this.state.table.getSlopeDownhillWithoutIce,
+                    overspeedReference: this.state.table.getOverspeedReference,
+                    overspeedWithIce: this.state.table.getOverspeedWithIce,
+                    overspeedWithoutIce: this.state.table.getOverspeedWithoutIce,
+                    reverserWithIce: this.state.table.getReverserWithIce,
+                    reverserWithoutIce: this.state.table.getReverserWithoutIce
+                })
             })
 
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Register completed',
+                title: 'Update completed',
                 showConfirmButton: false,
                 timer: 1500
             })
             setTimeout(function () {
-                window.location.href = "/airplanes"
+                window.location.href = "/flaps"
             }, 1500);
         }
     }
 
     render() {
         return (
-            <form onSubmit={this.eventoFormulario} id="form">
+            <>
                 <Container>
                     <Row className="px-2 mb-5 mt-5">
                         <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
@@ -772,13 +796,14 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Name of the flap</h5>
-                                <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="flap" placeholder="Name of the flap" onChange={this.flapChange} />
+                                <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="flap" placeholder="Name of the flap" 
+                                onChange={this.flapChange} /* value={tipoFlap} */ value={this.stat}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.flapError}
                                 </div>
                             </Col>
-                            <Col></Col> 
-                            <Col></Col> 
+                            <Col></Col>
+                            <Col></Col>
                             <Row>
                                 <Col className="pt-4 pb-4">
                                     <h4>&#x2022; Reference</h4>
@@ -788,14 +813,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Reference With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithIce" placeholder="Reference with ice" onChange={this.refWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithIce" placeholder="Reference with ice" 
+                                onChange={this.refWithIceChange} value={this.state.table.getRefWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.refWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Reference Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithoutIce" placeholder="Reference without ice" onChange={this.refWithouIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="refWithoutIce" placeholder="Reference without ice" 
+                                onChange={this.refWithouIceChange} value={this.state.table.getRefWithoutIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.refWithouIceError}
                                 </div>
@@ -810,21 +837,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Weight Reference (Kg)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightReference" placeholder="Wheight Reference" onChange={this.weightReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightReference" placeholder="Wheight Reference" 
+                                onChange={this.weightReferenceChange} value={this.state.table.getWeightReference}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Weight Bellow Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithoutIce" placeholder="Weight Bellow Without Ice" onChange={this.weightBellowWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithoutIce" placeholder="Weight Bellow Without Ice" 
+                                onChange={this.weightBellowWithoutIceChange} value={this.state.table.getWeightBellowWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightBellowWithoutIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Weight Above Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithoutIce" placeholder="Weight Above Without Ice" onChange={this.weightAboveWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithoutIce" placeholder="Weight Above Without Ice" 
+                                onChange={this.weightAboveWithoutIceChange} value={this.state.table.getWeightAboveWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightAboveWithoutIceError}
                                 </div>
@@ -834,14 +864,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Weight Bellow With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithIce" placeholder="Weight Bellow With Ice" onChange={this.weightBellowWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightBellowWithIce" placeholder="Weight Bellow With Ice" 
+                                onChange={this.weightBellowWithIceChange} value={this.state.table.getWeightBellowWithIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightBellowWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Weight Above With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithIce" placeholder="Weight Above With Ice" onChange={this.weightAboveWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weightAboveWithIce" placeholder="Weight Above With Ice" 
+                                onChange={this.weightAboveWithIceChange} value={this.state.table.getWeightAboveWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightAboveWithIceError}
                                 </div>
@@ -857,21 +889,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Altitude Reference (Per Ft)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeReference" placeholder="Altitude Reference" onChange={this.altitudeReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeReference" placeholder="Altitude Reference" 
+                                onChange={this.altitudeReferenceChange} value={this.state.table.getAltitudeReference} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.altitudeReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Altitude With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithIce" placeholder="Altitude With Ice" onChange={this.altitudeWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithIce" placeholder="Altitude With Ice" 
+                                onChange={this.altitudeWithIceChange} value={this.state.table.getAltitudeWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.altitudeWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Altitude Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithoutIce" placeholder="Altitude Without Ice" onChange={this.altitudeWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="altitudeWithoutIce" placeholder="Altitude Without Ice" 
+                                onChange={this.altitudeWithoutIceChange} value={this.state.table.getAltitudeWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.altitudeWithoutIceError}
                                 </div>
@@ -886,21 +921,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Temperature Reference ISA (Per ºC)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempReference" placeholder="Temperature Reference" onChange={this.tempReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempReference" placeholder="Temperature Reference" 
+                                onChange={this.tempReferenceChange} value={this.state.table.getTempReference}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.tempReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Temperature Bellow With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithIce" placeholder="Temperature Bellow With Ice" onChange={this.tempBellowWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithIce" placeholder="Temperature Bellow With Ice" 
+                                onChange={this.tempBellowWithIceChange} value={this.state.table.getTempBellowWithIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.tempBellowWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Temperature Above With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithIce" placeholder="Temperature Above With Ice" onChange={this.tempAboveWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithIce" placeholder="Temperature Above With Ice" 
+                                onChange={this.tempAboveWithIceChange} value={this.state.table.getTempAboveWithIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.tempAboveWithIceError}
                                 </div>
@@ -909,14 +947,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Temperature Bellow Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithoutIce" placeholder="Temperature Bellow Without Ice" onChange={this.tempBellowWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempBellowWithoutIce" placeholder="Temperature Bellow Without Ice" 
+                                onChange={this.tempBellowWithoutIceChange} value={this.state.table.getTempBellowWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.tempBellowWithoutIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Temperature Above Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithoutIce" placeholder="Temperature Above Without Ice" onChange={this.tempAboveWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="tempAboveWithoutIce" placeholder="Temperature Above Without Ice" 
+                                onChange={this.tempAboveWithoutIceChange} value={this.state.table.getTempAboveWithoutIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.tempAboveWithoutIceError}
                                 </div>
@@ -932,21 +972,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Wind Reference (Per Kt)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windReference" placeholder="Wind Reference" onChange={this.windReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windReference" placeholder="Wind Reference" 
+                                onChange={this.windReferenceChange} value={this.state.table.getWindReference} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.windReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Wind Head With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithIce" placeholder="Wind Head With Ice" onChange={this.windHeadWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithIce" placeholder="Wind Head With Ice" 
+                                onChange={this.windHeadWithIceChange} value={this.state.table.getWindHeadWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.windHeadWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Wind Tail With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithIce" placeholder="Wind Tail With Ice" onChange={this.windTailWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithIce" placeholder="Wind Tail With Ice" 
+                                onChange={this.windTailWithIceChange} value={this.state.table.getWindTailWithIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.windTailWithIceError}
                                 </div>
@@ -955,14 +998,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Wind Head Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithoutIce" placeholder="Wind Head Without Ice" onChange={this.windHeadWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windHeadWithoutIce" placeholder="Wind Head Without Ice" 
+                                onChange={this.windHeadWithoutIceChange} value={this.state.table.getWindHeadWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.windHeadWithoutIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Wind Tail Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithoutIce" placeholder="Wind Tail Without Ice" onChange={this.windTailWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="windTailWithoutIce" placeholder="Wind Tail Without Ice" 
+                                onChange={this.windTailWithoutIceChange} value={this.state.table.getWindTailWithoutIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.windTailWithoutIceError}
                                 </div>
@@ -978,21 +1023,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Slope Reference (Per %)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeReference" placeholder="Slope Reference" onChange={this.slopeReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeReference" placeholder="Slope Reference" 
+                                onChange={this.slopeReferenceChange} value={this.state.table.getSlopeReference} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.slopeReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Slope Uphill With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithIce" placeholder="Slope Uphill With Ice" onChange={this.slopeUphillWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithIce" placeholder="Slope Uphill With Ice" 
+                                onChange={this.slopeUphillWithIceChange} value={this.state.table.getSlopeUphillWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.slopeUphillWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Slope Downhill With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithIce" placeholder="Slope Downhill With Ice" onChange={this.slopeDownhillWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithIce" placeholder="Slope Downhill With Ice" 
+                                onChange={this.slopeDownhillWithIceChange} value={this.state.table.getSlopeDownhillWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.slopeDownhillWithIceError}
                                 </div>
@@ -1001,14 +1049,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Slope Uphill Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithoutIce" placeholder="Slope Uphill Without Ice" onChange={this.slopeUphillWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeUphillWithoutIce" placeholder="Slope Uphill Without Ice" 
+                                onChange={this.slopeUphillWithoutIceChange} value={this.state.table.getSlopeUphillWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.slopeUphillWithoutIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Slope Downhill Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithoutIce" placeholder="Slope Downhill Without Ice" onChange={this.slopeDownhillWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="slopeDownhillWithoutIce" placeholder="Slope Downhill Without Ice" 
+                                onChange={this.slopeDownhillWithoutIceChange} value={this.state.table.getSlopeDownhillWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.slopeDownhillWithoutIceError}
                                 </div>
@@ -1024,21 +1074,24 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Overspeed Reference (Per Kt)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedReference" placeholder="Overspeed Reference" onChange={this.overspeedReferenceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedReference" placeholder="Overspeed Reference" 
+                                onChange={this.overspeedReferenceChange} value={this.state.table.getOverspeedReference} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.overspeedReferenceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Overspeed With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithIce" placeholder="Overspeed With Ice" onChange={this.overspeedWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithIce" placeholder="Overspeed With Ice" 
+                                onChange={this.overspeedWithIceChange} value={this.state.table.getOverspeedWithIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.overspeedWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Overspeed Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithoutIce" placeholder="Overspeed Without Ice" onChange={this.overspeedWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="overspeedWithoutIce" placeholder="Overspeed Without Ice" 
+                                onChange={this.overspeedWithoutIceChange} value={this.state.table.getOverspeedWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.overspeedWithoutIceError}
                                 </div>
@@ -1053,14 +1106,16 @@ class flap extends Component<any, state>{
                         <Row>
                             <Col>
                                 <h5 className="card-title">Reverser With Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithIce" placeholder="Reverser With Ice" onChange={this.reverserWithIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithIce" placeholder="Reverser With Ice" 
+                                onChange={this.reverserWithIceChange} value={this.state.table.getReverserWithIce} />
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.reverserWithIceError}
                                 </div>
                             </Col>
                             <Col>
                                 <h5 className="card-title">Reverser Without Ice (M)</h5>
-                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithoutIce" placeholder="Reverser Without Ice" onChange={this.reverserWithoutIceChange} />
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="reverserWithoutIce" placeholder="Reverser Without Ice" 
+                                onChange={this.reverserWithoutIceChange} value={this.state.table.getReverserWithoutIce}/>
                                 <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.reverserWithoutIceError}
                                 </div>
@@ -1080,10 +1135,10 @@ class flap extends Component<any, state>{
                         <Col></Col>
                     </Row>
                 </Container>
-            </form>
+            </>
         )
     }
 
 }
 
-export default flap
+export default EditarFlap
