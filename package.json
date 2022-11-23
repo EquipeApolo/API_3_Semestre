@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "bootstrap": "^4.6.0",
+    "react-bootstrap": "^2.6.0",
     "react-toastify": "^9.1.1"
   }
 }

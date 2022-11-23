@@ -8,6 +8,7 @@ import CadastroUsuario from './Views/cadastroUsuario';
 import EditarUsuario from './Views/editarUsuario';
 import TelaLogin from './Views/telaLogin';
 import UserTable from './Views/listaUsuario';
+import Nav from './Components/Nav';
 import Flap from './Views/CadastroFlap';
 import ListaFlap from './Views/listaFlap';
 import EditarFlap from './Views/editarFlap';
@@ -42,6 +43,7 @@ function GetIdFlap(){
 function App() {
   return (
     <BrowserRouter>
+      <Nav></Nav>
       <Routes>
         <Route index element={<TelaLogin/>}/>
         <Route path="*" element={<Navigate to="/" />}/>
