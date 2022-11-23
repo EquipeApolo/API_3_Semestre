@@ -28,30 +28,19 @@ const Login = () => {
     }
 
     function handleLogin(values: any) {
-        console.log(params);
         values.preventDefault();
         Axios.get(`http://localhost:3001/users/${params.email}`, {
             params: { params }
         })
             .then((response) => {
                 const data = response.data;
-                console.log(data);
-                if (data.length === 0) {
-                    Swal.fire({
-                        title: `Error`,
-                        html:
-                            ' <b>User not found</b>'
-                    })
-                } else if (data.senha === params.senha) {
-                    console.log("linuxxxxx");
+                if (data.senha === params.senha) {
                     if (data.tipoUsuario === 'Adm') {
-                        console.log("mateusssssss");
                         localStorage.setItem('id',`${data.id}`)
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/aircrafts")
-                        console.log("testesteste");
+                        navigate("/aircrafts") //Modificar tela ADM
                         
                     }
                     else {
@@ -69,19 +58,15 @@ const Login = () => {
                             ' <b>Incorrect Password</b> '
                     })
                 }
-            });
-    };
-
-    async function recuperarSenha() {
-        const { value: email } = await Swal.fire({
-            title: 'To recover the password, please input your e-mail address:',
-            input: 'email',
-            inputPlaceholder: 'Enter your registered e-mail address'
-          })
-          
-          if (email) {
-            Swal.fire(`Entered email: ${email}`)
-          };
+            }).catch((res) => {
+                if (res.data === undefined) {
+                    Swal.fire({
+                        title: `Error`,
+                        html:
+                            ' <b>User not found</b>'
+                    })
+                } 
+            })
     };
 
     return (
