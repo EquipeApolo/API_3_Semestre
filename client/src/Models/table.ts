@@ -71,7 +71,7 @@ export default class Table {
          slopeDownhillWithoutIce: number,
          overspeedReference: number,
          overspeedWithIce: number,
-         overspeedWithotIce: number,
+         overspeedWithoutIce: number,
          reverserWithIce: number,
          reverserWithoutIce: number,
          flap: string
@@ -103,7 +103,7 @@ export default class Table {
          this.slopeDownhillWithoutIce = slopeDownhillWithoutIce
          this.overspeedReference = overspeedReference
          this.overspeedWithIce = overspeedWithIce
-         this.overspeedWithoutIce = overspeedWithotIce
+         this.overspeedWithoutIce = overspeedWithoutIce
          this.reverserWithIce = reverserWithIce
          this.reverserWithoutIce = reverserWithoutIce
          this.flap = flap
@@ -115,14 +115,124 @@ export default class Table {
     set setRefWithIce(value: number){
         this.refWithIce = value
     }
+    set setWeightReference (value: number) {
+        this.weightReference = value
+    }
+    set setWeightBellowWithoutIce (value: number) {
+        this.weightBellowWithoutIce = value
+    }
+    set setWeightAboveWithoutIce (value: number) {
+        this.weightAboveWithoutIce = value
+    }
+    set setWeightBellowWithIce (value: number) {
+        this.weightBellowWithIce = value
+    }
+    set setWeightAboveWithIce (value: number) {
+        this.weightAboveWithIce = value
+    }
+    set setAltitudeReference (value: number) {
+        this.altitudeReference = value
+    }
+    set setAltitudeWithIce (value: number) {
+        this.altitudeWithIce = value
+    }
+    set setAltitudeWithoutIce (value: number) {
+        this.altitudeWithoutIce = value
+    }
+    set setTempReference (value: number) {
+        this.tempReference = value
+    }
+    set setTempBellowWithIce (value: number) {
+        this.tempBellowWithIce = value
+    }
+    set setTempAboveWithIce (value: number) {
+        this.tempAboveWithIce = value
+    }
+    set setTempBellowWithoutIce (value: number) {
+        this.tempBellowWithoutIce = value
+    }
+    set setTempAboveWithoutIce (value: number) {
+        this.tempAboveWithoutIce = value
+    }
+    set setWindReference (value: number) {
+        this.windReference = value
+    }
+    set setWindHeadWithIce (value: number) {
+        this.windHeadWithIce = value
+    }
+    set setWindTailWithIce (value: number) {
+        this.windTailWithIce = value
+    }
+    set setWindHeadWithoutIce (value: number) {
+        this.windHeadWithoutIce = value
+    }
+    set setWindTailWithoutIce (value: number) {
+        this.windTailWithoutIce = value
+    }
+    set setSlopeReference (value: number) {
+        this.slopeReference = value
+    }
+    set setSlopeUphillWithIce (value: number) {
+        this.slopeUphillWithIce = value
+    }
+    set setSlopeDownhillWithIce (value: number) {
+        this.slopeDownhillWithIce = value
+    }
+    set setSlopeUphillWithoutIce (value: number) {
+        this.slopeUphillWithoutIce = value
+    }
+    set setSlopeDownhillWithoutIce (value: number) {
+        this.slopeDownhillWithoutIce = value
+    }
+    set setOverspeedReference (value: number) {
+        this.overspeedReference = value
+    }
+    set setOverspeedWithIce (value: number) {
+        this.overspeedWithIce = value
+    }
+    set setOverspeedWithoutIce (value: number) {
+        this.overspeedWithoutIce = value
+    }
+    set setReverserWithIce (value: number) {
+        this.reverserWithIce = value
+    }
+    set setReverserWithoutIce (value: number) {
+        this.reverserWithoutIce = value
+    }
     set setFlap(value: string){
         this.flap = value
     }
 
     get getRefWithoutIce(): number { return this.refWithoutIce }
-
     get getRefWithIce(): number { return this.refWithIce }
-
+    get getWeightReference (): number { return this.weightReference } 
+    get getWeightBellowWithoutIce (): number { return this.weightBellowWithoutIce } 
+    get getWeightAboveWithoutIce (): number { return this.weightAboveWithoutIce } 
+    get getWeightBellowWithIce (): number { return this.weightBellowWithIce } 
+    get getWeightAboveWithIce (): number { return this.weightAboveWithIce } 
+    get getAltitudeReference (): number { return this.altitudeReference } 
+    get getAltitudeWithIce (): number { return this.altitudeWithIce } 
+    get getAltitudeWithoutIce (): number { return this.altitudeWithoutIce } 
+    get getTempReference (): number { return this.tempReference } 
+    get getTempBellowWithIce (): number { return this.tempBellowWithIce } 
+    get getTempAboveWithIce (): number { return this.tempAboveWithIce } 
+    get getTempBellowWithoutIce (): number { return this.tempBellowWithoutIce } 
+    get getTempAboveWithoutIce (): number { return this.tempAboveWithoutIce } 
+    get getWindReference (): number { return this.windReference } 
+    get getWindHeadWithIce (): number { return this.windHeadWithIce } 
+    get getWindTailWithIce (): number { return this.windTailWithIce } 
+    get getWindHeadWithoutIce (): number { return this.windHeadWithoutIce } 
+    get getWindTailWithoutIce (): number { return this.windTailWithoutIce } 
+    get getSlopeReference (): number { return this.slopeReference } 
+    get getSlopeUphillWithIce (): number { return this.slopeUphillWithIce } 
+    get getSlopeDownhillWithIce (): number { return this.slopeDownhillWithIce } 
+    get getSlopeUphillWithoutIce (): number { return this.slopeUphillWithoutIce } 
+    get getSlopeDownhillWithoutIce (): number { return this.slopeDownhillWithoutIce } 
+    get getOverspeedReference (): number { return this.overspeedReference } 
+    get getOverspeedWithIce (): number { return this.overspeedWithIce } 
+    get getOverspeedWithoutIce (): number { return this.overspeedWithoutIce } 
+    get getReverserWithIce (): number { return this.reverserWithIce} 
+    get getReverserWithoutIce (): number { return this.reverserWithoutIce } 
     get getFlap(): string { return this.flap }
-    
+
 }

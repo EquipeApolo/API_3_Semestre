@@ -144,7 +144,7 @@ class EditarUsuario extends Component<any, state>{
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Register completed',
+                title: 'Update completed',
                 showConfirmButton: false,
                 timer: 1500
               })
