@@ -13,7 +13,7 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-              <Nav.Link className='font-weight-bold' href="/">Performance Calculation</Nav.Link>
+              <Nav.Link className='font-weight-bold' href="/calculation">Performance Calculation</Nav.Link>
               <Nav.Link className='font-weight-bold' href="/registerAircraft">Aircraft Configuration</Nav.Link>
               <Nav.Link className='font-weight-bold' href="/aircrafts">Aircrafts</Nav.Link>
               <Nav.Link className='font-weight-bold' href="/users">Users</Nav.Link>
