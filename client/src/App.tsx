@@ -9,6 +9,7 @@ import EditarUsuario from './Views/editarUsuario';
 import TelaLogin from './Views/telaLogin';
 import UserTable from './Views/listaUsuario';
 import Flap from './Views/flap';
+import Nav from './Components/Nav';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -31,6 +32,7 @@ function GetIdUsuario(){
 function App() {
   return (
     <BrowserRouter>
+      <Nav></Nav>
       <Routes>
         <Route index element={<Calculo/>}/>
         <Route path="*" element={<Navigate to="/" />}/>
