@@ -43,7 +43,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={<Calculo/>}/>
+        <Route index element={<TelaLogin/>}/>
         <Route path="*" element={<Navigate to="/" />}/>
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<Flap/>}/>
@@ -52,7 +52,7 @@ function App() {
         <Route path="/aircrafts" element={<AircraftTable/>}/>
         <Route path="/users" element={<UserTable/>}/>
         <Route path="/flaps" element={<ListaFlap/>} />
-        <Route path="/telaLogin" element={<TelaLogin/>}/>
+        <Route path="/calculation" element={<Calculo/>}/>
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editUser/:id" element={<GetIdUsuario/>}/>
       </Routes>

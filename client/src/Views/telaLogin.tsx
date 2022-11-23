@@ -48,7 +48,7 @@ const Login = () => {
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/")
+                        navigate("/calculation")
                         
                     }
                 } else if (data.senha !== params.senha) {
