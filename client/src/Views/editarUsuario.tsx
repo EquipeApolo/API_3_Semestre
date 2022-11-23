@@ -13,7 +13,6 @@ type state = {
     typeUserError: string,
     dados: any[],
     user: User
-
 }
 
 class EditarUsuario extends Component<any, state>{
@@ -37,7 +36,6 @@ class EditarUsuario extends Component<any, state>{
     }
 
     componentDidMount(): void {
-        
         axios.get('http://localhost:3001/users/' + this.props.taskId).then(response => {
           let dadosBanco = response.data
           this.setState({
@@ -146,7 +144,7 @@ class EditarUsuario extends Component<any, state>{
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: 'Register completed',
+                title: 'Update completed',
                 showConfirmButton: false,
                 timer: 1500
               })

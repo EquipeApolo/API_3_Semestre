@@ -10,6 +10,7 @@ import Calcular from '../Models/calcular';
 import axios from "axios";
 import Table from '../Models/table';
 import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
+import flap from './CadastroFlap';
 
 type state = {
   weightTitle: string,
@@ -465,11 +466,14 @@ class Calculo extends Component<{}, state>{
                 </div>
               </Col>
               <Col>
-                <h5 className="card-title">Flap</h5>
-                <DropdownMultiselect
-                  options={["1", "2", "3", "A", "B", "C"]}
-                  name="flaps"
-                />
+              <h5 className="card-title">Flap</h5>
+                <select defaultValue="-1" onChange={this.onAircraftChange} className="input text-select form-select form-select-sm form-control-sm custom-select select mb-3">
+                  <option value="-1" disabled>Select</option>
+                  {this.state.dados.map((flap) => (<option key={flap.id} value={flap.id}>{flap.nome}</option>))}
+                </select>
+                <div style={{ fontSize: 12, color: "red" }}>
+                  {this.state.aircraftError}
+                </div>
               </Col>
 
             </Row>

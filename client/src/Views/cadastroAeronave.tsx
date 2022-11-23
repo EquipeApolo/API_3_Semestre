@@ -6,6 +6,7 @@ import aviao from "../Icons/aviao.png";
 import React from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import Table from "../Models/table";
 
 type state = {
@@ -22,7 +23,7 @@ type state = {
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
-    
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -101,7 +102,7 @@ class cadastroAeronave extends Component<any, state>{
         this.aircraft.setReverserAmount = target.value;
         if (!this.aircraft.getReverserAmount) {
             reversorError = "The aircraft must have at least zero(0) reversor."
-        }else if(this.aircraft.getReverserAmount < 0){
+        } else if (this.aircraft.getReverserAmount < 0) {
             reversorError = "The reverser amount cannot be negative"
         } else {
             reversorError = ""
@@ -112,113 +113,115 @@ class cadastroAeronave extends Component<any, state>{
         const target = event.target;
         this.aircraft.setBrakingApplicationLevel = target.value;
         if (this.state.breakingError.includes("Select")) {
-          this.setState({ breakingError: "" })
+            this.setState({ breakingError: "" })
         }
         if (this.state.result != "") this.setState({ result: "" })
-      }
+    }
 
-   aircraftWeightChangeMin(event) {
+    aircraftWeightChangeMin(event) {
         const target = event.target;
         this.aircraft.setAircraftWeightMin = target.value;
         if (this.aircraft.getAircraftWeightMin < 10000) {
-          this.setState({ weightMinError: "The minimum weight must be above 10.000 kg" })
+            this.setState({ weightMinError: "The minimum weight must be above 10.000 kg" })
         }
-   
+
         if (this.state.weightMinError.includes("required") || this.state.weightMinError.includes("above") && this.aircraft.getAircraftWeightMin >= 5000) {
-          this.setState({ weightMinError: "" })
+            this.setState({ weightMinError: "" })
         }
         if (this.state.result != "") this.setState({ result: "" })
-      }
-   aircraftWeightChangeMax(event) {
-       const target = event.target;
-       this.aircraft.setAircraftWeightMax = target.value;
-       if ( this.aircraft.getAircraftWeightMax < 10000) {
-           this.setState({ weightMaxError: "The maximum weight must be above 10.000 kg" })
-       }
-       if ( this.aircraft.getAircraftWeightMax > 1000000){
-           this.setState({weightMaxError: "The weight must be below 1.000.000 kg"})
-       }
+    }
+    aircraftWeightChangeMax(event) {
+        const target = event.target;
+        this.aircraft.setAircraftWeightMax = target.value;
+        if (this.aircraft.getAircraftWeightMax < 10000) {
+            this.setState({ weightMaxError: "The maximum weight must be above 10.000 kg" })
+        }
+        if (this.aircraft.getAircraftWeightMax > 1000000) {
+            this.setState({ weightMaxError: "The weight must be below 1.000.000 kg" })
+        }
 
-       if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") && this.aircraft.getAircraftWeightMax >= 10000) {
-           this.setState({ weightMaxError: "" })
-       }
-       if (this.state.result != "") this.setState({ result: "" })
-       }
-   /*cadastrar(event) {
-       const target = event.target.value
-       this.aircraft.result = //Adicionar result à aeronave novamente para colocar os valores necessários aqui
-   }*/
+        if (this.state.weightMaxError.includes("required") || this.state.weightMaxError.includes("above") && this.aircraft.getAircraftWeightMax >= 10000) {
+            this.setState({ weightMaxError: "" })
+        }
+        if (this.state.result != "") this.setState({ result: "" })
+    }
+    /*cadastrar(event) {
+        const target = event.target.value
+        this.aircraft.result = //Adicionar result à aeronave novamente para colocar os valores necessários aqui
+    }*/
 
-   validate = () => {
-       let modelError = "";
-       let engineError = "";
-       let reversorError = "";
-       let certificationError = "";
-       let flapError = "";
-       let breakingError = "";
-       let weightMinError = "";
-       let weightMaxError = "";
-       
-       if (!this.aircraft.getModel) {
-           modelError = "The model is required"
-       } else {
-           modelError = ""
-       }
-       if (!this.aircraft.getEngine) {
-           engineError = "The engine is required";
-       } else {
-           engineError = ""
-       }
-       if (!this.aircraft.getReverserAmount) {
-           reversorError = "The aircraft must have at least one(1) reversor."
-        }else if(this.aircraft.getReverserAmount < 0){
+    validate = () => {
+        let modelError = "";
+        let engineError = "";
+        let reversorError = "";
+        let certificationError = "";
+        let flapError = "";
+        let breakingError = "";
+        let weightMinError = "";
+        let weightMaxError = "";
+
+        if (!this.aircraft.getModel) {
+            modelError = "The model is required"
+        } else {
+            modelError = ""
+        }
+        if (!this.aircraft.getEngine) {
+            engineError = "The engine is required";
+        } else {
+            engineError = ""
+        }
+        if (!this.aircraft.getReverserAmount) {
+            reversorError = "The aircraft must have at least one(1) reversor."
+        } else if (this.aircraft.getReverserAmount < 0) {
             reversorError = "The reverser amount cannot be negative"
-       } else {
-           reversorError = ""
-       }
-       if (!this.aircraft.getCertification) {
-           certificationError = "Select a certification"
-       } else {
-           certificationError = ""
-       }
-       if (!this.aircraft.getFlapValue) {
-           flapError = "Set the flap"
-       } else {
-           flapError = ""
-       }
-       if (!this.aircraft.getBrakingApplicationLevel) {
-           breakingError = "Select a braking level";
-       } else {
-           breakingError = ""
-       }
-       if (!this.aircraft.getAircraftWeightMin) {
-           weightMinError = "The weight is required";
+        } else {
+            reversorError = ""
+        }
+        if (!this.aircraft.getCertification) {
+            certificationError = "Select a certification"
+        } else {
+            certificationError = ""
+        }
+        if (!this.aircraft.getFlapValue) {
+            flapError = "Set the flap"
+        } else {
+            flapError = ""
+        }
+        if (!this.aircraft.getBrakingApplicationLevel) {
+            breakingError = "Select a braking level";
+        } else {
+            breakingError = ""
+        }
+        if (!this.aircraft.getAircraftWeightMin) {
+            weightMinError = "The weight is required";
         } else if (this.aircraft.getAircraftWeightMin <= 0) {
             weightMinError = "The weight must be above zero";
-        } else if (this.aircraft.getAircraftWeightMin >= this.aircraft.getAircraftWeightMax){
+        } else if (this.aircraft.getAircraftWeightMin >= this.aircraft.getAircraftWeightMax) {
             weightMinError = "The weight must be bellow the maximum weight";
         } else {
-           weightMinError = ""
-       }
-       if (!this.aircraft.getAircraftWeightMax) {
-           weightMaxError = "The weight is required";
-        }else if(this.aircraft.getAircraftWeightMax <= 0){
+            weightMinError = ""
+        }
+        if (!this.aircraft.getAircraftWeightMax) {
+            weightMaxError = "The weight is required";
+        } else if (this.aircraft.getAircraftWeightMax <= 0) {
             weightMaxError = "The weight must be above zero"
-        } else if (this.aircraft.getAircraftWeightMax <= this.aircraft.getAircraftWeightMin){
+        } else if (this.aircraft.getAircraftWeightMax <= this.aircraft.getAircraftWeightMin) {
             weightMinError = "The weight must be above the minimum weight";
-       } else {
-           weightMaxError = ""
-       }
-       
-     
-       this.setState({ modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError,  
-        breakingError: breakingError, weightMinError: weightMinError, weightMaxError: weightMaxError});
-       if (modelError || engineError || reversorError || certificationError || flapError || breakingError || weightMinError || weightMaxError) {
-           return false
-       }
+        } else {
+            weightMaxError = ""
+        }
 
-       return true;
-   }
+
+        this.setState({
+            modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError,
+            breakingError: breakingError, weightMinError: weightMinError, weightMaxError: weightMaxError
+        });
+        if (modelError || engineError || reversorError || certificationError || flapError || breakingError || weightMinError || weightMaxError) {
+            return false
+        }
+
+        return true;
+    }
 
     postClickButton = async (event: any) => {
         event.preventDefault();
@@ -236,6 +239,7 @@ class cadastroAeronave extends Component<any, state>{
                 brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
             }).then((response) => {
                 res = response.data.id
+                //axios
             });
 
             console.log(res);
@@ -246,10 +250,10 @@ class cadastroAeronave extends Component<any, state>{
                 title: 'Register completed',
                 showConfirmButton: false,
                 timer: 1500
-              })
-            setTimeout(function() {
+            })
+            setTimeout(function () {
                 window.location.href = "/aircrafts"
-              }, 1500);
+            }, 1500);
         }
     }
 
@@ -260,102 +264,102 @@ class cadastroAeronave extends Component<any, state>{
                     <Container>
                         <Row className="px-2 mb-5 mt-5">
                             <img src={aviao} alt="Avião." className="img col-sm-5 col-md-3 col-lg-2"></img>
-                            <h1 style={{paddingLeft: '23vh'}} className='mt-5 col-sm-7 col-md-9'>New Aircraft</h1>
+                            <h1 style={{ paddingLeft: '23vh' }} className='mt-5 col-sm-7 col-md-9'>New Aircraft</h1>
                         </Row>
                     </Container>
                     <Container fluid>
-                            <Row>
-                                <h2 className="pb-5 text-center">Aircraft Configuration</h2>
-                                <Row></Row>
-                                <Col>
-                                    <h5 className="card-title">Aircraft model</h5>
-                                    <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="model"
-                                        placeholder="Aircraft model" onChange={this.modelChange} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.modelError}
-                                    </div>
+                        <Row>
+                            <h2 className="pb-5 text-center">Aircraft Configuration</h2>
+                            <Row></Row>
+                            <Col>
+                                <h5 className="card-title">Aircraft model</h5>
+                                <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="model"
+                                    placeholder="Aircraft model" onChange={this.modelChange} />
+                                <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.modelError}
+                                </div>
 
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Engine</h5>
-                                    <input type='text' className="input form-control form-control-lg inputGroup-sizing-sm" id='engine' placeholder='Engine' onChange={this.engineChange} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.engineError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Reversor</h5>
-                                    <input type='number' className="input form-control form-control-lg inputGroup-sizing-sm" id='reversor' placeholder='Reversor' onChange={this.reversorChange} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.reversorError}
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col >
-                                    <h5 className="card-title">Braking application level</h5>
-                                    <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
+                            </Col>
+                            <Col>
+                                <h5 className="card-title">Engine</h5>
+                                <input type='text' className="input form-control form-control-lg inputGroup-sizing-sm" id='engine' placeholder='Engine' onChange={this.engineChange} />
+                                <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.engineError}
+                                </div>
+                            </Col>
+                            <Col>
+                                <h5 className="card-title">Reversor</h5>
+                                <input type='number' className="input form-control form-control-lg inputGroup-sizing-sm" id='reversor' placeholder='Reversor' onChange={this.reversorChange} />
+                                <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.reversorError}
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col >
+                                <h5 className="card-title">Braking application level</h5>
+                                <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm select custom-select mb-3" id="brankingLevel" onChange={this.brakingLevelChange}>
                                     <option value="-1" disabled>Select...</option>
                                     <option value="1">Maximum Manual</option>
                                     <option value="2">Autobrake High</option>
                                     <option value="3">Autobrake Med.</option>
                                     <option value="4">Autobrake Low</option>
-                                    </select>
-                                    <div style={{ fontSize: 12, color: "red" }}>
+                                </select>
+                                <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.breakingError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Certification</h5>
-                                    <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnCertification" onChange={this.certificationChange}>
-                                        <option value="-1" disabled>Select</option>
-                                        <option value="ANAC">ANAC</option>
-                                        <option value="EASA">EASA</option>
-                                        <option value="FAA">FAA</option>
-                                    </select>
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.certificationError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Flap</h5>
-                                    <Button variant="outline-primary" href='/registerFlap' size='sm' >Set the flap</Button>
-                                    <div style={{ fontSize: 12, color: "red" }}>
-                                        {this.state.flapError}
-                                    </div>
-                                </Col>
-                                
-                               
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h5 className="card-title">Aircraft Weight Min (Kg)</h5>
-                                    <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
+                                </div>
+                            </Col>
+                            <Col>
+                                <h5 className="card-title">Certification</h5>
+                                <select defaultValue="-1" className="input text-select form-select form-select-sm form-control-sm custom-select select md-3" id="btnCertification" onChange={this.certificationChange}>
+                                    <option value="-1" disabled>Select</option>
+                                    <option value="ANAC">ANAC</option>
+                                    <option value="EASA">EASA</option>
+                                    <option value="FAA">FAA</option>
+                                </select>
+                                <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.certificationError}
+                                </div>
+                            </Col>
+                            <Col>
+                                <h5 className="card-title">Flap</h5>
+                                <DropdownMultiselect
+                                    options={["1", "2", "3", "A", "B", "C"]}
+                                    name="flaps"
+                                />
+                            </Col>
+
+
+                        </Row>
+                        <Row>
+                            <Col>
+                                <h5 className="card-title">Aircraft Weight Min (Kg)</h5>
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMin} />
+                                <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMinError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                    <h5 className="card-title">Aircraft Weight Max (Kg)</h5>
-                                    <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} />
-                                    <div style={{ fontSize: 12, color: "red" }}>
+                                </div>
+                            </Col>
+                            <Col>
+                                <h5 className="card-title">Aircraft Weight Max (Kg)</h5>
+                                <input type='number' className='input form-control form-control-lg inputGroup-sizing-sm' id="weight" placeholder="Aircraft Weight" onChange={this.aircraftWeightChangeMax} />
+                                <div style={{ fontSize: 12, color: "red" }}>
                                     {this.state.weightMaxError}
-                                    </div>
-                                </Col>
-                                <Col>
-                                </Col>
-                            </Row>
-                            <Row className="px-2 mt-5">
-                                <Col/>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Button variant="danger" style={{margin:'10px', marginTop:'0px'}} size='lg' href="/aircrafts">Back</Button>
-                                    <Button className="botao-resultado" style={{margin:'10px', marginTop:'0px'}} size="lg" onClick={this.postClickButton}>Save</Button>
-                                </Col>
-                                <Col></Col>
-                                <Col></Col>
-                            </Row>
+                                </div>
+                            </Col>
+                            <Col>
+                            </Col>
+                        </Row>
+                        <Row className="px-2 mt-5">
+                            <Col />
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="danger" style={{ margin: '10px', marginTop: '0px' }} size='lg' href="/aircrafts">Back</Button>
+                                <Button className="botao-resultado" style={{ margin: '10px', marginTop: '0px' }} size="lg" onClick={this.postClickButton}>Save</Button>
+                            </Col>
+                            <Col></Col>
+                            <Col></Col>
+                        </Row>
                     </Container>
                 </Container>
             </form>
