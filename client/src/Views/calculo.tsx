@@ -29,7 +29,8 @@ type state = {
   slopeError: string,
   overspeedTitle: string,
   dados: any[],
-  dadosTable: any[]
+  dadosTable: any[],
+  dadosFlap: any[]
 }
 
 class Calculo extends Component<{}, state>{
@@ -53,7 +54,7 @@ class Calculo extends Component<{}, state>{
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", brakingError: "", runwayError: "",
       temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
-      dados: [], dadosTable: []
+      dados: [], dadosTable: [], dadosFlap: []
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -76,12 +77,27 @@ class Calculo extends Component<{}, state>{
         dados: dadosBanco
       })
     })
+
     axios.get('http://localhost:3001/operationDistance').then(response => {
       let data = response.data
       this.setState({
         dadosTable: data
       })
     })
+
+    axios.get('http://localhost:3001/flap').then(response => {
+      let dataFlap = response.data
+      this.setState({
+        dadosFlap: dataFlap
+      })
+    })
+
+    // axios.get('http://localhost:3001/airplaneFlap').then(response => {
+    //   let dataFlap = response.data
+    //   this.setState({
+    //     dadosFlap: dataFlap
+    //   })
+    // })
 
     this.setState({
       windTitle: "(Kt)",
@@ -469,7 +485,7 @@ class Calculo extends Component<{}, state>{
               <h5 className="card-title">Flap</h5>
                 <select defaultValue="-1" onChange={this.onAircraftChange} className="input text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  {this.state.dados.map((flap) => (<option key={flap.id} value={flap.id}>{flap.nome}</option>))}
+                  {this.state.dadosFlap.map((flap) => (<option key={flap.id} value={flap.id}>{flap.tipoFlap}</option>))}
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
                   {this.state.aircraftError}

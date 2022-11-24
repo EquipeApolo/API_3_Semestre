@@ -5,6 +5,7 @@ import Table from "../Models/table";
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import React from "react";
 import aviao from "../Icons/aviao.png";
+import Flap from "../Models/flap";
 
 type state = {
     refWithIceError: string,
@@ -40,15 +41,20 @@ type state = {
     flapError: string,
     result: string,
     dados: any[]
+    flap: Flap
     table: Table
+
 }
 
 class EditarFlap extends Component<any, state>{
-    private table: Table = new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '');
+    private flap: Flap = new Flap('')
+    private table: Table = new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    
     constructor(props) {
         super(props)
         this.state = {
-            table: new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ''),
+            table: new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+            flap: new Flap(''),
             altitudeReferenceError: '',
             altitudeWithIceError: '',
             altitudeWithoutIceError: '',
@@ -84,6 +90,7 @@ class EditarFlap extends Component<any, state>{
             dados: []
         }
 
+        this.flapChange = this.flapChange.bind(this);
         this.refWithIceChange = this.refWithIceChange.bind(this);
         this.refWithouIceChange = this.refWithouIceChange.bind(this);
         this.weightReferenceChange = this.weightReferenceChange.bind(this);
@@ -114,7 +121,6 @@ class EditarFlap extends Component<any, state>{
         this.overspeedWithoutIceChange = this.overspeedWithoutIceChange.bind(this);
         this.reverserWithIceChange = this.reverserWithIceChange.bind(this);
         this.reverserWithoutIceChange = this.reverserWithoutIceChange.bind(this);
-        this.flapChange = this.flapChange.bind(this);
     }
 
     eventoFormulario = (evento: any) => {
@@ -130,12 +136,19 @@ class EditarFlap extends Component<any, state>{
                     dadosBanco.weightAboveWithIce, dadosBanco.altitudeReference, dadosBanco.altitudeWithIce, dadosBanco.altitudeWithoutIce, dadosBanco.tempReference, dadosBanco.tempBellowWithIce, dadosBanco.tempAboveWithIce,
                     dadosBanco.tempBellowWithoutIce, dadosBanco.tempAboveWithoutIce, dadosBanco.windReference, dadosBanco.windHeadWithIce, dadosBanco.windTailWithIce, dadosBanco.windHeadWithoutIce, dadosBanco.windTailWithoutIce,
                     dadosBanco.slopeReference, dadosBanco.slopeUphillWithIce, dadosBanco.slopeDownhillWithIce, dadosBanco.slopeUphillWithoutIce, dadosBanco.slopeDownhillWithoutIce, dadosBanco.overspeedReference, dadosBanco.overspeedWithIce,
-                    dadosBanco.overspeedWithoutIce, dadosBanco.reverserWithIce, dadosBanco.reverserWithoutIce, dadosBanco.flap)
+                    dadosBanco.overspeedWithoutIce, dadosBanco.reverserWithIce, dadosBanco.reverserWithoutIce)
             })
             console.log(dadosBanco);
             console.log(this.state.table.refWithIce);
 
+        })
 
+        axios.get('http://localhost:3001/flap/' + this.props.taskId).then(res => {
+            let dadosFlap = res.data
+            this.setState({
+                flap: new Flap(dadosFlap.tipoFlap)
+            })
+            console.log(dadosFlap);
         })
 
     }
@@ -501,15 +514,8 @@ class EditarFlap extends Component<any, state>{
     }
 
     flapChange(event) {
-        let flapError;
         const target = event.target;
-        this.table.flap = target.value;
-        if (!this.table.flap) {
-            flapError = "The flap is required"
-        } else {
-            flapError = ""
-        }
-        this.setState({ flapError: flapError })
+        this.state.flap.tipoFlap = target.value;
     }
 
     validate = () => {
@@ -722,7 +728,7 @@ class EditarFlap extends Component<any, state>{
             let res = -1
             await axios.put("http://localhost:3001/flap/modificar" + this.props.taskId, {
 
-                tipoFlap: this.state.table.getFlap
+                tipoFlap: this.state.flap.getTipoFlap
                 // airplaneId: res
             }).then((response) => {
                 res = response.data.id
@@ -797,10 +803,8 @@ class EditarFlap extends Component<any, state>{
                             <Col>
                                 <h5 className="card-title">Name of the flap</h5>
                                 <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="flap" placeholder="Name of the flap" 
-                                onChange={this.flapChange} /* value={tipoFlap} */ value={this.stat}/>
-                                <div style={{ fontSize: 12, color: "red" }}>
-                                    {this.state.flapError}
-                                </div>
+                                onChange={this.flapChange}  value={this.state.flap.getTipoFlap}/>
+
                             </Col>
                             <Col></Col>
                             <Col></Col>

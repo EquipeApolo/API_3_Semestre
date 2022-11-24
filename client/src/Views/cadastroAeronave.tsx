@@ -14,11 +14,11 @@ type state = {
     engineError: string,
     reversorError: string,
     certificationError: string,
-    flapError: string,
     breakingError: string,
     weightMinError: string,
     weightMaxError: string,
     result: string,
+    dadosFlap: any[]
 }
 class cadastroAeronave extends Component<any, state>{
 
@@ -31,11 +31,11 @@ class cadastroAeronave extends Component<any, state>{
             engineError: '',
             reversorError: '',
             certificationError: '',
-            flapError: '',
             breakingError: '',
             weightMinError: '',
             weightMaxError: '',
             result: '',
+            dadosFlap: []
         }
         this.modelChange = this.modelChange.bind(this);
         this.engineChange = this.engineChange.bind(this);
@@ -47,7 +47,17 @@ class cadastroAeronave extends Component<any, state>{
         this.aircraftWeightChangeMax = this.aircraftWeightChangeMax.bind(this);
         //this.cadastrar = this.cadastrar.bind(this);
     }
+    componentDidMount(): void {
 
+        axios.get('http://localhost:3001/airplaneFlap').then(response => {
+            let dataFlap = response.data
+            this.setState({
+              dadosFlap: dataFlap
+            })
+          })
+
+      }
+    
     eventoFormulario = (evento: any) => {
         evento.preventDefault()
     }
@@ -86,15 +96,8 @@ class cadastroAeronave extends Component<any, state>{
         this.setState({ certificationError: certificationError })
     }
     flapChange(event) {
-        let flapError
         const target = event.target;
         this.aircraft.setFlapValue = target.value;
-        if (!this.aircraft.getFlapValue) {
-            flapError = "Set the flap"
-        } else {
-            flapError = ""
-        }
-        this.setState({ flapError: flapError })
     }
     reversorChange(event) {
         let reversorError
@@ -155,7 +158,6 @@ class cadastroAeronave extends Component<any, state>{
         let engineError = "";
         let reversorError = "";
         let certificationError = "";
-        let flapError = "";
         let breakingError = "";
         let weightMinError = "";
         let weightMaxError = "";
@@ -181,11 +183,6 @@ class cadastroAeronave extends Component<any, state>{
             certificationError = "Select a certification"
         } else {
             certificationError = ""
-        }
-        if (!this.aircraft.getFlapValue) {
-            flapError = "Set the flap"
-        } else {
-            flapError = ""
         }
         if (!this.aircraft.getBrakingApplicationLevel) {
             breakingError = "Select a braking level";
@@ -213,10 +210,10 @@ class cadastroAeronave extends Component<any, state>{
 
 
         this.setState({
-            modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError, flapError: flapError,
+            modelError: modelError, engineError: engineError, reversorError: reversorError, certificationError: certificationError,
             breakingError: breakingError, weightMinError: weightMinError, weightMaxError: weightMaxError
         });
-        if (modelError || engineError || reversorError || certificationError || flapError || breakingError || weightMinError || weightMaxError) {
+        if (modelError || engineError || reversorError || certificationError || breakingError || weightMinError || weightMaxError) {
             return false
         }
 
@@ -226,7 +223,9 @@ class cadastroAeronave extends Component<any, state>{
     postClickButton = async (event: any) => {
         event.preventDefault();
         const isValid = this.validate();
+        console.log("teste1");
         if (isValid) {
+            console.log("Linux");
             let res = -1
             await axios.post("http://localhost:3001/airplane/cadastrar", {
                 model: this.aircraft.getModel,
@@ -234,13 +233,15 @@ class cadastroAeronave extends Component<any, state>{
                 certification: this.aircraft.getCertification,
                 aircraftWeightMin: this.aircraft.getAircraftWeightMin,
                 aircraftWeightMax: this.aircraft.getAircraftWeightMax,
-                flap: this.aircraft.getFlapValue,
                 reverserAmount: this.aircraft.getReverserAmount,
-                brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
+                brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel     
             }).then((response) => {
                 res = response.data.id
+                console.log("teste2");
                 //axios
-            });
+            }).catch((res) => {
+                console.log("teste");
+            })
 
             console.log(res);
 
@@ -328,7 +329,6 @@ class cadastroAeronave extends Component<any, state>{
                                     name="flaps"
                                 />
                             </Col>
-
 
                         </Row>
                         <Row>
