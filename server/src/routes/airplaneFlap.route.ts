@@ -36,6 +36,9 @@ airplaneFlapRoute.post('/airplaneFlap/cadastrar/:uuid', async (req: Request, res
 
     for(let c = 0; c < newairplaneFlap.length ; c++){
         
+    const project = await airplaneFlap.findOne({ where: { airplaneId: airplaneId, flapId:  Number(newairplaneFlap[c])} })
+    
+    if (project === null) {
         await airplaneFlap.create({
             "airplaneId": Number(airplaneId),
             "flapId": Number(newairplaneFlap[c])
@@ -45,6 +48,8 @@ airplaneFlapRoute.post('/airplaneFlap/cadastrar/:uuid', async (req: Request, res
             ok = false
             c = newairplaneFlap.length
         })
+    }
+
     }
     
     return res.json({
