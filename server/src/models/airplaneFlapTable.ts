@@ -5,7 +5,6 @@ const database = require('./connect')
 const airplaneId = require('./airplaneTable')
 const flapId = require('./flapTable')
 
-
 airplaneId.belongsToMany(flapId, { through: 'airplaneFlap' });
 flapId.belongsToMany(airplaneId, { through: 'airplaneFlap' });
 
