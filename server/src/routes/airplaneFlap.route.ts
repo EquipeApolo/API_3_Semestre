@@ -29,24 +29,29 @@ airplaneFlapRoute.get('/airplaneFlap/:uuid', async(req: Request<{ uuid: string }
     }
 })
 
-airplaneFlapRoute.post('/airplaneFlap/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
-    const newairplaneFlap = req.body
-    await airplaneFlap.create(newairplaneFlap)
-    .then((test) =>{
-        console.log(test)
-        console.log(test.id)
-        return res.json({
-            id: test.id,
-            erro: false,
-            mensagem: "airplaneFlap cadastrado com sucesso!"
+airplaneFlapRoute.post('/airplaneFlap/cadastrar/:uuid', async (req: Request, res: Response, next: NextFunction)=>{
+    const newairplaneFlap = req.body.ids
+    const airplaneId = req.params.uuid;
+    let ok = false
+
+    for(let c = 0; c < newairplaneFlap.length ; c++){
+        
+        await airplaneFlap.create({
+            "airplaneId": Number(airplaneId),
+            "flapId": Number(newairplaneFlap[c])
+        }).then(() => {
+            ok = true
+        }).catch(() => {
+            ok = false
+            c = newairplaneFlap.length
         })
-    }).catch(() =>{
-        return res.status(StatusCodes.NOT_FOUND).json({
-            id: -1,
-            erro: true,
-            mensagem: "airplaneFlap não cadastrado!"
-        })
+    }
+    
+    return res.json({
+            ok: ok,
+            mensagem: ok ? "airplaneFlap cadastrado com sucesso!" : "n foi"
     })
+   
 })
 
 airplaneFlapRoute.put('/airplaneFlap/modificar/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{

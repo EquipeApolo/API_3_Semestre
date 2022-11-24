@@ -5,7 +5,7 @@ const database = require('./connect')
 const airplaneId = require('./airplaneTable')
 const flapId = require('./flapTable')
 
- 
+
 airplaneId.belongsToMany(flapId, { through: 'airplaneFlap' });
 flapId.belongsToMany(airplaneId, { through: 'airplaneFlap' });
 
@@ -24,14 +24,14 @@ const airplaneFlap = database.define('airplaneFlap', {
         }
       },
       flapId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: flapId, 
-          key: 'id'
-        }
+          type: Sequelize.INTEGER,
+          references: {
+            model: flapId, 
+            key: 'id'
+         }
       }
 })
 
-//airplaneFlap.sync({ alter: true });
+// airplaneFlap.sync({ alter: true });
 
 module.exports = airplaneFlap;
