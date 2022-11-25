@@ -6,8 +6,16 @@ import aviao from "../Icons/aviao.png";
 import React from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
-import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 import Table from "../Models/table";
+import Flap from "../Models/flap";
+
+// const selecionarFlaps = [
+//     this.state.dadosFlap.map(item => {
+//         return (
+//             <option  key={item.id} value={item.id}>{item.tipoFlap}</option>
+//         )
+//     })
+// ]
 
 type state = {
     modelError: string,
@@ -23,6 +31,7 @@ type state = {
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
+    private idFlaps :Array<string> = [];
 
     constructor(props: any) {
         super(props);
@@ -49,13 +58,12 @@ class cadastroAeronave extends Component<any, state>{
     }
     componentDidMount(): void {
 
-        axios.get('http://localhost:3001/airplaneFlap').then(response => {
+        axios.get('http://localhost:3001/flap').then(response => {
             let dataFlap = response.data
             this.setState({
               dadosFlap: dataFlap
             })
           })
-
       }
     
     eventoFormulario = (evento: any) => {
@@ -96,8 +104,24 @@ class cadastroAeronave extends Component<any, state>{
         this.setState({ certificationError: certificationError })
     }
     flapChange(event) {
-        const target = event.target;
-        this.aircraft.setFlapValue = target.value;
+        // const target = event.target;
+        // let value = target.value;
+        // this.aircraft.setFlapValue = target.value;
+        // this.flapSelected = value;
+        var options :Array<any> = event.target.options;
+        for (var i = 0, l = options.length; i < l; i++) {
+            if (options[i].selected) {
+                if(!this.idFlaps.includes(options[i].value)){
+                    this.idFlaps.push(options[i].value);
+                }
+            }else{
+                if(this.idFlaps.includes(options[i].value)){
+                    let index = this.idFlaps.indexOf(options[i].value)
+                    this.idFlaps.splice(index,1)
+                }
+            }
+        }
+        console.log(this.idFlaps)
     }
     reversorChange(event) {
         let reversorError
@@ -220,12 +244,18 @@ class cadastroAeronave extends Component<any, state>{
         return true;
     }
 
+    // getFlap(): Flap {
+    //     let dadosFlap = this.state.dadosFlap.find(item => item.id == this.idFlaps);
+    //     return dadosFlap.id;
+    //   }
+
     postClickButton = async (event: any) => {
+        // let flap = this.getFlap();
+        // console.log(flap);
+        
         event.preventDefault();
         const isValid = this.validate();
-        console.log("teste1");
         if (isValid) {
-            console.log("Linux");
             let res = -1
             await axios.post("http://localhost:3001/airplane/cadastrar", {
                 model: this.aircraft.getModel,
@@ -237,13 +267,14 @@ class cadastroAeronave extends Component<any, state>{
                 brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel     
             }).then((response) => {
                 res = response.data.id
-                console.log("teste2");
                 //axios
+                console.log(this.idFlaps)
+                axios.post("http://localhost:3001/airplaneFlap/cadastrar/" + res, {
+                ids: this.idFlaps
+                })
             }).catch((res) => {
                 console.log("teste");
             })
-
-            console.log(res);
 
             Swal.fire({
                 position: 'center',
@@ -324,10 +355,14 @@ class cadastroAeronave extends Component<any, state>{
                             </Col>
                             <Col>
                                 <h5 className="card-title">Flap</h5>
-                                <DropdownMultiselect
-                                    options={["1", "2", "3", "A", "B", "C"]}
-                                    name="flaps"
-                                />
+                                <select multiple={true} className="text-select form-select form-select-sm form-control-sm custom-select select md-3"
+                                onChange={this.flapChange}>
+                                    {this.state.dadosFlap.map(item => {
+                                        return (
+                                            <option value={item.id}>{item.tipoFlap}</option>
+                                        )
+                                    })}
+                                </select>
                             </Col>
 
                         </Row>
