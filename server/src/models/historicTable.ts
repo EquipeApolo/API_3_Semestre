@@ -45,6 +45,6 @@ historic.belongsTo(airplaneId, {
     foreignKey: 'airplaneId'
 })
 
- historic.sync({ alter: true });
+// historic.sync({ alter: true });
 
 module.exports = historic;
