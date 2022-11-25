@@ -45,8 +45,9 @@ function App() {
     <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        <Route index element={<Calculo/>}/>
+        <Route index element={<TelaLogin/>}/>
         <Route path="*" element={<Navigate to="/" />}/>
+        <Route path="/calculation" element={<Calculo/>}/>
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<Flap/>}/>
         <Route path="/editAircraft/:id" element={<GetIdAeronave/>}/>
@@ -54,7 +55,6 @@ function App() {
         <Route path="/aircrafts" element={<AircraftTable/>}/>
         <Route path="/users" element={<UserTable/>}/>
         <Route path="/flaps" element={<ListaFlap/>} />
-        <Route path="/telaLogin" element={<TelaLogin/>}/>
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editUser/:id" element={<GetIdUsuario/>}/>
       </Routes>

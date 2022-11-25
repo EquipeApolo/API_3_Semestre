@@ -6,6 +6,7 @@ import operationDistance from './routes/operationDistance.route';
 import cors from 'cors';
 import flapRoute from './routes/flap.route';
 import airplaneFlapRoute from './routes/airplaneFlap.route';
+import historicRoute from './routes/historic.route';
 // const connection = require('./models/connect')
 
 
@@ -25,6 +26,7 @@ app.use(operationDistance);
 app.use(statusRouter);
 app.use(flapRoute);
 app.use(airplaneFlapRoute);
+app.use(historicRoute);
 
 
 // inicialização do server
