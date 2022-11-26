@@ -36,7 +36,7 @@ class EditarUsuario extends Component<any, state>{
     }
 
     componentDidMount(): void {
-        axios.get('http://localhost:3001/users/' + this.props.taskId).then(response => {
+        axios.get('http://localhost:3001/users/id/' + this.props.taskId).then(response => {
           let dadosBanco = response.data
           this.setState({
             dados: dadosBanco,
