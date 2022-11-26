@@ -9,10 +9,10 @@ import EditarUsuario from './Views/editarUsuario';
 import TelaLogin from './Views/telaLogin';
 import UserTable from './Views/listaUsuario';
 import Nav from './Components/Nav';
-import Flap from './Views/CadastroFlap';
 import ListaFlap from './Views/listaFlap';
 import EditarFlap from './Views/editarFlap';
 import Home from './Views/home';
+import CadastroFlap from './Views/CadastroFlap';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -50,7 +50,7 @@ function App() {
         <Route path="*" element={<Navigate to="/home" />}/>
         <Route path="/calculation" element={<Calculo/>}/>
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
-        <Route path="/registerFlap" element={<Flap/>}/>
+        <Route path="/registerFlap" element={<CadastroFlap/>}/>
         <Route path="/editAircraft/:id" element={<GetIdAeronave/>}/>
         <Route path="/editFlap/:id" element={<GetIdFlap/>}/>
         <Route path="/aircrafts" element={<AircraftTable/>}/>

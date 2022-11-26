@@ -1,6 +1,6 @@
 export default class Table {
 
-    public aircraftId: number
+    public flapId: number
 
     // referencia
     public refWithoutIce: number

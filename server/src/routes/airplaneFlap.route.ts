@@ -34,6 +34,11 @@ airplaneFlapRoute.post('/airplaneFlap/cadastrar/:uuid', async (req: Request, res
     const airplaneId = req.params.uuid;
     let ok = false
 
+    await airplaneFlap.destroy({
+        where: {
+            airplaneId: airplaneId
+        }
+    })
     for(let c = 0; c < newairplaneFlap.length ; c++){
         
     const project = await airplaneFlap.findOne({ where: { airplaneId: airplaneId, flapId:  Number(newairplaneFlap[c])} })
@@ -61,24 +66,46 @@ airplaneFlapRoute.post('/airplaneFlap/cadastrar/:uuid', async (req: Request, res
 
 airplaneFlapRoute.put('/airplaneFlap/modificar/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
-    const modifiedAirplaneFlap = req.body;
+    const modifiedAirplaneFlap = req.body.ids;
     modifiedAirplaneFlap.uuid = uuid
+
+    let ok = false
+
+    for(let c = 0; c < modifiedAirplaneFlap.length ; c++){
+        
+    //const project = await airplaneFlap.findOne({ where: { airplaneId: uuid, flapId:  Number(modifiedAirplaneFlap[c])} })
     await airplaneFlap.update(modifiedAirplaneFlap, {
         where: {
-            id: uuid
-          }
-    })
-     .then(() =>{
-         return res.json({
-             erro: false,
-             mensagem: "airplaneFlap atualizado com sucesso!"
-         })
-     }).catch(() =>{
-         return res.status(StatusCodes.NOT_FOUND).json({
-             erro: true,
-             mensagem: "airplaneFlap não atualizado!"
+            airplaneId: uuid
+        }
+    }).then(() => {
+            ok = true
+        }).catch(() => {
+            ok = false
+            c = modifiedAirplaneFlap.length
         })
-     })
+    }
+
+    return res.json({
+        ok: ok,
+        mensagem: ok ? "airplaneFlap modificado com sucesso!" : "n foi"
+    })
+    // await airplaneFlap.update(modifiedAirplaneFlap, {
+    //     where: {
+    //         airplaneId: uuid
+    //       }
+    // })
+    //  .then(() =>{
+    //      return res.json({
+    //          erro: false,
+    //          mensagem: "airplaneFlap atualizado com sucesso!"
+    //      })
+    //  }).catch(() =>{
+    //      return res.status(StatusCodes.NOT_FOUND).json({
+    //          erro: true,
+    //          mensagem: "airplaneFlap não atualizado!"
+    //     })
+    //  })
 })
 
 
@@ -86,8 +113,8 @@ airplaneFlapRoute.delete('/airplaneFlap/deletar/:uuid', async(req: Request<{ uui
     const uuid = req.params.uuid;
     await airplaneFlap.destroy({
         where: {
-            id: uuid
-          }
+            airplaneId: uuid
+        }
     })
     .then(() =>{
         return res.json({

@@ -23,6 +23,19 @@ usersRoute.get('/users/:uuid', async(req: Request<{ uuid: string }>, res: Respon
         return res.json(project)
     }
 })
+usersRoute.get('/users/id/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
+    const uuid = req.params.uuid;
+    const project = await users.findOne({ where: { id: uuid } })
+    
+    if (project === null) {
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "Usuario não cadastrado!"
+        })
+    } else {
+        return res.json(project)
+    }
+})
 
 usersRoute.post('/users/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newUser = req.body

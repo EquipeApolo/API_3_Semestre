@@ -6,9 +6,9 @@ const connection = new Sequelize("embraer", "fatecsjc", "Aluno123", {
       dialect: 'mysql'
 })
 
-// const connection = new Sequelize("embraer", "root", "fatecsjc", {
-//      host: 'localhost',
-//      dialect: 'mysql'
+//  const connection = new Sequelize("embraer", "root", "fatecsjc", {
+//       host: 'localhost',
+//       dialect: 'mysql'
 // })
 
 connection.authenticate()

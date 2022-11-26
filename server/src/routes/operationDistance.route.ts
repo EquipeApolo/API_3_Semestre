@@ -25,6 +25,27 @@ operationDistanceRoute.get('/operationDistance/:uuid', async(req: Request<{ uuid
     }
 })
 
+operationDistanceRoute.post('/operationDistance/cadastrar/:uuid', async (req: Request, res: Response, next: NextFunction)=>{
+    const values = req.body
+    const airplaneId = req.params.uuid;
+    let ok = false
+    
+    values.airplaneId = airplaneId
+    await operationDistance.create(values)
+    .then(() =>{
+        return res.json({
+            erro: false,
+            mensagem: "operation Distance cadastrado com sucesso!"
+        })
+    }).catch(() =>{
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "operation Distance não cadastrado!"
+        })
+    })
+   
+})
+
 operationDistanceRoute.post('/operationDistance/cadastrar', async (req: Request, res: Response, next: NextFunction)=>{
     const newOperationDistance = req.body
     await operationDistance.create(newOperationDistance)

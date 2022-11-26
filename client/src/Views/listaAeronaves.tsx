@@ -66,9 +66,10 @@ class AircraftTable extends Component<{}, table>{
             confirmButtonText: 'Yes, delete it!'
           }).then(async (result) => {
             if (result.isConfirmed) {
+                let deletedFlap = await this.deleteFlap(id)
                 let deleted = await this.deleteAircraft(id)
                 console.log(deleted)
-                if(deleted){
+                if(deleted || deletedFlap){
                     Swal.fire(
                         'Deleted!',
                         'The aircraft has been deleted.',
@@ -91,6 +92,14 @@ class AircraftTable extends Component<{}, table>{
     public async deleteAircraft(id): Promise<boolean>  {
         let retorno = false
         await axios.delete('http://localhost:3001/airplane/deletar/' + id).then(response => {
+            retorno = !response.data.erro
+        })       
+        return retorno
+    }
+
+    public async deleteFlap(id): Promise<boolean>  {
+        let retorno = false
+        await axios.delete('http://localhost:3001/airplaneFlap/deletar/' + id).then(response => {
             retorno = !response.data.erro
         })       
         return retorno

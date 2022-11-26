@@ -6,6 +6,8 @@ import React from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2'
 import Table from "../Models/table";
+import Flap from "../Models/flap";
+
 
 type state = {
     refWithIceError: string,
@@ -41,8 +43,9 @@ type state = {
     flapError: string
 }
 
-class flap extends Component<any, state>{
-    private table: Table = new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '');
+class CadastroFlap extends Component<any, state>{
+    private flap: Flap = new Flap('')
+    private table: Table = new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     constructor(props: any) {
         super(props);
         this.state = {
@@ -108,7 +111,7 @@ class flap extends Component<any, state>{
         this.overspeedWithoutIceChange = this.overspeedWithoutIceChange.bind(this);
         this.reverserWithIceChange = this.reverserWithIceChange.bind(this);
         this.reverserWithoutIceChange = this.reverserWithoutIceChange.bind(this);
-        this.flapChange = this.flapChange.bind(this);
+        this.flapChange = this.flapChange.bind(this)
     }
 
     eventoFormulario = (evento: any) => {
@@ -476,11 +479,11 @@ class flap extends Component<any, state>{
     }
 
     flapChange(event) {
-        let flapError;
         const target = event.target;
-        this.table.flap = target.value;
-        if (!this.table.flap) {
-            flapError = "The flap is required"
+        this.flap.tipoFlap = target.value;
+        let flapError;
+        if (!this.flap.tipoFlap) {
+            flapError = "The flap is required";
         } else {
             flapError = ""
         }
@@ -670,14 +673,15 @@ class flap extends Component<any, state>{
         } else {
             reverserWithoutIceError = ""
         }
-        if (!this.table.flap) {
-            flapError = "The flap is required";
-        } else {
+
+        if(!this.flap.tipoFlap){
+            flapError = "The flap is required"
+        }else{
             flapError = ""
         }
 
         this.setState({
-            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError,
+            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError, flapError: flapError,
             weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError, weightAboveWithoutIceError: weightAboveWithoutIceError,
             weightBellowWithIceError: weightBellowWithIceError, weightAboveWithIceError: weightAboveWithIceError, altitudeReferenceError: altitudeReferenceError, altitudeWithIceError: altitudeWithIceError,
             altitudeWithoutIceError: altitudeWithoutIceError, tempReferenceError: tempReferenceError, tempBellowWithIceError: tempBellowWithIceError, tempAboveWithIceError: tempAboveWithIceError,
@@ -685,14 +689,14 @@ class flap extends Component<any, state>{
             windTailWithIceError: windTailWithIceError, windHeadWithoutIceError: windHeadWithoutIceError, windTailWithoutIceError: windTailWithoutIceError, slopeReferenceError: slopeReferenceError,
             slopeUphillWithIceError: slopeUphillWithIceError, slopeDownhillWithIceError: slopeDownhillWithIceError, slopeUphillWithoutIceError: slopeUphillWithoutIceError,
             slopeDownhillWithoutIceError: slopeDownhillWithoutIceError, overspeedReferenceError: overspeedReferenceError, overspeedWithIceError: overspeedWithIceError,
-            overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError, flapError: flapError
+            overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError
         })
-        if (refWithIceError
+        if (refWithIceError || flapError
             || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
             || altitudeReferenceError || altitudeWithIceError || altitudeWithoutIceError || tempReferenceError || tempBellowWithIceError || tempAboveWithIceError || tempBellowWithoutIceError
             || tempAboveWithoutIceError || windReferenceError || windHeadWithIceError || windTailWithIceError || windHeadWithoutIceError || windTailWithoutIceError || slopeReferenceError
             || slopeUphillWithIceError || slopeDownhillWithIceError || slopeUphillWithoutIceError || slopeDownhillWithoutIceError || overspeedReferenceError || overspeedWithIceError
-            || overspeedWithoutIceError || reverserWithIceError || reverserWithoutIceError || flapError) {
+            || overspeedWithoutIceError || reverserWithIceError || reverserWithoutIceError) {
             return false
         }
         return true
@@ -703,45 +707,43 @@ class flap extends Component<any, state>{
         if (isValid) {
             let res = -1
             await axios.post("http://localhost:3001/flap/cadastrar", {
-
-                tipoFlap: this.table.flap
+                tipoFlap: this.flap.tipoFlap,
+                refWithoutIce: this.table.refWithoutIce,
+                refWithIce: this.table.refWithIce,
+                weightReference: this.table.weightReference,
+                weightBellowWithoutIce: this.table.weightBellowWithoutIce,
+                weightAboveWithoutIce: this.table.weightAboveWithoutIce,
+                weightBellowWithIce: this.table.weightBellowWithIce,
+                weightAboveWithIce: this.table.weightAboveWithIce,
+                altitudeReference: this.table.altitudeReference,
+                altitudeWithIce: this.table.altitudeWithIce,
+                altitudeWithoutIce: this.table.altitudeWithoutIce,
+                tempReference: this.table.tempReference,
+                tempBellowWithIce: this.table.tempBellowWithIce,
+                tempAboveWithIce: this.table.tempAboveWithIce,
+                tempBellowWithoutIce: this.table.tempBellowWithoutIce,
+                tempAboveWithoutIce: this.table.tempAboveWithoutIce,
+                windReference: this.table.windReference,
+                windHeadWithIce: this.table.windHeadWithIce,
+                windTailWithIce: this.table.windTailWithIce,
+                windHeadWithoutIce: this.table.windHeadWithoutIce,
+                windTailWithoutIce: this.table.windTailWithoutIce,
+                slopeReference: this.table.slopeReference,
+                slopeUphillWithIce: this.table.slopeUphillWithIce,
+                slopeDownhillWithIce: this.table.slopeDownhillWithIce,
+                slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
+                slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
+                overspeedReference: this.table.overspeedReference,
+                overspeedWithIce: this.table.overspeedWithIce,
+                overspeedWithoutIce: this.table.overspeedWithoutIce,
+                reverserWithIce: this.table.reverserWithIce,
+                reverserWithoutIce: this.table.reverserWithoutIce
                 // airplaneId: res
             }).then((response) => {
                 res = response.data.id
+                console.log(res);
+                
                 //axios
-                axios.post("http://localhost:3001/operationDistance/cadastrar", {
-                    id: res,
-                    refWithoutIce: this.table.refWithoutIce,
-                    refWithIce: this.table.refWithIce,
-                    weightReference: this.table.weightReference,
-                    weightBellowWithoutIce: this.table.weightBellowWithoutIce,
-                    weightAboveWithoutIce: this.table.weightAboveWithoutIce,
-                    weightBellowWithIce: this.table.weightBellowWithIce,
-                    weightAboveWithIce: this.table.weightAboveWithIce,
-                    altitudeReference: this.table.altitudeReference,
-                    altitudeWithIce: this.table.altitudeWithIce,
-                    altitudeWithoutIce: this.table.altitudeWithoutIce,
-                    tempReference: this.table.tempReference,
-                    tempBellowWithIce: this.table.tempBellowWithIce,
-                    tempAboveWithIce: this.table.tempAboveWithIce,
-                    tempBellowWithoutIce: this.table.tempBellowWithoutIce,
-                    tempAboveWithoutIce: this.table.tempAboveWithoutIce,
-                    windReference: this.table.windReference,
-                    windHeadWithIce: this.table.windHeadWithIce,
-                    windTailWithIce: this.table.windTailWithIce,
-                    windHeadWithoutIce: this.table.windHeadWithoutIce,
-                    windTailWithoutIce: this.table.windTailWithoutIce,
-                    slopeReference: this.table.slopeReference,
-                    slopeUphillWithIce: this.table.slopeUphillWithIce,
-                    slopeDownhillWithIce: this.table.slopeDownhillWithIce,
-                    slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
-                    slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
-                    overspeedReference: this.table.overspeedReference,
-                    overspeedWithIce: this.table.overspeedWithIce,
-                    overspeedWithoutIce: this.table.overspeedWithoutIce,
-                    reverserWithIce: this.table.reverserWithIce,
-                    reverserWithoutIce: this.table.reverserWithoutIce
-                })
             });
 
 
@@ -753,9 +755,9 @@ class flap extends Component<any, state>{
                 showConfirmButton: false,
                 timer: 1500
             })
-            setTimeout(function () {
-                window.location.href = "/airplanes"
-            }, 1500);
+            // setTimeout(function () {
+            //     window.location.href = "/airplanes"
+            // }, 1500);
         }
     }
 
@@ -1094,4 +1096,4 @@ class flap extends Component<any, state>{
 
 }
 
-export default flap
+export default CadastroFlap

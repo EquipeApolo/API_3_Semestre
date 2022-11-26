@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 // configuração de rotas
 app.use(usersRoute);
 app.use(airplaneRoute);
-app.use(operationDistance);
+// app.use(operationDistance);
 app.use(statusRouter);
 app.use(flapRoute);
 app.use(airplaneFlapRoute);
