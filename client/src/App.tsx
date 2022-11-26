@@ -12,6 +12,7 @@ import Nav from './Components/Nav';
 import Flap from './Views/CadastroFlap';
 import ListaFlap from './Views/listaFlap';
 import EditarFlap from './Views/editarFlap';
+import Home from './Views/home';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -46,7 +47,7 @@ function App() {
       <Nav></Nav>
       <Routes>
         <Route index element={<TelaLogin/>}/>
-        <Route path="*" element={<Navigate to="/" />}/>
+        <Route path="*" element={<Navigate to="/home" />}/>
         <Route path="/calculation" element={<Calculo/>}/>
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<Flap/>}/>

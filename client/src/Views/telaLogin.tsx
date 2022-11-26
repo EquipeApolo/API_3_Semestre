@@ -40,7 +40,7 @@ const Login = () => {
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/aircrafts") //Modificar tela ADM
+                        navigate("/home") //Modificar tela ADM
                         
                     }
                     else {
@@ -48,7 +48,7 @@ const Login = () => {
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/calculation")
+                        navigate("/home")
                         
                     }
                 } else if (data.senha !== params.senha) {
