@@ -12,7 +12,7 @@ usersRoute.get('/users', async(req: Request, res: Response, next: NextFunction)=
 
 usersRoute.get('/users/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
     const uuid = req.params.uuid;
-    const project = await users.findOne({ where: { email: uuid } })
+    const project = await users.findOne({ where: { id: uuid } })
     
     if (project === null) {
         return res.status(StatusCodes.NOT_FOUND).json({

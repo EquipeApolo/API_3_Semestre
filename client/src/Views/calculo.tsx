@@ -82,13 +82,6 @@ class Calculo extends Component<{}, state>{
       })
     })
 
-    axios.get('http://localhost:3001/operationDistance').then(response => {
-      let data = response.data
-      this.setState({
-        dadosTable: data
-      })
-    })
-
     axios.get('http://localhost:3001/flap').then(response => {
       let dataFlap = response.data
       this.setState({
@@ -457,11 +450,8 @@ class Calculo extends Component<{}, state>{
     return calcular.calcular();
   }
 
-  getTable(): Table {
-    console.table(this.state.dadosTable)
-    
-    let dado = this.state.dadosTable.find(item => item.flapId == this.flap)
-    console.log(dado);
+  getTable(): Table { 
+    let dado = this.state.allFlaps.find(item => item.id == this.flap)
     
     let t = new Table(dado.refWithoutIce, dado.refWithIce, dado.weightReference, dado.weightBellowWithoutIce, dado.weightAboveWithoutIce, dado.weightBellowWithIce,
       dado.weightAboveWithIce, dado.altitudeReference, dado.altitudeWithIce, dado.altitudeWithoutIce, dado.tempReference, dado.tempBellowWithIce, dado.tempAboveWithIce,

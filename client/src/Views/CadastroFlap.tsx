@@ -707,46 +707,43 @@ class CadastroFlap extends Component<any, state>{
         if (isValid) {
             let res = -1
             await axios.post("http://localhost:3001/flap/cadastrar", {
-
-                tipoFlap: this.flap.tipoFlap
+                tipoFlap: this.flap.tipoFlap,
+                refWithoutIce: this.table.refWithoutIce,
+                refWithIce: this.table.refWithIce,
+                weightReference: this.table.weightReference,
+                weightBellowWithoutIce: this.table.weightBellowWithoutIce,
+                weightAboveWithoutIce: this.table.weightAboveWithoutIce,
+                weightBellowWithIce: this.table.weightBellowWithIce,
+                weightAboveWithIce: this.table.weightAboveWithIce,
+                altitudeReference: this.table.altitudeReference,
+                altitudeWithIce: this.table.altitudeWithIce,
+                altitudeWithoutIce: this.table.altitudeWithoutIce,
+                tempReference: this.table.tempReference,
+                tempBellowWithIce: this.table.tempBellowWithIce,
+                tempAboveWithIce: this.table.tempAboveWithIce,
+                tempBellowWithoutIce: this.table.tempBellowWithoutIce,
+                tempAboveWithoutIce: this.table.tempAboveWithoutIce,
+                windReference: this.table.windReference,
+                windHeadWithIce: this.table.windHeadWithIce,
+                windTailWithIce: this.table.windTailWithIce,
+                windHeadWithoutIce: this.table.windHeadWithoutIce,
+                windTailWithoutIce: this.table.windTailWithoutIce,
+                slopeReference: this.table.slopeReference,
+                slopeUphillWithIce: this.table.slopeUphillWithIce,
+                slopeDownhillWithIce: this.table.slopeDownhillWithIce,
+                slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
+                slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
+                overspeedReference: this.table.overspeedReference,
+                overspeedWithIce: this.table.overspeedWithIce,
+                overspeedWithoutIce: this.table.overspeedWithoutIce,
+                reverserWithIce: this.table.reverserWithIce,
+                reverserWithoutIce: this.table.reverserWithoutIce
                 // airplaneId: res
             }).then((response) => {
                 res = response.data.id
+                console.log(res);
+                
                 //axios
-                axios.post("http://localhost:3001/operationDistance/cadastrar/" + res, {
-                    refWithoutIce: this.table.refWithoutIce,
-                    refWithIce: this.table.refWithIce,
-                    weightReference: this.table.weightReference,
-                    weightBellowWithoutIce: this.table.weightBellowWithoutIce,
-                    weightAboveWithoutIce: this.table.weightAboveWithoutIce,
-                    weightBellowWithIce: this.table.weightBellowWithIce,
-                    weightAboveWithIce: this.table.weightAboveWithIce,
-                    altitudeReference: this.table.altitudeReference,
-                    altitudeWithIce: this.table.altitudeWithIce,
-                    altitudeWithoutIce: this.table.altitudeWithoutIce,
-                    tempReference: this.table.tempReference,
-                    tempBellowWithIce: this.table.tempBellowWithIce,
-                    tempAboveWithIce: this.table.tempAboveWithIce,
-                    tempBellowWithoutIce: this.table.tempBellowWithoutIce,
-                    tempAboveWithoutIce: this.table.tempAboveWithoutIce,
-                    windReference: this.table.windReference,
-                    windHeadWithIce: this.table.windHeadWithIce,
-                    windTailWithIce: this.table.windTailWithIce,
-                    windHeadWithoutIce: this.table.windHeadWithoutIce,
-                    windTailWithoutIce: this.table.windTailWithoutIce,
-                    slopeReference: this.table.slopeReference,
-                    slopeUphillWithIce: this.table.slopeUphillWithIce,
-                    slopeDownhillWithIce: this.table.slopeDownhillWithIce,
-                    slopeUphillWithoutIce: this.table.slopeUphillWithoutIce,
-                    slopeDownhillWithoutIce: this.table.slopeDownhillWithoutIce,
-                    overspeedReference: this.table.overspeedReference,
-                    overspeedWithIce: this.table.overspeedWithIce,
-                    overspeedWithoutIce: this.table.overspeedWithoutIce,
-                    reverserWithIce: this.table.reverserWithIce,
-                    reverserWithoutIce: this.table.reverserWithoutIce
-                }).then(resultado => {
-                    console.log(resultado.data.mensagem)
-                })
             });
 
 
