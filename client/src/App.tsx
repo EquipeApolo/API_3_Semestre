@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Navigate, Route, Router, Routes, useParams } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Router, Routes, useNavigate, useParams } from 'react-router-dom';
 import Calculo from './Views/calculo';
 import CadastroAeronave from './Views/cadastroAeronave';
 import EditarAeronave from './Views/editarAeronave';
@@ -46,8 +46,15 @@ function App() {
     <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        <Route index element={<TelaLogin/>}/>
-        <Route path="*" element={<Navigate to="/home" />}/>
+        {
+          localStorage.getItem('nome') ?
+          <>
+            <Route index element={<Home/>}/>
+          </>
+          : 
+          <Route index element={<TelaLogin/>}/>
+        }
+        <Route path="*" element={<Navigate to="/" />}/>
         <Route path="/calculation" element={<Calculo/>}/>
         <Route path="/registerAircraft" element={<CadastroAeronave/>}/>
         <Route path="/registerFlap" element={<CadastroFlap/>}/>

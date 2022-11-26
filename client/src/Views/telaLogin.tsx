@@ -40,7 +40,7 @@ const Login = () => {
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/home") //Modificar tela ADM
+                        window.location.href = "/home";
                         
                     }
                     else {
@@ -48,7 +48,7 @@ const Login = () => {
                         localStorage.setItem('nome',`${data.nome}`)
                         localStorage.setItem('tipoUsuario',`${data.tipoUsuario
                         }`)
-                        navigate("/home")
+                        window.location.href = "/calculation";
                         
                     }
                 } else if (data.senha !== params.senha) {
