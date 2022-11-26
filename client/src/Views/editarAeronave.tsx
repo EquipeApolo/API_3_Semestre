@@ -20,14 +20,14 @@ type state = {
     dados: any[],
     dadosOperation: any[],
     aircraft: Aircraft,
-    flap: any[]
+    flap: any[],
+    flapsSelected: any[]
 }
 class editarAeronave extends Component<any, state>{
 
     private brakingLevel: BrakingLevel;
     private aircraftWeightMin: number = 0;
     private aircraftWeightMax: number = 0;
-    private idFlapsSelected :Array<number> = [];
 
     constructor(props) {
         super(props);
@@ -44,7 +44,8 @@ class editarAeronave extends Component<any, state>{
             dados: [],
             dadosOperation: [],
             aircraft: new Aircraft('','','',0,0,0,0,0),
-            flap: []
+            flap: [],
+            flapsSelected: []
         }
         this.modelChange = this.modelChange.bind(this);
         this.engineChange = this.engineChange.bind(this);
@@ -66,18 +67,8 @@ class editarAeronave extends Component<any, state>{
             aircraft: new Aircraft(dadosBanco.model, dadosBanco.engine, dadosBanco.certification, dadosBanco.flap, dadosBanco.reverserAmount, dadosBanco.aircraftWeightMin, dadosBanco.aircraftWeightMax, dadosBanco.brakingApplicationLevel)
           })
         })
-        // axios.get('http://localhost:3001/operationDistance/' + this.props.taskId).then(res => {
-        //     let dadosBanco = res.data
-        //     this.setState({
-        //         dadosOperation: dadosBanco,
-        //         table: new Table(dadosBanco.refWithoutIce,dadosBanco.refWithIce,dadosBanco.weightReference,dadosBanco.weightBellowWithoutIce,dadosBanco.weightAboveWithoutIce,dadosBanco.weightBellowWithIce,dadosBanco.weightAboveWithIce,dadosBanco.altitudeReference,dadosBanco.altitudeWithIce,dadosBanco.altitudeWithoutIce,dadosBanco.tempReference,dadosBanco.tempBellowWithIce,dadosBanco.tempAboveWithIce,dadosBanco.tempBellowWithoutIce,dadosBanco.tempAboveWithoutIce,dadosBanco.windReference,dadosBanco.windHeadWithIce,dadosBanco.windTailWithIce,dadosBanco.windHeadWithoutIce,dadosBanco.windTailWithoutIce,dadosBanco.slopeReference,dadosBanco.slopeUphillWithIce,dadosBanco.slopeDownhillWithIce,dadosBanco.slopeUphillWithoutIce,dadosBanco.slopeDownhillWithoutIce,dadosBanco.overspeedReference,dadosBanco.overspeedWithIce,dadosBanco.overspeedWithoutIce,dadosBanco.reverserWithIce,dadosBanco.reverserWithoutIce)
-        //     })
-        //     console.log(dadosBanco);
-        //     console.log(this.state.table.refWithIce);
-        // })
         axios.get('http://localhost:3001/flap').then(response => {
             let flap = response.data
-            console.log(flap)
             this.setState({
               flap: flap
             })
@@ -87,7 +78,9 @@ class editarAeronave extends Component<any, state>{
 
         axios.get('http://localhost:3001/airplaneFlap/' + this.props.taskId).then(response => {
             let dadosBanco = response.data
-            this.idFlapsSelected = dadosBanco
+            this.setState({
+                flapsSelected: dadosBanco
+            })
         })
         
     }
@@ -137,19 +130,18 @@ class editarAeronave extends Component<any, state>{
         var options :Array<any> = event.target.options;
         for (var i = 0, l = options.length; i < l; i++) {
             if  (options[i].selected) { 
-                let valor = new Number(options[i].value).valueOf()
-                if(!this.idFlapsSelected.includes(valor)){
-                    this.idFlapsSelected.push(valor);
+                let valor = Number(options[i].value)
+                if(!this.state.flapsSelected.includes(valor)){
+                    this.state.flapsSelected.push(valor);
                 }
             }else{
-                let valor = new Number(options[i].value).valueOf()
-                if(this.idFlapsSelected.includes(valor)){
-                    let index = this.idFlapsSelected.indexOf(valor)
-                    this.idFlapsSelected.splice(index,1)
+                let valor = Number(options[i].value)
+                if(this.state.flapsSelected.includes(valor)){
+                    let index = this.state.flapsSelected.indexOf(valor)
+                    this.state.flapsSelected.splice(index,1)
                 }
             }
         }
-        console.log(this.idFlapsSelected)
     }
     brakingLevelChange(event) {
         let breakingError
@@ -271,7 +263,7 @@ class editarAeronave extends Component<any, state>{
                 brakingApplicationLevel: this.state.aircraft.getBrakingApplicationLevel
             })
             axios.post("http://localhost:3001/airplaneFlap/cadastrar/" + this.props.taskId, {
-                ids: this.idFlapsSelected 
+                ids: this.state.flapsSelected 
             })
             Swal.fire({
                 position: 'center',
@@ -349,10 +341,10 @@ class editarAeronave extends Component<any, state>{
                                 <Col>
                                     <h5 className="card-title">Flap</h5>
                                     <select multiple={true} className="text-select form-select form-select-sm form-control-sm custom-select select md-3"
-                                    onChange={this.flapChange} defaultValue={this.idFlapsSelected}>
+                                    onChange={this.flapChange}>
                                     {this.state.flap.map(item => {
                                         return (
-                                            <option value={item.id}>{item.tipoFlap}</option>
+                                            <option selected={this.state.flapsSelected.includes(item.id)} key={item.id} value={item.id}>{item.tipoFlap}</option>
                                         )
                                     })}
                                     </select>

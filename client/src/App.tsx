@@ -11,7 +11,7 @@ import UserTable from './Views/listaUsuario';
 import Nav from './Components/Nav';
 import ListaFlap from './Views/listaFlap';
 import EditarFlap from './Views/editarFlap';
-import CadastroFlap from './Views/cadastroFlap';
+import CadastroFlap from './Views/CadastroFlap';
 
 function GetIdAeronave(){
   const { id } = useParams()

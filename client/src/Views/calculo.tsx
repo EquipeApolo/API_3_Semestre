@@ -30,7 +30,9 @@ type state = {
   overspeedTitle: string,
   dados: any[],
   dadosTable: any[],
-  dadosFlap: any[]
+  dadosFlap: any[],
+  allFlaps: any[],
+  flapError: string
 }
 
 class Calculo extends Component<{}, state>{
@@ -45,6 +47,7 @@ class Calculo extends Component<{}, state>{
   private iceAccreation: boolean = false;
   private brakingLevel: BrakingLevel;
   private unitMeasurement: UnitMeasurement;
+  private flap!: number
   private overspeed: number = 0;
 
 
@@ -54,7 +57,7 @@ class Calculo extends Component<{}, state>{
       airportAltitudeTitle: "", temperatureTitle: "", weightTitle: "", windTitle: "",
       result: "", slopeError: "", aircraftError: "", altitudeError: "", brakingError: "", runwayError: "",
       temperatureError: "", unitMeasurementError: "", weightError: "", windError: "", overspeedTitle: "",
-      dados: [], dadosTable: [], dadosFlap: []
+      dados: [], dadosTable: [], dadosFlap: [], allFlaps: [], flapError: ""
     }
     this.temperatureChange = this.temperatureChange.bind(this);
     this.windChange = this.windChange.bind(this);
@@ -67,6 +70,7 @@ class Calculo extends Component<{}, state>{
     this.runwayConditionChange = this.runwayConditionChange.bind(this);
     this.iceAccreationChange = this.iceAccreationChange.bind(this);
     this.overspeedChange = this.overspeedChange.bind(this);
+    this.onFlapChange = this.onFlapChange.bind(this)
     this.onAircraftChange = this.onAircraftChange.bind(this);
   }
 
@@ -88,16 +92,10 @@ class Calculo extends Component<{}, state>{
     axios.get('http://localhost:3001/flap').then(response => {
       let dataFlap = response.data
       this.setState({
-        dadosFlap: dataFlap
+        allFlaps: dataFlap
       })
     })
 
-    // axios.get('http://localhost:3001/airplaneFlap').then(response => {
-    //   let dataFlap = response.data
-    //   this.setState({
-    //     dadosFlap: dataFlap
-    //   })
-    // })
 
     this.setState({
       windTitle: "(Kt)",
@@ -120,9 +118,31 @@ class Calculo extends Component<{}, state>{
     if (value == -1) return;
 
     this.aircraftSelected = value;
+    
 
     if (this.state.aircraftError.includes("Select")) {
       this.setState({ aircraftError: "" })
+    }
+    if (this.state.result != "") this.setState({ result: "" })
+
+    this.flap = -1
+
+    axios.get('http://localhost:3001/airplaneFlap/' + value).then(response => {
+      let dataFlap = response.data
+      this.setState({
+        dadosFlap: dataFlap
+      })
+    })
+  }
+
+  onFlapChange(event) {
+    const target = event.target;
+    let value = target.value;
+    if (value == -1) return;
+
+    this.flap = value
+    if (this.state.flapError.includes("required")) {
+      this.setState({ flapError: "" })
     }
     if (this.state.result != "") this.setState({ result: "" })
   }
@@ -307,11 +327,18 @@ class Calculo extends Component<{}, state>{
     let unitMeasurementError = ""; let aircraftError = ""; let weightError = "";
     let brakingError = ""; let temperatureError = ""; let windError = "";
     let runwayError = ""; let altitudeError = ""; let slopeError = "";
+    let flapError = ""
 
     if (!this.unitMeasurement) {
       unitMeasurementError = "Select an unit of measurement";
     } else {
       unitMeasurementError = ""
+    }
+
+    if(!this.flap || this.flap == -1){
+      flapError = "The flap is required"
+    }else{
+      flapError = ""
     }
 
     if (!this.aircraftSelected) {
@@ -411,9 +438,9 @@ class Calculo extends Component<{}, state>{
     this.setState({
       aircraftError: aircraftError, altitudeError: altitudeError, brakingError: brakingError,
       runwayError: runwayError, slopeError: slopeError, temperatureError: temperatureError, weightError: weightError,
-      unitMeasurementError: unitMeasurementError, windError: windError
+      unitMeasurementError: unitMeasurementError, windError: windError, flapError: flapError
     });
-    if (aircraftError || altitudeError || brakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
+    if (flapError || aircraftError || altitudeError || brakingError || runwayError || slopeError || temperatureError || weightError || unitMeasurementError || windError) {
       return false;
     }
 
@@ -431,13 +458,16 @@ class Calculo extends Component<{}, state>{
   }
 
   getTable(): Table {
-    let dado = this.state.dadosTable.find(item => item.airplaneId == this.aircraftSelected)
-
+    console.table(this.state.dadosTable)
+    
+    let dado = this.state.dadosTable.find(item => item.flapId == this.flap)
+    console.log(dado);
+    
     let t = new Table(dado.refWithoutIce, dado.refWithIce, dado.weightReference, dado.weightBellowWithoutIce, dado.weightAboveWithoutIce, dado.weightBellowWithIce,
       dado.weightAboveWithIce, dado.altitudeReference, dado.altitudeWithIce, dado.altitudeWithoutIce, dado.tempReference, dado.tempBellowWithIce, dado.tempAboveWithIce,
       dado.tempBellowWithoutIce, dado.tempAboveWithoutIce, dado.windReference, dado.windHeadWithIce, dado.windTailWithIce, dado.windHeadWithoutIce, dado.windTailWithoutIce,
       dado.slopeReference, dado.slopeUphillWithIce, dado.slopeDownhillWithIce, dado.slopeUphillWithoutIce, dado.slopeDownhillWithoutIce, dado.overspeedReference,
-      dado.overspeedWithIce, dado.overspeedWithoutIce, dado.reverserWithIce, dado.reverserWithoutIce, dado.flap);
+      dado.overspeedWithIce, dado.overspeedWithoutIce, dado.reverserWithIce, dado.reverserWithoutIce);
     return t;
   }
 
@@ -483,12 +513,16 @@ class Calculo extends Component<{}, state>{
               </Col>
               <Col>
               <h5 className="card-title">Flap</h5>
-                <select defaultValue="-1" onChange={this.onAircraftChange} className="input text-select form-select form-select-sm form-control-sm custom-select select mb-3">
+                <select defaultValue="-1" onChange={this.onFlapChange} className="input text-select form-select form-select-sm form-control-sm custom-select select mb-3">
                   <option value="-1" disabled>Select</option>
-                  {this.state.dadosFlap.map((flap) => (<option key={flap.id} value={flap.id}>{flap.tipoFlap}</option>))}
+                  {this.state.dadosFlap.map((flap) => {
+                    let flapJson = this.state.allFlaps.find(item => item.id == flap)
+                    return (
+                    <option key={flapJson.id} value={flapJson.id}>{flapJson.tipoFlap}</option>
+                    )})}
                 </select>
                 <div style={{ fontSize: 12, color: "red" }}>
-                  {this.state.aircraftError}
+                  {this.state.flapError}
                 </div>
               </Col>
 

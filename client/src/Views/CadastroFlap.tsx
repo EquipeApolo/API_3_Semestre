@@ -40,6 +40,7 @@ type state = {
     overspeedWithoutIceError: string,
     reverserWithIceError: string,
     reverserWithoutIceError: string,
+    flapError: string
 }
 
 class CadastroFlap extends Component<any, state>{
@@ -77,7 +78,8 @@ class CadastroFlap extends Component<any, state>{
             windHeadWithoutIceError: '',
             windReferenceError: '',
             windTailWithIceError: '',
-            windTailWithoutIceError: ''
+            windTailWithoutIceError: '',
+            flapError: ''
         }
         this.refWithIceChange = this.refWithIceChange.bind(this);
         this.refWithouIceChange = this.refWithouIceChange.bind(this);
@@ -109,7 +111,7 @@ class CadastroFlap extends Component<any, state>{
         this.overspeedWithoutIceChange = this.overspeedWithoutIceChange.bind(this);
         this.reverserWithIceChange = this.reverserWithIceChange.bind(this);
         this.reverserWithoutIceChange = this.reverserWithoutIceChange.bind(this);
-
+        this.flapChange = this.flapChange.bind(this)
     }
 
     eventoFormulario = (evento: any) => {
@@ -479,6 +481,13 @@ class CadastroFlap extends Component<any, state>{
     flapChange(event) {
         const target = event.target;
         this.flap.tipoFlap = target.value;
+        let flapError;
+        if (!this.flap.tipoFlap) {
+            flapError = "The flap is required";
+        } else {
+            flapError = ""
+        }
+        this.setState({ flapError: flapError })
     }
 
     validate = () => {
@@ -512,6 +521,7 @@ class CadastroFlap extends Component<any, state>{
         let overspeedWithoutIceError = "";
         let reverserWithIceError = "";
         let reverserWithoutIceError = "";
+        let flapError = "";
 
         if (!this.table.refWithIce) {
             refWithIceError = "The reference with ice is required";
@@ -664,8 +674,14 @@ class CadastroFlap extends Component<any, state>{
             reverserWithoutIceError = ""
         }
 
+        if(!this.flap.tipoFlap){
+            flapError = "The flap is required"
+        }else{
+            flapError = ""
+        }
+
         this.setState({
-            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError,
+            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError, flapError: flapError,
             weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError, weightAboveWithoutIceError: weightAboveWithoutIceError,
             weightBellowWithIceError: weightBellowWithIceError, weightAboveWithIceError: weightAboveWithIceError, altitudeReferenceError: altitudeReferenceError, altitudeWithIceError: altitudeWithIceError,
             altitudeWithoutIceError: altitudeWithoutIceError, tempReferenceError: tempReferenceError, tempBellowWithIceError: tempBellowWithIceError, tempAboveWithIceError: tempAboveWithIceError,
@@ -675,7 +691,7 @@ class CadastroFlap extends Component<any, state>{
             slopeDownhillWithoutIceError: slopeDownhillWithoutIceError, overspeedReferenceError: overspeedReferenceError, overspeedWithIceError: overspeedWithIceError,
             overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError
         })
-        if (refWithIceError
+        if (refWithIceError || flapError
             || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
             || altitudeReferenceError || altitudeWithIceError || altitudeWithoutIceError || tempReferenceError || tempBellowWithIceError || tempAboveWithIceError || tempBellowWithoutIceError
             || tempAboveWithoutIceError || windReferenceError || windHeadWithIceError || windTailWithIceError || windHeadWithoutIceError || windTailWithoutIceError || slopeReferenceError
@@ -697,8 +713,7 @@ class CadastroFlap extends Component<any, state>{
             }).then((response) => {
                 res = response.data.id
                 //axios
-                axios.post("http://localhost:3001/operationDistance/cadastrar", {
-                    id: res,
+                axios.post("http://localhost:3001/operationDistance/cadastrar/" + res, {
                     refWithoutIce: this.table.refWithoutIce,
                     refWithIce: this.table.refWithIce,
                     weightReference: this.table.weightReference,
@@ -729,6 +744,8 @@ class CadastroFlap extends Component<any, state>{
                     overspeedWithoutIce: this.table.overspeedWithoutIce,
                     reverserWithIce: this.table.reverserWithIce,
                     reverserWithoutIce: this.table.reverserWithoutIce
+                }).then(resultado => {
+                    console.log(resultado.data.mensagem)
                 })
             });
 
@@ -741,9 +758,9 @@ class CadastroFlap extends Component<any, state>{
                 showConfirmButton: false,
                 timer: 1500
             })
-            setTimeout(function () {
-                window.location.href = "/airplanes"
-            }, 1500);
+            // setTimeout(function () {
+            //     window.location.href = "/airplanes"
+            // }, 1500);
         }
     }
 
