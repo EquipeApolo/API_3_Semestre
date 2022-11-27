@@ -110,7 +110,7 @@ class ListaFlap extends Component<{}, table>{
                         <tbody>
                             {this.state.result.map(item => {
                                 return (
-                                    <tr>
+                                    <tr key={item.id}>
                                         <td className='text-center'>{item.tipoFlap}</td>
                                         <td className='text-center col-xs-1 col-sm-1 col-lg-2'>
                                             <Link to={"/editFlap/" + item.id}>

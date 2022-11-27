@@ -11,13 +11,16 @@ type table = {
     updatedAt: string,
     usersId: string,
     airplaneId,
-    dados: any[]
+    dados: any[],
+    users: any[],
+    airplanes: any[],
+    flaps: any[]
 }
 
 class HistoryTable extends Component<{}, table>{
 
-    constructor(props: any) {
-        super(props);
+    constructor(prop) {
+        super(prop);
         this.state = {
             id: '',
             result: '',
@@ -25,14 +28,39 @@ class HistoryTable extends Component<{}, table>{
             updatedAt: '',
             usersId: '',
             airplaneId: '',
-            dados: []
+            dados: [],
+            users: [],
+            airplanes: [],
+            flaps: []
         }
 
 
 }
 
 
-componentDidMount(): void {
+async componentDidMount(): void {
+
+    await axios.get('http://localhost:3001/airplane').then(response => {
+        let dadosBanco = response.data
+        this.setState({
+            airplanes: dadosBanco
+        })
+    })
+
+    await axios.get('http://localhost:3001/users').then(response => {
+        let dadosBanco = response.data
+        this.setState({
+            users: dadosBanco
+        })
+    })
+
+    await axios.get('http://localhost:3001/flap').then(response => {
+        let dadosBanco = response.data
+        this.setState({
+            flaps: dadosBanco
+        })
+    })
+
     axios.get('http://localhost:3001/historic').then(response => {
       let dadosBanco = response.data
       this.setState({
@@ -54,20 +82,42 @@ render() {
         <Table striped bordered hover>
         <thead>
             <tr>
-                <th>Result</th>
-                <th>Created At</th>
-                <th>Users Id</th>
-                <th>Airplane Id</th>
+                <th className='text-center'>Users</th>
+                <th className='text-center'>Aircraft</th>
+                <th className='text-center'>Flap</th>
+                <th className='text-center'>Unit Measurement</th>
+                <th className='text-center'>Result</th>
+                <th className='text-center'>Weight</th>
+                <th className='text-center'>Temperature</th>
+                <th className='text-center'>Wind</th>
+                <th className='text-center'>Overspeed</th>
+                <th className='text-center'>Altitude</th>
+                <th className='text-center'>Slope</th>
+                <th className='text-center'>Ice</th>
+                <th className='text-center'>Date</th>
             </tr>
         </thead>
         <tbody>
                 {this.state.dados.map(item => {
+                    let user = this.state.users.find(us => item.usersId === us.id)
+                    let airplane = this.state.airplanes.find(ar => item.airplaneId === ar.id)
+                    let flap = this.state.flaps.find(fl => item.flapId === fl.id)
+                    let dataCadastro = new Date(item.createdAt)
                     return(
-                        <tr>
-                        <td>{item.result}</td>
-                        <td>{item.createdAt}</td>
-                        <td>{item.usersId}</td>
-                        <td>{item.airplaneId}</td>
+                        <tr key={item.id}>
+                            <td className='text-center'>{user.name}</td>
+                            <td className='text-center'>{airplane.model}</td>
+                            <td className='text-center'>{flap.tipoFlap}</td>
+                            <td className='text-center'>{item.unitOfMeasurement == 2 ? 'International' : 'Imperial'}</td>
+                            <td className='text-center'>{item.result} {item.unitOfMeasurement == 2 ? ' meters' : ' fts'}</td>
+                            <td className='text-center'>{item.aircraftWeight} {item.unitOfMeasurement == 2 ? ' kg' : ' lb'}</td>
+                            <td className='text-center'>{item.temperature} ºC</td>
+                            <td className='text-center'>{item.wind} Kt</td>
+                            <td className='text-center'>{item.overspeed} Kt</td>
+                            <td className='text-center'>{item.altitude} Ft</td>
+                            <td className='text-center'>{item.slope} %</td>
+                            <td className='text-center'>{item.ice == 1 ? "true" : "false"}</td>
+                            <td className='text-center'>{dataCadastro.toLocaleString()}</td>
                         </tr>
                 )})}
         </tbody>

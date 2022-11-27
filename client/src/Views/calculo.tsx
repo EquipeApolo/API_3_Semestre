@@ -299,6 +299,20 @@ class Calculo extends Component<{}, state>{
       this.setState({
         result: (calculado == convertido ? convertido.toFixed(2) + " meters" : convertido.toFixed(2) + " fts")
       });
+      axios.post("http://localhost:3001/historic/cadastrar", {
+        result: convertido.toFixed(2),
+	      usersId: localStorage.getItem('id'),
+	      airplaneId: this.aircraftSelected,
+        unitOfMeasurement: this.unitMeasurement,
+        aircraftWeight: this.aircraftWeight,
+        temperature: this.temperature,
+        wind: this.wind,
+        overspeed: this.overspeed,
+        ice: this.iceAccreation ? 1 : 0,
+        altitude: this.airportAltitude,
+        slope: this.slope,
+        flapId: this.flap
+    })
     } else {
       this.setState({
         result: ""
@@ -446,11 +460,6 @@ class Calculo extends Component<{}, state>{
 
     let calcular = new Calcular(aircraft, table, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
       this.iceAccreation, this.overspeed);
-      axios.post("http://localhost:3001/historic/cadastrar", {
-        result: calcular.calcular(),
-	      usersId: localStorage.getItem('id'),
-	      airplaneId: this.aircraftSelected    
-    })
     return calcular.calcular();
   }
 

@@ -142,7 +142,7 @@ class AircraftTable extends Component<{}, table>{
                         let date = new Date(item.createdAt);
                         let dateFormat = date.toLocaleDateString()
                         return(
-                            <tr>
+                            <tr key={item.id}>
                                 <td className='text-center'>{item.model}</td>
                                 <td className='text-center'>{item.engine}</td>
                                 <td className='text-center'>{item.certification}</td>

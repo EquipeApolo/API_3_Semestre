@@ -50,6 +50,16 @@ function App() {
         {
           localStorage.getItem('nome') ?
           <>
+            {/* {
+              localStorage.getitem('tipoUsuario') == "Admin" ?
+              <>
+                <Route index element={<Home/>}/>
+              </>
+              :
+              <>
+                <Route element={<Calculo/>}/>
+              </>
+            } */}
             <Route index element={<Home/>}/>
           </>
           : 

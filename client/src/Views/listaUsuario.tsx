@@ -134,7 +134,7 @@ class UserTable extends Component<{}, table>{
                         let date = new Date(item.createdAt);
                         let dateFormat = date.toLocaleDateString()
                         return(
-                            <tr>
+                            <tr key={item.id}>
                                 <td className='text-center'>{item.name}</td>
                                 <td className='text-center'>{item.email}</td>
                                 <td className='text-center'>******</td>

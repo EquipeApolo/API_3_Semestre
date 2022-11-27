@@ -137,6 +137,6 @@ const flap = database.define('flap', {
     }
 })
 
-flap.sync({ alter: true });
+// flap.sync({ alter: true });
 
 module.exports = flap;
