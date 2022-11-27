@@ -93,7 +93,7 @@ const Login = () => {
 
                 <Row>
                     <Col md={{ span: 6, offset: 3}}>
-                        <Button className="botao-resultado" style={{margin:'10px', marginTop:'15px'}} size="lg" name="submitButton" type="submit" id="btn_logar">Sing in</Button>
+                        <Button className="botao-resultado" style={{margin:'10px', marginTop:'15px'}} size="lg" name="submitButton" type="submit" id="btn_logar">Sign in</Button>
                     </Col>
                 </Row>
                 

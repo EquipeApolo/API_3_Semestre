@@ -31,7 +31,7 @@ type state = {
 class cadastroAeronave extends Component<any, state>{
 
     private aircraft: Aircraft = new Aircraft('', '', '', 0, 0, 0, 0, 0);
-    private idFlaps :Array<string> = [];
+    private idFlaps: Array<string> = [];
 
     constructor(props: any) {
         super(props);
@@ -61,11 +61,11 @@ class cadastroAeronave extends Component<any, state>{
         axios.get('http://localhost:3001/flap').then(response => {
             let dataFlap = response.data
             this.setState({
-              dadosFlap: dataFlap
+                dadosFlap: dataFlap
             })
-          })
-      }
-    
+        })
+    }
+
     eventoFormulario = (evento: any) => {
         evento.preventDefault()
     }
@@ -108,20 +108,19 @@ class cadastroAeronave extends Component<any, state>{
         // let value = target.value;
         // this.aircraft.setFlapValue = target.value;
         // this.flapSelected = value;
-        var options :Array<any> = event.target.options;
-        for (var i = 0, l = options.length; i < l; i++) {
-            if (options[i].selected) {
-                if(!this.idFlaps.includes(options[i].value)){
-                    this.idFlaps.push(options[i].value);
-                }
-            }else{
-                if(this.idFlaps.includes(options[i].value)){
-                    let index = this.idFlaps.indexOf(options[i].value)
-                    this.idFlaps.splice(index,1)
-                }
+        var checked = event.target.checked
+        var value = event.target.value
+        var valor = value
+        if (checked){
+            if (!this.idFlaps.includes(valor)){
+                this.idFlaps.push(valor)
+            } 
+        } else {
+            if (this.idFlaps.includes(valor)){
+                let index = this.idFlaps.indexOf(valor)
+                this.idFlaps.splice(index, 1)
             }
         }
-        console.log(this.idFlaps)
     }
     reversorChange(event) {
         let reversorError
@@ -252,7 +251,7 @@ class cadastroAeronave extends Component<any, state>{
     postClickButton = async (event: any) => {
         // let flap = this.getFlap();
         // console.log(flap);
-        
+
         event.preventDefault();
         const isValid = this.validate();
         if (isValid) {
@@ -264,13 +263,13 @@ class cadastroAeronave extends Component<any, state>{
                 aircraftWeightMin: this.aircraft.getAircraftWeightMin,
                 aircraftWeightMax: this.aircraft.getAircraftWeightMax,
                 reverserAmount: this.aircraft.getReverserAmount,
-                brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel     
+                brakingApplicationLevel: this.aircraft.getBrakingApplicationLevel
             }).then((response) => {
                 res = response.data.id
                 //axios
                 console.log(this.idFlaps)
                 axios.post("http://localhost:3001/airplaneFlap/cadastrar/" + res, {
-                ids: this.idFlaps
+                    ids: this.idFlaps
                 })
             }).catch((res) => {
                 console.log("teste");
@@ -355,14 +354,25 @@ class cadastroAeronave extends Component<any, state>{
                             </Col>
                             <Col>
                                 <h5 className="card-title">Flap</h5>
-                                <select multiple={true} className="text-select form-select form-select-sm form-control-sm custom-select select md-3"
+                                {/* <select multiple={true} className="text-select form-select form-select-sm form-control-sm custom-select select md-3"
                                 onChange={this.flapChange}>
                                     {this.state.dadosFlap.map(item => {
                                         return (
                                             <option value={item.id}>{item.tipoFlap}</option>
                                         )
                                     })}
-                                </select>
+                                </select> */}
+                                <Form onChange={this.flapChange} >
+                                    {this.state.dadosFlap.map(item => {
+                                        return (
+                                            <Form.Check
+                                                type={"checkbox"}
+                                                value={item.id}
+                                                label={item.tipoFlap}
+                                            />
+                                        )
+                                    })}
+                                </Form>
                             </Col>
 
                         </Row>

@@ -29,6 +29,6 @@ const users = database.define('users', {
     }
 })
 
-users.sync({ alter: true });
+//users.sync({ alter: true });
 
 module.exports = users;
