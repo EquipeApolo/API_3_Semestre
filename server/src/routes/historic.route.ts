@@ -88,5 +88,46 @@ historicRoute.delete('/historic/deletar/:uuid', async(req: Request<{ uuid: strin
     })
 })
 
+historicRoute.delete('/historic/deletar/userId/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
+    const uuid = req.params.uuid;
+    await historic.destroy({
+        where: {
+            usersId: uuid
+        }
+    })
+    .then(() =>{
+        return res.json({
+            erro: false,
+            mensagem: "historic deletado com sucesso!"
+        })
+    }).catch(() =>{
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "historic não deletado!"
+        })
+    })
+})
+
+
+historicRoute.delete('/historic/deletar/airplaneId/:uuid', async(req: Request<{ uuid: string }>, res: Response, next: NextFunction)=>{
+    const uuid = req.params.uuid;
+    await historic.destroy({
+        where: {
+            airplaneId: uuid
+        }
+    })
+    .then(() =>{
+        return res.json({
+            erro: false,
+            mensagem: "historic deletado com sucesso!"
+        })
+    }).catch(() =>{
+        return res.status(StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "historic não deletado!"
+        })
+    })
+})
+
 
 export default historicRoute;

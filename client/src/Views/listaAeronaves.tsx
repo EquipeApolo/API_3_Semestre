@@ -67,9 +67,10 @@ class AircraftTable extends Component<{}, table>{
           }).then(async (result) => {
             if (result.isConfirmed) {
                 let deletedFlap = await this.deleteFlap(id)
+                let deleteHistoric = await this.deleteHistoric(id)
                 let deleted = await this.deleteAircraft(id)
-                console.log(deleted)
-                if(deleted || deletedFlap){
+                console.log(deleteHistoric)
+                if(deleted || deletedFlap || deleteHistoric){
                     Swal.fire(
                         'Deleted!',
                         'The aircraft has been deleted.',
@@ -104,7 +105,13 @@ class AircraftTable extends Component<{}, table>{
         })       
         return retorno
     }
-
+    public async deleteHistoric(id): Promise<boolean>  {
+        let retorno = false
+        await axios.delete('http://localhost:3001/historic/deletar/airplaneId/' + id).then(response => {
+            retorno = !response.data.erro
+        })       
+        return retorno
+    }
     render() {
         return(
         <Container className='px-2 mb-5'>
