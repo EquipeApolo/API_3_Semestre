@@ -625,4 +625,3 @@ class Calculo extends Component<{}, state>{
 }
 
 export default Calculo;
-
