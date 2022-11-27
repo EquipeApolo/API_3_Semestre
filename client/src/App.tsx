@@ -13,6 +13,7 @@ import ListaFlap from './Views/listaFlap';
 import EditarFlap from './Views/editarFlap';
 import Home from './Views/home';
 import CadastroFlap from './Views/CadastroFlap';
+import HistoryTable from './Views/historico';
 
 function GetIdAeronave(){
   const { id } = useParams()
@@ -65,6 +66,7 @@ function App() {
         <Route path="/flaps" element={<ListaFlap/>} />
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editUser/:id" element={<GetIdUsuario/>}/>
+        <Route path="/historic/:id" element={<HistoryTable/>}/>
       </Routes>
     </BrowserRouter>
   );

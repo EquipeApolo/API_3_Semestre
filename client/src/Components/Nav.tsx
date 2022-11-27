@@ -51,6 +51,7 @@ function NavBar() {
                   <Nav.Link className='font-weight-bold' href="/aircrafts">Aircrafts</Nav.Link>
                   <Nav.Link className='font-weight-bold' href="/flaps">Flaps</Nav.Link>
                   <Nav.Link className='font-weight-bold' href="/users">Users</Nav.Link>
+                  <Nav.Link className='font-weight-bold' href="/historic">History</Nav.Link>
 
             </Nav>
             <Row>
