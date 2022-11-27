@@ -130,12 +130,10 @@ class EditarFlap extends Component<any, state>{
     componentDidMount(): void {
         axios.get('http://localhost:3001/flap/' + this.props.taskId).then(res => {
             let dadosBanco = res.data
-            let dadosFlap = res.data
             this.setState({
-                // dadosOperation: dadosBanco,
-                flap: new Flap(dadosFlap.tipoFlap),
-
-                table: new Table(dadosBanco.refWithoutIce, dadosBanco.refWithIce, dadosBanco.weightReference, dadosBanco.weightBellowWithoutIce, dadosBanco.weightAboveWithoutIce, dadosBanco.weightBellowWithIce,
+                // dadosOperation: dadosBanco
+                    flap: new Flap(dadosBanco.tipoFlap),
+                    table: new Table(dadosBanco.refWithoutIce, dadosBanco.refWithIce, dadosBanco.weightReference, dadosBanco.weightBellowWithoutIce, dadosBanco.weightAboveWithoutIce, dadosBanco.weightBellowWithIce,
                     dadosBanco.weightAboveWithIce, dadosBanco.altitudeReference, dadosBanco.altitudeWithIce, dadosBanco.altitudeWithoutIce, dadosBanco.tempReference, dadosBanco.tempBellowWithIce, dadosBanco.tempAboveWithIce,
                     dadosBanco.tempBellowWithoutIce, dadosBanco.tempAboveWithoutIce, dadosBanco.windReference, dadosBanco.windHeadWithIce, dadosBanco.windTailWithIce, dadosBanco.windHeadWithoutIce, dadosBanco.windTailWithoutIce,
                     dadosBanco.slopeReference, dadosBanco.slopeUphillWithIce, dadosBanco.slopeDownhillWithIce, dadosBanco.slopeUphillWithoutIce, dadosBanco.slopeDownhillWithoutIce, dadosBanco.overspeedReference, dadosBanco.overspeedWithIce,
@@ -144,13 +142,19 @@ class EditarFlap extends Component<any, state>{
                 
             })
             console.log(dadosBanco);
-            console.log(dadosFlap);
         })
+        
     }
     flapChange(event) {
+        let flapError;
         const target = event.target;
         this.state.flap.tipoFlap = target.value;
-        
+        if (!this.state.flap.tipoFlap) {
+            flapError = "The flap name is required";
+        } else {
+            flapError = ""
+        }
+        this.setState({ flapError: flapError })   
     }
     refWithIceChange(event) {
         let refWithIceError;
@@ -514,6 +518,7 @@ class EditarFlap extends Component<any, state>{
 
 
     validate = () => {
+        let flapError = "";
         let refWithIceError = "";
         let refWithouIceError = "";
         let weightReferenceError = "";
@@ -544,6 +549,12 @@ class EditarFlap extends Component<any, state>{
         let overspeedWithoutIceError = "";
         let reverserWithIceError = "";
         let reverserWithoutIceError = "";
+
+        if (!this.state.flap.tipoFlap) {
+            flapError = "The reference with ice is required";
+        } else {
+            flapError = ""
+        }
 
         if (!this.state.table.refWithIce) {
             refWithIceError = "The reference with ice is required";
@@ -697,7 +708,7 @@ class EditarFlap extends Component<any, state>{
         }
 
         this.setState({
-            refWithIceError: refWithIceError, refWithouIceError: refWithouIceError, weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError,
+            flapError: flapError, refWithIceError: refWithIceError, refWithouIceError: refWithouIceError, weightReferenceError: weightReferenceError, weightBellowWithoutIceError: weightBellowWithoutIceError,
             weightAboveWithoutIceError: weightAboveWithoutIceError, weightBellowWithIceError: weightBellowWithIceError, weightAboveWithIceError: weightAboveWithIceError, altitudeReferenceError: altitudeReferenceError,
             altitudeWithIceError: altitudeWithIceError, altitudeWithoutIceError: altitudeWithoutIceError, tempReferenceError: tempReferenceError, tempBellowWithIceError: tempBellowWithIceError, tempAboveWithIceError: tempAboveWithIceError,
             tempBellowWithoutIceError: tempBellowWithoutIceError, tempAboveWithoutIceError: tempAboveWithoutIceError, windReferenceError: windReferenceError, windHeadWithIceError: windHeadWithIceError,
@@ -706,7 +717,7 @@ class EditarFlap extends Component<any, state>{
             slopeDownhillWithoutIceError: slopeDownhillWithoutIceError, overspeedReferenceError: overspeedReferenceError, overspeedWithIceError: overspeedWithIceError,
             overspeedWithoutIceError: overspeedWithoutIceError, reverserWithIceError: reverserWithIceError, reverserWithoutIceError: reverserWithoutIceError
         })
-        if (refWithIceError || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
+        if (flapError || refWithIceError || refWithouIceError || weightReferenceError || weightBellowWithoutIceError || weightAboveWithoutIceError || weightBellowWithIceError || weightAboveWithIceError
             || altitudeReferenceError || altitudeWithIceError || altitudeWithoutIceError || tempReferenceError || tempBellowWithIceError || tempAboveWithIceError || tempBellowWithoutIceError
             || tempAboveWithoutIceError || windReferenceError || windHeadWithIceError || windTailWithIceError || windHeadWithoutIceError || windTailWithoutIceError || slopeReferenceError
             || slopeUphillWithIceError || slopeDownhillWithIceError || slopeUphillWithoutIceError || slopeDownhillWithoutIceError || overspeedReferenceError || overspeedWithIceError
@@ -790,6 +801,9 @@ class EditarFlap extends Component<any, state>{
                                 <h5 className="card-title">Name of the flap</h5>
                                 <input type='text' className='input form-control form-control-lg inputGroup-sizing-sm' id="flap" placeholder="Name of the flap" 
                                 onChange={this.flapChange}  value={this.state.flap.getTipoFlap}/>
+                                <div style={{ fontSize: 12, color: "red" }}>
+                                    {this.state.flapError}
+                                </div>
 
                             </Col>
                             <Col></Col>
