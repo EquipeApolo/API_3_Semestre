@@ -88,8 +88,7 @@ class Calculo extends Component<{}, state>{
         allFlaps: dataFlap
       })
     })
-
-
+    
     this.setState({
       windTitle: "(Kt)",
       airportAltitudeTitle: "(Ft)",
@@ -447,6 +446,11 @@ class Calculo extends Component<{}, state>{
 
     let calcular = new Calcular(aircraft, table, this.unitMeasurement, this.aircraftWeight, this.airportAltitude, this.slope, this.temperature, this.wind,
       this.iceAccreation, this.overspeed);
+      axios.post("http://localhost:3001/historic/cadastrar", {
+        result: calcular.calcular(),
+	      usersId: localStorage.getItem('id'),
+	      airplaneId: this.aircraftSelected    
+    })
     return calcular.calcular();
   }
 

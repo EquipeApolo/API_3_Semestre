@@ -11,49 +11,49 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const http_status_codes_1 = require("http-status-codes");
-const airplaneRoute = (0, express_1.Router)();
-const airplane = require('../models/airplaneTable');
-airplaneRoute.get('/airplane', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const airplaneList = yield airplane.findAll();
-    res.status(http_status_codes_1.StatusCodes.OK).send(airplaneList);
+const flapRoute = (0, express_1.Router)();
+const flap = require('../models/flapTable');
+flapRoute.get('/flap', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const flapList = yield flap.findAll();
+    res.status(http_status_codes_1.StatusCodes.OK).send(flapList);
 }));
-airplaneRoute.get('/airplane/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+flapRoute.get('/flap/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    const project = yield airplane.findOne({ where: { id: uuid } });
+    const project = yield flap.findOne({ where: { id: uuid } });
     if (project === null) {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não cadastrado!"
+            mensagem: "flap não cadastrado!"
         });
     }
     else {
         return res.json(project);
     }
 }));
-airplaneRoute.post('/airplane/cadastrar', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const newAirplane = req.body;
-    yield airplane.create(newAirplane)
+flapRoute.post('/flap/cadastrar', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const newflap = req.body;
+    yield flap.create(newflap)
         .then((test) => {
         console.log(test);
         console.log(test.id);
         return res.json({
             id: test.id,
             erro: false,
-            mensagem: "Airplane cadastrado com sucesso!"
+            mensagem: "flap cadastrado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             id: -1,
             erro: true,
-            mensagem: "Airplane não cadastrado!"
+            mensagem: "flap não cadastrado!"
         });
     });
 }));
-airplaneRoute.put('/airplane/modificar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+flapRoute.put('/flap/modificar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    const modifiedAirplane = req.body;
-    modifiedAirplane.uuid = uuid;
-    yield airplane.update(modifiedAirplane, {
+    const modifiedFlap = req.body;
+    modifiedFlap.uuid = uuid;
+    yield flap.update(modifiedFlap, {
         where: {
             id: uuid
         }
@@ -61,18 +61,18 @@ airplaneRoute.put('/airplane/modificar/:uuid', (req, res, next) => __awaiter(voi
         .then(() => {
         return res.json({
             erro: false,
-            mensagem: "Airplane atualizado com sucesso!"
+            mensagem: "flap atualizado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não atualizado!"
+            mensagem: "flap não atualizado!"
         });
     });
 }));
-airplaneRoute.delete('/airplane/deletar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+flapRoute.delete('/flap/deletar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    yield airplane.destroy({
+    yield flap.destroy({
         where: {
             id: uuid
         }
@@ -80,13 +80,13 @@ airplaneRoute.delete('/airplane/deletar/:uuid', (req, res, next) => __awaiter(vo
         .then(() => {
         return res.json({
             erro: false,
-            mensagem: "Airplane deletado com sucesso!"
+            mensagem: "flap deletado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não deletado!"
+            mensagem: "flap não deletado!"
         });
     });
 }));
-exports.default = airplaneRoute;
+exports.default = flapRoute;

@@ -36,7 +36,7 @@ componentDidMount(): void {
     axios.get('http://localhost:3001/historic').then(response => {
       let dadosBanco = response.data
       this.setState({
-        result: dadosBanco
+        dados: dadosBanco
       })
     })
   }
@@ -56,7 +56,6 @@ render() {
             <tr>
                 <th>Result</th>
                 <th>Created At</th>
-                <th>Updated At</th>
                 <th>Users Id</th>
                 <th>Airplane Id</th>
             </tr>
@@ -67,7 +66,6 @@ render() {
                         <tr>
                         <td>{item.result}</td>
                         <td>{item.createdAt}</td>
-                        <td>{item.updatedAt}</td>
                         <td>{item.usersId}</td>
                         <td>{item.airplaneId}</td>
                         </tr>

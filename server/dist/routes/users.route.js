@@ -19,6 +19,19 @@ usersRoute.get('/users', (req, res, next) => __awaiter(void 0, void 0, void 0, f
 }));
 usersRoute.get('/users/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
+    const project = yield users.findOne({ where: { email: uuid } });
+    if (project === null) {
+        return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+            erro: true,
+            mensagem: "Usuario não cadastrado!"
+        });
+    }
+    else {
+        return res.json(project);
+    }
+}));
+usersRoute.get('/users/id/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const uuid = req.params.uuid;
     const project = yield users.findOne({ where: { id: uuid } });
     if (project === null) {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({

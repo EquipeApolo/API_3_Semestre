@@ -11,49 +11,49 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const http_status_codes_1 = require("http-status-codes");
-const airplaneRoute = (0, express_1.Router)();
-const airplane = require('../models/airplaneTable');
-airplaneRoute.get('/airplane', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const airplaneList = yield airplane.findAll();
-    res.status(http_status_codes_1.StatusCodes.OK).send(airplaneList);
+const historicRoute = (0, express_1.Router)();
+const historic = require('../models/historicTable');
+historicRoute.get('/historic', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const historicList = yield historic.findAll();
+    res.status(http_status_codes_1.StatusCodes.OK).send(historicList);
 }));
-airplaneRoute.get('/airplane/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+historicRoute.get('/historic/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    const project = yield airplane.findOne({ where: { id: uuid } });
+    const project = yield historic.findOne({ where: { id: uuid } });
     if (project === null) {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não cadastrado!"
+            mensagem: "historic não cadastrado!"
         });
     }
     else {
         return res.json(project);
     }
 }));
-airplaneRoute.post('/airplane/cadastrar', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const newAirplane = req.body;
-    yield airplane.create(newAirplane)
+historicRoute.post('/historic/cadastrar', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const newhistoric = req.body;
+    yield historic.create(newhistoric)
         .then((test) => {
         console.log(test);
         console.log(test.id);
         return res.json({
             id: test.id,
             erro: false,
-            mensagem: "Airplane cadastrado com sucesso!"
+            mensagem: "historic cadastrado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             id: -1,
             erro: true,
-            mensagem: "Airplane não cadastrado!"
+            mensagem: "historic não cadastrado!"
         });
     });
 }));
-airplaneRoute.put('/airplane/modificar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+historicRoute.put('/historic/modificar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    const modifiedAirplane = req.body;
-    modifiedAirplane.uuid = uuid;
-    yield airplane.update(modifiedAirplane, {
+    const modifiedhistoric = req.body;
+    modifiedhistoric.uuid = uuid;
+    yield historic.update(modifiedhistoric, {
         where: {
             id: uuid
         }
@@ -61,18 +61,18 @@ airplaneRoute.put('/airplane/modificar/:uuid', (req, res, next) => __awaiter(voi
         .then(() => {
         return res.json({
             erro: false,
-            mensagem: "Airplane atualizado com sucesso!"
+            mensagem: "historic atualizado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não atualizado!"
+            mensagem: "historic não atualizado!"
         });
     });
 }));
-airplaneRoute.delete('/airplane/deletar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+historicRoute.delete('/historic/deletar/:uuid', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const uuid = req.params.uuid;
-    yield airplane.destroy({
+    yield historic.destroy({
         where: {
             id: uuid
         }
@@ -80,13 +80,13 @@ airplaneRoute.delete('/airplane/deletar/:uuid', (req, res, next) => __awaiter(vo
         .then(() => {
         return res.json({
             erro: false,
-            mensagem: "Airplane deletado com sucesso!"
+            mensagem: "historic deletado com sucesso!"
         });
     }).catch(() => {
         return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
             erro: true,
-            mensagem: "Airplane não deletado!"
+            mensagem: "historic não deletado!"
         });
     });
 }));
-exports.default = airplaneRoute;
+exports.default = historicRoute;

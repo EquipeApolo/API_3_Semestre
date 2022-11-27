@@ -66,7 +66,7 @@ function App() {
         <Route path="/flaps" element={<ListaFlap/>} />
         <Route path="/registerUser" element={<CadastroUsuario />}/>
         <Route path="/editUser/:id" element={<GetIdUsuario/>}/>
-        <Route path="/historic/:id" element={<HistoryTable/>}/>
+        <Route path="/historic" element={<HistoryTable/>}/>
       </Routes>
     </BrowserRouter>
   );

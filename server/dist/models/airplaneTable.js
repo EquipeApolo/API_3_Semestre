@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Sequelize = require('sequelize');
 const database = require('./connect');
-const airplane = database.define('airplane', {
+const airplane = database.define('airplanes', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -21,11 +21,19 @@ const airplane = database.define('airplane', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    flap: {
+    aircraftWeightMin: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    aircraftWeightMax: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
     reverserAmount: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    brakingApplicationLevel: {
         type: Sequelize.INTEGER,
         allowNull: false
     }

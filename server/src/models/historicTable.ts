@@ -30,7 +30,7 @@ const historic = database.define('historic', {
     //     },
     // },
     result: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
     }
 })

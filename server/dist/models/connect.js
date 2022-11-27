@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const connection = new sequelize_1.Sequelize("embraer", "root", "fatec", {
-    host: 'localhost',
+const connection = new sequelize_1.Sequelize("embraer", "fatecsjc", "Aluno123", {
+    host: 'embraer.mysql.database.azure.com',
     dialect: 'mysql'
 });
 connection.authenticate()
