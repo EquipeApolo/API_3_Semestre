@@ -82,16 +82,16 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | 03 | Aplicar uma solução agnóstica a tabela fornecida para os cálculos. | :heavy_check_mark: |
 | 03 | Adaptar cadastro de aeronaves para a solução agnóstica. | :heavy_check_mark: |
 | 03 | CRUD de aeronaves completo. | :heavy_check_mark: |
-| 04 | CRUD de flaps completo. | :clock12: | 
-| 04 | Páginas de visualização, cadastro e edição de flaps. | :clock12: |
-| 04 | Página de histórico de cálculos. | :clock12: |
-| 04 | Ajuste nas unidades de medida da página de cálculo. | :clock12: |
-| 04 | CRUD de usuários completo. | :clock12: |
-| 04 | Página de visualização, cadastro e edição de usuários. | :clock12: |
-| 04 | Upar servidor na nuvem. | :clock12: |
-| 04 | Navegação do sistema administrativo (paginação). | :clock12: |
-| 04 | Página de login. | :clock12: |
-| 04 | Documentação para explicação e how-to da solução agnóstica apresentada. | :clock12: |
+| 04 | CRUD de flaps completo. | :heavy_check_mark: | 
+| 04 | Páginas de visualização, cadastro e edição de flaps. | :heavy_check_mark: |
+| 04 | Página de histórico de cálculos. | :heavy_check_mark: |
+| 04 | Ajuste nas unidades de medida da página de cálculo. | :heavy_check_mark: |
+| 04 | CRUD de usuários completo. | :heavy_check_mark: |
+| 04 | Página de visualização, cadastro e edição de usuários. | :heavy_check_mark: |
+| 04 | Upar servidor na nuvem. | :heavy_check_mark: |
+| 04 | Navegação do sistema administrativo (paginação). | :heavy_check_mark: |
+| 04 | Página de login. | :heavy_check_mark: |
+| 04 | Documentação para explicação e how-to da solução agnóstica apresentada. | :heavy_check_mark: |
  
 <br>
 <span id="equipe">
