@@ -58,10 +58,14 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 
 <span id="Documentaçãp">
 <h2> :clipboard: Documentação</h2>
-<p align="center"> <img src = "imagens/doc1.png"></p>
+<p align="center"> <img widht="800" src = "https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/doc1.png"></p>
 <p align="center"> <img src = "imagens/doc2.png"></p>
 <p align="center"> <img src = "imagens/doc3.png"></p>
 <p align="center"> <img src = "imagens/doc4.png"></p>
+    
+<p align="center">
+  <img width="500" src="https://github.com/Jennyads/Estrutura_de_Dados/blob/main/Imagens/cavalo_3_por3.jpeg">
+</p>
  
 <span id="projeto">
     
