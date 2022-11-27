@@ -1,7 +1,6 @@
 export default class Table {
 
     public flapId: number
-
     // referencia
     public refWithoutIce: number
     public refWithIce: number

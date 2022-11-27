@@ -53,8 +53,8 @@ class EditarFlap extends Component<any, state>{
     constructor(props) {
         super(props)
         this.state = {
-            table: new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
             flap: new Flap(''),
+            table: new Table(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
             altitudeReferenceError: '',
             altitudeWithIceError: '',
             altitudeWithoutIceError: '',
@@ -128,31 +128,30 @@ class EditarFlap extends Component<any, state>{
     }
 
     componentDidMount(): void {
-        axios.get('http://localhost:3001/operationDistance/' + this.props.taskId).then(res => {
+        axios.get('http://localhost:3001/flap/' + this.props.taskId).then(res => {
             let dadosBanco = res.data
+            let dadosFlap = res.data
             this.setState({
                 // dadosOperation: dadosBanco,
+                flap: new Flap(dadosFlap.tipoFlap),
+
                 table: new Table(dadosBanco.refWithoutIce, dadosBanco.refWithIce, dadosBanco.weightReference, dadosBanco.weightBellowWithoutIce, dadosBanco.weightAboveWithoutIce, dadosBanco.weightBellowWithIce,
                     dadosBanco.weightAboveWithIce, dadosBanco.altitudeReference, dadosBanco.altitudeWithIce, dadosBanco.altitudeWithoutIce, dadosBanco.tempReference, dadosBanco.tempBellowWithIce, dadosBanco.tempAboveWithIce,
                     dadosBanco.tempBellowWithoutIce, dadosBanco.tempAboveWithoutIce, dadosBanco.windReference, dadosBanco.windHeadWithIce, dadosBanco.windTailWithIce, dadosBanco.windHeadWithoutIce, dadosBanco.windTailWithoutIce,
                     dadosBanco.slopeReference, dadosBanco.slopeUphillWithIce, dadosBanco.slopeDownhillWithIce, dadosBanco.slopeUphillWithoutIce, dadosBanco.slopeDownhillWithoutIce, dadosBanco.overspeedReference, dadosBanco.overspeedWithIce,
                     dadosBanco.overspeedWithoutIce, dadosBanco.reverserWithIce, dadosBanco.reverserWithoutIce)
+
+                
             })
             console.log(dadosBanco);
-            console.log(this.state.table.refWithIce);
-
-        })
-
-        axios.get('http://localhost:3001/flap/' + this.props.taskId).then(res => {
-            let dadosFlap = res.data
-            this.setState({
-                flap: new Flap(dadosFlap.tipoFlap)
-            })
             console.log(dadosFlap);
         })
-
     }
-
+    flapChange(event) {
+        const target = event.target;
+        this.state.flap.tipoFlap = target.value;
+        
+    }
     refWithIceChange(event) {
         let refWithIceError;
         const target = event.target;
@@ -513,10 +512,6 @@ class EditarFlap extends Component<any, state>{
         this.setState({ reverserWithoutIceError: reverserWithoutIceError })
     }
 
-    flapChange(event) {
-        const target = event.target;
-        this.state.flap.tipoFlap = target.value;
-    }
 
     validate = () => {
         let refWithIceError = "";
@@ -724,17 +719,9 @@ class EditarFlap extends Component<any, state>{
     postClickButton = async (event: any) => {
         event.preventDefault();
         const isValid = this.validate();
-        if (isValid) {
-            let res = -1
-            await axios.put("http://localhost:3001/flap/modificar" + this.props.taskId, {
-
-                tipoFlap: this.state.flap.getTipoFlap
-                // airplaneId: res
-            }).then((response) => {
-                res = response.data.id
-                //axios
-                axios.put("http://localhost:3001/operationDistance/modificar", {
-                    id: res,
+        if (isValid) {  
+                axios.put("http://localhost:3001/flap/modificar/" + this.props.taskId, {
+                    tipoFlap: this.state.flap.getTipoFlap,
                     refWithoutIce: this.state.table.getRefWithoutIce,
                     refWithIce: this.state.table.getRefWithIce,
                     weightReference: this.state.table.getWeightReference,
@@ -766,7 +753,6 @@ class EditarFlap extends Component<any, state>{
                     reverserWithIce: this.state.table.getReverserWithIce,
                     reverserWithoutIce: this.state.table.getReverserWithoutIce
                 })
-            })
 
             Swal.fire({
                 position: 'center',
