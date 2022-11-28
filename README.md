@@ -41,7 +41,7 @@
 <h4> Entrega da Sprint 3 </h4>
 <p align="center"> <img src = "imagens/features3sprint.gif"></p>
 <h4> Entrega da Sprint 4 </h4>
-<p align="center"> <img src = ""></p>
+<p align="center"> <img src = "imagens/sprint_4.gif"></p>
 <br>
     
 <span id="relatório">
