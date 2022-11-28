@@ -35,13 +35,13 @@
  ## Entregas 
 
 <h4> Entrega da Sprint 1 </h4>
-<p align="center"> <img src = "imagens/video-primeiraentrega.gif"></p>
+<p align="center"> <img width="100%" src = "imagens/video-primeiraentrega.gif"></p>
 <h4> Entrega da Sprint 2 </h4>
-<p align="center"> <img src = "imagens/video - sprint2.gif"></p>
+<p align="center"> <img width="100%" src = "imagens/video - sprint2.gif"></p>
 <h4> Entrega da Sprint 3 </h4>
-<p align="center"> <img src = "imagens/features3sprint.gif"></p>
+<p align="center"> <img width="100%" src = "imagens/features3sprint.gif"></p>
 <h4> Entrega da Sprint 4 </h4>
-<p align="center"> <img src = "imagens/sprint_4.gif"></p>
+<p align="center"> <img width="100%" src = "imagens/sprint_4.gif"></p>
 <h4> Endereço do site para acesso na nuvem:  </h4>
 <p align="center">
   <img width="300" src="https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/qrcode.jpeg">
