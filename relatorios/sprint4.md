@@ -15,8 +15,6 @@
 </p>
   
   
- <h3 align="center"> WIREFRAME </h3>
-<p align="center"> <img src = "../imagens/"></p>
 <br>
   
 <span id="burndown">
