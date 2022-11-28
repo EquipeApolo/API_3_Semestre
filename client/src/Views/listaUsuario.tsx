@@ -54,6 +54,18 @@ class UserTable extends Component<{}, table>{
 
     onClickDelete(event) {
         let id = event.target.id
+
+        if(localStorage.getItem('id')){
+            if(localStorage.getItem('id') === id) {
+                Swal.fire(
+                    'Error!',
+                    'You cannot delete yourself.',
+                    'error'
+                    )  
+                return
+            }
+        }
+
         console.log(id);
         Swal.fire({
             title: 'Delete  User',
@@ -126,6 +138,7 @@ class UserTable extends Component<{}, table>{
                     <th className='text-center'>Email</th>
                     <th className='text-center'>Password</th>
                     <th className='text-center'>Type of User</th>
+                    <th className='text-center'>Date</th>
                     <th className='text-center'>Action</th>
                 </tr>
             </thead>
