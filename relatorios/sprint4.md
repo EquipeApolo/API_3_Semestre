@@ -22,14 +22,14 @@
 <span id="burndown">
  
 ## :pushpin: Burndown
-<p align="center"> <img src = "../imagens/"></p>
+<p align="center"> <img src = "../imagens/burndown4.png"></p>
 <br>
 
   
  <span id="entrega">
  
 ## 👩‍💻 Entrega
-<p align="center"> <img src = "../imagens/"></p>
+<p align="center"> <img src = "../imagens/sprint_4.gif"></p>
 <br>
    
   → [Voltar ao topo](#topo)
