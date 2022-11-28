@@ -42,6 +42,11 @@
 <p align="center"> <img src = "imagens/features3sprint.gif"></p>
 <h4> Entrega da Sprint 4 </h4>
 <p align="center"> <img src = "imagens/sprint_4.gif"></p>
+<h4> Endereço do site para acesso na nuvem:  </h4>
+<p align="center">
+  <img width="300" src="https://github.com/EquipeApolo/API_3_Semestre/blob/main/imagens/qrcode.jpeg">
+</p>
+<h5 align="center"> Link de acesso: http://20.110.14.195/ </h5>
 <br>
     
 <span id="relatório">
@@ -56,7 +61,7 @@ Na tabela abaixo é possível visualizar os resultados de cada Sprint clicando e
 | 03 | 06/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint3.md) |
 | 04 | 27/11/2022 | :heavy_check_mark:	 | [ver relatório](https://github.com/EquipeApolo/API_3_Semestre/blob/main/relatorios/sprint4.md) |
 
-<span id="Documentaçãp">
+<span id="Documentação">
 <h2> :clipboard: Documentação</h2>
 
 <p align="center"> <img src = "imagens/doc1.png"></p>    
@@ -116,7 +121,7 @@ Na tabela abaixo é possível visualizar a divisão de tarefas do Backlog por Sp
 | Developer |Diego Batista|<a href="https://github.com/diiegobsilva" target="_blanck"><img src = "https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a> |<a href="https://www.linkedin.com/in/diegobatista1/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>|
 <br>
 
-''<span id="tecnologias">
+<span id="tecnologias">
 
 ## 🛠️ Tecnologias
 
