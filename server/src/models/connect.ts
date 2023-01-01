@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize'
 
 
-const connection = new Sequelize("embraer", "fatecsjc", "Aluno123", {
-      host: 'embraer.mysql.database.azure.com',
+const connection = new Sequelize("embraer", "root", "thales", {
+      host: 'localhost',
       dialect: 'mysql'
 })
 

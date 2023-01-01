@@ -173,6 +173,10 @@ class Calculo extends Component<{}, state>{
     if (this.state.temperatureError.includes("required")) {
       this.setState({ temperatureError: "" })
     }
+    if(this.state.temperatureError.includes("between") && this.temperature <= 60 && this.temperature >= -30){
+      this.setState({ temperatureError: "" })
+    }
+
     if (this.state.result != "") this.setState({ result: "" })
   }
 
@@ -188,6 +192,9 @@ class Calculo extends Component<{}, state>{
       this.setState({ windError: "" })
     }
 
+    if(this.state.windError.includes("between") && this.wind <= 300 && this.wind >= -300){
+      this.setState({ windError: "" })
+    }
     if (this.state.result != "") this.setState({ result: "" })
   }
 
@@ -259,6 +266,9 @@ class Calculo extends Component<{}, state>{
     this.airportAltitude = target.value;
     if (this.state.altitudeError.includes("required")) {
       this.setState({ altitudeError: "" })
+    }
+    if(this.state.airportAltitudeTitle.includes("between") && this.airportAltitude <= 100000 && this.airportAltitude >= -1000){
+      this.setState({ airportAltitudeTitle: "" })
     }
     if (this.state.result != "") this.setState({ result: "" })
   }
@@ -409,13 +419,21 @@ class Calculo extends Component<{}, state>{
     if (!this.temperature) {
       temperatureError = "The temperature is required";
     } else {
-      temperatureError = ""
+      if(this.temperature > 60 || this.temperature < -30){
+        temperatureError = "The temperature must be between -30 and 60."
+      }else{
+        temperatureError = ""
+      }
     }
 
     if (!this.wind) {
       windError = "The wind is required";
     } else {
-      windError = ""
+      if(this.wind > 300 || this.wind < -300){
+        windError = "The wind must be between -300 and 300."
+      }else{
+        windError = ""
+      }
     }
 
     if (!this.runwayCondition) {
@@ -427,7 +445,11 @@ class Calculo extends Component<{}, state>{
     if (!this.airportAltitude) {
       altitudeError = "The airport altitude is required";
     } else {
-      altitudeError = ""
+      if(this.airportAltitude > 10000 || this.airportAltitude < -10000){
+        altitudeError = "The altitude must be between -1000 and 100000."
+      }else{
+        altitudeError = ""
+      }
     }
 
     if (!this.slope) {

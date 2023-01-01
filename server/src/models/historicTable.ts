@@ -83,6 +83,6 @@ historic.belongsTo(flapId, {
     foreignKey: 'flapId'
 })
 
-//historic.sync({ alter: true });
+// historic.sync({ alter: true });
 
 module.exports = historic;

@@ -137,6 +137,6 @@ operationDistance.belongsTo(flapId, {
     foreignKey: 'flapId'
 })
 
-//operationDistance.sync({ alter: true });
+// operationDistance.sync({ alter: true });
 
 module.exports = operationDistance;
